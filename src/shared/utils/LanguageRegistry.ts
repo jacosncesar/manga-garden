@@ -65,6 +65,19 @@ export const LANGUAGES: LanguageMap[] = [
   { id: 'cy', name: 'Welsh' },
 ];
 
+const portugueseLanguageNames = new Intl.DisplayNames(['pt-BR'], { type: 'language' });
+
+/**
+ * Resolve a language code to its Brazilian Portuguese display name.
+ *
+ * @param id - ISO language tag or the internal `auto` source-language option.
+ * @returns The localized language name, or the original ID if it is unknown.
+ */
+export function getLanguageDisplayName(id: string): string {
+  if (id === 'auto') return 'Detecção automática';
+  return portugueseLanguageNames.of(id) ?? getLanguageName(id);
+}
+
 /**
  * Look up a language entry by its canonical two-letter ID.
  *

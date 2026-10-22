@@ -14,16 +14,16 @@ export interface EngineOption {
 export const INPAINT_ENGINE_OPTIONS: EngineOption[] = INPAINT_TIER_CATALOG as EngineOption[];
 
 export const OCR_ENGINE_OPTIONS: EngineOption[] = [
-  { id: 'v6-small', name: 'PaddleOCR v6 Small (Default)', tag: 'Recommended', isModel: true, sizeEstimate: '~4 MB' },
-  { id: 'v6-medium', name: 'PaddleOCR v6 Medium', tag: 'Higher Accuracy', isModel: true, sizeEstimate: '~8 MB' },
-  { id: 'v6-tiny', name: 'PaddleOCR v6 Tiny', tag: 'Ultra Fast', isModel: true, sizeEstimate: '~2 MB' },
-  { id: 'v5-mobile', name: 'PaddleOCR v5 Mobile', tag: 'Legacy v5', isModel: true, sizeEstimate: '~4 MB' },
-  { id: 'v5-server', name: 'PaddleOCR v5 Server', tag: 'Server Grade', isModel: true, sizeEstimate: '~20 MB' },
-  { id: 'v5-en-mobile', name: 'PaddleOCR v5 English Mobile', tag: 'English Tuned', isModel: true, sizeEstimate: '~4 MB' },
-  { id: 'v4-mobile', name: 'PaddleOCR v4 Mobile', tag: 'Legacy v4', isModel: true, sizeEstimate: '~4 MB' },
-  { id: 'v4-server', name: 'PaddleOCR v4 Server', tag: 'v4 Server', isModel: true, sizeEstimate: '~20 MB' },
-  { id: 'v3-mobile', name: 'PaddleOCR v3 Mobile', tag: 'Legacy v3', isModel: true, sizeEstimate: '~4 MB' },
-  { id: 'v3-japanese-mobile', name: 'PaddleOCR v3 Japanese Mobile', tag: 'Japanese Tuned', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v6-small', name: 'PaddleOCR v6 Pequeno (padrão)', tag: 'Recomendado', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v6-medium', name: 'PaddleOCR v6 Médio', tag: 'Maior precisão', isModel: true, sizeEstimate: '~8 MB' },
+  { id: 'v6-tiny', name: 'PaddleOCR v6 Minúsculo', tag: 'Ultrarrápido', isModel: true, sizeEstimate: '~2 MB' },
+  { id: 'v5-mobile', name: 'PaddleOCR v5 Móvel', tag: 'Versão antiga v5', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v5-server', name: 'PaddleOCR v5 Servidor', tag: 'Nível servidor', isModel: true, sizeEstimate: '~20 MB' },
+  { id: 'v5-en-mobile', name: 'PaddleOCR v5 Móvel em inglês', tag: 'Otimizado para inglês', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v4-mobile', name: 'PaddleOCR v4 Móvel', tag: 'Versão antiga v4', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v4-server', name: 'PaddleOCR v4 Servidor', tag: 'Servidor v4', isModel: true, sizeEstimate: '~20 MB' },
+  { id: 'v3-mobile', name: 'PaddleOCR v3 Móvel', tag: 'Versão antiga v3', isModel: true, sizeEstimate: '~4 MB' },
+  { id: 'v3-japanese-mobile', name: 'PaddleOCR v3 Móvel em japonês', tag: 'Otimizado para japonês', isModel: true, sizeEstimate: '~4 MB' },
 ];
 
 interface StudioEngineSelectorProps {
@@ -135,15 +135,15 @@ export const StudioEngineSelector: React.FC<StudioEngineSelectorProps> = ({ cate
       {/* Header with Global Sync Switch */}
       <div className="flex items-center justify-between text-[11px]">
         <label className="text-slate-400 font-medium">
-          {category === 'inpaint' ? 'Inpaint Model Tier' : 'OCR Recognition Tier'}
+          {category === 'inpaint' ? 'Nível do modelo de preenchimento' : 'Nível de reconhecimento do OCR'}
         </label>
         <button
           type="button"
           onClick={() => studioStore.setState({ syncWithGlobal: !syncWithGlobal })}
           title={
             syncWithGlobal
-              ? 'Global Sync ON: Changing engine updates extension popup & all web translations'
-              : 'Local Mode: Changing engine only affects this Studio editing session'
+              ? 'Sincronização global ativada: alterar o mecanismo atualiza o popup da extensão e todas as traduções na web'
+              : 'Modo local: alterar o mecanismo afeta apenas esta sessão do Studio'
           }
           className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium transition cursor-pointer ${
             syncWithGlobal
@@ -152,7 +152,7 @@ export const StudioEngineSelector: React.FC<StudioEngineSelectorProps> = ({ cate
           }`}
         >
           {syncWithGlobal ? <Globe className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-          <span>{syncWithGlobal ? 'Global Sync' : 'Local Only'}</span>
+          <span>{syncWithGlobal ? 'Sincronização global' : 'Somente local'}</span>
         </button>
       </div>
 
@@ -230,10 +230,10 @@ export const StudioEngineSelector: React.FC<StudioEngineSelectorProps> = ({ cate
                           className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-[10px] font-medium shadow transition cursor-pointer disabled:opacity-50"
                         >
                           <Download className="w-2.5 h-2.5" />
-                          <span>{isDownloading ? 'Downloading...' : opt.sizeEstimate || 'Get'}</span>
+                          <span>{isDownloading ? 'Baixando...' : opt.sizeEstimate || 'Obter'}</span>
                         </button>
                       ) : opt.isModel ? (
-                        <span className="text-[10px] text-emerald-400 font-mono font-medium">Ready</span>
+                        <span className="text-[10px] text-emerald-400 font-mono font-medium">Pronto</span>
                       ) : null}
                     </div>
                   </div>
@@ -242,7 +242,13 @@ export const StudioEngineSelector: React.FC<StudioEngineSelectorProps> = ({ cate
                   {isDownloading && (
                     <div className="mt-0.5 pl-5.5 space-y-0.5">
                       <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                        <span>{downloadInfo.status || 'Downloading weights...'}</span>
+                        <span>
+                          {downloadInfo.status === 'Queued'
+                            ? 'Na fila'
+                            : downloadInfo.status === 'Downloading...'
+                              ? 'Baixando...'
+                              : downloadInfo.status || 'Baixando modelos...'}
+                        </span>
                         <span>{Math.round(downloadInfo.progress * 100)}%</span>
                       </div>
                       <div className="w-full h-1.5 rounded-full bg-[#1e2333] overflow-hidden">

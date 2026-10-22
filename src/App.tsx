@@ -244,7 +244,7 @@ export default function App() {
       setActiveJobId(jobId);
     } catch (err) {
       console.error('[Studio] Manual upload failed:', err);
-      setUploadError(err instanceof Error ? err.message : 'Could not upload and queue this page.');
+      setUploadError(err instanceof Error ? err.message : 'Não foi possível enviar e adicionar esta página à fila.');
       await loadJobs();
     } finally {
       uploadInFlightRef.current = false;
@@ -331,7 +331,7 @@ export default function App() {
       {isLeftDrawerOpen && (
         <aside className="w-64 border-r border-[#282d3f] bg-[#12141c] flex flex-col z-40 shrink-0">
           <div className="flex items-center justify-between p-3 border-b border-[#282d3f]">
-            <span className="font-semibold text-xs text-slate-200">Library & Pages ({jobs.length})</span>
+            <span className="font-semibold text-xs text-slate-200">Biblioteca e páginas ({jobs.length})</span>
             <button
               onClick={() => setIsLeftDrawerOpen(false)}
               className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition"
@@ -347,7 +347,7 @@ export default function App() {
               className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-dashed border-[#282d3f] hover:border-indigo-500 bg-[#090a0f] text-xs text-indigo-300 font-medium transition"
             >
               <Upload className="w-3.5 h-3.5" />
-              {isUploading ? 'Queueing page…' : 'Upload Image'}
+              {isUploading ? 'Adicionando página à fila…' : 'Enviar imagem'}
             </button>
           </div>
 
@@ -366,12 +366,12 @@ export default function App() {
                 >
                   <div className="flex items-center gap-2 truncate">
                     <FileImage className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span className="truncate">{job.srcUrl || `Page #${job.id}`}</span>
+                    <span className="truncate">{job.srcUrl || `Página #${job.id}`}</span>
                   </div>
                   <button
                     onClick={(e) => handleDeleteJob(job.id!, e)}
                     className="p-1 rounded text-slate-500 hover:text-red-400 transition"
-                    title="Delete page"
+                    title="Excluir página"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -395,7 +395,7 @@ export default function App() {
             originalImage={originalImageEl}
             cleanedImage={cleanedImageEl}
             initialTextObjects={studioTextObjects}
-            jobTitle={activeJob?.srcUrl || `Manga Page #${activeJobId}`}
+            jobTitle={activeJob?.srcUrl || `Página de mangá #${activeJobId}`}
             onUploadPage={handlePageUpload}
             isUploadingPage={isUploading}
             onBack={() => setIsLeftDrawerOpen(true)}
@@ -408,7 +408,7 @@ export default function App() {
             </div>
             <h2 className="text-base font-semibold text-slate-100">Manga Garden Studio</h2>
             <p className="text-xs text-slate-400 max-w-sm mt-1">
-              Upload a comic or manga page to edit inpainting, restore artwork, tweak CJK typography, or run local WebGPU translations.
+              Envie uma página de quadrinho ou mangá para ajustar o preenchimento, restaurar a arte, editar a tipografia CJK ou executar traduções locais com WebGPU.
             </p>
             <button
               onClick={() => fileInputRef.current?.click()}
@@ -416,7 +416,7 @@ export default function App() {
               className="mt-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-medium hover:bg-indigo-500 transition shadow-lg shadow-indigo-900/30"
             >
               <Upload className="w-4 h-4" />
-              {isUploading ? 'Queueing page…' : 'Upload Manga Page'}
+              {isUploading ? 'Adicionando página à fila…' : 'Enviar página de mangá'}
             </button>
           </div>
         )}

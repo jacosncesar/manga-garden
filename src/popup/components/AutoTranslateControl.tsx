@@ -11,9 +11,9 @@ export default function AutoTranslateControl({ state, updateState }: AutoTransla
       {/* Main Auto-Translate Toggle Card */}
       <div className="flex items-center justify-between p-3 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md">
         <div>
-          <span className="font-medium block text-sm">Auto-Translate</span>
+          <span className="font-medium block text-sm">Tradução automática</span>
           <span className="text-xs text-[var(--color-dust)]">
-            {state.isAuto ? 'Translates visible images automatically' : 'Requires manual activation'}
+            {state.isAuto ? 'Traduz imagens visíveis automaticamente' : 'Requer ativação manual'}
           </span>
         </div>
         <button 
@@ -21,7 +21,7 @@ export default function AutoTranslateControl({ state, updateState }: AutoTransla
           className="manga-garden-switch manga-garden-switch-md"
           data-state={state.isAuto ? 'checked' : 'unchecked'}
         >
-          <span className="sr-only">Toggle auto-translate</span>
+          <span className="sr-only">Alternar tradução automática</span>
           <span className="manga-garden-switch-thumb" />
         </button>
       </div>

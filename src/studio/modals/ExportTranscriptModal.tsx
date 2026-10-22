@@ -16,16 +16,16 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
   const [copied, setCopied] = useState(false);
 
   const transcript = useMemo(() => {
-    if (textObjects.length === 0) return 'No text bubbles detected in this image.';
+    if (textObjects.length === 0) return 'Nenhum balão de texto detectado nesta imagem.';
 
     const separator = extraSpacing ? '\n\n' : '\n';
 
     if (format === 'combined') {
       return textObjects
         .map((obj, i) => {
-          const header = includeIndices ? `[Bubble ${i + 1}]\n` : '';
+          const header = includeIndices ? `[Balão ${i + 1}]\n` : '';
           const orig = obj.originalText ? `Original: ${obj.originalText}\n` : '';
-          const trans = `Translated: ${obj.text}`;
+          const trans = `Traduzido: ${obj.text}`;
           return `${header}${orig}${trans}`;
         })
         .join(separator);
@@ -51,12 +51,12 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
 
     if (format === 'separate') {
       const origList = textObjects
-        .map((obj, i) => `[#${i + 1}] ${obj.originalText || '(none)'}`)
+        .map((obj, i) => `[#${i + 1}] ${obj.originalText || '(nenhum)'}`)
         .join('\n');
       const transList = textObjects
         .map((obj, i) => `[#${i + 1}] ${obj.text}`)
         .join('\n');
-      return `=== ORIGINAL DIALOGUE ===\n${origList}\n\n=== TRANSLATED DIALOGUE ===\n${transList}`;
+      return `=== DIÁLOGO ORIGINAL ===\n${origList}\n\n=== DIÁLOGO TRADUZIDO ===\n${transList}`;
     }
 
     return '';
@@ -84,7 +84,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
         <div className="flex items-center justify-between pb-3 border-b border-[#282d3f]">
           <div className="flex items-center gap-2 font-medium text-sm text-slate-200">
             <FileText className="w-4 h-4 text-[#22d3ee]" />
-            Export Dialogue Transcript
+            Exportar transcrição dos diálogos
           </div>
           <button
             onClick={onClose}
@@ -103,7 +103,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
                 : 'border-[#282d3f] bg-[#090a0f] text-slate-400 hover:border-slate-700'
             }`}
           >
-            Combined (Both)
+            Combinado (ambos)
           </button>
           <button
             onClick={() => setFormat('translated_only')}
@@ -113,7 +113,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
                 : 'border-[#282d3f] bg-[#090a0f] text-slate-400 hover:border-slate-700'
             }`}
           >
-            Translated Only
+            Somente traduzidos
           </button>
           <button
             onClick={() => setFormat('original_only')}
@@ -123,7 +123,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
                 : 'border-[#282d3f] bg-[#090a0f] text-slate-400 hover:border-slate-700'
             }`}
           >
-            Original Only
+            Somente originais
           </button>
           <button
             onClick={() => setFormat('separate')}
@@ -133,7 +133,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
                 : 'border-[#282d3f] bg-[#090a0f] text-slate-400 hover:border-slate-700'
             }`}
           >
-            Separate Sections
+            Seções separadas
           </button>
         </div>
 
@@ -145,7 +145,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
               onChange={(e) => setIncludeIndices(e.target.checked)}
               className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0"
             />
-            Include bubble numbers
+            Incluir números dos balões
           </label>
           <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
             <input
@@ -154,7 +154,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
               onChange={(e) => setExtraSpacing(e.target.checked)}
               className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0"
             />
-            Extra paragraph spacing
+            Espaçamento extra entre parágrafos
           </label>
         </div>
 
@@ -168,7 +168,7 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
 
         <div className="mt-4 flex items-center justify-between pt-3 border-t border-[#282d3f]">
           <span className="text-xs text-slate-500">
-            {textObjects.length} {textObjects.length === 1 ? 'bubble' : 'bubbles'} total
+            {textObjects.length} {textObjects.length === 1 ? 'balão no total' : 'balões no total'}
           </span>
           <div className="flex items-center gap-2">
             <button
@@ -176,14 +176,14 @@ export const ExportTranscriptModal: React.FC<ExportTranscriptModalProps> = ({ on
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-[#282d3f] bg-[#1c1f2e] text-slate-200 hover:bg-[#282d3f] transition"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? 'Copied!' : 'Copy'}
+              {copied ? 'Copiado!' : 'Copiar'}
             </button>
             <button
               onClick={handleDownload}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#22d3ee] text-white hover:bg-[#0ea5e9] transition shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
-              Download .txt
+              Baixar .txt
             </button>
           </div>
         </div>

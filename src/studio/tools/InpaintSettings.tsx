@@ -17,10 +17,10 @@ export const InpaintSettings: React.FC = () => {
       <div className="pb-2 border-b border-[#282d3f]">
         <div className="flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-[#22d3ee]" />
-          <h3 className="font-semibold text-sm text-slate-100">Live AI Inpaint Brush</h3>
+          <h3 className="font-semibold text-sm text-slate-100">Pincel de preenchimento com IA</h3>
         </div>
         <p className="text-[11px] text-slate-400 mt-1">
-          Brush over bubbles or artifacts. On pointer release, crops tight 1:1 patch and runs local inpainting with zero cloud cost.
+          Pinte sobre balões ou artefatos. Ao soltar o botão, a área é recortada na escala 1:1 e preenchida localmente, sem custos de nuvem.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export const InpaintSettings: React.FC = () => {
 
       {/* 2-Way Inpaint Source Selector */}
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">Inpaint Source</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Origem do preenchimento</label>
         <div className="grid grid-cols-2 gap-1.5 p-1 rounded-lg bg-[#090a0f] border border-[#282d3f]">
           <button
             type="button"
@@ -39,9 +39,9 @@ export const InpaintSettings: React.FC = () => {
                 ? 'bg-[#22d3ee] text-white shadow-xs'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
             }`}
-            title="Inpaint current working background canvas to remove residual artifacts (Default)"
+            title="Preencher o fundo de trabalho atual para remover artefatos restantes (padrão)"
           >
-            Inpainted BG
+            Fundo preenchido
           </button>
           <button
             type="button"
@@ -51,20 +51,20 @@ export const InpaintSettings: React.FC = () => {
                 ? 'bg-[#22d3ee] text-white shadow-xs'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
             }`}
-            title="Inpaint untouched original artwork to cleanly erase original dialogue/SFX"
+            title="Preencher a imagem original para apagar balões de fala e efeitos sonoros"
           >
-            Original Artwork
+            Imagem original
           </button>
         </div>
         <p className="text-[10px] text-slate-500 mt-1">
           {inpaint.source === 'background'
-            ? 'Crops current background canvas to retouch speech bubbles and artifacts.'
-            : 'Crops untouched original artwork to cleanly erase original dialogue/SFX.'}
+            ? 'Recorta o fundo atual para retocar balões de fala e artefatos.'
+            : 'Recorta a imagem original para apagar balões de fala e efeitos sonoros.'}
         </p>
       </div>
 
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">Brush Shape</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Formato do pincel</label>
         <div className="flex gap-2">
           <button
             onClick={() => update({ shape: 'circle' })}
@@ -75,7 +75,7 @@ export const InpaintSettings: React.FC = () => {
             }`}
           >
             <Circle className="w-3.5 h-3.5" />
-            Circle
+            Círculo
           </button>
           <button
             onClick={() => update({ shape: 'square' })}
@@ -86,14 +86,14 @@ export const InpaintSettings: React.FC = () => {
             }`}
           >
             <Square className="w-3.5 h-3.5" />
-            Square
+            Quadrado
           </button>
         </div>
       </div>
 
       <div>
         <div className="flex justify-between text-slate-400 mb-1">
-          <span>Brush Size</span>
+          <span>Tamanho do pincel</span>
           <span className="font-mono text-slate-200">{inpaint.size}px</span>
         </div>
         <input
@@ -107,7 +107,7 @@ export const InpaintSettings: React.FC = () => {
       </div>
 
       <div className="p-3 rounded-lg bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-[11px] text-[#22d3ee] leading-relaxed">
-        ⚡ <strong>Privacy Guaranteed:</strong> Inpainting executes 100% inside your browser using WebGPU/WASM. No image crops leave your machine.
+        ⚡ <strong>Privacidade garantida:</strong> o preenchimento é executado 100% no navegador usando WebGPU/WASM. Nenhum recorte de imagem sai do seu dispositivo.
       </div>
     </div>
   );

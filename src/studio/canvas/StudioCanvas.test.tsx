@@ -96,7 +96,7 @@ describe('Studio canvas layout routing', () => {
   it('prepares manual text boxes before paint without stamping global editing mode', () => {
     // Toolbar needs a post-mount render after its overlay canvas ref is assigned.
     act(() => studioStore.setState({ zoom: 1.1 }));
-    const button = Array.from(container.querySelectorAll('button')).find(element => element.title === 'Add New Text Box');
+    const button = Array.from(container.querySelectorAll('button')).find(element => element.title === 'Adicionar nova caixa de texto');
     expect(button).toBeDefined();
     act(() => button!.click());
     expect(layout.prepare).toHaveBeenCalledOnce();

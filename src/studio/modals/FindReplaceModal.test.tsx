@@ -44,11 +44,11 @@ describe('Find and replace layout routing', () => {
     const unaffected = { ...base, id: 'second', text: 'untouched', lines: ['untouched'] };
     studioStore.setState({ textObjects: [base, unaffected], globalTypesetMode: 'simple' });
     act(() => root.render(<FindReplaceModal onClose={() => {}} />));
-    const find = container.querySelector<HTMLInputElement>('input[placeholder="Search dialogue..."]')!;
-    const replace = container.querySelector<HTMLInputElement>('input[placeholder="Replacement text..."]')!;
+    const find = container.querySelector<HTMLInputElement>('input[placeholder="Buscar no diálogo..."]')!;
+    const replace = container.querySelector<HTMLInputElement>('input[placeholder="Texto de substituição..."]')!;
     act(() => fillInput(find, 'hello'));
     act(() => fillInput(replace, 'welcome'));
-    const button = Array.from(container.querySelectorAll('button')).find(element => element.textContent?.includes('Replace All'))!;
+    const button = Array.from(container.querySelectorAll('button')).find(element => element.textContent?.includes('Substituir tudo'))!;
     act(() => button.click());
     expect(layout.apply).toHaveBeenCalledWith(base, { text: 'welcome friend' }, 'simple');
     expect(studioStore.getState().textObjects[0].lines).toEqual(['new measured layout']);

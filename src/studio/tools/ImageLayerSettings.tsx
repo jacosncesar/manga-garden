@@ -115,17 +115,17 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
   return (
     <div className="space-y-4 text-xs text-slate-200">
       <div className="pb-2 border-b border-[#282d3f]">
-        <h3 className="font-semibold text-sm text-slate-100">Stickers & Image Layers</h3>
+        <h3 className="font-semibold text-sm text-slate-100">Adesivos e camadas de imagem</h3>
         <p className="text-[11px] text-slate-400 mt-0.5">
-          Place sound effect graphics, clean speech bubbles, or custom visual overlays.
+          Adicione efeitos sonoros, balões limpos ou sobreposições visuais personalizadas.
         </p>
       </div>
 
       <div>
         <label className="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-dashed border-[#282d3f] bg-[#090a0f] hover:border-[#22d3ee]/60 hover:bg-[#12141c] cursor-pointer transition">
           <Upload className="w-5 h-5 text-[#22d3ee] mb-1" />
-          <span className="font-medium text-slate-200">Upload Sticker Image</span>
-          <span className="text-[11px] text-slate-500">PNG with transparency, WebP, JPEG</span>
+          <span className="font-medium text-slate-200">Enviar imagem de adesivo</span>
+          <span className="text-[11px] text-slate-500">PNG com transparência, WebP ou JPEG</span>
           <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
         </label>
       </div>
@@ -134,9 +134,9 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
         <div className="pt-3 border-t border-[#282d3f]">
           <label className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 border-dashed border-[#282d3f] bg-[#090a0f] transition ${isUploadingPage ? 'opacity-50 cursor-wait' : 'hover:border-indigo-500 hover:bg-[#12141c] cursor-pointer'}`}>
             <Upload className="w-5 h-5 text-indigo-400 mb-1" />
-            <span className="font-medium text-slate-200">{isUploadingPage ? 'Queueing page…' : 'Upload & translate page'}</span>
-            <span className="text-[11px] text-slate-500">New page · full translation pipeline, not a sticker</span>
-            <input type="file" accept="image/*" aria-label="Upload and translate page" onChange={handlePageUpload} disabled={isUploadingPage} className="hidden" />
+            <span className="font-medium text-slate-200">{isUploadingPage ? 'Adicionando página à fila…' : 'Enviar e traduzir página'}</span>
+            <span className="text-[11px] text-slate-500">Nova página · pipeline completo de tradução, não um adesivo</span>
+            <input type="file" accept="image/*" aria-label="Enviar e traduzir página" onChange={handlePageUpload} disabled={isUploadingPage} className="hidden" />
           </label>
         </div>
       )}
@@ -144,11 +144,11 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
       {selectedLayer ? (
         <div className="space-y-3 pt-2 border-t border-[#282d3f]">
           <div className="flex items-center justify-between">
-            <span className="font-semibold text-slate-200">Selected Sticker</span>
+            <span className="font-semibold text-slate-200">Adesivo selecionado</span>
             <button
               onClick={handleDelete}
               className="p-1 rounded text-[#22d3ee] hover:bg-[#22d3ee]/15 transition"
-              title="Delete sticker"
+              title="Excluir adesivo"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -156,7 +156,7 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
 
           <div>
             <div className="flex justify-between text-slate-400 mb-1">
-              <span>Opacity</span>
+              <span>Opacidade</span>
               <span className="font-mono text-slate-200">{Math.round(selectedLayer.opacity * 100)}%</span>
             </div>
             <input
@@ -180,7 +180,7 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
               }`}
             >
               <FlipHorizontal className="w-3.5 h-3.5" />
-              Flip Horizontal
+              Espelhar horizontalmente
             </button>
             <button
               onClick={() => updateSelected({ flipV: !selectedLayer.flipV })}
@@ -191,7 +191,7 @@ export const ImageLayerSettings: React.FC<ImageLayerSettingsProps> = ({ onUpload
               }`}
             >
               <FlipVertical className="w-3.5 h-3.5" />
-              Flip Vertical
+              Espelhar verticalmente
             </button>
           </div>
         </div>

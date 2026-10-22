@@ -73,15 +73,15 @@ export default function GlossaryPanel({
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <BookOpen size={16} className="text-[var(--color-dust)]" />
-          <span className="font-medium text-sm">Translation Glossary</span>
+          <span className="font-medium text-sm">Glossário de tradução</span>
           <HelpTooltip
             size="sm"
             content={
               <>
-                Map source terms to preferred translations for WebLLM, Custom API, and Shared Pool.
-                LLMs may not always follow these preferences. Google Translate does not support glossary in Manga Garden.
+                Associe termos de origem às traduções preferidas no WebLLM, em APIs personalizadas e no pool compartilhado.
+                Os modelos de linguagem podem não seguir sempre essas preferências. O Google Tradutor não oferece suporte ao glossário no Manga Garden.
                 <span className="block mt-1 text-[var(--color-dust)]">
-                  When using Custom API or Shared Pool, glossary terms are included in translation prompts sent to the respective cloud provider. Do not add sensitive data.
+                  Ao usar uma API personalizada ou o pool compartilhado, os termos do glossário são enviados ao respectivo provedor na solicitação de tradução. Não inclua dados confidenciais.
                 </span>
               </>
             }
@@ -92,16 +92,16 @@ export default function GlossaryPanel({
             type="button"
             role="switch"
             aria-checked={glossaryEnabled}
-            aria-label="Enable translation glossary"
+            aria-label="Ativar glossário de tradução"
             onClick={() => updateState({ glossaryEnabled: !glossaryEnabled })}
             className="manga-garden-switch manga-garden-switch-sm"
             data-state={glossaryEnabled ? 'checked' : 'unchecked'}
           >
-            <span className="sr-only">Enable translation glossary</span>
+            <span className="sr-only">Ativar glossário de tradução</span>
             <span className="manga-garden-switch-thumb" />
           </button>
           <button
-            aria-label="Close translation glossary"
+            aria-label="Fechar glossário de tradução"
             onClick={onClose}
             className="p-1 hover:bg-[var(--color-dust)] hover:bg-opacity-30 rounded cursor-pointer"
           >
@@ -128,7 +128,7 @@ export default function GlossaryPanel({
               <button
                 onClick={() => handleRemove(index)}
                 className="p-0.5 hover:bg-red-100 dark:hover:bg-red-900 rounded cursor-pointer text-[var(--color-dust)] hover:text-red-500 transition-colors"
-                title="Remove entry"
+                title="Remover item"
               >
                 <Trash2 size={12} />
               </button>
@@ -140,25 +140,25 @@ export default function GlossaryPanel({
       {/* Add new entry row */}
       <div className="flex gap-1.5 items-end">
         <div className="flex-1">
-          <label className="text-[10px] text-[var(--color-dust)] block mb-0.5">Source</label>
+          <label className="text-[10px] text-[var(--color-dust)] block mb-0.5">Origem</label>
           <input
             type="text"
-            aria-label="Source"
+            aria-label="Origem"
             value={draftSource}
             onChange={(e) => setDraftSource(e.target.value)}
-            placeholder="e.g. 先輩"
+            placeholder="Ex.: 先輩"
             maxLength={MAX_GLOSSARY_TERM_LENGTH}
             className="w-full px-2 py-1 text-xs bg-[var(--color-paper)] border border-[var(--color-dust)] rounded focus:outline-none focus:border-[var(--color-editorial)] text-[var(--color-ink)]"
           />
         </div>
         <div className="flex-1">
-          <label className="text-[10px] text-[var(--color-dust)] block mb-0.5">Preferred</label>
+          <label className="text-[10px] text-[var(--color-dust)] block mb-0.5">Tradução preferida</label>
           <input
             type="text"
-            aria-label="Preferred"
+            aria-label="Tradução preferida"
             value={draftTarget}
             onChange={(e) => setDraftTarget(e.target.value)}
-            placeholder="e.g. Senpai"
+            placeholder="Ex.: Senpai"
             maxLength={MAX_GLOSSARY_TERM_LENGTH}
             className="w-full px-2 py-1 text-xs bg-[var(--color-paper)] border border-[var(--color-dust)] rounded focus:outline-none focus:border-[var(--color-editorial)] text-[var(--color-ink)]"
           />
@@ -167,7 +167,7 @@ export default function GlossaryPanel({
           onClick={handleAdd}
           disabled={atCapacity || !draftSource.trim() || !draftTarget.trim()}
           className="p-1.5 bg-[var(--color-editorial)] text-white rounded hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-opacity"
-          title={atCapacity ? `Maximum ${MAX_GLOSSARY_ENTRIES} entries reached` : 'Add glossary entry'}
+          title={atCapacity ? `Limite de ${MAX_GLOSSARY_ENTRIES} itens atingido` : 'Adicionar item ao glossário'}
         >
           <Plus size={14} />
         </button>
@@ -176,7 +176,7 @@ export default function GlossaryPanel({
       {/* Capacity indicator */}
       {entries.length > 0 && (
         <p className="text-[10px] text-[var(--color-dust)] mt-1.5 text-right">
-          {entries.length}/{MAX_GLOSSARY_ENTRIES} entries
+          {entries.length}/{MAX_GLOSSARY_ENTRIES} itens
         </p>
       )}
     </div>

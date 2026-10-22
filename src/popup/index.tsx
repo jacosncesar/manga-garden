@@ -196,9 +196,9 @@ function PopupApp() {
         <h1 className="text-xl font-bold font-display tracking-tight text-[var(--color-editorial)] flex items-center gap-2">
           Manga Garden
           {!state.isExtensionEnabled ? (
-            <span className="text-xs font-normal text-[var(--color-dust)] px-2 py-0.5 border border-[var(--color-dust)] rounded-full">OFF</span>
+            <span className="text-xs font-normal text-[var(--color-dust)] px-2 py-0.5 border border-[var(--color-dust)] rounded-full">DESLIGADA</span>
           ) : isCurrentDomainDisabled ? (
-            <span className="text-xs font-normal text-amber-500 px-2 py-0.5 border border-amber-500/40 rounded-full">PAUSED</span>
+            <span className="text-xs font-normal text-amber-500 px-2 py-0.5 border border-amber-500/40 rounded-full">PAUSADA</span>
           ) : null}
         </h1>
         <div className="flex gap-2 items-center">
@@ -213,21 +213,21 @@ function PopupApp() {
           <button 
             onClick={() => setActiveTab('home')}
             className={`p-1.5 rounded transition-colors cursor-pointer ${activeTab === 'home' ? 'bg-[var(--color-vellum)]' : 'hover:bg-[var(--color-vellum)]'}`}
-            title="Home"
+            title="Início"
           >
             <Home size={18} className="text-[var(--color-ink)]" />
           </button>
           <button 
             onClick={() => setActiveTab('batch')}
             className={`p-1.5 rounded transition-colors cursor-pointer ${activeTab === 'batch' ? 'bg-[var(--color-vellum)]' : 'hover:bg-[var(--color-vellum)]'}`}
-            title="Chapter Page Scanner & Batch Translate"
+            title="Scanner de páginas e tradução em lote"
           >
             <Layers size={18} className="text-[var(--color-ink)]" />
           </button>
           <button 
             onClick={() => setActiveTab('settings')}
             className={`p-1.5 rounded transition-colors cursor-pointer ${activeTab === 'settings' ? 'bg-[var(--color-vellum)]' : 'hover:bg-[var(--color-vellum)]'}`}
-            title="Settings"
+            title="Configurações"
           >
             <Settings size={18} className="text-[var(--color-ink)]" />
           </button>
@@ -250,9 +250,9 @@ function PopupApp() {
                 ? 'bg-amber-500/10 border-amber-500/30 text-amber-500 hover:bg-amber-500/20'
                 : 'bg-[var(--color-paper)] border-[var(--color-dust)] border-opacity-40 text-[var(--color-dust)] hover:text-red-500 hover:border-red-400'
             }`}
-            title={isCurrentDomainDisabled ? `Reativar Manga Garden em ${currentDomain}` : `Desativar Manga Garden em ${currentDomain}`}
+            title={isCurrentDomainDisabled ? `Reativar o Manga Garden em ${currentDomain}` : `Desativar o Manga Garden em ${currentDomain}`}
           >
-            {isCurrentDomainDisabled ? 'Disabled · Enable' : 'Disable on site'}
+            {isCurrentDomainDisabled ? 'Pausado · Ativar' : 'Pausar neste site'}
           </button>
         </div>
       )}
@@ -278,10 +278,10 @@ function PopupApp() {
                     }
                   }}
                   className="w-full py-2 bg-[var(--color-vellum)] text-[var(--color-ink)] border border-[var(--color-dust)] border-opacity-30 font-semibold rounded hover:border-[var(--color-editorial)] hover:text-[var(--color-editorial)] transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
-                  title="Drag a rectangle across any on-screen manga panel, canvas, or video to translate it"
+                  title="Arraste para selecionar uma área de mangá, imagem ou vídeo e traduzi-la"
                 >
                   <Crop size={16} />
-                  Crop & Translate Area
+                  Recortar e traduzir área
                 </button>
               </div>
             </div>
@@ -299,9 +299,9 @@ function PopupApp() {
               chrome.tabs.create({ url: chrome.runtime.getURL('index.html') });
             }}
             className="w-full py-2.5 bg-[var(--color-ink)] text-[var(--color-paper)] font-bold rounded hover:bg-[var(--color-editorial)] transition-colors flex items-center justify-center gap-2 cursor-pointer"
-            title="Open manga editing studio in a new tab"
+            title="Abrir o estúdio de edição de mangá em uma nova aba"
           >
-            Open Edit Studio <span className="opacity-70">↗</span>
+            Abrir estúdio de edição <span className="opacity-70">↗</span>
           </button>
         </div>
       </div>

@@ -12,6 +12,15 @@ import { liveQuery } from 'dexie';
 import { db, type TranslationJob, type ImageRecord, type TextBlock } from '../../db';
 import { useStudioStore } from '../state/studioStore';
 import { RENDER_FONT_PRESETS } from '../../shared/renderFontPresets';
+import { getLanguageDisplayName } from '../../shared/utils/LanguageRegistry';
+
+const JOB_STATUS_LABELS: Record<string, string> = {
+  completed: 'Concluído',
+  error: 'Falhou',
+  queued: 'Na fila',
+  downloading: 'Baixando',
+  processing: 'Processando',
+};
 
 export interface PageInfoSettingsProps {
   jobId?: number;
@@ -32,9 +41,9 @@ interface PageData {
 function resolveOcrLabel(id?: string): string {
   switch (id) {
     case 'v6-small':
-      return 'Paddle OCR v6 Small';
+      return 'PaddleOCR v6 Pequeno';
     case 'v6-large':
-      return 'Paddle OCR v6 Large';
+      return 'PaddleOCR v6 Grande';
     case 'manga-ocr':
       return 'Manga-OCR (ViT)';
     default:
@@ -50,18 +59,18 @@ function resolveOcrLabel(id?: string): string {
 function resolveInpaintLabel(id?: string): string {
   switch (id) {
     case 'lama-manga':
-      return 'LaMa Manga Inpaint (WebGPU)';
+      return 'Preenchimento LaMa para mangá (WebGPU)';
     case 'lama-manga-fast':
-      return 'LaMa Manga Fast';
+      return 'LaMa rápido para mangá';
     case 'lama-base':
-      return 'LaMa Base Inpaint';
+      return 'Preenchimento LaMa básico';
     case 'aotgan':
     case 'aot':
-      return 'AOT-GAN Dynamic Inpaint';
+      return 'Preenchimento dinâmico AOT-GAN';
     case 'simple':
-      return 'Simple Inpaint (Color Fill)';
+      return 'Preenchimento simples (cor sólida)';
     case 'none':
-      return 'Disabled (No Inpaint)';
+      return 'Desativado (sem preenchimento)';
     default:
       return id || 'LaMa Manga';
   }
@@ -91,12 +100,12 @@ function resolveTranslationLabel(id?: string): string {
 function resolveBubbleLabel(mode?: string): string {
   switch (mode) {
     case 'neural':
-      return 'Neural Balloon (YOLO)';
+      return 'Balão neural (YOLO)';
     case 'heuristic':
-      return 'Heuristic Geometry';
+      return 'Geometria heurística';
     case 'off':
     default:
-      return 'Disabled (Cotrans Box)';
+      return 'Desativado (caixa)';
   }
 }
 
@@ -161,7 +170,7 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
   };
 
   const formattedDate = job?.completedAt
-    ? new Date(job.completedAt).toLocaleString(undefined, {
+    ? new Date(job.completedAt).toLocaleString('pt-BR', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
@@ -170,14 +179,14 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
         second: '2-digit',
       })
     : job?.timestamp
-    ? new Date(job.timestamp).toLocaleString(undefined, {
+    ? new Date(job.timestamp).toLocaleString('pt-BR', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
       })
-    : 'Unknown date';
+    : 'Data desconhecida';
 
   return (
     <div className="space-y-3.5 text-xs text-slate-200">
@@ -188,8 +197,8 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
             <Info className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm text-slate-100">Page & Translation Info</h3>
-            <p className="text-[10px] text-slate-400">Database metadata & live AI pipeline config</p>
+            <h3 className="font-semibold text-sm text-slate-100">Informações da página e tradução</h3>
+            <p className="text-[10px] text-slate-400">Metadados do banco de dados e configuração do pipeline de IA</p>
           </div>
         </div>
         {onBack && (
@@ -197,7 +206,7 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
             onClick={onBack}
             className="text-[11px] text-slate-400 hover:text-white px-2 py-1 rounded bg-[#090a0f] border border-[#262a3b] hover:bg-[#1c1f2e] transition"
           >
-            Close
+            Fechar
           </button>
         )}
       </div>
@@ -206,23 +215,23 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
       <div className="p-3 rounded-xl bg-[#090a0f] border border-[#262a3b] space-y-2">
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-semibold text-slate-300">
-            {jobId ? `Job #${jobId}` : 'Current Page'}
+            {jobId ? `Tarefa #${jobId}` : 'Página atual'}
           </span>
           <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
             <CheckCircle2 className="w-3 h-3" />
-            <span>{job?.status ? job.status.toUpperCase() : 'COMPLETED'}</span>
+            <span>{JOB_STATUS_LABELS[job?.status ?? 'completed'] ?? job?.status?.toUpperCase() ?? 'CONCLUÍDO'}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 pt-1 border-t border-[#1c1f2e] text-[11px]">
           <div>
-            <span className="text-slate-400 block text-[10px]">Total Runtime</span>
+            <span className="text-slate-400 block text-[10px]">Tempo total</span>
             <span className="font-mono text-slate-100 font-medium">
               {job?.durationMs ? `${job.durationMs.toLocaleString()} ms` : '—'}
             </span>
           </div>
           <div>
-            <span className="text-slate-400 block text-[10px]">Processed At</span>
+            <span className="text-slate-400 block text-[10px]">Processado em</span>
             <span className="text-slate-200 truncate block" title={formattedDate}>
               {formattedDate}
             </span>
@@ -234,34 +243,34 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
       <div className="p-3 rounded-xl bg-[#090a0f] border border-[#262a3b] space-y-2.5">
         <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
           <Cpu className="w-3.5 h-3.5 text-[#22d3ee]" />
-          <span>AI Pipeline Engines</span>
+          <span>Mecanismos do pipeline de IA</span>
         </div>
 
         <div className="space-y-2 text-[11px]">
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Language Pair</span>
+            <span className="text-slate-400">Par de idiomas</span>
             <span className="font-mono text-slate-100 font-semibold uppercase">
-              {job?.sourceLang || 'auto'} → {job?.targetLang || 'en'}
+              {getLanguageDisplayName(job?.sourceLang || 'auto')} → {getLanguageDisplayName(job?.targetLang || 'en')}
             </span>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">OCR Recognition</span>
+            <span className="text-slate-400">Reconhecimento OCR</span>
             <span className="text-slate-200 font-medium">{resolveOcrLabel(job?.ocrEngineId)}</span>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Translation Model</span>
+            <span className="text-slate-400">Modelo de tradução</span>
             <span className="text-slate-200 font-medium">{resolveTranslationLabel(job?.translationEngineId)}</span>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Inpainting Engine</span>
+            <span className="text-slate-400">Mecanismo de preenchimento</span>
             <span className="text-slate-200 font-medium">{resolveInpaintLabel(job?.inpaintTier)}</span>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Bubble Detection</span>
+            <span className="text-slate-400">Detecção de balões</span>
             <span className="text-slate-200 font-medium">{resolveBubbleLabel(job?.bubbleMode)}</span>
           </div>
         </div>
@@ -271,21 +280,21 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
       <div className="p-3 rounded-xl bg-[#090a0f] border border-[#262a3b] space-y-2">
         <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
           <Type className="w-3.5 h-3.5 text-[#22d3ee]" />
-          <span>Render Typography</span>
+          <span>Tipografia renderizada</span>
         </div>
 
         <div className="space-y-1.5 text-[11px]">
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Font Preset</span>
+            <span className="text-slate-400">Predefinição de fonte</span>
             <span className="text-slate-200 font-medium">{resolveFontLabel(job?.renderFontPresetId)}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Default Weight</span>
+            <span className="text-slate-400">Peso padrão</span>
             <span className="font-semibold text-slate-200">
               {job?.renderFontBold ? (
-                <span className="text-[#22d3ee]">Bold (Enabled)</span>
+                <span className="text-[#22d3ee]">Negrito (ativado)</span>
               ) : (
-                <span className="text-slate-400">Regular (Unbold)</span>
+                <span className="text-slate-400">Normal (sem negrito)</span>
               )}
             </span>
           </div>
@@ -296,19 +305,19 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
       <div className="p-3 rounded-xl bg-[#090a0f] border border-[#262a3b] space-y-2">
         <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
           <Layers className="w-3.5 h-3.5 text-[#22d3ee]" />
-          <span>Page Content</span>
+          <span>Conteúdo da página</span>
         </div>
 
         <div className="grid grid-cols-2 gap-2 text-[11px]">
           <div>
-            <span className="text-slate-400 block text-[10px]">Dimensions</span>
+            <span className="text-slate-400 block text-[10px]">Dimensões</span>
             <span className="font-mono text-slate-200">
               {imageWidth > 0 && imageHeight > 0 ? `${imageWidth} × ${imageHeight} px` : '—'}
             </span>
           </div>
           <div>
-            <span className="text-slate-400 block text-[10px]">Dialogue Bubbles</span>
-            <span className="font-mono text-slate-200">{activeBlockCount} detected</span>
+            <span className="text-slate-400 block text-[10px]">Balões de diálogo</span>
+            <span className="font-mono text-slate-200">{activeBlockCount} detectados</span>
           </div>
         </div>
       </div>
@@ -317,20 +326,20 @@ export const PageInfoSettings: React.FC<PageInfoSettingsProps> = ({ jobId, onBac
       {job?.srcUrl && (
         <div className="p-3 rounded-xl bg-[#090a0f] border border-[#262a3b] space-y-1.5">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-slate-400 font-medium">Source Image</span>
+            <span className="text-[10px] text-slate-400 font-medium">Imagem de origem</span>
             <button
               onClick={handleCopyUrl}
               className="flex items-center gap-1 text-[10px] text-[#22d3ee] hover:underline"
             >
               {copiedUrl ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-              {copiedUrl ? 'Copied' : 'Copy Source'}
+              {copiedUrl ? 'Copiado' : 'Copiar origem'}
             </button>
           </div>
           <p className="text-[11px] text-slate-300 break-all font-mono line-clamp-2">
             {job.srcUrl}
           </p>
           <div className="pt-1 text-[10px] text-slate-500">
-            Stored locally in browser IndexedDB
+            Armazenado localmente no IndexedDB do navegador
           </div>
         </div>
       )}

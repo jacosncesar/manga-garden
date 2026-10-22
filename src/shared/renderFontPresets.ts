@@ -20,39 +20,39 @@ export const DEFAULT_RENDER_FONT_PRESET_ID: string = 'standard';
 export const fontRegistry: Record<string, RenderFontPreset> = {
   'standard': {
     id: 'standard',
-    label: 'Standard',
+    label: 'Padrão',
     fontFamily: 'sans-serif',
-    description: 'Clean system sans-serif font.'
+    description: 'Fonte sem serifa simples do sistema.'
   },
   'comic': {
     id: 'comic',
     label: 'Wild Words',
     fontFamily: '"Manga Garden Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif',
-    description: 'Authentic manga dialogue font'
+    description: 'Fonte de balões no estilo clássico de mangá.'
   },
   'anime-ace': {
     id: 'anime-ace',
     label: 'Anime Ace',
     fontFamily: '"MTO Comic 2", "SVN-Anime Ace 2.0", "Anime Ace 2.0 BB", "Anime Ace", cursive, sans-serif',
-    description: 'Popular comic dialogue font'
+    description: 'Fonte popular para balões de quadrinhos.'
   },
   'comic-hand': {
     id: 'comic-hand',
     label: 'Comic Hand',
     fontFamily: '"Patrick Hand SC", "Comic Sans MS", cursive, sans-serif',
-    description: 'Natural small-caps comic lettering'
+    description: 'Letras de quadrinhos naturais em versalete.'
   },
   'serif': {
     id: 'serif',
-    label: 'Serif',
+    label: 'Serifada',
     fontFamily: 'Georgia, "Times New Roman", serif',
-    description: 'Traditional literary serif font'
+    description: 'Fonte serifada tradicional para textos literários.'
   },
   'monospace': {
     id: 'monospace',
-    label: 'Monospace',
+    label: 'Monoespaçada',
     fontFamily: '"Courier New", Courier, monospace',
-    description: 'Fixed-width typewriter font'
+    description: 'Fonte de largura fixa, como a de uma máquina de escrever.'
   }
 };
 

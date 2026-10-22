@@ -35,7 +35,7 @@ describe('ReaderLaunchControl UI', () => {
     };
   });
 
-  it('renders Open Chapter Reader button when translated pages exist', async () => {
+  it('renders the chapter reader button when translated pages exist', async () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const root = createRoot(container);
@@ -45,7 +45,7 @@ describe('ReaderLaunchControl UI', () => {
       root.render(<ReaderLaunchControl />);
     });
 
-    expect(container.textContent).toContain('Open Chapter Reader');
+    expect(container.textContent).toContain('Abrir leitor de capítulos');
     expect(container.textContent).toContain('(12)');
 
     const btn = container.querySelector('button') as HTMLButtonElement;

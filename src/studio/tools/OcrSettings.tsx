@@ -21,10 +21,10 @@ export const OcrSettings: React.FC = () => {
       <div className="pb-2 border-b border-[#282d3f]">
         <div className="flex items-center gap-2">
           <ScanText className="w-4 h-4 text-[#22d3ee]" />
-          <h3 className="font-semibold text-sm text-slate-100">Live AI Re-OCR Area</h3>
+          <h3 className="font-semibold text-sm text-slate-100">Executar novo OCR com IA</h3>
         </div>
         <p className="text-[11px] text-slate-400 mt-1">
-          Brush over dialogue or SFX to read the original image, even where the editor background is already cleaned. Choose which steps run after recognition.
+          Pinte sobre falas ou efeitos sonoros para ler a imagem original, mesmo onde o fundo do editor já foi limpo. Escolha quais etapas executar após o reconhecimento.
         </p>
       </div>
 
@@ -33,7 +33,7 @@ export const OcrSettings: React.FC = () => {
 
       {/* 3-Way Scan Source Selector */}
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">OCR Scan Source</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Origem da leitura do OCR</label>
         <div className="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-[#090a0f] border border-[#282d3f]">
           <button
             type="button"
@@ -43,7 +43,7 @@ export const OcrSettings: React.FC = () => {
                 ? 'bg-[#22d3ee] text-white shadow'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
-            title="Scan original raw artwork (untranslated Japanese/foreign text)"
+            title="Ler a imagem original (texto japonês ou estrangeiro ainda não traduzido)"
           >
             Original
           </button>
@@ -55,9 +55,9 @@ export const OcrSettings: React.FC = () => {
                 ? 'bg-[#22d3ee] text-white shadow'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
-            title="Scan inpainted/cleaned background canvas"
+            title="Ler a imagem de fundo preenchida/limpa"
           >
-            Inpainted BG
+            Fundo preenchido
           </button>
           <button
             type="button"
@@ -67,44 +67,44 @@ export const OcrSettings: React.FC = () => {
                 ? 'bg-[#22d3ee] text-white shadow'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
-            title="Scan translated composite image (background + rendered text)"
+            title="Ler a imagem composta traduzida (fundo + texto inserido)"
           >
-            Translated
+            Traduzida
           </button>
         </div>
         <p className="text-[10px] text-slate-500 mt-1">
           {ocr.scanSource === 'original'
-            ? 'Scans untouched original artwork to detect original dialogue/SFX.'
+            ? 'Analisa a imagem original para detectar falas e efeitos sonoros.'
             : ocr.scanSource === 'background'
-            ? 'Scans cleaned background canvas (may have text already erased).'
-            : 'Scans the composite page including translated text overlay.'}
+            ? 'Analisa o fundo limpo (o texto pode já ter sido apagado).'
+            : 'Analisa a página composta, incluindo o texto traduzido.'}
         </p>
       </div>
 
       <fieldset className="space-y-2 rounded-lg border border-[#282d3f] p-3">
-        <legend className="px-1 text-slate-400 font-medium">After recognition</legend>
+        <legend className="px-1 text-slate-400 font-medium">Após o reconhecimento</legend>
         <label className="flex items-center justify-between gap-3 cursor-pointer">
-          <span>Translate recognized text</span>
+          <span>Traduzir o texto reconhecido</span>
           <input type="checkbox" checked={ocr.translate}
             onChange={(event) => update({ translate: event.target.checked })}
             className="accent-[#22d3ee]" />
         </label>
         <label className="flex items-center justify-between gap-3 cursor-pointer">
-          <span>Clean background</span>
+          <span>Limpar o fundo</span>
           <input type="checkbox" checked={ocr.inpaint}
             onChange={(event) => update({ inpaint: event.target.checked })}
             className="accent-[#22d3ee]" />
         </label>
         <p className="text-[11px] text-slate-400 leading-relaxed">
           {!ocr.translate && !ocr.inpaint
-            ? 'OCR only: adds editable source text. No translation request or background changes.'
-            : `${ocr.translate ? 'Adds translated text' : 'Adds source text'}${ocr.inpaint ? ' and cleans detected lettering using the selected inpaint tier.' : '. The background stays unchanged.'}`}
+            ? 'Somente OCR: adiciona o texto original em caixas editáveis. Não solicita tradução nem altera o fundo.'
+            : `${ocr.translate ? 'Adiciona o texto traduzido' : 'Adiciona o texto original'}${ocr.inpaint ? ' e limpa as letras detectadas usando o nível de preenchimento selecionado.' : '. O fundo permanece inalterado.'}`}
         </p>
-        <p className="text-[10px] text-slate-500">These steps apply only in Studio, independently of Global Sync.</p>
+        <p className="text-[10px] text-slate-500">Estas etapas se aplicam somente ao Studio, independentemente da sincronização global.</p>
       </fieldset>
 
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">Brush Shape</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Formato do pincel</label>
         <div className="flex gap-2">
           <button
             onClick={() => update({ shape: 'circle' })}
@@ -115,7 +115,7 @@ export const OcrSettings: React.FC = () => {
             }`}
           >
             <Circle className="w-3.5 h-3.5" />
-            Circle
+            Círculo
           </button>
           <button
             onClick={() => update({ shape: 'square' })}
@@ -126,14 +126,14 @@ export const OcrSettings: React.FC = () => {
             }`}
           >
             <Square className="w-3.5 h-3.5" />
-            Square
+            Quadrado
           </button>
         </div>
       </div>
 
       <div>
         <div className="flex justify-between text-slate-400 mb-1">
-          <span>Brush Size</span>
+          <span>Tamanho do pincel</span>
           <span className="font-mono text-slate-200">{ocr.size}px</span>
         </div>
         <input
@@ -147,7 +147,7 @@ export const OcrSettings: React.FC = () => {
       </div>
 
       <div className="p-3 rounded-lg bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-[11px] text-[#22d3ee] leading-relaxed">
-        Recognized text is added as editable boxes over its detected position. With translation off, the boxes contain the original source text.
+        O texto reconhecido é adicionado em caixas editáveis sobre a posição detectada. Com a tradução desativada, as caixas exibem o texto original.
       </div>
     </div>
   );

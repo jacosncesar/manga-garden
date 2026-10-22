@@ -79,14 +79,14 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <Globe size={16} className="text-[var(--color-dust)]" />
-          <span className="font-medium text-sm">Site Rules & Domains</span>
+          <span className="font-medium text-sm">Regras e domínios de sites</span>
           <HelpTooltip
             size="sm"
             content="Desative o Manga Garden em domínios específicos ou configure seletores CSS personalizados para imagens em sites de leitura complexos."
           />
         </div>
         <button
-          aria-label="Close site rules panel"
+          aria-label="Fechar painel de regras do site"
           onClick={onClose}
           className="p-1 hover:bg-[var(--color-dust)] hover:bg-opacity-30 rounded cursor-pointer"
         >
@@ -104,7 +104,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
               : 'border-transparent text-[var(--color-dust)] hover:text-[var(--color-ink)]'
           }`}
         >
-          Disabled Sites ({disabledDomains.length})
+          Sites desativados ({disabledDomains.length})
         </button>
         <button
           onClick={() => setActiveTab('selectors')}
@@ -114,7 +114,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
               : 'border-transparent text-[var(--color-dust)] hover:text-[var(--color-ink)]'
           }`}
         >
-          Custom Selectors ({siteRules.length})
+          Seletores personalizados ({siteRules.length})
         </button>
       </div>
 
@@ -129,7 +129,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
           <div className="flex gap-2">
             <input
               type="text"
-              placeholder="e.g. twitter.com or *.bato.to"
+              placeholder="Ex.: twitter.com ou *.bato.to"
               value={newDomain}
               onChange={(e) => setNewDomain(e.target.value)}
               onKeyDown={(e) => {
@@ -141,7 +141,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
               onClick={handleAddDisabledDomain}
               disabled={!newDomain.trim()}
               className="p-1.5 bg-[var(--color-ink)] text-[var(--color-paper)] rounded disabled:opacity-40 cursor-pointer"
-              title="Add to disabled sites"
+              title="Adicionar à lista de sites desativados"
             >
               <Plus size={14} />
             </button>
@@ -159,7 +159,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
                   <button
                     onClick={() => handleRemoveDisabledDomain(domain)}
                     className="p-0.5 hover:text-red-500 text-[var(--color-dust)] transition-colors cursor-pointer"
-                    title="Re-enable domain"
+                    title="Reativar domínio"
                   >
                     <Trash2 size={12} />
                   </button>
@@ -178,14 +178,14 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
       {activeTab === 'selectors' && (
         <div className="flex flex-col gap-2.5">
           <p className="text-[11px] text-[var(--color-dust)]">
-            Specify CSS image selectors to accurately target chapter panels on tricky reader layouts.
+            Informe seletores CSS de imagens para localizar com precisão as páginas em layouts de leitura mais complexos.
           </p>
 
           {/* Add rule form */}
           <div className="flex flex-col gap-1.5 p-2 bg-[var(--color-paper)] rounded border border-[var(--color-dust)] border-opacity-30">
             <input
               type="text"
-              placeholder="Domain (e.g. mangadex.org)"
+              placeholder="Domínio (ex.: mangadex.org)"
               value={newRuleDomain}
               onChange={(e) => setNewRuleDomain(e.target.value)}
               className="px-2 py-1 text-xs bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded focus:outline-none focus:border-[var(--color-editorial)] font-mono text-[11px]"
@@ -193,7 +193,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
             <div className="flex gap-1.5">
               <input
                 type="text"
-                placeholder="CSS Selector (e.g. #readerarea img)"
+                placeholder="Seletor CSS (ex.: #readerarea img)"
                 value={newRuleSelector}
                 onChange={(e) => setNewRuleSelector(e.target.value)}
                 onKeyDown={(e) => {
@@ -205,10 +205,10 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
                 onClick={handleAddSiteRule}
                 disabled={!newRuleDomain.trim() || !newRuleSelector.trim()}
                 className="px-2.5 py-1 bg-[var(--color-ink)] text-[var(--color-paper)] rounded text-xs font-medium disabled:opacity-40 cursor-pointer flex items-center gap-1"
-                title="Save site selector rule"
+                title="Salvar regra de seletor do site"
               >
                 <Plus size={12} />
-                <span>Save</span>
+                <span>Salvar</span>
               </button>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
                       checked={rule.enabled}
                       onChange={() => handleToggleRule(idx)}
                       className="cursor-pointer accent-[var(--color-editorial)]"
-                      title={rule.enabled ? 'Disable rule' : 'Enable rule'}
+                      title={rule.enabled ? 'Desativar regra' : 'Ativar regra'}
                     />
                     <div className="flex flex-col min-w-0">
                       <span className="font-bold text-[11px] truncate">{rule.domain}</span>
@@ -237,7 +237,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
                   <button
                     onClick={() => handleRemoveSiteRule(idx)}
                     className="p-0.5 hover:text-red-500 text-[var(--color-dust)] transition-colors cursor-pointer shrink-0"
-                    title="Delete rule"
+                    title="Excluir regra"
                   >
                     <Trash2 size={12} />
                   </button>
@@ -246,7 +246,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
             </div>
           ) : (
             <p className="text-[11px] text-[var(--color-dust)] text-center py-2 italic">
-              No custom rules. Standard auto-detection and built-in manga presets are used.
+              Nenhuma regra personalizada. A detecção automática padrão e as predefinições de mangá integradas serão usadas.
             </p>
           )}
         </div>

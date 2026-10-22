@@ -362,7 +362,7 @@ export const TypographySettings: React.FC = () => {
       y: Math.round(imgH / 2 - 25),
       width: 140,
       height: 50,
-      text: 'New Dialogue',
+      text: 'Novo diálogo',
       originalText: undefined,
       fontSize: 18,
       fontFamily: 'WildWords, CCWildWords, sans-serif',
@@ -401,36 +401,36 @@ export const TypographySettings: React.FC = () => {
           className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-md shadow-[rgba(34,211,238,0.3)] transition cursor-pointer"
         >
           <Plus className="w-3.5 h-3.5" />
-          Add Text Box
+          Adicionar caixa de texto
         </button>
         {selectedObj && (
           <button
             onClick={() => studioStore.setState({ selectedTextId: null, editingTextId: null, inlineSelection: null })}
-            title="Deselect text box"
+            title="Desselecionar caixa de texto"
             className="py-2 px-2.5 rounded-lg border border-[#282d3f] bg-[#090a0f] text-slate-400 hover:text-white hover:bg-[#1c1f2e] text-xs font-medium transition cursor-pointer"
           >
-            Deselect
+            Desselecionar
           </button>
         )}
       </div>
 
       {!selectedObj && !globalEditMode ? (
         <div className="p-4 text-center text-xs text-slate-400 space-y-2.5 rounded-xl border border-[#262a3b] bg-[#090a0f]/50">
-          <p className="font-medium text-slate-300">No text bubble selected</p>
+          <p className="font-medium text-slate-300">Nenhum balão de texto selecionado</p>
           <p className="text-[11px] text-slate-500 leading-relaxed">
-            Click any bubble on the canvas to edit its dialogue and style, or enable <strong>Global Edit Mode</strong> to style all bubbles at once.
+            Clique em um balão na tela para editar o texto e o estilo, ou ative <strong>Modo de edição global</strong> para estilizar todos de uma vez.
           </p>
           <button
             onClick={() => studioStore.setState({ globalEditMode: true })}
             className="w-full py-1.5 px-3 rounded-lg border border-[#282d3f] bg-[#1c1f2e] text-[#22d3ee] hover:bg-[#282d3f] transition font-medium"
           >
-            Enable Global Edit Mode
+            Ativar modo de edição global
           </button>
         </div>
       ) : (
         <>
           <div className="flex items-center justify-between pb-2 border-b border-[#282d3f]">
-            <h3 className="font-semibold text-sm text-slate-100">Typography</h3>
+            <h3 className="font-semibold text-sm text-slate-100">Tipografia</h3>
             <label className="flex items-center gap-1.5 text-[11px] text-[#22d3ee] font-medium cursor-pointer">
               <input
                 type="checkbox"
@@ -438,7 +438,7 @@ export const TypographySettings: React.FC = () => {
                 onChange={(e) => studioStore.setState({ globalEditMode: e.target.checked })}
                 className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0 accent-[#22d3ee]"
               />
-              All Bubbles
+              Todos os balões
             </label>
           </div>
 
@@ -449,27 +449,27 @@ export const TypographySettings: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopyStyle}
-                  title="Copy typography styling (font, color, stroke, shadow, etc.)"
+                  title="Copiar estilo tipográfico (fonte, cor, contorno, sombra etc.)"
                   className="flex-1 py-1 px-2 rounded text-[11px] font-medium bg-[#1c1f2e] text-slate-200 hover:text-white hover:bg-[#282d3f] border border-[#282d3f] transition flex items-center justify-center gap-1"
                 >
                   {copiedStyle ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-indigo-400" />}
-                  <span>{copiedStyle ? 'Copied!' : 'Copy Style'}</span>
+                  <span>{copiedStyle ? 'Copiado!' : 'Copiar estilo'}</span>
                 </button>
                 <button
                   type="button"
                   onClick={handlePasteStyle}
                   disabled={!clipboardStyle}
-                  title={clipboardStyle ? "Paste copied typography styling onto this bubble" : "Copy a style first"}
+                  title={clipboardStyle ? "Aplicar o estilo tipográfico copiado a este balão" : "Copie um estilo primeiro"}
                   className="flex-1 py-1 px-2 rounded text-[11px] font-medium bg-[#1c1f2e] text-slate-200 hover:text-white hover:bg-[#282d3f] border border-[#282d3f] disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center gap-1"
                 >
                   <ClipboardPaste className="w-3 h-3 text-indigo-400" />
-                  <span>Paste Style</span>
+                  <span>Colar estilo</span>
                 </button>
               </div>
 
               {selectedObj.isSkipped && (
                 <div className="flex items-center justify-between p-2 rounded-lg bg-amber-950/30 border border-amber-800/40 text-amber-300 text-xs">
-                  <span className="text-[11px]">Filtered out by bubble detector</span>
+                  <span className="text-[11px]">Ignorado pelo detector de balões</span>
                   <button
                     type="button"
                     onClick={() => {
@@ -479,7 +479,7 @@ export const TypographySettings: React.FC = () => {
                     }}
                     className="px-2 py-0.5 rounded bg-amber-600/30 hover:bg-amber-600/50 text-amber-200 text-[10px] font-medium transition"
                   >
-                    Include Bubble
+                    Incluir balão
                   </button>
                 </div>
               )}
@@ -493,13 +493,13 @@ export const TypographySettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
             <Languages className="w-3.5 h-3.5 text-[#22d3ee]" />
-            <span>Original Source (OCR)</span>
+            <span>Texto original (OCR)</span>
           </div>
           <div className="flex items-center gap-1">
             {originalImage && (
               <button
                 onClick={() => setShowCropPreview(!showCropPreview)}
-                title={showCropPreview ? 'Hide original panel crop' : 'Peek original panel crop'}
+                title={showCropPreview ? 'Ocultar recorte original do quadro' : 'Visualizar recorte original do quadro'}
                 className={`p-1 rounded text-[10px] transition ${
                   showCropPreview ? 'bg-[#1c1f2e] text-[#22d3ee]' : 'text-slate-400 hover:text-white'
                 }`}
@@ -510,16 +510,16 @@ export const TypographySettings: React.FC = () => {
             {obj.originalText && (
               <button
                 onClick={handleCopyOriginal}
-                title="Copy original OCR text"
+                title="Copiar texto original do OCR"
                 className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#1c1f2e] text-slate-300 hover:text-white hover:bg-[#282d3f] transition flex items-center gap-1"
               >
                 {copiedOriginal ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                {copiedOriginal ? 'Copied' : 'Copy'}
+                {copiedOriginal ? 'Copiado' : 'Copiar'}
               </button>
             )}
             <button
               onClick={() => setIsEditingOriginal(!isEditingOriginal)}
-              title={isEditingOriginal ? 'Done editing original OCR' : 'Edit original OCR transcription'}
+              title={isEditingOriginal ? 'Concluir edição do OCR original' : 'Editar transcrição original do OCR'}
               className={`p-1 rounded text-[10px] transition ${
                 isEditingOriginal
                   ? 'bg-[#22d3ee]/20 text-[#22d3ee]'
@@ -543,7 +543,7 @@ export const TypographySettings: React.FC = () => {
           <textarea
             value={obj.originalText ?? ''}
             onChange={(e) => handleUpdateOriginalText(e.target.value)}
-            placeholder="Edit original raw text (e.g. Japanese, Korean)..."
+            placeholder="Edite o texto original (ex.: japonês, coreano)..."
             rows={2}
             className="w-full rounded-lg border border-[#22d3ee]/60 bg-[#12141c] p-2 text-xs text-slate-200 focus:outline-hidden resize-none font-sans"
           />
@@ -553,9 +553,9 @@ export const TypographySettings: React.FC = () => {
               obj.originalText
             ) : (
               <div className="flex items-center justify-between text-slate-400 text-[11px]">
-                <span className="italic">None (Manual text box)</span>
+                <span className="italic">Nenhum (caixa de texto manual)</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1c1f2e] text-slate-500 font-mono">
-                  No source OCR
+                  Sem OCR de origem
                 </span>
               </div>
             )}
@@ -570,25 +570,25 @@ export const TypographySettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
             <Type className="w-3.5 h-3.5 text-[#22d3ee]" />
-            <span>Dialogue Text</span>
+            <span>Texto do diálogo</span>
           </div>
           <div className="flex items-center gap-1">
             {obj.originalText && (
               <button
                 onClick={handleRevertToOriginal}
-                title="Reset dialogue to original OCR text"
+                title="Restaurar o texto original do OCR"
                 className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#1c1f2e] text-slate-400 hover:text-white hover:bg-[#282d3f] transition flex items-center gap-1"
               >
                 <RotateCcw className="w-3 h-3" />
-                Revert
+                Restaurar
               </button>
             )}
             <button
               onClick={handleClearText}
-              title="Clear dialogue text"
+              title="Limpar texto do diálogo"
               className="px-1.5 py-0.5 rounded text-[10px] text-slate-400 hover:text-[#22d3ee] hover:bg-[#1c1f2e] transition"
             >
-              Clear
+              Limpar
             </button>
           </div>
         </div>
@@ -627,7 +627,7 @@ export const TypographySettings: React.FC = () => {
               },
             });
           }}
-          placeholder="Type translation dialogue here..."
+          placeholder="Digite o texto traduzido aqui..."
           rows={3}
           className="w-full rounded-lg border border-[#262a3b] bg-[#12141c] p-2.5 text-xs text-slate-100 placeholder:text-slate-600 focus:border-[#22d3ee] focus:outline-hidden transition resize-y min-h-[64px] max-h-48 leading-relaxed font-sans"
         />
@@ -635,7 +635,7 @@ export const TypographySettings: React.FC = () => {
         {isSelectionActive && (
           <div className="flex items-center justify-between text-[11px] text-[#22d3ee] bg-[#22d3ee]/10 px-2.5 py-1.5 rounded-lg border border-[#22d3ee]/20 animate-in fade-in duration-150">
             <span className="truncate max-w-[210px] font-medium">
-              Formatting selection: "{obj.text?.slice(selStart, selEnd)}"
+              Formatando seleção: "{obj.text?.slice(selStart, selEnd)}"
             </span>
             <button
               type="button"
@@ -643,16 +643,16 @@ export const TypographySettings: React.FC = () => {
               onClick={() => studioStore.setState({ inlineSelection: null })}
               className="text-[10px] text-slate-400 hover:text-white shrink-0 ml-1 underline cursor-pointer"
             >
-              Deselect
+              Desselecionar
             </button>
           </div>
         )}
 
         <div className="flex items-center justify-between text-[10px] text-slate-500 pt-0.5">
           <span>
-            {(obj.text || '').length} chars • {(obj.text || '').split('\n').filter(Boolean).length || 1} lines
+            {(obj.text || '').length} caracteres • {(obj.text || '').split('\n').filter(Boolean).length || 1} linhas
           </span>
-          <span className="text-slate-500 text-[10px]">Updates canvas live</span>
+          <span className="text-slate-500 text-[10px]">Atualiza a tela em tempo real</span>
         </div>
       </div>
 
@@ -663,9 +663,9 @@ export const TypographySettings: React.FC = () => {
       {/* Typesetting Mode Toggle */}
       <div>
         <div className="flex items-center justify-between mb-1">
-          <label className="block text-slate-400 font-medium">Typesetting Engine</label>
+          <label className="block text-slate-400 font-medium">Mecanismo de composição tipográfica</label>
           <span className="text-[10px] text-slate-500 font-mono">
-            {globalEditMode ? 'Global (All Bubbles)' : 'Local (Selected)'}
+            {globalEditMode ? 'Global (todos os balões)' : 'Local (selecionado)'}
           </span>
         </div>
         <div className="flex p-0.5 rounded-lg bg-[#090a0f] border border-[#282d3f] text-xs">
@@ -677,10 +677,10 @@ export const TypographySettings: React.FC = () => {
                 ? 'bg-[#1c1f2e] text-[#22d3ee] shadow-xs'
                 : 'text-slate-400 hover:text-white'
             }`}
-            title="Auto Balloon: Balances lines into speech bubble diamond envelopes and auto-fits font size (Pipeline typesystem)"
+            title="Balão automático: distribui as linhas no formato do balão e ajusta o tamanho da fonte automaticamente"
           >
             <Sparkles size={12} className={effectiveTypesetMode === 'balloon' ? 'text-[#22d3ee]' : ''} />
-            <span>Auto Balloon</span>
+            <span>Balão automático</span>
           </button>
           <button
             type="button"
@@ -690,31 +690,31 @@ export const TypographySettings: React.FC = () => {
                 ? 'bg-[#1c1f2e] text-[#22d3ee] shadow-xs'
                 : 'text-slate-400 hover:text-white'
             }`}
-            title="Simple Wrap: Greedy line wrapping without auto font scaling on subsequent edits"
+            title="Quebra simples: distribui as linhas sem ajustar automaticamente o tamanho da fonte"
           >
             <AlignLeft size={12} className={effectiveTypesetMode === 'simple' ? 'text-[#22d3ee]' : ''} />
-            <span>Simple Wrap</span>
+            <span>Quebra simples</span>
           </button>
         </div>
         <p className="mt-1 text-[10px] text-slate-500">
-          Applies when you edit text or typography. Existing layout stays unchanged until then.
+          Aplicado ao editar o texto ou a tipografia. O layout atual permanece até que você faça uma edição.
         </p>
       </div>
 
       {/* Font Family */}
       <div>
-        <label className="block text-slate-400 font-medium mb-1">Font Family</label>
+        <label className="block text-slate-400 font-medium mb-1">Família da fonte</label>
         <select
           value={effectiveFontFamily}
           onChange={(e) => updateSelected({ fontFamily: e.target.value })}
           className="w-full rounded-lg border border-[#282d3f] bg-[#090a0f] px-2.5 py-1.5 text-xs text-slate-200 focus:outline-hidden"
         >
-          <option value="WildWords, CCWildWords, sans-serif">CC Wild Words (Comic)</option>
-          <option value="Kalam, cursive">Kalam (Manga Dialogue)</option>
-          <option value="Figtree, sans-serif">Figtree (Modern Clean)</option>
-          <option value="Comic Sans MS, cursive">Comic Sans (Classic)</option>
-          <option value="Impact, sans-serif">Impact (Action SFX)</option>
-          <option value="sans-serif">System Sans-Serif</option>
+          <option value="WildWords, CCWildWords, sans-serif">CC Wild Words (quadrinhos)</option>
+          <option value="Kalam, cursive">Kalam (diálogos de mangá)</option>
+          <option value="Figtree, sans-serif">Figtree (moderna e simples)</option>
+          <option value="Comic Sans MS, cursive">Comic Sans (clássica)</option>
+          <option value="Impact, sans-serif">Impact (efeitos sonoros)</option>
+          <option value="sans-serif">Sem serifa do sistema</option>
         </select>
       </div>
 
@@ -722,7 +722,7 @@ export const TypographySettings: React.FC = () => {
       <div className="grid grid-cols-2 gap-2">
         <div>
           <div className="flex justify-between text-slate-400 mb-1">
-            <span>Size</span>
+            <span>Tamanho</span>
             <span className="font-mono text-slate-200">{effectiveFontSize}px</span>
           </div>
           <input
@@ -736,7 +736,7 @@ export const TypographySettings: React.FC = () => {
         </div>
         <div>
           <div className="flex justify-between text-slate-400 mb-1">
-            <span>Line Space</span>
+            <span>Espaçamento entre linhas</span>
             <span className="font-mono text-slate-200">{(obj.lineSpacing || 1.2).toFixed(1)}x</span>
           </div>
           <input
@@ -762,7 +762,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Bold"
+          title="Negrito"
         >
           <Bold className="w-3.5 h-3.5" />
         </button>
@@ -775,7 +775,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Italic"
+          title="Itálico"
         >
           <Italic className="w-3.5 h-3.5" />
         </button>
@@ -788,7 +788,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Uppercase"
+          title="Maiúsculas"
         >
           <CaseUpper className="w-3.5 h-3.5" />
         </button>
@@ -801,7 +801,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Align Left"
+          title="Alinhar à esquerda"
         >
           <AlignLeft className="w-3.5 h-3.5" />
         </button>
@@ -814,7 +814,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Align Center"
+          title="Centralizar"
         >
           <AlignCenter className="w-3.5 h-3.5" />
         </button>
@@ -827,7 +827,7 @@ export const TypographySettings: React.FC = () => {
               ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
-          title="Align Right"
+          title="Alinhar à direita"
         >
           <AlignRight className="w-3.5 h-3.5" />
         </button>
@@ -836,8 +836,8 @@ export const TypographySettings: React.FC = () => {
       {/* CJK Vertical Layout Toggle */}
       <div className="flex items-center justify-between p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
         <div>
-          <span className="font-medium text-slate-200">CJK Vertical Layout</span>
-          <p className="text-[11px] text-slate-500">Top-to-bottom right-to-left columns</p>
+          <span className="font-medium text-slate-200">Texto vertical CJK</span>
+          <p className="text-[11px] text-slate-500">Colunas de cima para baixo e da direita para a esquerda</p>
         </div>
         <input
           type="checkbox"
@@ -852,7 +852,7 @@ export const TypographySettings: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-medium">
             <RotateCw className="w-3.5 h-3.5 text-[#22d3ee]" />
-            <span>Rotation Angle</span>
+            <span>Ângulo de rotação</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="font-mono text-slate-200">{obj.rotation || 0}°</span>
@@ -861,10 +861,10 @@ export const TypographySettings: React.FC = () => {
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => updateSelected({ rotation: 0 })}
-                title="Reset angle to 0° (flat)"
+                title="Redefinir ângulo para 0° (reto)"
                 className="px-1.5 py-0.5 rounded text-[10px] bg-[#1c1f2e] text-slate-400 hover:text-white transition"
               >
-                Reset
+                Redefinir
               </button>
             )}
           </div>
@@ -888,7 +888,7 @@ export const TypographySettings: React.FC = () => {
                 deg = ((((deg % 360) + 540) % 360) - 180);
                 updateSelected({ rotation: deg });
               }}
-              title="Rotate -90°"
+              title="Girar -90°"
               className="px-1.5 py-0.5 rounded bg-[#1c1f2e] border border-[#282d3f] text-slate-300 hover:text-white text-[10px] font-mono transition"
             >
               -90°
@@ -901,7 +901,7 @@ export const TypographySettings: React.FC = () => {
                 deg = ((((deg % 360) + 540) % 360) - 180);
                 updateSelected({ rotation: deg });
               }}
-              title="Rotate +90°"
+              title="Girar +90°"
               className="px-1.5 py-0.5 rounded bg-[#1c1f2e] border border-[#282d3f] text-slate-300 hover:text-white text-[10px] font-mono transition"
             >
               +90°
@@ -913,7 +913,7 @@ export const TypographySettings: React.FC = () => {
       {/* Text Color & Gradient */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label className="text-slate-400 font-medium">Text Fill Color</label>
+          <label className="text-slate-400 font-medium">Cor do texto</label>
           <label className="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer">
             <input
               type="checkbox"
@@ -921,7 +921,7 @@ export const TypographySettings: React.FC = () => {
               onChange={(e) => updateSelected({ isGradient: e.target.checked })}
               className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0 accent-[#22d3ee]"
             />
-            Linear Gradient
+            Gradiente linear
           </label>
         </div>
         <div className="flex items-center gap-2">
@@ -951,7 +951,7 @@ export const TypographySettings: React.FC = () => {
       {/* Stroke Outline & Drop Shadow Angle Dial */}
       <div className="space-y-2 pt-2 border-t border-[#282d3f]">
         <div className="flex justify-between text-slate-400">
-          <span className="font-medium">Outline Stroke</span>
+          <span className="font-medium">Contorno</span>
           <span className="font-mono text-slate-200">{effectiveStrokeWidth}px</span>
         </div>
         <div className="flex items-center gap-2">
@@ -975,7 +975,7 @@ export const TypographySettings: React.FC = () => {
         <div className="grid grid-cols-2 gap-2 pt-1">
           <div>
             <div className="flex justify-between text-slate-400 mb-1">
-              <span>Shadow Offset</span>
+              <span>Deslocamento da sombra</span>
               <span className="font-mono text-slate-200">{obj.shadowDistance || 0}px</span>
             </div>
             <input
@@ -989,7 +989,7 @@ export const TypographySettings: React.FC = () => {
           </div>
           <div>
             <div className="flex justify-between text-slate-400 mb-1">
-              <span>Shadow Angle</span>
+              <span>Ângulo da sombra</span>
               <span className="font-mono text-slate-200">{obj.shadowAngle || 45}°</span>
             </div>
             <input
@@ -1006,7 +1006,7 @@ export const TypographySettings: React.FC = () => {
 
       {/* Bubble Background Fill Box */}
       <div className="space-y-2 pt-2 border-t border-[#282d3f]">
-        <label className="block text-slate-400 font-medium">Bubble Background Box</label>
+        <label className="block text-slate-400 font-medium">Fundo do balão</label>
         <div className="flex items-center gap-2">
           <input
             type="color"
@@ -1018,14 +1018,14 @@ export const TypographySettings: React.FC = () => {
             onClick={() => updateSelected({ backgroundFill: 'transparent' })}
             className="px-2.5 py-1 rounded-md border border-[#282d3f] bg-[#090a0f] text-slate-400 hover:text-white"
           >
-            Clear Fill
+            Remover preenchimento
           </button>
         </div>
         {obj.backgroundFill && obj.backgroundFill !== 'transparent' && (
           <div className="grid grid-cols-2 gap-2 pt-1">
             <div>
               <div className="flex justify-between text-slate-400 mb-1">
-                <span>Padding</span>
+                <span>Espaçamento interno</span>
                 <span className="font-mono text-slate-200">{obj.backgroundPadding || 4}px</span>
               </div>
               <input
@@ -1039,7 +1039,7 @@ export const TypographySettings: React.FC = () => {
             </div>
             <div>
               <div className="flex justify-between text-slate-400 mb-1">
-                <span>Corner Radius</span>
+                <span>Arredondamento dos cantos</span>
                 <span className="font-mono text-slate-200">{obj.backgroundBorderRadius || 0}px</span>
               </div>
               <input

@@ -56,11 +56,11 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
       />
 
       <div className="flex items-center justify-between">
-        <h2 className="text-xs font-semibold tracking-wider uppercase text-[var(--color-dust)]">Preferences</h2>
+        <h2 className="text-xs font-semibold tracking-wider uppercase text-[var(--color-dust)]">Preferências</h2>
         <button 
           onClick={() => updateState({ isDark: !state.isDark })}
           className="p-1.5 rounded-md hover:bg-[var(--color-vellum)] transition-colors cursor-pointer text-[var(--color-ink)]"
-          title={state.isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          title={state.isDark ? "Mudar para o tema claro" : "Mudar para o tema escuro"}
         >
           {state.isDark ? <Sun size={16} /> : <Moon size={16} />}
         </button>
@@ -75,12 +75,12 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
       {/* Section 2: Reading & Interaction */}
       <div className="flex flex-col gap-3 pt-1">
         <h3 className="text-xs font-semibold tracking-wider uppercase text-[var(--color-dust)]">
-          Reading & Interaction
+          Leitura e interação
         </h3>
 
         {/* Manual Selection Method */}
         <div className="flex flex-col gap-2">
-          <span className="font-medium block text-sm px-0.5">Manual Selection Method</span>
+          <span className="font-medium block text-sm px-0.5">Método de seleção manual</span>
           <div className="flex p-1 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md">
             <button
               onClick={() => updateState({ manualMode: 'hover' })}
@@ -90,7 +90,7 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
                   : 'text-[var(--color-dust)] hover:text-[var(--color-ink)]'
               }`}
             >
-              Hover
+              Ao passar o mouse
             </button>
             <button
               onClick={() => updateState({ manualMode: 'persistent' })}
@@ -100,14 +100,14 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
                   : 'text-[var(--color-dust)] hover:text-[var(--color-ink)]'
               }`}
             >
-              Persistent
+              Fixo
             </button>
           </div>
           {/* Dynamic Helper Text */}
           <p className="text-xs text-[var(--color-dust)] px-0.5 leading-relaxed">
             {state.manualMode === 'hover' 
-              ? 'translate button appears when hovering over images' 
-              : 'translate button is pinned to every detectable image'}
+              ? 'O botão de tradução aparece ao passar o mouse sobre as imagens.'
+              : 'O botão de tradução fica fixo em todas as imagens detectadas.'}
           </p>
         </div>
 
@@ -115,9 +115,9 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
-              <span className="font-medium text-sm">Max Queue Capacity</span>
+              <span className="font-medium text-sm">Capacidade máxima da fila</span>
               <FieldHint>
-                Maximum images allowed in translation queue. Processed sequentially for GPU stability.
+                Número máximo de imagens na fila de tradução. Elas são processadas em sequência para manter a estabilidade da GPU.
               </FieldHint>
             </div>
             <span className="text-sm font-bold text-[var(--color-editorial)]">{state.concurrency}</span>
@@ -139,11 +139,11 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
         {/* History Retention / Auto-Delete */}
         <div className="flex justify-between items-center py-0.5">
           <div className="flex items-center gap-1.5">
-            <label htmlFor="history-retention" className="font-medium text-sm">Auto-delete History</label>
+            <label htmlFor="history-retention" className="font-medium text-sm">Excluir histórico automaticamente</label>
             <FieldHint id="history-retention-description">
               {state.historyRetention === 'never'
-                ? 'Auto-delete is disabled. History is kept until you delete it manually.'
-                : 'Deletes inactive job records and their cached images and text older than the selected window. Queued, downloading, and processing jobs are kept.'}
+                ? 'A exclusão automática está desativada. O histórico será mantido até você removê-lo manualmente.'
+                : 'Exclui registros de tarefas inativas e suas imagens e textos em cache após o período selecionado. Tarefas na fila, em download ou em processamento são mantidas.'}
             </FieldHint>
           </div>
           <select
@@ -153,10 +153,10 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
             onChange={(e) => updateState({ historyRetention: e.target.value as HistoryRetentionPeriod })}
             className="px-2.5 py-1 text-xs bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded font-medium text-[var(--color-ink)] cursor-pointer focus:outline-none focus:border-[var(--color-editorial)]"
           >
-            <option value="1day">1 day</option>
-            <option value="1week">1 week (Default)</option>
-            <option value="1month">1 month</option>
-            <option value="never">Never</option>
+            <option value="1day">1 dia</option>
+            <option value="1week">1 semana (padrão)</option>
+            <option value="1month">1 mês</option>
+            <option value="never">Nunca</option>
           </select>
         </div>
 
@@ -167,7 +167,7 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
       {/* Section 3: Advanced & Integrations */}
       <div className="flex flex-col gap-3 pt-1">
         <h3 className="text-xs font-semibold tracking-wider uppercase text-[var(--color-dust)]">
-          Advanced & Integrations
+          Avançado e integrações
         </h3>
 
         <div className="flex flex-col gap-2">
@@ -178,9 +178,9 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
             >
               <div className="flex items-center gap-2">
                 <KeyRound size={16} className="text-[var(--color-dust)]" />
-                <span className="font-medium text-sm">Manage Custom APIs</span>
+                <span className="font-medium text-sm">Gerenciar APIs personalizadas</span>
               </div>
-              <span className="text-xs text-[var(--color-editorial)] font-medium">Edit</span>
+              <span className="text-xs text-[var(--color-editorial)] font-medium">Editar</span>
             </button>
           ) : (
             <ApiManagerPanel state={state} updateState={updateState} onClose={() => setShowApiManager(false)} />
@@ -193,9 +193,9 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
             >
               <div className="flex items-center gap-2">
                 <Network size={16} className="text-[var(--color-dust)]" />
-                <span className="font-medium text-sm">Configure Fallback Chain</span>
+                <span className="font-medium text-sm">Configurar sequência alternativa</span>
               </div>
-              <span className="text-xs text-[var(--color-editorial)] font-medium">Edit</span>
+              <span className="text-xs text-[var(--color-editorial)] font-medium">Editar</span>
             </button>
           ) : (
             <FallbackConfigPanel state={state} updateState={updateState} onClose={() => setShowFallbackConfig(false)} />
@@ -208,9 +208,9 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
             >
               <div className="flex items-center gap-2">
                 <BookOpen size={16} className="text-[var(--color-dust)]" />
-                <span className="font-medium text-sm">Name Dictionary</span>
+                <span className="font-medium text-sm">Glossário de nomes</span>
               </div>
-              <span className="text-xs text-[var(--color-editorial)] font-medium">Edit</span>
+              <span className="text-xs text-[var(--color-editorial)] font-medium">Editar</span>
             </button>
           ) : (
             <GlossaryPanel
@@ -228,9 +228,9 @@ export default function SettingsView({ state, updateState }: SettingsViewProps) 
             >
               <div className="flex items-center gap-2">
                 <Globe size={16} className="text-[var(--color-dust)]" />
-                <span className="font-medium text-sm">Site Rules & Domains</span>
+                <span className="font-medium text-sm">Regras e domínios de sites</span>
               </div>
-              <span className="text-xs text-[var(--color-editorial)] font-medium">Edit</span>
+              <span className="text-xs text-[var(--color-editorial)] font-medium">Editar</span>
             </button>
           ) : (
             <SiteRulesPanel

@@ -82,10 +82,10 @@ export default function ChapterReaderFloatingPill({
           fontSize: '12px',
           lineHeight: 1,
         }}
-        title="Open Distraction-Free Chapter Reader"
+        title="Abrir leitor de capítulos sem distrações"
       >
         <BookOpen size={14} color="#22d3ee" />
-        <span>Open Reader</span>
+        <span>Abrir leitor</span>
         <span
           className="manga-garden-reader-pill-count"
           style={{
@@ -117,7 +117,7 @@ export default function ChapterReaderFloatingPill({
           color: 'rgba(255, 255, 255, 0.45)',
           cursor: 'pointer',
         }}
-        title="Dismiss for this page"
+        title="Dispensar nesta página"
       >
         <X size={12} />
       </button>

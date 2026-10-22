@@ -56,10 +56,10 @@ describe('ChapterReaderFloatingPill UI', () => {
       );
     });
 
-    expect(container.textContent).toContain('Open Reader');
+    expect(container.textContent).toContain('Abrir leitor');
     expect(container.textContent).toContain('5');
 
-    const openBtn = container.querySelector('button[title="Open Distraction-Free Chapter Reader"]') as HTMLButtonElement;
+    const openBtn = container.querySelector('button[title="Abrir leitor de capítulos sem distrações"]') as HTMLButtonElement;
     expect(openBtn).toBeDefined();
 
     await act(async () => {
@@ -67,7 +67,7 @@ describe('ChapterReaderFloatingPill UI', () => {
     });
     expect(onOpen).toHaveBeenCalled();
 
-    const dismissBtn = container.querySelector('button[title="Dismiss for this page"]') as HTMLButtonElement;
+    const dismissBtn = container.querySelector('button[title="Dispensar nesta página"]') as HTMLButtonElement;
     expect(dismissBtn).toBeDefined();
 
     await act(async () => {

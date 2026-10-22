@@ -436,14 +436,14 @@ interface ChapterExporterOptions {
 export function createChapterExporter(options: ChapterExporterOptions) {
   let status: ChapterZipStatus = {
     phase: 'idle', busy: false, total: 0, processed: 0, included: 0, failed: 0,
-    percent: 0, message: 'Translate pages in this chapter to export them.', errors: [],
+    percent: 0, message: 'Traduza páginas deste capítulo para exportá-las.', errors: [],
   };
   let lastSourcePage = options.getSourcePage();
   /** @returns Current progress plus the count of available pages when idle. */
   function getStatus(): ChapterZipStatus {
     const sourcePage = options.getSourcePage();
     if (!status.busy && sourcePage !== lastSourcePage) {
-      status = { ...status, phase: 'idle', processed: 0, included: 0, failed: 0, percent: 0, errors: [], message: 'Translate pages in this chapter to export them.' };
+      status = { ...status, phase: 'idle', processed: 0, included: 0, failed: 0, percent: 0, errors: [], message: 'Traduza páginas deste capítulo para exportá-las.' };
       lastSourcePage = sourcePage;
     }
     return { ...status, errors: [...status.errors], total: status.busy ? status.total : orderChapterImages(options.getRecords(), sourcePage).length };
@@ -492,7 +492,7 @@ export function createChapterExporter(options: ChapterExporterOptions) {
       }
       if (!status.included) throw new Error('No translated images could be loaded. Nothing downloaded.');
       status.phase = 'packing';
-      status.message = 'Building ZIP…';
+      status.message = 'Gerando ZIP…';
       const archive = await zip.generateAsync({ type: 'blob', compression: 'STORE', streamFiles: true }, (progress) => {
         status.percent = Math.round(progress.percent);
       });
@@ -500,11 +500,11 @@ export function createChapterExporter(options: ChapterExporterOptions) {
       (options.download ?? downloadLocalBlob)(archive, `${safeStem(title)}-translated.zip`);
       status.phase = status.failed ? 'partial' : 'success';
       status.percent = 100;
-      status.message = `Download started: ${status.included}/${status.total} pages${status.failed ? `; ${status.failed} could not be loaded.` : '.'}`;
+      status.message = `Download iniciado: ${status.included}/${status.total} páginas${status.failed ? `; ${status.failed} não puderam ser carregadas.` : '.'}`;
       console.log('[Chapter ZIP]', status.message);
     } catch (error) {
       status.phase = 'error';
-      status.message = error instanceof Error ? error.message : 'ZIP export failed. Nothing downloaded.';
+      status.message = error instanceof Error ? error.message : 'Falha ao exportar o ZIP. Nada foi baixado.';
       console.error('[Chapter ZIP] Export failed:', error);
     } finally { status.busy = false; }
     return { ...status, errors: [...status.errors] };

@@ -3,6 +3,13 @@ import { Pipette, Image as ImageIcon } from 'lucide-react';
 import { studioStore, useStudioStore } from '../state/studioStore';
 import type { PaintSourceMode } from '../types';
 
+const PAINT_MODE_LABELS: Record<PaintSourceMode, string> = {
+  color: 'Cor',
+  pattern: 'Padrão',
+  blur: 'Desfoque',
+  transparency: 'Transparência',
+};
+
 export const PaintSettings: React.FC = () => {
   const paint = useStudioStore((s) => s.paintSettings);
 
@@ -37,15 +44,15 @@ export const PaintSettings: React.FC = () => {
   return (
     <div className="space-y-4 text-xs text-slate-200">
       <div className="pb-2 border-b border-[#282d3f]">
-        <h3 className="font-semibold text-sm text-slate-100">Freehand Paint Brush</h3>
+        <h3 className="font-semibold text-sm text-slate-100">Pincel de pintura livre</h3>
         <p className="text-[11px] text-slate-400 mt-0.5">
-          Paint solid color, screentone patterns, Gaussian blur, or punch transparency.
+          Pinte com uma cor sólida, padrões de retícula, desfoque gaussiano ou transparência.
         </p>
       </div>
 
       {/* Paint Mode */}
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">Paint Mode</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Modo de pintura</label>
         <div className="grid grid-cols-2 gap-1.5 p-1 rounded-lg bg-[#090a0f] border border-[#282d3f]">
           {(['color', 'pattern', 'blur', 'transparency'] as PaintSourceMode[]).map((mode) => (
             <button
@@ -57,7 +64,7 @@ export const PaintSettings: React.FC = () => {
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
-              {mode}
+              {PAINT_MODE_LABELS[mode]}
             </button>
           ))}
         </div>
@@ -66,7 +73,7 @@ export const PaintSettings: React.FC = () => {
       {/* Color Mode Options */}
       {paint.mode === 'color' && (
         <div>
-          <label className="block text-slate-400 font-medium mb-1.5">Stroke Color</label>
+          <label className="block text-slate-400 font-medium mb-1.5">Cor do traço</label>
           <div className="flex items-center gap-2">
             <input
               type="color"
@@ -83,7 +90,7 @@ export const PaintSettings: React.FC = () => {
             {'EyeDropper' in window && (
               <button
                 onClick={handleEyeDropper}
-                title="Eyedropper Color Picker"
+                title="Conta-gotas para selecionar cor"
                 className="p-2 rounded-lg border border-[#282d3f] bg-[#1c1f2e] text-slate-300 hover:text-white"
               >
                 <Pipette className="w-4 h-4" />
@@ -96,16 +103,16 @@ export const PaintSettings: React.FC = () => {
       {/* Pattern Mode Options */}
       {paint.mode === 'pattern' && (
         <div className="space-y-3">
-          <label className="block text-slate-400 font-medium mb-1.5">Pattern Image</label>
+          <label className="block text-slate-400 font-medium mb-1.5">Imagem do padrão</label>
           <label className="flex items-center justify-center gap-2 p-3 rounded-lg border border-dashed border-[#282d3f] bg-[#090a0f] cursor-pointer hover:border-[#22d3ee] transition">
             <ImageIcon className="w-4 h-4 text-[#22d3ee]" />
-            <span className="text-slate-300">{paint.patternUrl ? 'Change Pattern' : 'Upload Pattern Image'}</span>
+            <span className="text-slate-300">{paint.patternUrl ? 'Alterar padrão' : 'Enviar imagem do padrão'}</span>
             <input type="file" accept="image/*" onChange={handlePatternUpload} className="hidden" />
           </label>
           {paint.patternUrl && (
             <div>
               <div className="flex justify-between text-slate-400 mb-1">
-                <span>Pattern Scale</span>
+                <span>Escala do padrão</span>
                 <span className="font-mono text-slate-200">{paint.patternScale.toFixed(1)}x</span>
               </div>
               <input
@@ -126,7 +133,7 @@ export const PaintSettings: React.FC = () => {
       {paint.mode === 'blur' && (
         <div>
           <div className="flex justify-between text-slate-400 mb-1">
-            <span>Blur Strength</span>
+            <span>Intensidade do desfoque</span>
             <span className="font-mono text-slate-200">{paint.blurRadius}px</span>
           </div>
           <input
@@ -143,7 +150,7 @@ export const PaintSettings: React.FC = () => {
       {/* Brush Size */}
       <div>
         <div className="flex justify-between text-slate-400 mb-1">
-          <span>Brush Size</span>
+          <span>Tamanho do pincel</span>
           <span className="font-mono text-slate-200">{paint.size}px</span>
         </div>
         <input
@@ -159,7 +166,7 @@ export const PaintSettings: React.FC = () => {
       {/* Brush Feather */}
       <div>
         <div className="flex justify-between text-slate-400 mb-1">
-          <span>Feather Edge</span>
+          <span>Suavização das bordas</span>
           <span className="font-mono text-slate-200">{paint.feather}px</span>
         </div>
         <input

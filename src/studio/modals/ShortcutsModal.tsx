@@ -7,45 +7,45 @@ export interface ShortcutsModalProps {
 
 const SHORTCUT_GROUPS = [
   {
-    title: 'Tools',
+    title: 'Ferramentas',
     items: [
-      { key: 'T / V', desc: 'Text & Typography Tool' },
-      { key: 'Ctrl + 1', desc: 'Erase / Restore Brush' },
-      { key: 'Ctrl + 2', desc: 'Paint Brush (Color / Blur / Pattern)' },
-      { key: 'Ctrl + 3', desc: 'Local AI Inpaint Brush' },
-      { key: 'Ctrl + 4', desc: 'Local AI Re-OCR Area' },
-      { key: 'Ctrl + 5', desc: 'Warp & Quad Perspective' },
-      { key: 'Ctrl + 6', desc: 'Sticker Image Layers' },
+      { key: 'T / V', desc: 'Ferramenta de texto e tipografia' },
+      { key: 'Ctrl + 1', desc: 'Pincel para apagar/restaurar' },
+      { key: 'Ctrl + 2', desc: 'Pincel de pintura (cor/desfoque/padrão)' },
+      { key: 'Ctrl + 3', desc: 'Pincel de preenchimento local com IA' },
+      { key: 'Ctrl + 4', desc: 'Executar novo OCR local na área' },
+      { key: 'Ctrl + 5', desc: 'Distorção e perspectiva quadrilateral' },
+      { key: 'Ctrl + 6', desc: 'Camadas de imagem e adesivos' },
     ],
   },
   {
-    title: 'Canvas Viewport',
+    title: 'Área de trabalho',
     items: [
-      { key: 'Mouse Wheel', desc: 'Vertical document scroll' },
-      { key: 'Shift + Wheel', desc: 'Horizontal document scroll' },
-      { key: 'Ctrl / Cmd + Wheel', desc: 'Cursor-centered zoom' },
-      { key: 'Space + Drag', desc: 'Pan canvas workspace' },
+      { key: 'Mouse Wheel', desc: 'Rolar o documento na vertical' },
+      { key: 'Shift + Wheel', desc: 'Rolar o documento na horizontal' },
+      { key: 'Ctrl / Cmd + Wheel', desc: 'Zoom centralizado no cursor' },
+      { key: 'Space + Drag', desc: 'Mover a área de trabalho' },
     ],
   },
   {
-    title: 'Text Box Transforms & Lettering',
+    title: 'Transformação de caixas e lettering',
     items: [
-      { key: 'Top Nub Drag', desc: 'Rotate dialogue box freely' },
-      { key: 'A Nub Drag', desc: 'Scale font size directly on canvas' },
-      { key: '↔ Nub Drag', desc: 'Wrap text lines with locked font size' },
-      { key: 'Corner Handles', desc: 'Resize box bounds and reflow text' },
+      { key: 'Top Nub Drag', desc: 'Girar a caixa de diálogo livremente' },
+      { key: 'A Nub Drag', desc: 'Redimensionar a fonte diretamente na tela' },
+      { key: '↔ Nub Drag', desc: 'Quebrar linhas mantendo o tamanho da fonte' },
+      { key: 'Corner Handles', desc: 'Redimensionar os limites da caixa e reorganizar o texto' },
     ],
   },
   {
-    title: 'Editing & Clipboard',
+    title: 'Edição e área de transferência',
     items: [
-      { key: 'Ctrl + Z', desc: 'Undo last stroke or text edit' },
-      { key: 'Ctrl + Shift + Z', desc: 'Redo previously undone action' },
-      { key: 'Ctrl + Alt + C', desc: 'Copy typography style' },
-      { key: 'Ctrl + Alt + V', desc: 'Paste typography style' },
-      { key: 'Delete / Backspace', desc: 'Remove selected text box or sticker' },
-      { key: 'Ctrl + D', desc: 'Duplicate selected text box' },
-      { key: 'Ctrl + B', desc: 'Toggle history drawer' },
+      { key: 'Ctrl + Z', desc: 'Desfazer o último traço ou edição de texto' },
+      { key: 'Ctrl + Shift + Z', desc: 'Refazer a ação desfeita' },
+      { key: 'Ctrl + Alt + C', desc: 'Copiar estilo tipográfico' },
+      { key: 'Ctrl + Alt + V', desc: 'Colar estilo tipográfico' },
+      { key: 'Delete / Backspace', desc: 'Remover caixa de texto ou adesivo selecionado' },
+      { key: 'Ctrl + D', desc: 'Duplicar caixa de texto selecionada' },
+      { key: 'Ctrl + B', desc: 'Alternar painel do histórico' },
     ],
   },
 ];
@@ -57,7 +57,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ onClose }) => {
         <div className="flex items-center justify-between pb-3 border-b border-[#282d3f]">
           <div className="flex items-center gap-2 font-medium text-sm text-slate-200">
             <Keyboard className="w-4 h-4 text-[#22d3ee]" />
-            Keyboard Shortcuts
+            Atalhos de teclado
           </div>
           <button
             onClick={onClose}
@@ -95,7 +95,7 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ onClose }) => {
             onClick={onClose}
             className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1c1f2e] border border-[#282d3f] text-slate-200 hover:bg-[#282d3f] transition"
           >
-            Close
+            Fechar
           </button>
         </div>
       </div>

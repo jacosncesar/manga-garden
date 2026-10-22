@@ -74,13 +74,13 @@ export interface StudioProps {
 const EMPTY_TEXT_OBJECTS: TextObject[] = [];
 
 const TOOLS: { id: StudioTool; label: string; icon: React.ComponentType<{ className?: string }>; shortcut: string }[] = [
-  { id: 'text', label: 'Text & Typography', icon: Type, shortcut: 'T' },
-  { id: 'erase', label: 'Restore / Erase Brush', icon: Eraser, shortcut: 'Ctrl+1' },
-  { id: 'paint', label: 'Freehand Paint Brush', icon: Brush, shortcut: 'Ctrl+2' },
-  { id: 'inpaint', label: 'Local AI Inpaint', icon: Sparkles, shortcut: 'Ctrl+3' },
-  { id: 'ocr', label: 'Manual Translate OCR', icon: ScanText, shortcut: 'Ctrl+4' },
-  { id: 'warp', label: 'Warp & Perspective', icon: Maximize2, shortcut: 'Ctrl+5' },
-  { id: 'image', label: 'Stickers & Layers', icon: ImageIcon, shortcut: 'Ctrl+6' },
+  { id: 'text', label: 'Texto e tipografia', icon: Type, shortcut: 'T' },
+  { id: 'erase', label: 'Pincel para restaurar/apagar', icon: Eraser, shortcut: 'Ctrl+1' },
+  { id: 'paint', label: 'Pincel de pintura livre', icon: Brush, shortcut: 'Ctrl+2' },
+  { id: 'inpaint', label: 'Preenchimento local com IA', icon: Sparkles, shortcut: 'Ctrl+3' },
+  { id: 'ocr', label: 'OCR e tradução manual', icon: ScanText, shortcut: 'Ctrl+4' },
+  { id: 'warp', label: 'Distorção e perspectiva', icon: Maximize2, shortcut: 'Ctrl+5' },
+  { id: 'image', label: 'Adesivos e camadas', icon: ImageIcon, shortcut: 'Ctrl+6' },
 ];
 
 export const Studio: React.FC<StudioProps> = ({
@@ -88,7 +88,7 @@ export const Studio: React.FC<StudioProps> = ({
   originalImage,
   cleanedImage,
   initialTextObjects = EMPTY_TEXT_OBJECTS,
-  jobTitle = 'Manga Page',
+  jobTitle = 'Página de mangá',
   onSave,
   onBack,
   onUploadPage,
@@ -294,7 +294,7 @@ export const Studio: React.FC<StudioProps> = ({
     );
     const filename = `manga-garden-${getCleanBaseFilename()}-translated.${format === 'jpeg' ? 'jpg' : 'png'}`;
     await downloadCanvasAsFile(compositeCanvas, filename, format);
-    setToastMessage(`Exported ${format.toUpperCase()} image successfully!`);
+    setToastMessage(`Imagem ${format.toUpperCase()} exportada com sucesso!`);
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -311,11 +311,11 @@ export const Studio: React.FC<StudioProps> = ({
     );
     const success = await copyCanvasToClipboard(compositeCanvas);
     if (success) {
-      setToastMessage('Full image copied to clipboard!');
+      setToastMessage('Imagem completa copiada para a área de transferência!');
       setCopiedImageToast(true);
       setTimeout(() => setCopiedImageToast(false), 2000);
     } else {
-      setToastMessage('Could not copy image to clipboard');
+      setToastMessage('Não foi possível copiar a imagem para a área de transferência.');
     }
     setTimeout(() => setToastMessage(null), 3000);
   };
@@ -340,7 +340,7 @@ export const Studio: React.FC<StudioProps> = ({
           await onSave(blob, textObjects);
         }
         setIsSaving(false);
-        setToastMessage('Saved changes to library!');
+        setToastMessage('Alterações salvas na biblioteca!');
         setTimeout(() => setToastMessage(null), 3000);
       }, 'image/png');
     } catch (err) {
@@ -353,7 +353,7 @@ export const Studio: React.FC<StudioProps> = ({
     if (!originalImage || isRetranslating) return;
     const retranslateStart = performance.now();
     setIsRetranslating(true);
-    setToastMessage('Retranslating page with full AI pipeline…');
+    setToastMessage('Retraduzindo a página com o pipeline completo de IA…');
 
     try {
       const bgCanvas = getWorkingCanvas();
@@ -464,13 +464,13 @@ export const Studio: React.FC<StudioProps> = ({
         }
       }
 
-      setToastMessage('Page retranslated · Press Ctrl+Z to undo');
+      setToastMessage('Página retraduzida · Pressione Ctrl+Z para desfazer');
       setTimeout(() => {
-        setToastMessage((curr) => (curr?.includes('retranslated') ? null : curr));
+        setToastMessage((curr) => (curr?.includes('retraduzida') ? null : curr));
       }, 4500);
     } catch (err: any) {
       console.error('[Studio] Retranslate failed:', err);
-      setToastMessage(`Retranslate failed: ${err?.message || 'Pipeline error'}`);
+      setToastMessage(`Falha ao retraduzir: ${err?.message || 'erro no pipeline'}`);
       setTimeout(() => setToastMessage(null), 4500);
     } finally {
       setIsRetranslating(false);
@@ -487,11 +487,11 @@ export const Studio: React.FC<StudioProps> = ({
         <div className="relative flex-1 min-h-0 bg-[#12141c] border border-[#262a3b] rounded-xl shadow-2xl p-3.5 flex flex-col overflow-hidden">
           {/* Top Bar of Card 1: Title & Utilities */}
           <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#262a3b]">
-            <span className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">Tools</span>
+            <span className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">Ferramentas</span>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => studioStore.setState({ isInfoPanelOpen: !isInfoPanelOpen })}
-                title={isInfoPanelOpen ? 'Close Page & Translation Info' : 'Page & Translation Info (I)'}
+                title={isInfoPanelOpen ? 'Fechar informações da página e tradução' : 'Informações da página e tradução (I)'}
                 className={`p-1 rounded-md transition cursor-pointer ${
                   isInfoPanelOpen
                     ? 'bg-[#22d3ee] text-white shadow-md shadow-[rgba(34,211,238,0.35)]'
@@ -502,21 +502,21 @@ export const Studio: React.FC<StudioProps> = ({
               </button>
               <button
                 onClick={() => studioStore.setState({ activeModal: 'fontManager' })}
-                title="Manage Custom Fonts"
+                title="Gerenciar fontes personalizadas"
                 className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition"
               >
                 <Type className="w-4 h-4" />
               </button>
               <button
                 onClick={() => studioStore.setState({ activeModal: 'appearance' })}
-                title="Editor Appearance"
+                title="Aparência do editor"
                 className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition"
               >
                 <Palette className="w-4 h-4" />
               </button>
               <button
                 onClick={() => studioStore.setState({ activeModal: 'shortcuts' })}
-                title="Keyboard Shortcuts"
+                title="Atalhos de teclado"
                 className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition"
               >
                 <Keyboard className="w-4 h-4" />
@@ -570,62 +570,62 @@ export const Studio: React.FC<StudioProps> = ({
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Global Editing {globalEditMode ? '(On)' : '(Off)'}
+              Edição global {globalEditMode ? '(ativada)' : '(desativada)'}
             </button>
           </div>
         </div>
 
         {/* CARD 2: Actions Grid */}
         <div className="bg-[#12141c] border border-[#262a3b] rounded-xl shadow-2xl p-3 shrink-0 flex flex-col gap-2">
-          <div className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">Actions</div>
+          <div className="text-[11px] uppercase font-bold text-slate-400 tracking-wider">Ações</div>
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={handleUndo}
               disabled={!canUndo}
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] disabled:opacity-30 disabled:pointer-events-none transition"
             >
-              <Undo2 className="w-3.5 h-3.5" /> Undo
+              <Undo2 className="w-3.5 h-3.5" /> Desfazer
             </button>
             <button
               onClick={handleRedo}
               disabled={!canRedo}
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] disabled:opacity-30 disabled:pointer-events-none transition"
             >
-              <Redo2 className="w-3.5 h-3.5" /> Redo
+              <Redo2 className="w-3.5 h-3.5" /> Refazer
             </button>
             <button
               onClick={() => studioStore.setState({ activeModal: 'exportTranscript' })}
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] transition"
             >
-              <FileText className="w-3.5 h-3.5" /> Export Texts
+              <FileText className="w-3.5 h-3.5" /> Exportar textos
             </button>
             <button
               onClick={() => studioStore.setState({ activeModal: 'findReplace' })}
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] transition"
             >
-              <Search className="w-3.5 h-3.5" /> Find & Replace
+              <Search className="w-3.5 h-3.5" /> Localizar e substituir
             </button>
             <button
               onClick={handleSaveImage}
               disabled={isSaving}
-              title="Save changes to Manga Garden library"
+              title="Salvar alterações na biblioteca do Manga Garden"
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-md shadow-[rgba(34,211,238,0.35)] transition disabled:opacity-50 cursor-pointer"
             >
-              <Save className="w-3.5 h-3.5" /> {isSaving ? 'Saving...' : 'Save to DB'}
+              <Save className="w-3.5 h-3.5" /> {isSaving ? 'Salvando...' : 'Salvar na biblioteca'}
             </button>
             <button
               onClick={handleRetranslatePage}
               disabled={isRetranslating || !originalImage}
-              title="Re-run full OCR detection, inpainting, and translation on the original page"
+              title="Executar novamente o OCR, o preenchimento e a tradução da página original"
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] hover:text-[#22d3ee] hover:border-[#22d3ee]/40 disabled:opacity-30 disabled:pointer-events-none transition cursor-pointer"
             >
               {isRetranslating ? (
                 <>
-                  <Loader className="w-3.5 h-3.5 animate-spin text-[#22d3ee]" /> Retranslating…
+                  <Loader className="w-3.5 h-3.5 animate-spin text-[#22d3ee]" /> Retraduzindo…
                 </>
               ) : (
                 <>
-                  <RotateCcw className="w-3.5 h-3.5" /> Retranslate
+                  <RotateCcw className="w-3.5 h-3.5" /> Retraduzir
                 </>
               )}
             </button>
@@ -634,7 +634,7 @@ export const Studio: React.FC<StudioProps> = ({
                 onClick={onBack}
                 className="col-span-2 flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] transition"
               >
-                Library
+                Biblioteca
               </button>
             )}
           </div>
@@ -653,7 +653,7 @@ export const Studio: React.FC<StudioProps> = ({
               <button
                 type="button"
                 onClick={() => studioStore.setViewMode('original')}
-                title="Show pristine untouched raw artwork"
+                title="Mostrar a imagem original sem alterações"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'original'
                     ? 'bg-[#22d3ee] text-white shadow-xs'
@@ -665,32 +665,32 @@ export const Studio: React.FC<StudioProps> = ({
               <button
                 type="button"
                 onClick={() => studioStore.setViewMode('inpainted')}
-                title="Show cleaned background artwork without text"
+                title="Mostrar a imagem de fundo sem texto"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'inpainted'
                     ? 'bg-[#22d3ee] text-white shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
                 }`}
               >
-                <span>Inpainted BG</span>
+                <span>Fundo preenchido</span>
               </button>
               <button
                 type="button"
                 onClick={() => studioStore.setViewMode('translated')}
-                title="Show translated artwork with typography overlay"
+                title="Mostrar a imagem traduzida com o texto inserido"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'translated'
                     ? 'bg-[#22d3ee] text-white shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
                 }`}
               >
-                <span>Translated</span>
+                <span>Traduzida</span>
               </button>
             </div>
 
             <button
               onClick={() => studioStore.setState({ hideBoxes: !hideBoxes })}
-              title="Hide Boxes (Preview clean page without dashed outlines)"
+              title="Ocultar caixas (pré-visualizar a página sem contornos tracejados)"
               disabled={viewMode !== 'translated'}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-medium transition ${
                 viewMode !== 'translated'
@@ -701,7 +701,7 @@ export const Studio: React.FC<StudioProps> = ({
               }`}
             >
               {hideBoxes ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-              <span>{hideBoxes ? 'Show Boxes' : 'Hide Boxes'}</span>
+              <span>{hideBoxes ? 'Mostrar caixas' : 'Ocultar caixas'}</span>
             </button>
           </div>
 
@@ -709,13 +709,13 @@ export const Studio: React.FC<StudioProps> = ({
 
           <div className="flex items-center gap-2">
             <span className="font-mono text-slate-500 text-[11px] hidden sm:inline">
-              Canvas: {imageWidth} × {imageHeight}
+              Tela: {imageWidth} × {imageHeight}
             </span>
 
             <div className="flex items-center gap-1">
               <button
                 onClick={() => studioStore.setClampedZoom(zoom * 0.85)}
-                title="Zoom Out"
+                title="Diminuir zoom"
                 className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition"
               >
                 <ZoomOut className="w-3.5 h-3.5" />
@@ -736,25 +736,25 @@ export const Studio: React.FC<StudioProps> = ({
                       onClick={() => handleZoomPreset('100%')}
                       className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-[#1c1f2e] text-slate-200"
                     >
-                      100% Actual
+                      100% (tamanho real)
                     </button>
                     <button
                       onClick={() => handleZoomPreset('fitWidth')}
                       className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-[#1c1f2e] text-slate-200"
                     >
-                      Fit Width
+                      Ajustar à largura
                     </button>
                     <button
                       onClick={() => handleZoomPreset('fitHeight')}
                       className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-[#1c1f2e] text-slate-200"
                     >
-                      Fit Height
+                      Ajustar à altura
                     </button>
                     <button
                       onClick={() => handleZoomPreset('fitWindow')}
                       className="w-full text-left px-2.5 py-1.5 rounded-md hover:bg-[#1c1f2e] text-slate-200"
                     >
-                      Fit Window
+                      Ajustar à janela
                     </button>
                   </div>
                 )}
@@ -762,7 +762,7 @@ export const Studio: React.FC<StudioProps> = ({
 
               <button
                 onClick={() => studioStore.setClampedZoom(zoom * 1.15)}
-                title="Zoom In"
+                title="Aumentar zoom"
                 className="p-1 rounded-md text-slate-400 hover:text-white hover:bg-[#1c1f2e] transition cursor-pointer"
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -775,10 +775,10 @@ export const Studio: React.FC<StudioProps> = ({
                 type="button"
                 onClick={() => setExportDropdownOpen((prev) => !prev)}
                 className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-xs transition cursor-pointer"
-                title="Export or download image"
+                title="Exportar ou baixar imagem"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Export</span>
+                <span>Exportar</span>
                 <ChevronDown className="w-3 h-3 text-white/80" />
               </button>
 
@@ -793,7 +793,7 @@ export const Studio: React.FC<StudioProps> = ({
                     className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] text-slate-200 text-left transition cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5 text-[#22d3ee]" />
-                    <span>Download PNG</span>
+                    <span>Baixar PNG</span>
                   </button>
                   <button
                     type="button"
@@ -801,7 +801,7 @@ export const Studio: React.FC<StudioProps> = ({
                     className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] text-slate-200 text-left transition cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Download JPEG</span>
+                    <span>Baixar JPEG</span>
                   </button>
                   <button
                     type="button"
@@ -813,7 +813,7 @@ export const Studio: React.FC<StudioProps> = ({
                     ) : (
                       <Copy className="w-3.5 h-3.5 text-indigo-400" />
                     )}
-                    <span>Copy Full Image</span>
+                    <span>Copiar imagem completa</span>
                   </button>
                 </div>
               )}

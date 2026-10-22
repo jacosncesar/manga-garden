@@ -39,7 +39,7 @@ describe('SiteRulesPanel UI', () => {
       );
     });
 
-    expect(container.textContent).toContain('Site Rules & Domains');
+    expect(container.textContent).toContain('Regras e domínios de sites');
     expect(container.textContent).toContain('mangadex.org');
 
     // Add domain
@@ -54,11 +54,11 @@ describe('SiteRulesPanel UI', () => {
       input.dispatchEvent(changeEvent);
     });
 
-    const addBtn = container.querySelector('button[title="Add to disabled sites"]') as HTMLButtonElement;
+    const addBtn = container.querySelector('button[title="Adicionar à lista de sites desativados"]') as HTMLButtonElement;
     expect(addBtn).toBeDefined();
 
     // Click remove button on existing domain
-    const removeBtn = container.querySelector('button[title="Re-enable domain"]') as HTMLButtonElement;
+    const removeBtn = container.querySelector('button[title="Reativar domínio"]') as HTMLButtonElement;
     expect(removeBtn).toBeDefined();
     await act(async () => {
       removeBtn.click();
@@ -90,7 +90,7 @@ describe('SiteRulesPanel UI', () => {
 
     // Switch to Custom Selectors tab
     const tabButtons = container.querySelectorAll('button');
-    const selectorsTabBtn = Array.from(tabButtons).find((b) => b.textContent?.includes('Custom Selectors'));
+    const selectorsTabBtn = Array.from(tabButtons).find((b) => b.textContent?.includes('Seletores personalizados'));
     expect(selectorsTabBtn).toBeDefined();
 
     await act(async () => {

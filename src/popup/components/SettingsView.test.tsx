@@ -20,7 +20,7 @@ import SettingsView from './SettingsView';
 import { DEFAULT_POPUP_STATE, type PopupState } from '../../shared/types';
 
 describe('SettingsView', () => {
-  it('renders Render Font after OCR and handles preset changes', async () => {
+  it('renders translation font after OCR and handles preset changes', async () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const root = createRoot(container);
@@ -36,16 +36,16 @@ describe('SettingsView', () => {
     });
 
     const headings = Array.from(container.querySelectorAll('h2'));
-    const ocrHeading = headings.find((heading) => heading.textContent === 'OCR Engine');
-    const renderFontHeading = headings.find((heading) => heading.textContent === 'Render Font');
+    const ocrHeading = headings.find((heading) => heading.textContent === 'Mecanismo de OCR');
+    const renderFontHeading = headings.find((heading) => heading.textContent === 'Fonte da tradução');
     expect(ocrHeading).toBeDefined();
     expect(renderFontHeading).toBeDefined();
     expect(ocrHeading && renderFontHeading
       ? ocrHeading.compareDocumentPosition(renderFontHeading) & Node.DOCUMENT_POSITION_FOLLOWING
       : 0).toBeTruthy();
 
-    const trigger = container.querySelector('button[aria-label="Render Font"]') as HTMLButtonElement | null;
-    expect(trigger?.textContent).toContain('Standard');
+    const trigger = container.querySelector('button[aria-label="Fonte da tradução"]') as HTMLButtonElement | null;
+    expect(trigger?.textContent).toContain('Padrão');
 
     await act(async () => {
       trigger?.click();
@@ -53,7 +53,7 @@ describe('SettingsView', () => {
 
     const fontButtons = Array.from(trigger?.parentElement?.querySelectorAll('button') ?? []);
     const optionLabels = fontButtons.slice(1).map((button) => button.querySelector('span')?.textContent?.trim());
-    expect(optionLabels).toEqual(['Standard', 'Wild Words', 'Anime Ace', 'Comic Hand', 'Serif', 'Monospace']);
+    expect(optionLabels).toEqual(['Padrão', 'Wild Words', 'Anime Ace', 'Comic Hand', 'Serifada', 'Monoespaçada']);
 
     const wildWordsOption = fontButtons.find((button) => button.querySelector('span')?.textContent?.trim() === 'Wild Words');
     await act(async () => {
@@ -68,7 +68,7 @@ describe('SettingsView', () => {
     container.remove();
   });
 
-  it('renders Manual Selection Method regardless of isAuto and handles mode changes', async () => {
+  it('renders the manual selection method regardless of isAuto and handles mode changes', async () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const root = createRoot(container);
@@ -86,14 +86,14 @@ describe('SettingsView', () => {
     });
 
     const manualMethodHeader = Array.from(container.querySelectorAll('span')).find(
-      (span) => span.textContent === 'Manual Selection Method'
+      (span) => span.textContent === 'Método de seleção manual'
     );
     expect(manualMethodHeader).toBeDefined();
 
-    // Find the Hover and Persistent buttons
+    // Find the hover and fixed-mode buttons
     const buttons = Array.from(container.querySelectorAll('button'));
-    const hoverBtn = buttons.find((btn) => btn.textContent?.trim() === 'Hover');
-    const persistentBtn = buttons.find((btn) => btn.textContent?.trim() === 'Persistent');
+    const hoverBtn = buttons.find((btn) => btn.textContent?.trim() === 'Ao passar o mouse');
+    const persistentBtn = buttons.find((btn) => btn.textContent?.trim() === 'Fixo');
 
     expect(hoverBtn).toBeDefined();
     expect(persistentBtn).toBeDefined();

@@ -47,8 +47,8 @@ describe('GpuAccelerationPanel', () => {
     });
 
     // Verify Bubble Detection row exists
-    expect(container.textContent).toContain('Bubble Detection');
-    expect(container.textContent).toContain('YOLO Bubble • ~15 MB');
+    expect(container.textContent).toContain('Detecção de balões');
+    expect(container.textContent).toContain('Balão YOLO • ~15 MB');
 
     // Find all switches in granular config
     const switches = Array.from(container.querySelectorAll<HTMLButtonElement>('.manga-garden-switch-sm'));

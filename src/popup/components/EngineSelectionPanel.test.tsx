@@ -76,7 +76,7 @@ describe('WebLLM download control', () => {
       container.querySelector<HTMLButtonElement>('button')?.click();
     });
 
-    const downloadButton = container.querySelector<HTMLButtonElement>(`button[aria-label="Download ${WEB_LLM_MODEL_ID}"]`);
+    const downloadButton = container.querySelector<HTMLButtonElement>(`button[aria-label="Baixar ${WEB_LLM_MODEL_ID}"]`);
     expect(downloadButton).not.toBeNull();
     const rowButton = downloadButton?.previousElementSibling as HTMLButtonElement | null;
     expect(rowButton?.tagName).toBe('BUTTON');
@@ -99,7 +99,7 @@ describe('WebLLM download control', () => {
       payload: { modelId: WEB_LLM_MODEL_ID, category: 'translation' },
     });
     expect(downloadButton?.disabled).toBe(false);
-    expect(container.textContent).toContain('Failed: network unavailable');
+    expect(container.textContent).toContain('Falha: network unavailable');
 
     await act(async () => {
       root.unmount();
@@ -122,15 +122,15 @@ describe('WebLLM download control', () => {
       root.render(<EngineSelectionPanel state={state} updateState={updateState} />);
     });
 
-    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout and Bubble Fit"]');
+    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout e ajuste aos balões"]');
     expect(bubbleButton).not.toBeNull();
-    expect(bubbleButton?.textContent).toContain('Heuristic');
+    expect(bubbleButton?.textContent).toContain('Heurístico');
 
     await act(async () => {
       bubbleButton?.click();
     });
 
-    const offButton = Array.from(container.querySelectorAll('button')).find((b) => b.textContent?.includes('Disabled'));
+    const offButton = Array.from(container.querySelectorAll('button')).find((b) => b.textContent?.includes('Desativado'));
     expect(offButton).toBeDefined();
 
     await act(async () => {
@@ -160,12 +160,12 @@ describe('WebLLM download control', () => {
       root.render(<EngineSelectionPanel state={state} updateState={updateState} />);
     });
 
-    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout and Bubble Fit"]');
+    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout e ajuste aos balões"]');
     await act(async () => {
       bubbleButton?.click();
     });
 
-    const downloadButton = container.querySelector<HTMLElement>('div[title="Download model"]');
+    const downloadButton = container.querySelector<HTMLElement>('div[title="Baixar modelo"]');
     expect(downloadButton).not.toBeNull();
 
     await act(async () => {
@@ -203,14 +203,14 @@ describe('WebLLM download control', () => {
       root.render(<EngineSelectionPanel state={state} updateState={updateState} />);
     });
 
-    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout and Bubble Fit"]');
+    const bubbleButton = container.querySelector<HTMLButtonElement>('button[aria-label="Layout e ajuste aos balões"]');
     await act(async () => {
       bubbleButton?.click();
     });
 
     const buttons = Array.from(container.querySelectorAll('button'));
-    const yoloBoxBtn = buttons.find((b) => b.textContent?.includes('YOLO Box'));
-    const yoloMaskBtn = buttons.find((b) => b.textContent?.includes('YOLO Smart Mask'));
+    const yoloBoxBtn = buttons.find((b) => b.textContent?.includes('Caixa YOLO'));
+    const yoloMaskBtn = buttons.find((b) => b.textContent?.includes('Máscara inteligente YOLO'));
 
     expect(yoloBoxBtn).toBeDefined();
     expect(yoloMaskBtn).toBeDefined();

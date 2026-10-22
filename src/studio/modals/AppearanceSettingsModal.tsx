@@ -36,7 +36,7 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
         <div className="flex items-center justify-between pb-3 border-b border-[#282d3f]">
           <div className="flex items-center gap-2 font-medium text-sm text-slate-200">
             <Palette className="w-4 h-4 text-[#22d3ee]" />
-            Editor Appearance
+            Aparência do editor
           </div>
           <button
             onClick={onClose}
@@ -48,7 +48,7 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
 
         <div className="mt-4 space-y-3.5 text-xs">
           <div className="flex items-center justify-between p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
-            <span className="text-slate-300">Selected Box Border</span>
+            <span className="text-slate-300">Contorno da caixa selecionada</span>
             <input
               type="color"
               value={appearance.selectedBoxBorderColor}
@@ -58,7 +58,7 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
           </div>
 
           <div className="flex items-center justify-between p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
-            <span className="text-slate-300">Unselected Box Border</span>
+            <span className="text-slate-300">Contorno das caixas não selecionadas</span>
             <input
               type="color"
               value={appearance.unselectedBoxBorderColor.startsWith('#') ? appearance.unselectedBoxBorderColor : '#888888'}
@@ -68,7 +68,7 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
           </div>
 
           <div className="flex items-center justify-between p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
-            <span className="text-slate-300">Text Caret Color</span>
+            <span className="text-slate-300">Cor do cursor de texto</span>
             <input
               type="color"
               value={appearance.caretColor}
@@ -78,7 +78,7 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
           </div>
 
           <div className="flex items-center justify-between p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
-            <span className="text-slate-300">Brush Cursor Footprint</span>
+            <span className="text-slate-300">Cor do cursor do pincel</span>
             <input
               type="color"
               value={appearance.brushCursorColor.startsWith('#') ? appearance.brushCursorColor : '#22d3ee'}
@@ -94,13 +94,13 @@ export const AppearanceSettingsModal: React.FC<AppearanceSettingsModalProps> = (
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e] transition"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            Reset Defaults
+            Restaurar padrões
           </button>
           <button
             onClick={onClose}
             className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#22d3ee] text-white hover:bg-[#0ea5e9] transition shadow-sm"
           >
-            Save
+            Salvar
           </button>
         </div>
       </div>

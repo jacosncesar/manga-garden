@@ -35,11 +35,11 @@ describe('GlossaryPanel', () => {
       );
     });
 
-    expect(container.textContent).toContain('Translation Glossary');
+    expect(container.textContent).toContain('Glossário de tradução');
     expect(container.textContent).toContain('先輩');
     expect(container.textContent).toContain('Senpai');
-    expect(container.textContent).toContain('Google Translate does not support glossary');
-    expect(container.textContent).toContain('Do not add sensitive data');
+    expect(container.textContent).toContain('O Google Tradutor não oferece suporte ao glossário');
+    expect(container.textContent).toContain('Não inclua dados confidenciais');
 
     // Toggle switch test
     const switchBtn = container.querySelector('button[role="switch"]') as HTMLButtonElement;
@@ -51,7 +51,7 @@ describe('GlossaryPanel', () => {
     expect(updateState).toHaveBeenCalledWith({ glossaryEnabled: false });
 
     // Close button test
-    const closeBtn = container.querySelector('button[aria-label="Close translation glossary"]') as HTMLButtonElement;
+    const closeBtn = container.querySelector('button[aria-label="Fechar glossário de tradução"]') as HTMLButtonElement;
     await act(async () => {
       closeBtn.click();
     });
@@ -79,7 +79,7 @@ describe('GlossaryPanel', () => {
     const inputs = container.querySelectorAll('input[type="text"]');
     const sourceInput = inputs[0] as HTMLInputElement;
     const targetInput = inputs[1] as HTMLInputElement;
-    const addBtn = container.querySelector('button[title="Add glossary entry"]') as HTMLButtonElement;
+    const addBtn = container.querySelector('button[title="Adicionar item ao glossário"]') as HTMLButtonElement;
 
     expect(addBtn.disabled).toBe(true);
 
@@ -114,9 +114,9 @@ describe('GlossaryPanel', () => {
     await act(async () => {
       root.render(<GlossaryPanel glossaryEnabled={true} glossaryEntries={Array.from({ length: MAX_GLOSSARY_ENTRIES }, (_, i) => ({ source: `Name${i}`, target: `Target${i}` }))} updateState={updateState} onClose={vi.fn()} />);
     });
-    expect(container.querySelector<HTMLInputElement>('input[aria-label="Source"]')?.maxLength).toBe(MAX_GLOSSARY_TERM_LENGTH);
-    expect(container.querySelector<HTMLInputElement>('input[aria-label="Preferred"]')?.maxLength).toBe(MAX_GLOSSARY_TERM_LENGTH);
-    const add = container.querySelector<HTMLButtonElement>(`button[title="Maximum ${MAX_GLOSSARY_ENTRIES} entries reached"]`)!;
+    expect(container.querySelector<HTMLInputElement>('input[aria-label="Origem"]')?.maxLength).toBe(MAX_GLOSSARY_TERM_LENGTH);
+    expect(container.querySelector<HTMLInputElement>('input[aria-label="Tradução preferida"]')?.maxLength).toBe(MAX_GLOSSARY_TERM_LENGTH);
+    const add = container.querySelector<HTMLButtonElement>(`button[title="Limite de ${MAX_GLOSSARY_ENTRIES} itens atingido"]`)!;
     expect(add.disabled).toBe(true);
     await act(async () => add.click());
     expect(updateState).not.toHaveBeenCalled();
@@ -143,7 +143,7 @@ describe('GlossaryPanel', () => {
       );
     });
 
-    const trashButtons = container.querySelectorAll('button[title="Remove entry"]');
+    const trashButtons = container.querySelectorAll('button[title="Remover item"]');
     expect(trashButtons.length).toBe(2);
 
     await act(async () => {

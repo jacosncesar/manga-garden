@@ -26,28 +26,28 @@ export function getPlatformShortcuts(): ShortcutEntry[] {
   return [
     {
       keys: `${mod} + Z`,
-      label: 'Translate or toggle original',
-      note: 'Translates hovered image, or toggles between original/translation if already translated.',
+      label: 'Traduzir ou alternar para o original',
+      note: 'Traduz a imagem sob o cursor ou alterna entre o original e a tradução, se ela já tiver sido traduzida.',
     },
     {
       keys: `${mod} + X`,
-      label: 'Screen crop selection',
-      note: 'Draw a rectangle on screen to capture and translate.',
+      label: 'Selecionar área da tela',
+      note: 'Desenha um retângulo na tela para capturar e traduzir uma área.',
     },
     {
       keys: `${mod} + C`,
-      label: 'Repeat previous screen crop',
-      note: 'Instantly re-translates the exact same screen crop coordinates.',
+      label: 'Repetir o recorte anterior',
+      note: 'Traduz novamente, na hora, exatamente a mesma área da tela.',
     },
     {
       keys: `${mod} + M`,
-      label: 'Open Chapter Reader',
-      note: 'Launch fullscreen distraction-free reader for translated pages.',
+      label: 'Abrir leitor de capítulos',
+      note: 'Abre um leitor em tela cheia e sem distrações para as páginas traduzidas.',
     },
     {
       keys: 'F',
-      label: 'Toggle original / hold to peek',
-      note: 'Tap to switch views, or hold to temporarily peek at the original artwork.',
+      label: 'Alternar original / manter pressionado para visualizar',
+      note: 'Pressione para alternar a visualização ou mantenha pressionado para ver temporariamente a imagem original.',
     },
   ];
 }
@@ -73,7 +73,7 @@ export default function ReadingShortcutsHelp() {
       >
         <div className="flex items-center gap-2">
           <Keyboard size={16} className="text-[var(--color-dust)]" />
-          <span className="font-medium text-sm">Keyboard Shortcuts</span>
+          <span className="font-medium text-sm">Atalhos de teclado</span>
         </div>
         {open
           ? <ChevronUp size={14} className="text-[var(--color-dust)]" />
@@ -97,9 +97,9 @@ export default function ReadingShortcutsHelp() {
         ))}
 
         <p className="text-[10px] text-[var(--color-dust)] px-1 leading-relaxed">
-          Action shortcuts work in-page with both Ctrl and Alt/Option. Global browser shortcuts can be customized at{' '}
+          Os atalhos de ação funcionam na página com Ctrl e Alt/Option. Os atalhos globais do navegador podem ser personalizados em{' '}
           <span className="font-mono text-[var(--color-ink)]">chrome://extensions/shortcuts</span>.
-          {' '}The unmodified F key is fixed.
+          {' '}A tecla F sem modificadores é fixa.
         </p>
       </div>
     </div>

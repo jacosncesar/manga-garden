@@ -38,10 +38,10 @@ export const FontManagerModal: React.FC<FontManagerModalProps> = ({ onClose }) =
           fileName: file.name,
         },
       ]);
-      setUploadStatus(`Installed font "${fontName}" successfully!`);
+      setUploadStatus(`Fonte "${fontName}" instalada com sucesso!`);
       setTimeout(() => setUploadStatus(null), 3000);
     } catch (err: any) {
-      setUploadStatus(`Failed to load font: ${err?.message || String(err)}`);
+      setUploadStatus(`Falha ao carregar a fonte: ${err?.message || String(err)}`);
     }
   };
 
@@ -51,7 +51,7 @@ export const FontManagerModal: React.FC<FontManagerModalProps> = ({ onClose }) =
         <div className="flex items-center justify-between pb-3 border-b border-[#282d3f]">
           <div className="flex items-center gap-2 font-medium text-sm text-slate-200">
             <Type className="w-4 h-4 text-[#22d3ee]" />
-            Font Manager & Custom Fonts
+            Gerenciador de fontes personalizadas
           </div>
           <button
             onClick={onClose}
@@ -64,8 +64,8 @@ export const FontManagerModal: React.FC<FontManagerModalProps> = ({ onClose }) =
         <div className="mt-4">
           <label className="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-dashed border-[#282d3f] bg-[#090a0f] hover:border-[#22d3ee]/60 hover:bg-[#12141c] cursor-pointer transition">
             <Upload className="w-6 h-6 text-[#22d3ee] mb-1" />
-            <span className="text-xs font-medium text-slate-200">Upload Font (.ttf, .otf, .woff2)</span>
-            <span className="text-[11px] text-slate-500 mt-0.5">Loads directly into canvas typography engine</span>
+            <span className="text-xs font-medium text-slate-200">Enviar fonte (.ttf, .otf, .woff2)</span>
+            <span className="text-[11px] text-slate-500 mt-0.5">Carrega diretamente no mecanismo tipográfico da tela</span>
             <input
               type="file"
               accept=".ttf,.otf,.woff,.woff2"
@@ -84,7 +84,7 @@ export const FontManagerModal: React.FC<FontManagerModalProps> = ({ onClose }) =
 
         <div className="mt-4">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-            Active Comic Fonts ({fonts.length})
+            Fontes de quadrinhos ativas ({fonts.length})
           </h4>
           <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
             {fonts.map((f) => (
@@ -111,7 +111,7 @@ export const FontManagerModal: React.FC<FontManagerModalProps> = ({ onClose }) =
             onClick={onClose}
             className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1c1f2e] border border-[#282d3f] text-slate-200 hover:bg-[#282d3f] transition"
           >
-            Done
+            Concluído
           </button>
         </div>
       </div>

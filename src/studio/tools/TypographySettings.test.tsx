@@ -76,21 +76,21 @@ afterEach(async () => {
 });
 
 describe('TypographySettings editing intent and reflow', () => {
-  it('preserves pipeline lines on mount and selection changes under global Simple Wrap', async () => {
+  it('preserves pipeline lines on mount and selection changes under global simple wrapping', async () => {
     studioStore.setState({ globalTypesetMode: 'simple' });
     const original = studioStore.getState().textObjects;
     await render();
     await act(async () => { studioStore.setState({ selectedTextId: 'second' }); });
     expect(studioStore.getState().textObjects).toBe(original);
     expect(measureDefaultLayout).not.toHaveBeenCalled();
-    const simple = Array.from(container.querySelectorAll('button')).find((button) => button.textContent === 'Simple Wrap');
+    const simple = Array.from(container.querySelectorAll('button')).find((button) => button.textContent?.trim() === 'Quebra simples');
     expect(simple?.className).toContain('text-[#22d3ee]');
   });
 
   it('changes only selected mode without touching lines or font size, then reflows its edit', async () => {
     const original = studioStore.getState().textObjects;
     await render();
-    await click('Simple Wrap');
+    await click('Quebra simples');
     const toggled = studioStore.getState().textObjects;
     expect(toggled[0].typesetMode).toBe('simple');
     expect(toggled[0].lines).toBe(original[0].lines);
@@ -107,7 +107,7 @@ describe('TypographySettings editing intent and reflow', () => {
     studioStore.setState({ globalEditMode: true });
     const original = studioStore.getState().textObjects;
     await render();
-    await click('Simple Wrap');
+    await click('Quebra simples');
     expect(studioStore.getState().globalTypesetMode).toBe('simple');
     studioStore.getState().textObjects.forEach((object, index) => {
       expect(object.typesetMode).toBe('simple');
@@ -123,7 +123,7 @@ describe('TypographySettings editing intent and reflow', () => {
       makeObject('second', { typesetMode: 'balloon', charStyles: [{ bold: true }] }),
     ] });
     await render();
-    await click('Bold');
+    await click('Negrito');
     const [simple, balloon] = studioStore.getState().textObjects;
     expect(simple.bold).toBe(true);
     expect(simple.fontSize).toBe(18);
@@ -133,7 +133,7 @@ describe('TypographySettings editing intent and reflow', () => {
     expect(measureDefaultLayout).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['Bold', 'Italic', 'Uppercase'])('reflows actual %s edits through Auto Balloon', async (label) => {
+  it.each(['Negrito', 'Itálico', 'Maiúsculas'])('reflows actual %s edits through automatic balloon fitting', async (label) => {
     await render();
     await click(label);
     expect(measureDefaultLayout).toHaveBeenCalledTimes(1);
@@ -152,7 +152,7 @@ describe('TypographySettings editing intent and reflow', () => {
   it('reflows selected font overrides without changing box-wide font', async () => {
     studioStore.setState({ inlineSelection: { textId: 'first', start: 0, end: 3 } });
     await render();
-    await click('Bold');
+    await click('Negrito');
     const edited = studioStore.getState().textObjects[0];
     expect(edited.bold).toBeUndefined();
     expect(edited.charStyles?.slice(0, 3)).toEqual([{ bold: true }, { bold: true }, { bold: true }]);
@@ -163,7 +163,7 @@ describe('TypographySettings editing intent and reflow', () => {
     const lines = studioStore.getState().textObjects[0].lines;
     await render();
     await change('input[type="color"]', '#ff0000');
-    await click('Rotate +90°');
+    await click('Girar +90°');
     await act(async () => { studioStore.setState({ inlineSelection: { textId: 'first', start: 0, end: 3 } }); });
     await change('input[type="color"]', '#00ff00');
     expect(studioStore.getState().textObjects[0].lines).toBe(lines);
@@ -174,12 +174,12 @@ describe('TypographySettings editing intent and reflow', () => {
   it('edits dialogue, reverts original, and clears through chosen engine', async () => {
     studioStore.setState({ globalTypesetMode: 'simple' });
     await render();
-    await change('textarea[placeholder="Type translation dialogue here..."]', 'Edited words go here');
+    await change('textarea[placeholder="Digite o texto traduzido aqui..."]', 'Edited words go here');
     expect(studioStore.getState().textObjects[0].text).toBe('Edited words go here');
     expect(studioStore.getState().textObjects[0].lines).not.toEqual(['Original', 'dialogue']);
-    await click('Revert');
+    await click('Restaurar');
     expect(studioStore.getState().textObjects[0].lines).toEqual(['Original OCR']);
-    await click('Clear');
+    await click('Limpar');
     expect(studioStore.getState().textObjects[0].lines).toEqual([]);
     expect(measureDefaultLayout).not.toHaveBeenCalled();
   });
@@ -189,7 +189,7 @@ describe('TypographySettings editing intent and reflow', () => {
       clipboardStyle: { fontSize: 27, bold: true, typesetMode: 'balloon' } });
     const originalLines = studioStore.getState().textObjects[0].lines;
     await render();
-    await click('Paste Style');
+    await click('Colar estilo');
     const pasted = studioStore.getState().textObjects[0];
     expect(pasted.typesetMode).toBe('simple');
     expect(pasted.fontSize).toBe(27);
@@ -200,7 +200,7 @@ describe('TypographySettings editing intent and reflow', () => {
   it('adopts fitted font size as well as lines when pasting into Auto Balloon', async () => {
     studioStore.setState({ clipboardStyle: { fontSize: 27, italic: true, typesetMode: 'simple' } });
     await render();
-    await click('Paste Style');
+    await click('Colar estilo');
     const pasted = studioStore.getState().textObjects[0];
     expect(pasted.typesetMode).toBeUndefined();
     expect(pasted.fontSize).toBe(31);
@@ -211,11 +211,11 @@ describe('TypographySettings editing intent and reflow', () => {
   it('keeps global mode meaningful before any boxes exist', async () => {
     studioStore.setState({ textObjects: [], selectedTextId: null, globalEditMode: true });
     await render();
-    await click('Simple Wrap');
+    await click('Quebra simples');
     expect(studioStore.getState().globalTypesetMode).toBe('simple');
     expect(studioStore.getState().textObjects).toEqual([]);
-    await click('Add Text Box');
-    expect(studioStore.getState().textObjects[0].lines).toEqual(['balloon: New Dialogue']);
+    await click('Adicionar caixa de texto');
+    expect(studioStore.getState().textObjects[0].lines).toEqual(['balloon: Novo diálogo']);
     expect(studioStore.getState().textObjects[0].typesetMode).toBeUndefined();
   });
 
@@ -227,12 +227,12 @@ describe('TypographySettings editing intent and reflow', () => {
     expect(measureDefaultLayout).not.toHaveBeenCalled();
   });
 
-  it('initializes manual dialogue with Auto Balloon despite Simple Wrap editing default', async () => {
+  it('initializes manual dialogue with automatic balloon fitting despite simple wrapping as the editing default', async () => {
     studioStore.setState({ globalTypesetMode: 'simple' });
     await render();
-    await click('Add Text Box');
+    await click('Adicionar caixa de texto');
     const created = studioStore.getState().textObjects.at(-1)!;
-    expect(created.lines).toEqual(['balloon: New Dialogue']);
+    expect(created.lines).toEqual(['balloon: Novo diálogo']);
     expect(created.fontSize).toBe(31);
     expect(created.typesetMode).toBeUndefined();
     expect(studioStore.getState().selectedTextId).toBe(created.id);

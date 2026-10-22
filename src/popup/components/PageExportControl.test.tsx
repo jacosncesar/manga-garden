@@ -32,7 +32,7 @@ describe('PageExportControl', () => {
           included: 0,
           failed: 0,
           percent: 0,
-          message: 'Translate pages in this chapter to export them.',
+          message: 'Traduza páginas deste capítulo para exportá-las.',
           errors: [],
         } as ChapterZipStatus),
       },
@@ -46,7 +46,7 @@ describe('PageExportControl', () => {
       await Promise.resolve();
     });
 
-    expect(container.textContent).toContain('Download Chapter ZIP (0 pages)');
+    expect(container.textContent).toContain('Baixar ZIP do capítulo (0 páginas)');
     await act(async () => { root.unmount(); });
     container.remove();
   });
@@ -77,7 +77,7 @@ describe('PageExportControl', () => {
       await Promise.resolve();
     });
 
-    expect(container.textContent).toContain('Download 15 Translated Pages');
+    expect(container.textContent).toContain('Baixar 15 páginas traduzidas');
     await act(async () => { root.unmount(); });
     container.remove();
   });
@@ -88,7 +88,7 @@ describe('PageExportControl', () => {
     (globalThis as any).chrome = { tabs: { query: vi.fn().mockResolvedValue([{ id: 123 }]), sendMessage } };
     const root = createRoot(container);
     await act(async () => { root.render(<PageExportControl />); });
-    expect(container.textContent).toContain('Download 2 Translated Pages');
+    expect(container.textContent).toContain('Baixar 2 páginas traduzidas');
     await act(async () => { await vi.advanceTimersByTimeAsync(2000); });
     expect(container.textContent).toBe('');
     await act(async () => { root.unmount(); });
@@ -96,17 +96,17 @@ describe('PageExportControl', () => {
   });
 
   it('ignores out-of-order status responses and polls busy exports after popup reopening', async () => {
-    const status: ChapterZipStatus = { phase: 'packing', busy: true, total: 2, processed: 2, included: 2, failed: 0, percent: 30, message: 'Building ZIP…', errors: [] };
+    const status: ChapterZipStatus = { phase: 'packing', busy: true, total: 2, processed: 2, included: 2, failed: 0, percent: 30, message: 'Gerando ZIP…', errors: [] };
     let resolveOld!: (value: ChapterZipStatus) => void;
     const sendMessage = vi.fn().mockReturnValueOnce(new Promise((resolve) => { resolveOld = resolve; })).mockResolvedValue({ ...status, percent: 75 });
     (globalThis as any).chrome = { tabs: { query: vi.fn().mockResolvedValue([{ id: 123 }]), sendMessage } };
     const root = createRoot(container);
     await act(async () => { root.render(<PageExportControl />); });
     await act(async () => { await vi.advanceTimersByTimeAsync(2000); });
-    expect(container.textContent).toContain('Exporting 75%');
+    expect(container.textContent).toContain('Exportando 75%');
     expect(container.querySelector('button')?.disabled).toBe(true);
     await act(async () => { resolveOld(status); });
-    expect(container.textContent).toContain('Exporting 75%');
+    expect(container.textContent).toContain('Exportando 75%');
     await act(async () => { root.unmount(); });
     container.remove();
   });
@@ -132,7 +132,7 @@ describe('PageExportControl', () => {
         included: 5,
         failed: 0,
         percent: 100,
-        message: 'Download started: 5/5 pages.',
+        message: 'Download iniciado: 5/5 páginas.',
         errors: [],
       } as ChapterZipStatus);
 
@@ -166,8 +166,8 @@ describe('PageExportControl', () => {
       { type: 'EXPORT_CHAPTER_ZIP', target: 'content', source: 'popup', request: true },
       { frameId: 0 }
     );
-    expect(container.textContent).toContain('Re-download Chapter ZIP');
-    expect(container.textContent).toContain('Download started: 5/5 pages.');
+    expect(container.textContent).toContain('Baixar novamente o ZIP do capítulo');
+    expect(container.textContent).toContain('Download iniciado: 5/5 páginas.');
 
     await act(async () => { root.unmount(); });
     container.remove();

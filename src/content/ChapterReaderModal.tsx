@@ -88,7 +88,7 @@ export default function ChapterReaderModal({
     setIsExporting(true);
     try {
       await onExportZip();
-      setToastMessage(`✓ Download started (${translatedCount} pages)`);
+      setToastMessage(`✓ Download iniciado (${translatedCount} páginas)`);
       setTimeout(() => setToastMessage(null), 3500);
     } catch {
       setToastMessage('ZIP Export failed. Try again.');
@@ -193,7 +193,7 @@ export default function ChapterReaderModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Distraction-Free Chapter Reader"
+      aria-label="Leitor de capítulos sem distrações"
       className="manga-garden-reader-modal"
       style={{
         position: 'fixed',
@@ -245,7 +245,7 @@ export default function ChapterReaderModal({
               background: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid rgba(255, 255, 255, 0.12)',
             }}
-            title="Exit Reader (Esc)"
+            title="Sair do leitor (Esc)"
           >
             <X size={15} />
             <kbd className="manga-garden-reader-kbd" style={{ fontSize: '10px', padding: '1px 4px', borderRadius: '3px', background: 'rgba(255, 255, 255, 0.15)' }}>
@@ -268,8 +268,8 @@ export default function ChapterReaderModal({
               style={{ fontSize: '11px', fontFamily: 'monospace', color: 'rgba(255, 255, 255, 0.5)', whiteSpace: 'nowrap' }}
             >
               {viewMode === 'webtoon'
-                ? `Page ${activeScrollPage} / ${totalPages}`
-                : `Page ${currentIndex + 1}${viewMode === 'double' && currentIndex + 1 < totalPages ? `-${currentIndex + 2}` : ''} / ${totalPages}`}
+                ? `Página ${activeScrollPage} de ${totalPages}`
+                : `Página ${currentIndex + 1}${viewMode === 'double' && currentIndex + 1 < totalPages ? `-${currentIndex + 2}` : ''} de ${totalPages}`}
             </span>
           </div>
         </div>
@@ -303,7 +303,7 @@ export default function ChapterReaderModal({
               backgroundColor: viewMode === 'webtoon' ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
               color: viewMode === 'webtoon' ? '#ffffff' : 'rgba(255, 255, 255, 0.6)',
             }}
-            title="Continuous Vertical Stream (Webtoon)"
+            title="Rolagem vertical contínua (webtoon)"
           >
             <BookOpen size={13} />
             <span>Webtoon</span>
@@ -324,10 +324,10 @@ export default function ChapterReaderModal({
               backgroundColor: viewMode === 'single' ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
               color: viewMode === 'single' ? '#ffffff' : 'rgba(255, 255, 255, 0.6)',
             }}
-            title="Single Page Mode"
+            title="Modo de página única"
           >
             <FileText size={13} />
-            <span>Single</span>
+            <span>Uma página</span>
           </button>
           <button
             onClick={() => setViewMode('double')}
@@ -345,10 +345,10 @@ export default function ChapterReaderModal({
               backgroundColor: viewMode === 'double' ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
               color: viewMode === 'double' ? '#ffffff' : 'rgba(255, 255, 255, 0.6)',
             }}
-            title="Double Page Spread Mode"
+            title="Modo de página dupla"
           >
             <Columns size={13} />
-            <span>Double</span>
+            <span>Duas páginas</span>
           </button>
         </div>
 
@@ -369,10 +369,10 @@ export default function ChapterReaderModal({
                 color: '#34d399',
                 border: '1px solid rgba(16, 185, 129, 0.3)',
               }}
-              title="All chapter pages are translated"
+              title="Todas as páginas do capítulo foram traduzidas"
             >
               <Check size={13} />
-              <span>All Translated</span>
+              <span>Todas traduzidas</span>
             </div>
           ) : isTranslatingChapter ? (
             <div
@@ -388,10 +388,10 @@ export default function ChapterReaderModal({
                 color: '#22d3ee',
                 border: '1px solid rgba(244, 68, 109, 0.3)',
               }}
-              title="Translating pages in background sequentially"
+              title="Traduzindo páginas em sequência, em segundo plano"
             >
               <Loader size={12} className="animate-spin" />
-              <span>Translating {translatedCount}/{totalPages}…</span>
+              <span>Traduzindo {translatedCount}/{totalPages}…</span>
             </div>
           ) : onTranslateAll && untranslatedUrls.length > 0 ? (
             <button
@@ -411,10 +411,10 @@ export default function ChapterReaderModal({
                 border: '1px solid #22d3ee',
                 boxShadow: '0 2px 8px rgba(244, 68, 109, 0.35)',
               }}
-              title="Translate all pages in top-to-bottom sequence"
+              title="Traduzir todas as páginas em sequência, de cima para baixo"
             >
               <Sparkles size={13} />
-              <span>Translate Chapter ({untranslatedUrls.length})</span>
+              <span>Traduzir capítulo ({untranslatedUrls.length})</span>
             </button>
           ) : null}
 
@@ -448,7 +448,7 @@ export default function ChapterReaderModal({
                     color: webtoonWidth === preset ? '#ffffff' : 'rgba(255, 255, 255, 0.5)',
                     fontWeight: webtoonWidth === preset ? 700 : 400,
                   }}
-                  title={`Width: ${preset}`}
+                  title={`Largura: ${preset}`}
                 >
                   {preset}
                 </button>
@@ -473,7 +473,7 @@ export default function ChapterReaderModal({
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 background: 'rgba(255, 255, 255, 0.06)',
               }}
-              title={`Reading Direction: ${isRtl ? 'Right-to-Left (Manga)' : 'Left-to-Right (Webtoon)'}`}
+              title={`Direção de leitura: ${isRtl ? 'da direita para a esquerda (mangá)' : 'da esquerda para a direita (webtoon)'}`}
             >
               <ArrowLeftRight size={13} />
               <span style={{ fontFamily: 'monospace', fontSize: '10px' }}>{isRtl ? 'RTL' : 'LTR'}</span>
@@ -497,10 +497,10 @@ export default function ChapterReaderModal({
               backgroundColor: showOriginal ? 'rgba(245, 158, 11, 0.15)' : 'rgba(255, 255, 255, 0.08)',
               color: showOriginal ? '#fbbf24' : '#ffffff',
             }}
-            title="Toggle Original Artwork / Translation (F)"
+            title="Alternar entre imagem original e tradução (F)"
           >
             {showOriginal ? <EyeOff size={13} /> : <Eye size={13} />}
-            <span>{showOriginal ? 'Original' : 'Translated'}</span>
+            <span>{showOriginal ? 'Original' : 'Traduzida'}</span>
             <kbd className="manga-garden-reader-kbd" style={{ fontSize: '9px', padding: '1px 4px', background: 'rgba(255, 255, 255, 0.2)' }}>
               F
             </kbd>
@@ -526,8 +526,8 @@ export default function ChapterReaderModal({
               }}
               title={
                 translatedCount === 0
-                  ? 'No translated pages in this reader yet. Translate pages first to export ZIP.'
-                  : `Download Chapter ZIP (${translatedCount} page${translatedCount === 1 ? '' : 's'})`
+                  ? 'Ainda não há páginas traduzidas neste leitor. Traduza páginas antes de exportar o ZIP.'
+                  : `Baixar ZIP do capítulo (${translatedCount} ${translatedCount === 1 ? 'página' : 'páginas'})`
               }
             >
               {isExporting ? <Loader size={14} className="animate-spin text-[#22d3ee]" /> : <Download size={14} />}
@@ -599,8 +599,8 @@ export default function ChapterReaderModal({
             }}
           >
             <BookOpen size={36} style={{ marginBottom: '12px', opacity: 0.4 }} />
-            <p style={{ fontSize: '14px', fontWeight: 500, margin: '0 0 6px 0' }}>No chapter pages found on this tab.</p>
-            <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Open a manga or webtoon reader page to view chapter panels.</p>
+            <p style={{ fontSize: '14px', fontWeight: 500, margin: '0 0 6px 0' }}>Nenhuma página de capítulo encontrada nesta aba.</p>
+            <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.4)', margin: 0 }}>Abra uma página de leitura de mangá ou webtoon para ver os quadros do capítulo.</p>
           </div>
         ) : viewMode === 'webtoon' ? (
           /* Continuous Vertical Stream (Webtoon) */
@@ -679,7 +679,7 @@ export default function ChapterReaderModal({
                       }}
                     >
                       <Loader size={11} className="animate-spin" />
-                      <span>Translating page {idx + 1}…</span>
+                      <span>Traduzindo página {idx + 1}…</span>
                     </div>
                   )}
 
@@ -761,7 +761,7 @@ export default function ChapterReaderModal({
                     }}
                   >
                     <Loader size={11} className="animate-spin" />
-                    <span>Translating page {currentIndex + 1}…</span>
+                    <span>Traduzindo página {currentIndex + 1}…</span>
                   </div>
                 )}
               </div>
@@ -789,7 +789,7 @@ export default function ChapterReaderModal({
                 cursor: 'pointer',
                 zIndex: 1000002,
               }}
-              title={isRtl ? 'Next Page' : 'Previous Page'}
+              title={isRtl ? 'Próxima página' : 'Página anterior'}
             >
               <ChevronLeft size={24} />
             </button>
@@ -814,7 +814,7 @@ export default function ChapterReaderModal({
                 cursor: 'pointer',
                 zIndex: 1000002,
               }}
-              title={isRtl ? 'Previous Page' : 'Next Page'}
+              title={isRtl ? 'Página anterior' : 'Próxima página'}
             >
               <ChevronRight size={24} />
             </button>
@@ -886,7 +886,7 @@ export default function ChapterReaderModal({
                       }}
                     >
                       <Loader size={10} className="animate-spin" />
-                      <span>Translating p. {currentIndex + 1}…</span>
+                      <span>Traduzindo pág. {currentIndex + 1}…</span>
                     </div>
                   )}
                 </div>
@@ -930,7 +930,7 @@ export default function ChapterReaderModal({
                       }}
                     >
                       <Loader size={10} className="animate-spin" />
-                      <span>Translating p. {currentIndex + 2}…</span>
+                      <span>Traduzindo pág. {currentIndex + 2}…</span>
                     </div>
                   )}
                 </div>
@@ -959,7 +959,7 @@ export default function ChapterReaderModal({
                 cursor: 'pointer',
                 zIndex: 1000002,
               }}
-              title={isRtl ? 'Next Spread' : 'Previous Spread'}
+              title={isRtl ? 'Próxima dupla' : 'Dupla anterior'}
             >
               <ChevronLeft size={24} />
             </button>
@@ -984,7 +984,7 @@ export default function ChapterReaderModal({
                 cursor: 'pointer',
                 zIndex: 1000002,
               }}
-              title={isRtl ? 'Previous Spread' : 'Next Spread'}
+              title={isRtl ? 'Dupla anterior' : 'Próxima dupla'}
             >
               <ChevronRight size={24} />
             </button>

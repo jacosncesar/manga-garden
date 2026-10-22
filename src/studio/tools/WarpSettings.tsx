@@ -6,12 +6,12 @@ import { WarpMesh, type WarpPreset } from '../canvas/WarpMesh';
 import type { TextObject } from '../types';
 
 const WARP_PRESETS: { id: WarpPreset; label: string }[] = [
-  { id: 'none', label: 'None (Flat)' },
-  { id: 'arch', label: 'Arch (Curved)' },
-  { id: 'bulge', label: 'Bulge (Expand)' },
-  { id: 'wave', label: 'Wave (Sine)' },
-  { id: 'twist', label: 'Twist (Diagonal)' },
-  { id: 'squeeze', label: 'Squeeze (Hourglass)' },
+  { id: 'none', label: 'Nenhuma (plana)' },
+  { id: 'arch', label: 'Arco (curvo)' },
+  { id: 'bulge', label: 'Saliente (expandir)' },
+  { id: 'wave', label: 'Onda (senoidal)' },
+  { id: 'twist', label: 'Torção (diagonal)' },
+  { id: 'squeeze', label: 'Apertar (ampulheta)' },
 ];
 
 export const WarpSettings: React.FC = () => {
@@ -36,9 +36,9 @@ export const WarpSettings: React.FC = () => {
   if (!selectedObj) {
     return (
       <div className="p-5 text-center text-xs text-slate-400">
-        <p>No text bubble selected.</p>
+        <p>Nenhum balão de texto selecionado.</p>
         <p className="mt-1 text-[11px] text-slate-500">
-          Select a text bubble to apply 4-point perspective warp or parametric distortion.
+          Selecione um balão de texto para aplicar distorção em perspectiva de 4 pontos ou distorção paramétrica.
         </p>
       </div>
     );
@@ -83,15 +83,15 @@ export const WarpSettings: React.FC = () => {
       <div className="pb-2 border-b border-[#282d3f]">
         <div className="flex items-center gap-2">
           <Maximize2 className="w-4 h-4 text-[#22d3ee]" />
-          <h3 className="font-semibold text-sm text-slate-100">Warp & Quad Perspective</h3>
+          <h3 className="font-semibold text-sm text-slate-100">Distorção e perspectiva quadrilateral</h3>
         </div>
         <p className="text-[11px] text-slate-400 mt-1">
-          Distort text boxes along angled speech balloons, tilted signs, or dynamic SFX sound waves.
+          Distorça caixas de texto para acompanhar balões inclinados, placas em perspectiva ou efeitos sonoros dinâmicos.
         </p>
       </div>
 
       <div>
-        <label className="block text-slate-400 font-medium mb-1.5">Warp Presets</label>
+        <label className="block text-slate-400 font-medium mb-1.5">Predefinições de distorção</label>
         <div className="grid grid-cols-2 gap-1.5">
           {WARP_PRESETS.map((p) => (
             <button
@@ -112,7 +112,7 @@ export const WarpSettings: React.FC = () => {
       {currentPreset !== 'none' && (
         <div>
           <div className="flex justify-between text-slate-400 mb-1">
-            <span>Bend Intensity</span>
+            <span>Intensidade da curvatura</span>
             <span className="font-mono text-slate-200">{Math.round(currentBend * 100)}%</span>
           </div>
           <input
@@ -133,12 +133,12 @@ export const WarpSettings: React.FC = () => {
           className="w-full flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-[#282d3f] bg-[#1c1f2e] text-slate-300 hover:bg-[#282d3f] transition"
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          Reset Quad to Rectangle
+          Redefinir quadrilátero como retângulo
         </button>
       </div>
 
       <div className="p-3 rounded-lg bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-[11px] text-[#22d3ee] leading-relaxed">
-        💡 <strong>Interactive Handles:</strong> Drag any of the 4 corner handles on the canvas to freely distort text in 3D perspective space.
+        💡 <strong>Alças interativas:</strong> arraste qualquer uma das quatro alças de canto na tela para distorcer o texto livremente em perspectiva 3D.
       </div>
     </div>
   );

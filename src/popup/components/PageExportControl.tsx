@@ -100,18 +100,18 @@ export default function PageExportControl() {
         }`}
         title={
           total === 0
-            ? 'No translated pages on this tab yet. Translate images to export chapter as ZIP.'
-            : 'Download all translated pages as a ZIP archive'
+            ? 'Ainda não há páginas traduzidas nesta aba. Traduza imagens para exportar o capítulo em ZIP.'
+            : 'Baixar todas as páginas traduzidas em um arquivo ZIP'
         }
       >
         {busy ? <Loader size={16} className="animate-spin" /> : <Archive size={16} />}
         {busy
-          ? `Exporting${status && status.percent > 0 ? ` ${status.percent}%` : '…'}`
+          ? `Exportando${status && status.percent > 0 ? ` ${status.percent}%` : '…'}`
           : done
-          ? 'Re-download Chapter ZIP'
+          ? 'Baixar novamente o ZIP do capítulo'
           : total > 0
-          ? `Download ${total} Translated Pages`
-          : 'Download Chapter ZIP (0 pages)'}
+          ? `Baixar ${total} páginas traduzidas`
+          : 'Baixar ZIP do capítulo (0 páginas)'}
       </button>
       {status?.message && (phase !== 'idle') && (
         <p className={`text-xs px-1 leading-relaxed ${

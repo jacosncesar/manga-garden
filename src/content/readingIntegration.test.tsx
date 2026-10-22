@@ -148,7 +148,7 @@ describe('real content reading shortcut wiring', () => {
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true, clientX: 50, clientY: 50 })); });
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 250, clientY: 250 })); });
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointerup', { bubbles: true, clientX: 250, clientY: 250 })); });
-    const button = document.querySelector<HTMLButtonElement>('[title="Translate area"]')!;
+    const button = document.querySelector<HTMLButtonElement>('[title="Traduzir área"]')!;
     expect(button).not.toBeNull();
     await act(async () => button.click());
     expect(document.querySelector('.manga-garden-crop-frozen')).not.toBeNull();
@@ -168,7 +168,7 @@ describe('real content reading shortcut wiring', () => {
     move();
     await act(async () => { document.dispatchEvent(new KeyboardEvent('keydown', { key: 'f', bubbles: true, cancelable: true })); });
     expect(target.imgElement!.src).toBe(target.srcUrl);
-    expect(document.querySelector('[data-manga-garden-toggle-btn]')?.getAttribute('aria-label')).toBe('Show Translated Image');
+    expect(document.querySelector('[data-manga-garden-toggle-btn]')?.getAttribute('aria-label')).toBe('Mostrar imagem traduzida');
   });
 
   it('clears persistent target when the pointer leaves the document', async () => {

@@ -38,7 +38,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
     chrome.runtime.sendMessage({ type: 'SIGN_IN_GOOGLE' }, (response) => {
       setIsLoading(false);
       if (chrome.runtime.lastError || !response?.success) {
-        setError(response?.error || chrome.runtime.lastError?.message || 'Sign in cancelled');
+        setError(response?.error || chrome.runtime.lastError?.message || 'O login foi cancelado.');
       } else if (response.userAccount) {
         onAccountChange(response.userAccount);
       }
@@ -54,7 +54,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
       if (response?.success) {
         onAccountChange(undefined);
       } else {
-        setError(response?.error || 'Sign out failed');
+        setError(response?.error || 'Não foi possível sair da conta.');
       }
     });
   };
@@ -69,11 +69,11 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase text-[var(--color-dust)]">
             <Sparkles className="w-3.5 h-3.5 text-[var(--color-editorial)]" />
-            <span>Manga Garden Cloud Pass</span>
+            <span>Passe Manga Garden na nuvem</span>
           </div>
           <span className="flex items-center gap-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
             <CheckCircle2 className="w-3 h-3" />
-            Active
+            Ativo
           </span>
         </div>
 
@@ -81,7 +81,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
           {userAccount.picture ? (
             <img
               src={userAccount.picture}
-              alt="User"
+              alt="Usuário"
               className="w-8 h-8 rounded-full border border-[var(--color-dust)]/50 object-cover flex-shrink-0"
               referrerPolicy="no-referrer"
             />
@@ -93,7 +93,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
 
           <div className="flex-1 min-w-0">
             <div className="text-xs font-semibold text-[var(--color-ink)] truncate leading-tight">
-              {userAccount.name || 'Google User'}
+              {userAccount.name || 'Usuário do Google'}
             </div>
             <div className="text-[11px] text-[var(--color-dust)] truncate leading-tight mt-0.5">
               {userAccount.email}
@@ -103,7 +103,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
 
         <div className="pt-1 border-t border-[var(--color-dust)]/20 flex items-center justify-between">
           <span className="text-[10px] text-[var(--color-dust)] font-medium">
-            {userAccount.quotaRemaining !== undefined ? userAccount.quotaRemaining : 100} / 100 translations left
+            {userAccount.quotaRemaining !== undefined ? userAccount.quotaRemaining : 100} / 100 traduções restantes
           </span>
           <button
             type="button"
@@ -112,7 +112,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
             className="flex items-center gap-1 text-[11px] font-medium text-[var(--color-dust)] hover:text-[var(--color-editorial)] transition-colors py-0.5 px-1.5 rounded hover:bg-[var(--color-paper)]"
           >
             <LogOut className="w-3 h-3" />
-            <span>{isLoading ? 'Signing out...' : 'Sign out'}</span>
+            <span>{isLoading ? 'Saindo...' : 'Sair'}</span>
           </button>
         </div>
 
@@ -129,11 +129,11 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
     <div className="p-2.5 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md space-y-2">
       <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase text-[var(--color-dust)]">
         <Sparkles className="w-3.5 h-3.5 text-[var(--color-editorial)]" />
-        <span>Shared Translation Pool</span>
+        <span>Pool de tradução compartilhado</span>
       </div>
 
       <p className="text-[11px] text-[var(--color-dust)] leading-relaxed">
-        Sign in to unlock <strong className="text-[var(--color-ink)]">100 free cloud translations/day</strong> across Gemma, Mistral, and NVIDIA models.
+        Entre para ter <strong className="text-[var(--color-ink)]">100 traduções gratuitas na nuvem por dia</strong> com os modelos Gemma, Mistral e NVIDIA.
       </p>
 
       <button
@@ -161,7 +161,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
             d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
           />
         </svg>
-        <span>{isLoading ? 'Connecting Google...' : 'Sign in with Google'}</span>
+        <span>{isLoading ? 'Conectando ao Google...' : 'Entrar com o Google'}</span>
       </button>
 
       {error && (

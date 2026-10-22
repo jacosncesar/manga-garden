@@ -21,10 +21,10 @@ export default function EngineDropdown({ state, updateState }: EngineDropdownPro
         <div className="p-2.5 bg-amber-500/10 border border-amber-500/30 rounded-md flex flex-col gap-2 text-xs text-amber-600 dark:text-amber-400 animate-in fade-in duration-200">
           <div className="flex items-center gap-1.5 font-semibold">
             <span>⚠️</span>
-            <span>GPU Acceleration is off for active model</span>
+            <span>A aceleração por GPU está desativada para o modelo atual</span>
           </div>
           <p className="text-[11px] leading-tight text-[var(--color-ink)] opacity-80">
-            The selected model ({state.activeEngineId}) needs GPU acceleration to run.
+            O modelo selecionado ({state.activeEngineId}) precisa de aceleração por GPU para funcionar.
           </p>
           <div className="flex items-center gap-2 pt-0.5">
             <button
@@ -39,13 +39,13 @@ export default function EngineDropdown({ state, updateState }: EngineDropdownPro
               }}
               className="px-2 py-1 bg-amber-500 hover:bg-amber-600 text-white rounded font-medium text-[11px] transition-colors cursor-pointer"
             >
-              Enable GPU
+              Ativar GPU
             </button>
             <button
               onClick={() => updateState({ activeEngineId: 'gg-translate' })}
               className="px-2 py-1 bg-[var(--color-vellum)] hover:bg-[var(--color-paper)] border border-[var(--color-dust)] text-[var(--color-ink)] rounded font-medium text-[11px] transition-colors cursor-pointer"
             >
-              Use Google Translate
+              Usar o Google Tradutor
             </button>
           </div>
         </div>

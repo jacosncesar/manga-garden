@@ -67,18 +67,18 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
   return (
     <div className="p-3 bg-[var(--color-paper)] border border-[var(--color-dust)] rounded-md shadow-sm">
       <div className="flex justify-between items-center mb-3">
-        <h3 className="text-sm font-bold text-[var(--color-editorial)]">Waterfall Fallback Chain</h3>
+        <h3 className="text-sm font-bold text-[var(--color-editorial)]">Sequência de mecanismos alternativos</h3>
         <button 
           onClick={onClose}
           className="p-1 text-[var(--color-dust)] hover:text-[var(--color-ink)] transition-colors cursor-pointer"
-          title="Close Panel"
+          title="Fechar painel"
         >
           <X size={16} />
         </button>
       </div>
 
       <p className="text-xs text-[var(--color-dust)] mb-4">
-        If the primary engine fails (e.g. rate limit, WebGPU crash), Manga Garden will automatically try the engines below in order.
+        Se o mecanismo principal falhar (por exemplo, por limite de requisições ou falha no WebGPU), o Manga Garden tentará automaticamente os mecanismos abaixo, na ordem.
       </p>
 
       <div className="flex flex-col relative">
@@ -86,9 +86,9 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
         <div className="relative flex flex-col items-center">
           <div className="w-full flex items-center gap-2 p-3 bg-[var(--color-vellum)] border border-dashed border-[var(--color-dust)] rounded-md opacity-60">
             <span className="text-xs font-bold text-[var(--color-editorial)] flex-1 truncate">
-              Primary: {allEngines.find(e => e.id === state.activeEngineId)?.name || 'Unknown'}
+              Principal: {allEngines.find(e => e.id === state.activeEngineId)?.name || 'Desconhecido'}
             </span>
-            <span className="text-[10px] text-[var(--color-dust)] uppercase tracking-wider">Set in Home</span>
+            <span className="text-[10px] text-[var(--color-dust)] uppercase tracking-wider">Definido no início</span>
           </div>
         </div>
 
@@ -109,13 +109,13 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
                     onChange={(e) => handleUpdateChain(index, e.target.value)}
                     className="w-full appearance-none p-3 pr-8 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md hover:border-[var(--color-ink)] transition-colors cursor-pointer text-sm font-medium text-[var(--color-ink)]"
                   >
-                    <optgroup label="Available Engines">
+                    <optgroup label="Mecanismos disponíveis">
                       {rowEngines.filter(e => e.type !== 'custom').map(e => (
                         <option key={e.id} value={e.id}>{e.name}</option>
                       ))}
                     </optgroup>
                     {rowEngines.some(e => e.type === 'custom') && (
-                      <optgroup label="Custom APIs">
+                      <optgroup label="APIs personalizadas">
                         {rowEngines.filter(e => e.type === 'custom').map(e => (
                           <option key={e.id} value={e.id}>{e.name}</option>
                         ))}
@@ -128,7 +128,7 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
                 <button 
                   onClick={() => handleRemoveFallback(index)}
                   className="p-3 text-[var(--color-dust)] hover:text-red-500 hover:bg-[var(--color-vellum)] rounded-md border border-transparent transition-colors cursor-pointer"
-                  title="Remove Fallback"
+                  title="Remover alternativa"
                 >
                   <X size={16} />
                 </button>
@@ -142,7 +142,7 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
           onClick={handleAddFallback}
           className="mt-2 w-full py-2 border border-dashed border-[var(--color-dust)] text-[var(--color-dust)] text-xs font-bold rounded-md hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] transition-colors cursor-pointer flex justify-center items-center gap-1"
         >
-          <Plus size={14} /> Add Fallback Engine
+          <Plus size={14} /> Adicionar mecanismo alternativo
         </button>
 
       </div>

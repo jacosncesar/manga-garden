@@ -56,9 +56,9 @@ describe('BatchScanPanel UI & Controls', () => {
     });
 
     // Expect 3 total pages detected
-    expect(container.textContent).toContain('3 pages');
+    expect(container.textContent).toContain('3 páginas');
     // Pre-select untranslated (pages 1 and 2 = 2 pages)
-    expect(container.textContent).toContain('Translate 2 Selected Pages');
+    expect(container.textContent).toContain('Traduzir 2 páginas selecionadas');
 
     // Click Translate button
     const translateBtn = container.querySelector('button.bg-\\[var\\(--color-editorial\\)\\]') as HTMLButtonElement;
@@ -118,7 +118,7 @@ describe('BatchScanPanel UI & Controls', () => {
       await Promise.resolve();
     });
 
-    const fastScanBtn = container.querySelector('button[title*="Auto-scroll reader page"]') as HTMLButtonElement;
+    const fastScanBtn = container.querySelector('button[title*="Rolar a página e carregar todos os quadros do leitor"]') as HTMLButtonElement;
     expect(fastScanBtn).not.toBeNull();
 
     await act(async () => {
@@ -185,11 +185,11 @@ describe('BatchScanPanel UI & Controls', () => {
     });
 
     // Should indicate 1 page to translate, 1 already done
-    expect(container.textContent).toContain('Translate 1 Pages (1 already done)');
+    expect(container.textContent).toContain('Traduzir 1 páginas (1 já concluídas)');
 
     // Open reader for selected button should exist
     const readerBtn = Array.from(container.querySelectorAll('button')).find((b) =>
-      b.textContent?.includes('Reader') && b.textContent?.includes('2')
+      b.textContent?.includes('Leitor') && b.textContent?.includes('2')
     );
     expect(readerBtn).toBeDefined();
 

@@ -19,9 +19,9 @@ const INPAINT_VRAM_MAP: Record<string, string> = {
 };
 
 const BUBBLE_VRAM_MAP: Record<string, string> = {
-  off: 'Disabled • 0 MB',
+  off: 'Desativado • 0 MB',
   heuristic: 'Heuristic • 0 MB',
-  neural: 'YOLO Bubble • ~15 MB',
+  neural: 'Balão YOLO • ~15 MB',
 };
 
 export default function GpuAccelerationPanel({ state, updateState }: GpuAccelerationPanelProps) {
@@ -35,17 +35,17 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
   const activeEngine = engines.find(e => e.id === state.activeEngineId);
   const translationVramText = activeEngine 
     ? `${activeEngine.name} • ${activeEngine.vramEstimate || '0 MB'}` 
-    : 'Google Translate • 0 MB';
-  const inpaintVramText = INPAINT_VRAM_MAP[state.activeInpaintId] || 'Inpaint Engine • ~50 MB';
-  const bubbleVramText = BUBBLE_VRAM_MAP[state.bubbleMode ?? 'off'] || 'Disabled • 0 MB';
+    : 'Google Tradutor • 0 MB';
+  const inpaintVramText = INPAINT_VRAM_MAP[state.activeInpaintId] || 'Mecanismo de preenchimento • ~50 MB';
+  const bubbleVramText = BUBBLE_VRAM_MAP[state.bubbleMode ?? 'off'] || 'Desativado • 0 MB';
 
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center gap-1.5 mb-1">
-        <span className="font-medium text-sm">GPU Acceleration</span>
+        <span className="font-medium text-sm">Aceleração por GPU</span>
         <HelpTooltip
           size="md"
-          content="Run models locally on your graphics card for maximum speed. Turn off specific pipelines below if memory is limited."
+          content="Execute os modelos localmente na placa de vídeo para obter o máximo de velocidade. Desative pipelines específicos abaixo se a memória estiver limitada."
         />
       </div>
 
@@ -101,7 +101,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
                 }}
                 className="px-2 py-0.5 border border-[var(--color-dust)] hover:border-[var(--color-ink)] text-[10px] text-[var(--color-dust)] hover:text-[var(--color-ink)] font-medium rounded transition-colors cursor-pointer"
               >
-                Re-check
+                Verificar novamente
               </button>
             )}
           </div>
@@ -125,7 +125,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
                 data-state={state.webgpuMaster && state.webgpuSupported === true ? 'checked' : 'unchecked'}
                 data-disabled={state.webgpuSupported !== true ? 'true' : 'false'}
               >
-                <span className="sr-only">Toggle WebGPU Master</span>
+                <span className="sr-only">Alternar WebGPU</span>
                 <span className="manga-garden-switch-thumb" />
               </button>
             </div>
@@ -138,7 +138,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
             
             <div className="flex items-center justify-between p-2.5 rounded-md hover:bg-[var(--color-paper)] transition-colors">
               <div className="flex flex-col text-left">
-                <span className="font-medium text-sm text-[var(--color-ink)]">Translation</span>
+                <span className="font-medium text-sm text-[var(--color-ink)]">Tradução</span>
                 <span className="text-[10px] text-[var(--color-dust)] font-medium truncate max-w-[180px]">
                   {translationVramText}
                 </span>
@@ -154,7 +154,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
 
             <div className="flex items-center justify-between p-2.5 rounded-md hover:bg-[var(--color-paper)] transition-colors">
               <div className="flex flex-col text-left">
-                <span className="font-medium text-sm text-[var(--color-ink)]">Image Cleaning</span>
+                <span className="font-medium text-sm text-[var(--color-ink)]">Limpeza de imagem</span>
                 <span className="text-[10px] text-[var(--color-dust)] font-medium truncate max-w-[180px]">
                   {inpaintVramText}
                 </span>
@@ -170,7 +170,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
 
             <div className="flex items-center justify-between p-2.5 rounded-md hover:bg-[var(--color-paper)] transition-colors">
               <div className="flex flex-col text-left">
-                <span className="font-medium text-sm text-[var(--color-ink)]">Text Detection</span>
+                <span className="font-medium text-sm text-[var(--color-ink)]">Detecção de texto</span>
                 <span className="text-[10px] text-[var(--color-dust)] font-medium truncate max-w-[180px]">
                   PaddleOCR • ~30 MB
                 </span>
@@ -186,7 +186,7 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
 
             <div className="flex items-center justify-between p-2.5 rounded-md hover:bg-[var(--color-paper)] transition-colors">
               <div className="flex flex-col text-left">
-                <span className="font-medium text-sm text-[var(--color-ink)]">Bubble Detection</span>
+                <span className="font-medium text-sm text-[var(--color-ink)]">Detecção de balões</span>
                 <span className="text-[10px] text-[var(--color-dust)] font-medium truncate max-w-[180px]">
                   {bubbleVramText}
                 </span>

@@ -223,7 +223,7 @@ export default function BatchScanPanel() {
   const handleFastScan = async () => {
     if (isFastScanning) return;
     setIsFastScanning(true);
-    setStatusMessage('Auto-scrolling page to mount lazy comic panels...');
+    setStatusMessage('Rolando a página para carregar todos os quadros...');
     try {
       const tab = await getActiveTab();
       if (!tab?.id) return;
@@ -262,11 +262,11 @@ export default function BatchScanPanel() {
           }
           return next;
         });
-        setStatusMessage(`Discovered ${items.length} panels total.`);
+        setStatusMessage(`${items.length} quadros encontrados.`);
       }
     } catch (err: any) {
       console.warn('[BatchScan] Fast-scroll preload failed:', err);
-      setStatusMessage('Fast-scan encountered an error.');
+      setStatusMessage('O escaneamento rápido encontrou um erro.');
     } finally {
       if (mountedRef.current) setIsFastScanning(false);
     }
@@ -317,7 +317,7 @@ export default function BatchScanPanel() {
   const handleQueueSelected = async () => {
     if (isQueueing || pendingToTranslate.length === 0) return;
     setIsQueueing(true);
-    setStatusMessage('Queueing pages for translation...');
+    setStatusMessage('Adicionando páginas à fila de tradução...');
 
     try {
       const urlsToQueue = pendingToTranslate.map((item) => item.url).filter(Boolean);
@@ -330,7 +330,7 @@ export default function BatchScanPanel() {
 
       if (res?.status === 'success') {
         const count = res.queuedCount ?? urlsToQueue.length;
-        setStatusMessage(`Queued ${count} pages. Starting sequential translation.`);
+        setStatusMessage(`${count} páginas adicionadas à fila. Iniciando a tradução em sequência.`);
         const queuedUrls = new Set(urlsToQueue);
 
         setPageItems((prev) =>
@@ -344,11 +344,11 @@ export default function BatchScanPanel() {
           )
         );
       } else {
-        setStatusMessage(res?.error || 'Failed to queue translations.');
+        setStatusMessage(res?.error || 'Não foi possível adicionar as traduções à fila.');
       }
     } catch (err: any) {
       console.warn('[BatchScan] Queue dispatch failed:', err);
-      setStatusMessage('Error sending translations to background queue.');
+      setStatusMessage('Erro ao enviar traduções para a fila em segundo plano.');
     } finally {
       if (mountedRef.current) setIsQueueing(false);
     }
@@ -416,12 +416,12 @@ export default function BatchScanPanel() {
       const readyItems = targetItems.filter((item) => item.isTranslated && item.translatedUrl);
 
       if (readyItems.length === 0) {
-        setStatusMessage('No translated pages ready to export.');
+        setStatusMessage('Não há páginas traduzidas prontas para exportação.');
         return;
       }
 
       setIsExportingZip(true);
-      setStatusMessage(`Preparing ${readyItems.length} pages for ZIP export…`);
+      setStatusMessage(`Preparando ${readyItems.length} páginas para exportar em ZIP…`);
 
       const recordsToExport = readyItems.map((item, idx) => ({
         originalUrl: item.url,
@@ -445,13 +445,13 @@ export default function BatchScanPanel() {
       );
 
       if (res?.phase === 'error') {
-        setStatusMessage(res.message || 'ZIP Export failed.');
+        setStatusMessage(res.message || 'Falha ao exportar o arquivo ZIP.');
       } else {
-        setStatusMessage(`ZIP Download started (${readyItems.length} pages).`);
+        setStatusMessage(`Download do ZIP iniciado (${readyItems.length} páginas).`);
       }
     } catch (err: any) {
       console.warn('[BatchScan] Export ZIP dispatch failed:', err);
-      setStatusMessage('Failed to trigger ZIP export on active tab.');
+      setStatusMessage('Não foi possível iniciar a exportação ZIP na aba ativa.');
     } finally {
       if (mountedRef.current) setIsExportingZip(false);
     }
@@ -497,7 +497,7 @@ export default function BatchScanPanel() {
           }`}
         >
           <Layers size={13} className={activeSource === 'page' ? 'text-[var(--color-editorial)]' : ''} />
-          <span>Current Page</span>
+          <span>Página atual</span>
           <span className="font-mono text-[10px] opacity-75 font-normal">({pageItems.length})</span>
         </button>
         <button
@@ -513,7 +513,7 @@ export default function BatchScanPanel() {
           }`}
         >
           <History size={13} className={activeSource === 'history' ? 'text-[var(--color-editorial)]' : ''} />
-          <span>History</span>
+          <span>Histórico</span>
           <span className="font-mono text-[10px] opacity-75 font-normal">({historyItems.length})</span>
         </button>
       </div>
@@ -529,10 +529,10 @@ export default function BatchScanPanel() {
             className="rounded border-[var(--color-dust)] text-[var(--color-editorial)] focus:ring-0 cursor-pointer"
           />
           <span className="font-mono text-[11px] text-[var(--color-ink)] truncate">
-            {selectedCountInView} / {currentViewItems.length} pages
+            {selectedCountInView} / {currentViewItems.length} páginas
             {selectedList.length > 0 && selectedList.length !== selectedCountInView && (
               <span className="text-[var(--color-editorial)] font-semibold ml-1">
-                ({selectedList.length} total selected)
+                ({selectedList.length} selecionadas no total)
               </span>
             )}
           </span>
@@ -545,7 +545,7 @@ export default function BatchScanPanel() {
                 onClick={scanPages}
                 disabled={isScanning || isFastScanning}
                 className="p-1 rounded hover:bg-[var(--color-paper)] text-[var(--color-dust)] hover:text-[var(--color-ink)] transition-colors cursor-pointer"
-                title="Rescan current page DOM"
+                title="Escanear novamente a página atual"
               >
                 <RotateCcw size={14} className={isScanning ? 'animate-spin' : ''} />
               </button>
@@ -554,14 +554,14 @@ export default function BatchScanPanel() {
                 onClick={handleFastScan}
                 disabled={isFastScanning || isScanning}
                 className="px-2 py-1 rounded bg-[var(--color-paper)] hover:bg-[var(--color-editorial)] hover:text-white border border-[var(--color-dust)] border-opacity-30 font-semibold transition-all flex items-center gap-1 text-[11px] cursor-pointer shadow-sm disabled:opacity-50"
-                title="Auto-scroll reader page to mount all lazy-loaded comic panels"
+                title="Rolar a página e carregar todos os quadros do leitor"
               >
                 {isFastScanning ? (
                   <Loader size={12} className="animate-spin" />
                 ) : (
                   <Zap size={12} className="text-amber-500" />
                 )}
-                <span>{isFastScanning ? 'Scanning…' : 'Fast Scan'}</span>
+                <span>{isFastScanning ? 'Escaneando…' : 'Escaneamento rápido'}</span>
               </button>
             </>
           ) : (
@@ -569,10 +569,10 @@ export default function BatchScanPanel() {
               onClick={loadHistoryItems}
               disabled={isLoadingHistory}
               className="px-2 py-1 rounded bg-[var(--color-paper)] hover:bg-[var(--color-editorial)] hover:text-white border border-[var(--color-dust)] border-opacity-30 font-semibold transition-all flex items-center gap-1 text-[11px] cursor-pointer shadow-sm disabled:opacity-50"
-              title="Refresh saved translation history"
+              title="Atualizar histórico de traduções salvas"
             >
               <RotateCcw size={12} className={isLoadingHistory ? 'animate-spin' : ''} />
-              <span>Refresh</span>
+              <span>Atualizar</span>
             </button>
           )}
         </div>
@@ -584,8 +584,8 @@ export default function BatchScanPanel() {
           <div className="flex items-start gap-2">
             <AlertCircle size={15} className="shrink-0 mt-0.5 text-amber-500" />
             <div className="text-[11px] leading-snug">
-              <p className="font-semibold text-[var(--color-ink)]">Extension Updated</p>
-              <p className="opacity-80 mt-0.5">Please reload this tab to connect the updated extension.</p>
+              <p className="font-semibold text-[var(--color-ink)]">Extensão atualizada</p>
+              <p className="opacity-80 mt-0.5">Recarregue esta aba para conectar à versão atualizada da extensão.</p>
             </div>
           </div>
           <button
@@ -598,7 +598,7 @@ export default function BatchScanPanel() {
             }}
             className="w-full py-1 bg-amber-500 text-black font-bold rounded text-[11px] cursor-pointer hover:bg-amber-400 transition-colors shadow-sm"
           >
-            Reload Tab Now
+            Recarregar aba agora
           </button>
         </div>
       )}
@@ -617,19 +617,19 @@ export default function BatchScanPanel() {
           <div className="py-12 flex flex-col items-center justify-center text-[var(--color-dust)] gap-2">
             <Loader size={20} className="animate-spin text-[var(--color-editorial)]" />
             <span className="text-[11px]">
-              {activeSource === 'page' ? 'Detecting comic panels on page…' : 'Loading saved history…'}
+              {activeSource === 'page' ? 'Detectando quadros na página…' : 'Carregando histórico salvo…'}
             </span>
           </div>
         ) : currentViewItems.length === 0 ? (
           <div className="py-8 px-4 flex flex-col items-center justify-center text-center text-[var(--color-dust)]">
             <BookOpen size={28} className="mb-2 opacity-50" />
             <p className="font-semibold text-xs text-[var(--color-ink)]">
-              {activeSource === 'page' ? 'No Comic Panels Detected' : 'No Saved History Yet'}
+              {activeSource === 'page' ? 'Nenhum quadro detectado' : 'Ainda não há histórico salvo'}
             </p>
             <p className="text-[11px] mt-1 leading-relaxed opacity-80">
               {activeSource === 'page'
-                ? 'Try running Fast Scan to scroll through virtualized readers, or check page elements.'
-                : 'Translated images will automatically save here so you can re-open or export them later.'}
+                ? 'Use o escaneamento rápido para percorrer leitores virtualizados ou verifique os elementos da página.'
+                : 'As imagens traduzidas serão salvas aqui para que você possa abri-las ou exportá-las depois.'}
             </p>
           </div>
         ) : (
@@ -661,7 +661,7 @@ export default function BatchScanPanel() {
                           : 'bg-slate-900/80 text-slate-300 border border-slate-500/30'
                       }`}
                     >
-                      {item.source}
+                      {item.source === 'history' ? 'histórico' : 'página'}
                     </span>
                   </div>
 
@@ -678,7 +678,7 @@ export default function BatchScanPanel() {
                   <div className="w-full h-32 bg-black/20 flex items-center justify-center overflow-hidden relative">
                     <img
                       src={item.thumbnailUrl}
-                      alt={`Page ${idx + 1}`}
+                      alt={`Página ${idx + 1}`}
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover"
@@ -692,20 +692,22 @@ export default function BatchScanPanel() {
                       {item.isTranslated ? (
                         <>
                           <Check size={10} className="text-emerald-400" />
-                          <span className="text-emerald-300 font-semibold">Done</span>
+                          <span className="text-emerald-300 font-semibold">Concluído</span>
                         </>
                       ) : isBusy ? (
                         <>
                           <Loader size={10} className="animate-spin text-amber-400" />
-                          <span className="text-amber-300 capitalize">{jobStatus}</span>
+                          <span className="text-amber-300">
+                            {jobStatus === 'queued' ? 'na fila' : jobStatus === 'downloading' ? 'baixando' : 'processando'}
+                          </span>
                         </>
                       ) : item.status === 'error' ? (
                         <>
                           <AlertCircle size={10} className="text-rose-400" />
-                          <span className="text-rose-300 font-semibold">Retry</span>
+                          <span className="text-rose-300 font-semibold">Tentar novamente</span>
                         </>
                       ) : (
-                        <span className="opacity-75">Ready</span>
+                        <span className="opacity-75">Pronto</span>
                       )}
                     </div>
                   </div>
@@ -720,9 +722,9 @@ export default function BatchScanPanel() {
                         : '...'}
                     </span>
                     {item.isTranslated ? (
-                      <span className="text-emerald-500 font-bold">Translated</span>
+                      <span className="text-emerald-500 font-bold">Traduzida</span>
                     ) : item.status === 'error' ? (
-                      <span className="text-rose-400 font-bold">Failed</span>
+                      <span className="text-rose-400 font-bold">Falhou</span>
                     ) : null}
                   </div>
                 </div>
@@ -747,14 +749,14 @@ export default function BatchScanPanel() {
           )}
           <span>
             {isQueueing
-              ? 'Queueing Pages…'
+              ? 'Adicionando páginas à fila…'
               : selectedList.length === 0
-              ? 'Select Pages to Translate'
+              ? 'Selecione páginas para traduzir'
               : pendingToTranslate.length > 0
               ? skippedCount > 0
-                ? `Translate ${pendingToTranslate.length} Pages (${skippedCount} already done)`
-                : `Translate ${pendingToTranslate.length} Selected Pages`
-              : `All ${selectedList.length} Selected Pages Done`}
+                ? `Traduzir ${pendingToTranslate.length} páginas (${skippedCount} já concluídas)`
+                : `Traduzir ${pendingToTranslate.length} páginas selecionadas`
+              : `Todas as ${selectedList.length} páginas selecionadas foram concluídas`}
           </span>
         </button>
 
@@ -765,15 +767,15 @@ export default function BatchScanPanel() {
             className="py-1.5 px-2 bg-[var(--color-vellum)] text-[var(--color-ink)] border border-[var(--color-dust)] border-opacity-30 font-semibold rounded hover:border-[var(--color-editorial)] hover:text-[var(--color-editorial)] transition-colors flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-sm truncate"
             title={
               selectedList.length > 0
-                ? `Open reader displaying ${selectedList.length} selected pages`
-                : `Open reader displaying all ${currentViewItems.length} pages`
+                ? `Abrir leitor com ${selectedList.length} páginas selecionadas`
+                : `Abrir leitor com todas as ${currentViewItems.length} páginas`
             }
           >
             <BookOpen size={13} className="text-[var(--color-editorial)] shrink-0" />
             <span className="truncate">
               {selectedList.length > 0
-                ? `Reader (${selectedList.length})`
-                : `Open Reader (${currentViewItems.length})`}
+                ? `Leitor (${selectedList.length})`
+                : `Abrir leitor (${currentViewItems.length})`}
             </span>
           </button>
 
@@ -783,8 +785,8 @@ export default function BatchScanPanel() {
             className="py-1.5 px-2 bg-[var(--color-vellum)] text-[var(--color-ink)] border border-[var(--color-dust)] border-opacity-30 font-semibold rounded hover:border-[var(--color-editorial)] hover:text-[var(--color-editorial)] transition-colors flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed truncate"
             title={
               readyToExportCount === 0
-                ? 'No translated pages ready to export yet'
-                : `Download ${readyToExportCount} translated page${readyToExportCount === 1 ? '' : 's'} as ZIP`
+                ? 'Ainda não há páginas traduzidas prontas para exportar'
+                : `Baixar ${readyToExportCount} ${readyToExportCount === 1 ? 'página traduzida' : 'páginas traduzidas'} em ZIP`
             }
           >
             {isExportingZip ? (
@@ -794,8 +796,8 @@ export default function BatchScanPanel() {
             )}
             <span className="truncate">
               {isExportingZip
-                ? 'Exporting…'
-                : `Export ZIP (${readyToExportCount})`}
+                ? 'Exportando…'
+                : `Exportar ZIP (${readyToExportCount})`}
             </span>
           </button>
         </div>

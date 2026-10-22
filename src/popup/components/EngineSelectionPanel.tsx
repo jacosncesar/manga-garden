@@ -19,24 +19,24 @@ export interface BubbleModeOption {
 export const BUBBLE_MODE_OPTIONS: BubbleModeOption[] = [
   {
     id: 'off',
-    name: 'Disabled',
-    tooltip: 'Tightly hugs source text lines without bubble expansion (Cotrans MST).',
+    name: 'Desativado',
+    tooltip: 'Ajusta-se às linhas de texto originais sem expandir a área do balão.',
   },
   {
     id: 'heuristic',
-    name: 'Heuristic',
-    tooltip: 'Expands into white bubble whitespace with tail severing. Fast (<1ms), zero download.',
+    name: 'Heurístico',
+    tooltip: 'Expande para o espaço em branco do balão e remove a cauda. Rápido (<1 ms), sem downloads.',
   },
   {
     id: 'neural',
-    name: 'YOLO Box',
-    tooltip: 'Fast AI bounding box detector for speech bubble bounds (~11 MB).',
+    name: 'Caixa YOLO',
+    tooltip: 'Detector de IA rápido que identifica os limites dos balões (~11 MB).',
     isModel: true,
   },
   {
     id: 'neural-mask',
-    name: 'YOLO Smart Mask',
-    tooltip: 'Neural segmentation mask with morphological tail severing on AI contours (~11 MB).',
+    name: 'Máscara inteligente YOLO',
+    tooltip: 'Máscara de segmentação neural que remove caudas dos contornos identificados pela IA (~11 MB).',
     isModel: true,
   },
 ];
@@ -73,6 +73,19 @@ export function orderChangedCatalog(engines: readonly Engine[], defaultId: strin
     Number(Boolean(right.isDownloaded)) - Number(Boolean(left.isDownloaded)) ||
     left.name.localeCompare(right.name)
   );
+}
+
+/**
+ * Converts known model-download progress states into Brazilian Portuguese for display.
+ *
+ * @param status - Internal download status received from the background process.
+ * @returns A localized status label, preserving unknown states for diagnostics.
+ */
+function formatDownloadStatus(status: string): string {
+  if (status === 'Queued') return 'Na fila';
+  if (status === 'Downloading' || status === 'Downloading...') return 'Baixando…';
+  if (status.startsWith('Failed:')) return `Falha:${status.slice('Failed:'.length)}`;
+  return status;
 }
 
 export default function EngineSelectionPanel({ state, updateState }: EngineSelectionPanelProps) {
@@ -218,16 +231,16 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
   );
 
   const [ocrBaseEngines, setOcrBaseEngines] = useState<Engine[]>([
-    { id: 'v6-small', name: 'PaddleOCR v6 Small (Default)', type: 'local', isDownloaded: false },
-    { id: 'v6-medium', name: 'PaddleOCR v6 Medium', type: 'local', isDownloaded: false },
-    { id: 'v6-tiny', name: 'PaddleOCR v6 Tiny', type: 'local', isDownloaded: false },
-    { id: 'v5-mobile', name: 'PaddleOCR v5 Mobile', type: 'local', isDownloaded: false },
-    { id: 'v5-server', name: 'PaddleOCR v5 Server', type: 'local', isDownloaded: false },
-    { id: 'v5-en-mobile', name: 'PaddleOCR v5 English Mobile', type: 'local', isDownloaded: false },
-    { id: 'v4-mobile', name: 'PaddleOCR v4 Mobile', type: 'local', isDownloaded: false },
-    { id: 'v4-server', name: 'PaddleOCR v4 Server', type: 'local', isDownloaded: false },
-    { id: 'v3-mobile', name: 'PaddleOCR v3 Mobile', type: 'local', isDownloaded: false },
-    { id: 'v3-japanese-mobile', name: 'PaddleOCR v3 Japanese Mobile', type: 'local', isDownloaded: false },
+    { id: 'v6-small', name: 'PaddleOCR v6 Pequeno (padrão)', type: 'local', isDownloaded: false },
+    { id: 'v6-medium', name: 'PaddleOCR v6 Médio', type: 'local', isDownloaded: false },
+    { id: 'v6-tiny', name: 'PaddleOCR v6 Minúsculo', type: 'local', isDownloaded: false },
+    { id: 'v5-mobile', name: 'PaddleOCR v5 Móvel', type: 'local', isDownloaded: false },
+    { id: 'v5-server', name: 'PaddleOCR v5 Servidor', type: 'local', isDownloaded: false },
+    { id: 'v5-en-mobile', name: 'PaddleOCR v5 Móvel em inglês', type: 'local', isDownloaded: false },
+    { id: 'v4-mobile', name: 'PaddleOCR v4 Móvel', type: 'local', isDownloaded: false },
+    { id: 'v4-server', name: 'PaddleOCR v4 Servidor', type: 'local', isDownloaded: false },
+    { id: 'v3-mobile', name: 'PaddleOCR v3 Móvel', type: 'local', isDownloaded: false },
+    { id: 'v3-japanese-mobile', name: 'PaddleOCR v3 Móvel em japonês', type: 'local', isDownloaded: false },
   ]);
 
   const [baseEngines, setBaseEngines] = useState<Engine[]>([]);
@@ -353,7 +366,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
   const activeEngine = allEngines.find((engine) => engine.id === state.activeEngineId && !(engine.type === 'local' && !engine.isDownloaded))
     || allEngines.find((engine) => engine.id === 'gg-translate')
     || allEngines[0]
-    || { name: 'Loading...', id: '' };
+    || { name: 'Carregando…', id: '' };
   const activeRenderFontPresetId = normalizeRenderFontPresetId(state.renderFontPresetId);
   const activeRenderFontPreset = RENDER_FONT_PRESETS.find((preset) => preset.id === activeRenderFontPresetId)
     ?? RENDER_FONT_PRESETS[0];
@@ -363,13 +376,13 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
       {/* Translation Engine Selector */}
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-1.5 mb-1">
-          <h2 className="text-sm font-medium">Translation Engine</h2>
+          <h2 className="text-sm font-medium">Mecanismo de tradução</h2>
           <HelpTooltip
             size="md"
             content={
               <>
-                <span className="font-semibold text-[var(--color-paper)]">[CPU] Local</span> models run on your processor.{' '}
-                <span className="font-semibold text-[var(--color-paper)]">[WEBGPU] Local</span> models use your graphics card for faster speeds.
+                <span className="font-semibold text-[var(--color-paper)]">[CPU] Local</span> os modelos são executados no processador.{' '}
+                <span className="font-semibold text-[var(--color-paper)]">[WEBGPU] Local</span> os modelos usam a placa de vídeo para maior velocidade.
               </>
             }
           />
@@ -393,7 +406,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
               <div className="mt-2 p-2 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md animate-in fade-in duration-200">
                 <div className="flex justify-between items-end mb-1.5">
                   <span className="text-[10px] font-medium text-[var(--color-dust)] uppercase tracking-wider truncate max-w-[80%]">
-                    {downloadingEngine.name}: {dl.status}
+                    {downloadingEngine.name}: {formatDownloadStatus(dl.status)}
                   </span>
                   <span className="text-xs font-bold text-[var(--color-ink)]">
                     {Math.round(dl.progress * 100)}%
@@ -418,7 +431,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                       <Search size={14} className="absolute left-2 top-1/2 -translate-y-1/2 text-[var(--color-dust)]" />
                       <input 
                         type="text" 
-                        placeholder="Search models..." 
+                        placeholder="Buscar modelos..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full pl-8 pr-2 py-1.5 text-sm bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded focus:outline-none focus:border-[var(--color-ink)] transition-colors"
@@ -460,11 +473,11 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                               <span className="truncate pr-2 text-sm">{engine.name}</span>
                               {isAuthRequired ? (
                                 <span className="text-[10px] font-medium tracking-wide uppercase text-[var(--color-editorial)]">
-                                  [Sign In Required]
+                                  [Login necessário]
                                 </span>
                               ) : engine.hardware ? (
                                 <span className={`text-[10px] font-bold uppercase tracking-wider ${isGpuDisabledForModel ? 'text-amber-500/80' : ''}`}>
-                                  [{engine.hardware}{isGpuDisabledForModel ? ' · GPU OFF' : ''}] {engine.type === 'local' ? 'Local' : ''}
+                                  [{engine.hardware}{isGpuDisabledForModel ? ' · GPU DESATIVADA' : ''}] {engine.type === 'local' ? 'Local' : ''}
                                 </span>
                               ) : null}
                             </div>
@@ -483,8 +496,8 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                               disabled={pendingDownloadIds.has(engine.id) || downloads[engine.id]?.status === 'Queued'}
                               onClick={() => void requestDownload(engine.id, 'translation')}
                               className="p-2 rounded hover:bg-[var(--color-vellum)] transition-colors cursor-pointer text-[var(--color-ink)] disabled:cursor-not-allowed disabled:opacity-50"
-                              title="Download model"
-                              aria-label={`Download ${engine.name}`}
+                              title="Baixar modelo"
+                              aria-label={`Baixar ${engine.name}`}
                             >
                               <Download size={14} />
                             </button>
@@ -502,7 +515,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                                 width={210}
                                 content={
                                   <>
-                                    Sign in with Google in <span className="font-semibold text-[var(--color-editorial)]">Settings</span> to use the free shared pool (100 free translations/day).
+                                    Entre com o Google em <span className="font-semibold text-[var(--color-editorial)]">Configurações</span> para usar o pool compartilhado gratuito (100 traduções por dia).
                                   </>
                                 }
                               />
@@ -512,7 +525,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                       );
                     }) : (
                       <div className="p-4 text-center text-sm text-[var(--color-dust)]">
-                        No models found
+                        Nenhum modelo encontrado
                       </div>
                     )}
                   </div>
@@ -523,7 +536,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                       className="w-full flex items-center gap-2 p-2 text-sm text-left hover:bg-[var(--color-paper)] rounded-sm cursor-pointer transition-colors"
                     >
                       <Plus size={14} className="text-[var(--color-editorial)]" />
-                      <span className="text-[var(--color-editorial)] font-medium">Add Custom API Key</span>
+                      <span className="text-[var(--color-editorial)] font-medium">Adicionar chave de API personalizada</span>
                     </button>
                   </div>
                 </>
@@ -547,10 +560,10 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
       {/* Image Cleaning Engine Selector */}
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-1.5 mb-1">
-          <h2 className="text-sm font-medium">Image Cleaning Engine</h2>
+          <h2 className="text-sm font-medium">Mecanismo de limpeza de imagem</h2>
           <HelpTooltip
             size="md"
-            content="Select inpainting engine for text removal. Higher tiers like LaMa & AOT-GAN provide seamless results."
+            content="Selecione o mecanismo de preenchimento para remover texto. Opções avançadas como LaMa e AOT-GAN oferecem resultados mais naturais."
           />
         </div>
 
@@ -562,7 +575,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
             <span className="font-medium truncate pr-2">
               {inpaintBaseEngines.find((engine) => engine.id === state.activeInpaintId && engine.isDownloaded)?.name
                 || inpaintBaseEngines.find((engine) => engine.id === 'simple')?.name
-                || 'Loading...'}
+                || 'Carregando…'}
             </span>
             <ChevronDown size={16} className={`text-[var(--color-dust)] transition-transform ${isOpenInpaint ? 'rotate-180' : ''}`} />
           </button>
@@ -576,7 +589,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
               <div className="mt-2 p-2 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md animate-in fade-in duration-200">
                 <div className="flex justify-between items-end mb-1.5">
                   <span className="text-[10px] font-medium text-[var(--color-dust)] uppercase tracking-wider truncate max-w-[80%]">
-                    {downloadingInpaint.name}: {dl.status}
+                    {downloadingInpaint.name}: {formatDownloadStatus(dl.status)}
                   </span>
                   <span className="text-xs font-bold text-[var(--color-ink)]">
                     {Math.round(dl.progress * 100)}%
@@ -631,7 +644,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                               void requestDownload(engine.id, 'inpaint');
                             }}
                             className="p-1 -mr-1 rounded hover:bg-[var(--color-vellum)] transition-colors cursor-pointer text-[var(--color-ink)] opacity-100"
-                            title="Download model"
+                            title="Baixar modelo"
                           >
                             <Download size={14} />
                           </div>
@@ -649,10 +662,10 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
       {/* OCR Engine Selector */}
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-1.5 mb-1">
-          <h2 className="text-sm font-medium">OCR Engine</h2>
+          <h2 className="text-sm font-medium">Mecanismo de OCR</h2>
           <HelpTooltip
             size="md"
-            content="Select PaddleOCR text detection and recognition model tier. v6-small is fast and lightweight. Higher tiers provide enhanced precision for specialized scripts."
+            content="Selecione o modelo PaddleOCR para detecção e reconhecimento de texto. O v6 pequeno é rápido e leve. Modelos avançados oferecem mais precisão para sistemas de escrita específicos."
           />
         </div>
 
@@ -664,7 +677,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
             <span className="font-medium truncate pr-2">
               {ocrBaseEngines.find((engine) => engine.id === (state.activeOcrId || 'v6-small') && engine.isDownloaded)?.name
                 || ocrBaseEngines.find((engine) => engine.id === 'v6-small')?.name
-                || 'Loading...'}
+                || 'Carregando…'}
             </span>
             <ChevronDown size={16} className={`text-[var(--color-dust)] transition-transform ${isOpenOcr ? 'rotate-180' : ''}`} />
           </button>
@@ -678,7 +691,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
               <div className="mt-2 p-2 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md animate-in fade-in duration-200">
                 <div className="flex justify-between items-end mb-1.5">
                   <span className="text-[10px] font-medium text-[var(--color-dust)] uppercase tracking-wider truncate max-w-[80%]">
-                    {downloadingOcr.name}: {dl.status}
+                    {downloadingOcr.name}: {formatDownloadStatus(dl.status)}
                   </span>
                   <span className="text-xs font-bold text-[var(--color-ink)]">
                     {Math.round(dl.progress * 100)}%
@@ -734,7 +747,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                               void requestDownload(engine.id, 'ocr');
                             }}
                             className="p-1 -mr-1 rounded hover:bg-[var(--color-vellum)] transition-colors cursor-pointer text-[var(--color-ink)] opacity-100"
-                            title="Download model"
+                            title="Baixar modelo"
                           >
                             <Download size={14} />
                           </div>
@@ -752,16 +765,16 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
       {/* Render Font Selector */}
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-1.5 mb-1">
-          <h2 className="text-sm font-medium">Render Font</h2>
+          <h2 className="text-sm font-medium">Fonte da tradução</h2>
           <HelpTooltip
             size="sm"
-            content="Typography used when rendering translated text back onto comic speech bubbles and artwork."
+            content="Estilo tipográfico usado para inserir o texto traduzido nos balões e nas imagens."
           />
         </div>
 
         <div className="relative flex flex-col">
           <button
-            aria-label="Render Font"
+            aria-label="Fonte da tradução"
             aria-expanded={isOpenRenderFont}
             onClick={() => setIsOpenRenderFont(!isOpenRenderFont)}
             className="w-full flex items-center justify-between p-3 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md hover:border-[var(--color-ink)] transition-colors cursor-pointer"
@@ -816,10 +829,10 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
               size={13}
               className={`transition-transform duration-200 text-[var(--color-dust)] ${isOpenFontOptions ? 'rotate-90' : ''}`}
             />
-            <span>Text Rendering Options</span>
+            <span>Opções de exibição do texto</span>
             {(state.renderFontBold || state.renderFontItalic || state.renderFontStrokeDisabled || (state.renderFontAlignment && state.renderFontAlignment !== 'auto') || (state.renderFontMinSize && state.renderFontMinSize !== 6)) && (
               <span className="text-[10px] font-semibold px-1.5 py-0.2 rounded bg-[var(--color-vellum)] text-[var(--color-editorial)] border border-[var(--color-editorial)]/40 ml-1">
-                Custom
+                Personalizado
               </span>
             )}
           </button>
@@ -830,8 +843,8 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
               <div className="flex items-center gap-1.5 flex-wrap">
                 <button
                   type="button"
-                  aria-label="Toggle Bold Font"
-                  title={state.renderFontBold ? 'Bold text enabled (Click to use regular)' : 'Bold text disabled (Click to enable bold)'}
+                  aria-label="Alternar negrito"
+                  title={state.renderFontBold ? 'Negrito ativado (clique para usar o estilo normal)' : 'Negrito desativado (clique para ativar)'}
                   onClick={() => updateState({ renderFontBold: !state.renderFontBold })}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer border ${
                     state.renderFontBold
@@ -840,13 +853,13 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                   }`}
                 >
                   <Bold size={13} className={state.renderFontBold ? 'stroke-[2.5]' : 'stroke-[2]'} />
-                  <span>Bold</span>
+                  <span>Negrito</span>
                 </button>
 
                 <button
                   type="button"
-                  aria-label="Toggle Italic Font"
-                  title={state.renderFontItalic ? 'Italic text enabled' : 'Italic text disabled'}
+                  aria-label="Alternar itálico"
+                  title={state.renderFontItalic ? 'Itálico ativado' : 'Itálico desativado'}
                   onClick={() => updateState({ renderFontItalic: !state.renderFontItalic })}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer border ${
                     state.renderFontItalic
@@ -855,13 +868,13 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                   }`}
                 >
                   <Italic size={13} className={state.renderFontItalic ? 'stroke-[2.5]' : 'stroke-[2]'} />
-                  <span>Italic</span>
+                  <span>Itálico</span>
                 </button>
 
                 <button
                   type="button"
-                  aria-label="Toggle Text Stroke"
-                  title={state.renderFontStrokeDisabled ? 'Outline stroke disabled' : 'Outline stroke enabled'}
+                  aria-label="Alternar contorno do texto"
+                  title={state.renderFontStrokeDisabled ? 'Contorno desativado' : 'Contorno ativado'}
                   onClick={() => updateState({ renderFontStrokeDisabled: !state.renderFontStrokeDisabled })}
                   className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer border ${
                     state.renderFontStrokeDisabled
@@ -869,13 +882,13 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                       : 'bg-transparent border-[var(--color-dust)] text-[var(--color-dust)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]'
                   }`}
                 >
-                  <span>Disable Stroke</span>
+                  <span>Desativar contorno</span>
                 </button>
               </div>
 
               {/* Row 2: Text Alignment (Auto | Left | Center | Right) */}
               <div className="flex items-center justify-between">
-                <span className="text-xs text-[var(--color-dust)] font-medium">Text Alignment</span>
+                <span className="text-xs text-[var(--color-dust)] font-medium">Alinhamento do texto</span>
                 <div className="flex items-center rounded-md border border-[var(--color-dust)] bg-[var(--color-paper)] p-0.5">
                   {(['auto', 'left', 'center', 'right'] as const).map((align) => {
                     const activeAlign = state.renderFontAlignment || 'auto';
@@ -900,7 +913,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
 
               {/* Row 3: Minimum Font Size */}
               <div className="flex items-center justify-between gap-3">
-                <span className="text-xs text-[var(--color-dust)] font-medium shrink-0">Min Font Size</span>
+                <span className="text-xs text-[var(--color-dust)] font-medium shrink-0">Tamanho mínimo da fonte</span>
                 <div className="flex items-center gap-2 flex-1 max-w-[170px]">
                   <input
                     type="range"
@@ -928,28 +941,28 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
         return (
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-1.5 mb-1">
-              <h2 className="text-sm font-medium">Layout & Bubble Fit</h2>
+              <h2 className="text-sm font-medium">Layout e ajuste aos balões</h2>
               <HelpTooltip
                 size="md"
-                content="Speech bubbles expand horizontal layout space and center translated text inside the balloon chamber, preventing tiny 6px fonts."
+                content="Os balões ampliam o espaço horizontal do layout e centralizam o texto traduzido dentro deles, evitando fontes minúsculas."
               />
             </div>
 
             <div className="relative flex flex-col">
               <button
-                aria-label="Layout and Bubble Fit"
+                aria-label="Layout e ajuste aos balões"
                 aria-expanded={isOpenBubbleMode}
                 onClick={() => setIsOpenBubbleMode(!isOpenBubbleMode)}
                 className="w-full flex items-center justify-between p-3 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md hover:border-[var(--color-ink)] transition-colors cursor-pointer"
               >
                 <span className="font-medium truncate pr-2">
                   {activeBubbleMode === 'neural-mask' && isNeuralDownloaded
-                    ? 'YOLO Smart Mask'
+                    ? 'Máscara inteligente YOLO'
                     : activeBubbleMode === 'neural' && isNeuralDownloaded
-                      ? 'YOLO Box'
+                      ? 'Caixa YOLO'
                       : activeBubbleMode === 'heuristic'
-                        ? 'Heuristic'
-                        : 'Disabled'}
+                        ? 'Heurístico'
+                        : 'Desativado'}
                 </span>
                 <ChevronDown size={16} className={`text-[var(--color-dust)] transition-transform ${isOpenBubbleMode ? 'rotate-180' : ''}`} />
               </button>
@@ -962,7 +975,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                   <div className="mt-2 p-2 bg-[var(--color-vellum)] border border-[var(--color-dust)] rounded-md animate-in fade-in duration-200">
                     <div className="flex justify-between items-end mb-1.5">
                       <span className="text-[10px] font-medium text-[var(--color-dust)] uppercase tracking-wider truncate max-w-[80%]">
-                        YOLO Bubble: {dl.status}
+                        Balão YOLO: {formatDownloadStatus(dl.status)}
                       </span>
                       <span className="text-xs font-bold text-[var(--color-ink)]">
                         {Math.round(dl.progress * 100)}%
@@ -1027,7 +1040,7 @@ export default function EngineSelectionPanel({ state, updateState }: EngineSelec
                                   void requestDownload('bubble-yolo', 'bubble');
                                 }}
                                 className="p-1 -mr-1 rounded hover:bg-[var(--color-vellum)] transition-colors cursor-pointer text-[var(--color-ink)] opacity-100"
-                                title="Download model"
+                                title="Baixar modelo"
                               >
                                 <Download size={14} />
                               </div>

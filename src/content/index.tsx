@@ -49,18 +49,18 @@ const TRANSLATE_CONTROL_SELECTOR = '[data-manga-garden-translate-control]';
 const IMAGE_DISPLAY_CHANGED_EVENT = 'manga-garden-image-display-changed';
 // Snappy feedback: 150ms delay avoids flickering on sub-100ms no-ops while catching all genuine model inits
 const MODEL_INITIALIZATION_LABEL_DELAY_MS = 150;
-const MODEL_INITIALIZATION_LABEL = 'Preparing AI model…';
+const MODEL_INITIALIZATION_LABEL = 'Preparando modelo de IA…';
 
 function formatModelInitializationLabel(stage?: string, modelName?: string): string {
-  if (stage === 'ocr') return `Preparing OCR${modelName ? ` (${modelName})` : ''}…`;
-  if (stage === 'inpaint') return `Preparing Inpainting${modelName ? ` (${modelName})` : ''}…`;
-  if (stage === 'translation') return `Preparing Translation${modelName ? ` (${modelName})` : ''}…`;
-  if (stage === 'bubble') return `Preparing Bubble Detector…`;
-  return 'Preparing AI model…';
+  if (stage === 'ocr') return `Preparando OCR${modelName ? ` (${modelName})` : ''}…`;
+  if (stage === 'inpaint') return `Preparando preenchimento${modelName ? ` (${modelName})` : ''}…`;
+  if (stage === 'translation') return `Preparando tradução${modelName ? ` (${modelName})` : ''}…`;
+  if (stage === 'bubble') return 'Preparando detector de balões…';
+  return 'Preparando modelo de IA…';
 }
 // How long the translate button keeps its visible failure state after a terminal error.
 const TRANSLATION_FAILURE_VISIBLE_MS = 3000;
-const TRANSLATION_FAILURE_LABEL = 'Translation failed. Click to retry.';
+const TRANSLATION_FAILURE_LABEL = 'Falha na tradução. Clique para tentar novamente.';
 
 // Standard lazy-load attributes commonly used by host websites and CMSs
 const LAZY_LOAD_ATTRIBUTES = [
@@ -349,7 +349,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message.type === 'EXPORT_CHAPTER_ZIP') {
     void chapterExporter.exportChapter(message.payload?.records).then(sendResponse).catch((error) => {
       console.error('[Chapter ZIP] Message failed:', error);
-      sendResponse({ ...chapterExporter.getStatus(), phase: 'error', busy: false, message: 'ZIP export failed. Nothing downloaded.' });
+      sendResponse({ ...chapterExporter.getStatus(), phase: 'error', busy: false, message: 'Falha ao exportar o ZIP. Nada foi baixado.' });
     });
     return true;
   }
@@ -1054,8 +1054,8 @@ function TranslateButton({
             : showInitializationLabel
             ? initializationText
             : isTranslated && !activeTranslating
-            ? 'Re-translate Image'
-            : 'Translate Image'
+            ? 'Retraduzir imagem'
+            : 'Traduzir imagem'
         }
         aria-describedby={showInitializationLabel && !hasFailed ? initializationLabelId : undefined}
       >
@@ -1098,8 +1098,8 @@ function TranslateButton({
           {hasFailed
             ? TRANSLATION_FAILURE_LABEL
             : isTranslated && !activeTranslating
-            ? 'Re-translate Image'
-            : 'Translate Image'}
+            ? 'Retraduzir imagem'
+            : 'Traduzir imagem'}
         </div>
       )}
 
@@ -1134,8 +1134,8 @@ function TranslateButton({
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.35)',
               transition: 'all 0.15s ease',
             }}
-            title={showOriginal ? 'Show Translated Image' : 'Show Original Image'}
-            aria-label={showOriginal ? 'Show Translated Image' : 'Show Original Image'}
+            title={showOriginal ? 'Mostrar imagem traduzida' : 'Mostrar imagem original'}
+            aria-label={showOriginal ? 'Mostrar imagem traduzida' : 'Mostrar imagem original'}
           >
             {showOriginal ? <EyeOff size={14} /> : <Eye size={14} />}
           </button>
@@ -1161,8 +1161,8 @@ function TranslateButton({
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.35)',
               transition: 'all 0.15s ease',
             }}
-            title="Download Translated Image"
-            aria-label="Download Translated Image"
+            title="Baixar imagem traduzida"
+            aria-label="Baixar imagem traduzida"
           >
             <Download size={14} />
           </button>
@@ -1188,8 +1188,8 @@ function TranslateButton({
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.35)',
               transition: 'all 0.15s ease',
             }}
-            title="Edit in Studio (New Tab)"
-            aria-label="Edit in Studio"
+            title="Editar no Studio (nova aba)"
+            aria-label="Editar no Studio"
           >
             <ExternalLink size={14} />
           </button>
@@ -1439,7 +1439,7 @@ function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggle
         onPointerDown={(event) => event.stopPropagation()}
       >
         {isEditable && (
-          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onTranslate(crop.id)} title="Translate area">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onTranslate(crop.id)} title="Traduzir área">
             <Languages size={18} />
           </button>
         )}
@@ -1448,34 +1448,34 @@ function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggle
             type="button"
             className={`manga-garden-crop-toolbar-btn ${crop.showOriginal ? 'manga-garden-crop-btn-active' : ''}`}
             onClick={() => onToggleOriginal(crop.id)}
-            title={crop.showOriginal ? 'View Translated' : 'View Original'}
+            title={crop.showOriginal ? 'Ver tradução' : 'Ver original'}
           >
             {crop.showOriginal ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         )}
         {crop.status === 'completed' && (
-          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onReset(crop.id)} title="Reset crop">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onReset(crop.id)} title="Redefinir recorte">
             <RotateCcw size={18} />
           </button>
         )}
         {crop.jobId && (
-          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={openInStudio} title="Open in Studio">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={openInStudio} title="Abrir no Studio">
             <ExternalLink size={18} />
           </button>
         )}
-        <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onRemove(crop.id)} title="Close">
+        <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onRemove(crop.id)} title="Fechar">
           <X size={18} />
         </button>
       </div>
 
       {displayUrl && (
-        <img src={displayUrl} alt="Cropped manga panel" className="manga-garden-crop-overlay-img" draggable={false} />
+        <img src={displayUrl} alt="Quadro de mangá recortado" className="manga-garden-crop-overlay-img" draggable={false} />
       )}
 
       {isTranslating && crop.originalDataUrl && (
         <div className="manga-garden-crop-loading-badge">
           <Languages size={16} className="manga-garden-anim-spin" />
-          <span>{initFeedback || (crop.status === 'capturing' ? 'Capturing...' : 'Translating...')}</span>
+          <span>{initFeedback || (crop.status === 'capturing' ? 'Capturando…' : 'Traduzindo…')}</span>
         </div>
       )}
 

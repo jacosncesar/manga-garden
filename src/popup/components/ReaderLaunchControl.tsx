@@ -52,10 +52,10 @@ export default function ReaderLaunchControl() {
       <button
         disabled={true}
         className="w-full py-2 bg-[var(--color-vellum)] text-[var(--color-dust)] border border-[var(--color-dust)] border-opacity-20 font-bold rounded flex items-center justify-center gap-2 text-sm opacity-60 cursor-not-allowed"
-        title="No translated pages on this tab yet. Translate images to view in distraction-free reader."
+        title="Ainda não há páginas traduzidas nesta aba. Traduza imagens para vê-las no leitor sem distrações."
       >
         <BookOpen size={16} className="opacity-50" />
-        <span>Open Chapter Reader</span>
+        <span>Abrir leitor de capítulos</span>
         <span className="font-mono text-xs opacity-60 font-normal">(0)</span>
       </button>
     );
@@ -74,10 +74,10 @@ export default function ReaderLaunchControl() {
     <button
       onClick={handleOpenReader}
       className="w-full py-2 bg-[var(--color-ink)] text-[var(--color-paper)] font-bold rounded hover:bg-[var(--color-editorial)] transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm shadow-md"
-      title="Open distraction-free fullscreen reader for this chapter"
+      title="Abrir leitor deste capítulo em tela cheia e sem distrações"
     >
       <BookOpen size={16} className="text-[var(--color-editorial)]" />
-      <span>Open Chapter Reader</span>
+      <span>Abrir leitor de capítulos</span>
       <span className="font-mono text-xs opacity-80 font-normal">({pageCount})</span>
     </button>
   );

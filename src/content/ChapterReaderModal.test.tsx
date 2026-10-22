@@ -83,7 +83,7 @@ describe('ChapterReaderModal UI & Controls', () => {
 
     expect(document.body.style.overflow).toBe('hidden');
     expect(container.textContent).toContain('Chapter 1');
-    expect(container.textContent).toContain('Page 1 / 2');
+    expect(container.textContent).toContain('Página 1 de 2');
 
     // Images rendered with translatedUrl by default
     const images = container.querySelectorAll('img');
@@ -127,7 +127,7 @@ describe('ChapterReaderModal UI & Controls', () => {
 
     // Prominent Translate Chapter button exists
     const translateBtn = Array.from(container.querySelectorAll('button')).find((b) =>
-      b.textContent?.includes('Translate Chapter')
+      b.textContent?.includes('Traduzir capítulo')
     );
     expect(translateBtn).toBeDefined();
 
@@ -194,7 +194,7 @@ describe('ChapterReaderModal UI & Controls', () => {
     });
 
     // Find view mode buttons
-    const singleBtn = Array.from(container.querySelectorAll('button')).find((b) => b.textContent?.includes('Single'));
+    const singleBtn = Array.from(container.querySelectorAll('button')).find((b) => b.textContent?.includes('Uma página'));
     expect(singleBtn).toBeDefined();
 
     await act(async () => {
@@ -234,7 +234,7 @@ describe('ChapterReaderModal UI & Controls', () => {
       );
     });
 
-    const exportBtn = container.querySelector('button[title*="Download Chapter ZIP"]') as HTMLButtonElement;
+    const exportBtn = container.querySelector('button[title*="Baixar ZIP do capítulo"]') as HTMLButtonElement;
     expect(exportBtn).not.toBeNull();
 
     await act(async () => {
