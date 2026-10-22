@@ -79,7 +79,7 @@ export default function GlossaryPanel({
             content={
               <>
                 Map source terms to preferred translations for WebLLM, Custom API, and Shared Pool.
-                LLMs may not always follow these preferences. Google Translate does not support glossary in Kites.
+                LLMs may not always follow these preferences. Google Translate does not support glossary in MangaLume 2.0.
                 <span className="block mt-1 text-[var(--color-dust)]">
                   When using Custom API or Shared Pool, glossary terms are included in translation prompts sent to the respective cloud provider. Do not add sensitive data.
                 </span>

@@ -78,7 +78,7 @@ export default function FallbackConfigPanel({ state, updateState, onClose }: Fal
       </div>
 
       <p className="text-xs text-[var(--color-dust)] mb-4">
-        If the primary engine fails (e.g. rate limit, WebGPU crash), Kites will automatically try the engines below in order.
+        If the primary engine fails (e.g. rate limit, WebGPU crash), MangaLume 2.0 will automatically try the engines below in order.
       </p>
 
       <div className="flex flex-col relative">

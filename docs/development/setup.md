@@ -1,108 +1,109 @@
-# Development Environment & Setup Guide 🛠️
+# Guia de configuração do ambiente de desenvolvimento 🛠️
 
-This guide walks you through setting up your local environment to develop, build, and debug **Kites**.
+Este guia explica como configurar o ambiente local para desenvolver, compilar e depurar o **MangaLume 2.0**.
 
 ---
 
-## 💻 Prerequisites
+## 💻 Pré-requisitos
 
-| Requirement | Recommended Version | Notes |
+| Requisito | Versão recomendada | Observações |
 | :--- | :--- | :--- |
-| **Node.js** | **`v22.14.0 LTS`** | Pinned in `.nvmrc`. Node 20.19+ or 22.12+ is required by Vite 8. |
-| **npm** | `v10.x` or later | Bundled with Node.js. |
-| **Chromium Browser** | Latest Google Chrome / Brave / Edge | Must support Manifest V3 and WebGPU. |
-| **Operating System** | macOS (Apple Silicon/Intel), Linux, Windows 11 | GPU hardware acceleration required for WebGPU tests. |
+| **Node.js** | **`v22.14.0 LTS`** | Versão definida em `.nvmrc`. O Vite 8 exige Node 20.19+ ou 22.12+. |
+| **npm** | `v10.x` ou posterior | Incluído no Node.js. |
+| **Navegador Chromium** | Versão mais recente do Google Chrome, Brave ou Edge | Deve oferecer suporte ao Manifest V3 e WebGPU. |
+| **Sistema operacional** | macOS (Apple Silicon/Intel), Linux ou Windows 11 | Os testes WebGPU exigem aceleração de hardware pela GPU. |
 
 ---
 
-## 🚀 Step-by-Step Installation
+## 🚀 Instalação passo a passo
 
-### 1. Clone the Repository
+### 1. Clone o repositório
+Use a URL do seu próprio repositório:
 ```bash
-git clone https://github.com/Unheat/Kites.git
-cd Kites
+git clone https://github.com/SEU-USUARIO/MangaLume-2.0.git
+cd MangaLume-2.0
 ```
 
-### 2. Node.js Version Check
-If you use `nvm` (Node Version Manager):
+### 2. Verifique a versão do Node.js
+Se você usa `nvm` (Node Version Manager):
 ```bash
 nvm use
 ```
-Or verify manually:
+Ou verifique manualmente:
 ```bash
-node -v  # Should output v22.14.0 or compatible
+node -v  # Deve exibir v22.14.0 ou uma versão compatível
 ```
 
-### 3. Install Dependencies
-Always use `npm ci` to guarantee identical dependency trees from `package-lock.json`:
+### 3. Instale as dependências
+Use `npm ci` para instalar as versões registradas em `package-lock.json`:
 ```bash
 npm ci
 ```
 
-### 4. Build Extension Artifacts
-Building the extension runs the WASM copy step, TypeScript type-check, and Vite/Rolldown compilation:
+### 4. Compile os arquivos da extensão
+A compilação copia os arquivos WASM, verifica os tipos TypeScript e executa a compilação com Vite/Rolldown:
 ```bash
 npm run build
 ```
-The compiled, ready-to-load extension will be located in the `dist/` directory.
+A extensão compilada, pronta para carregar, ficará na pasta `dist/`.
 
 ---
 
-## 🔌 Loading the Extension into Chrome
+## 🔌 Carregue a extensão no Chrome
 
-1. Open your Chromium browser and go to `chrome://extensions/`.
-2. Toggle on **Developer mode** in the top-right corner.
-3. Click the **Load unpacked** button.
-4. Select the `dist/` directory inside your cloned `Kites` project folder.
-5. You should now see **Kites: Local-First Manga Translator** in your extension list!
-6. Click the extension puzzle piece in the toolbar and pin **Kites**.
-
----
-
-## ⚡ Enabling WebGPU Hardware Acceleration
-
-To run local ONNX Runtime Web and WebLLM models on your GPU:
-
-1. Open `chrome://flags/` in your browser.
-2. Search for:
-   - **`#enable-unsafe-webgpu`** $\to$ Set to **Enabled**.
-   - **`#enable-webgpu-developer-features`** $\to$ Set to **Enabled** (useful for shader debugging).
-3. Relaunch your browser.
-4. Verify WebGPU status by navigating to `chrome://gpu/` and confirming **WebGPU: Hardware accelerated**.
+1. Abra o navegador Chromium e acesse `chrome://extensions/`.
+2. Ative o **Modo do desenvolvedor** no canto superior direito.
+3. Clique em **Carregar sem compactação**.
+4. Selecione a pasta `dist/` dentro da pasta do projeto MangaLume 2.0.
+5. A extensão **MangaLume 2.0** deverá aparecer na lista.
+6. Clique no ícone de extensões da barra do navegador e fixe o MangaLume 2.0.
 
 ---
 
-## 🔄 Daily Development Workflow
+## ⚡ Ative a aceleração de hardware WebGPU
 
-### Starting the Vite Dev Server
+Para executar modelos locais do ONNX Runtime Web e WebLLM na GPU:
+
+1. Abra `chrome://flags/` no navegador.
+2. Pesquise estas opções:
+   - **`#enable-unsafe-webgpu`** $\to$ selecione **Enabled**.
+   - **`#enable-webgpu-developer-features`** $\to$ selecione **Enabled** (útil para depurar shaders).
+3. Reinicie o navegador.
+4. Acesse `chrome://gpu/` e confirme que o WebGPU aparece como acelerado por hardware.
+
+---
+
+## 🔄 Fluxo diário de desenvolvimento
+
+### Inicie o servidor de desenvolvimento do Vite
 ```bash
 npm run dev
 ```
-- Starts the Vite server at `http://localhost:5173/`.
-- Hot Module Replacement (HMR) will update UI files in `src/popup/` and `src/App.tsx`.
-- **Note on Extension Reloading:** Whenever you modify files in `src/background/` or `src/content/`, click the 🔄 **Refresh icon** on the Kites card in `chrome://extensions/` to reload the extension context in Chrome.
+- Inicia o servidor Vite em `http://localhost:5173/`.
+- O Hot Module Replacement (HMR) atualiza arquivos de interface em `src/popup/` e `src/App.tsx`.
+- **Sobre recarregar a extensão:** depois de alterar arquivos em `src/background/` ou `src/content/`, clique no ícone 🔄 **Atualizar** do MangaLume 2.0 em `chrome://extensions/` para recarregar o contexto da extensão no Chrome.
 
-### Running Quick Quality Checks
+### Execute verificações rápidas de qualidade
 ```bash
-# Check code syntax and rules with Oxlint
+# Verifique a sintaxe e as regras do código com Oxlint
 npm run lint
 
-# Run Vitest automated test suite
+# Execute os testes automatizados do Vitest
 npm test
 ```
 
 ---
 
-## ☁️ (Optional) Cloudflare Shared Pool Backend
+## ☁️ (Opcional) Backend do pool compartilhado da Cloudflare
 
-If you want to test or run the multi-provider community fallback pool:
+Para testar ou executar o pool comunitário de fallback com vários provedores:
 
 ```bash
 cd worker
 npm ci
 cp .dev.vars.example .dev.vars
 
-# Fill in your test provider API keys in .dev.vars
+# Preencha .dev.vars com as chaves de API de teste dos provedores
 npm run dev
 ```
-For production deployment notes, see [`worker/WAF_RULES.md`](../../worker/WAF_RULES.md).
+Para informações sobre implantação em produção, consulte [`worker/WAF_RULES.md`](../../worker/WAF_RULES.md).

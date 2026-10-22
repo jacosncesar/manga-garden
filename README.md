@@ -1,11 +1,11 @@
 <div align="center">
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
+[Português (Brasil)](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
-# 🪁 Kites
+# 🪁 MangaLume 2.0
 
-### Read Any Manga in Your Language. Directly in Your Browser.
-**Zero Python • Zero Servers • 100% Private In-Browser Extension AI Translation**
+### Leia mangás no seu idioma, direto no navegador.
+**Sem Python • Sem servidores próprios • Tradução com IA no navegador**
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Free_Install-4285F4.svg?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](LICENSE)
@@ -27,65 +27,65 @@
 
 <br/>
 
-[![Kites Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
+[![Banner do MangaLume 2.0](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
 </div>
 
 ---
 
-## 💡 Why Kites?
+## 💡 Por que o MangaLume 2.0?
 
-Traditional manga translators require installing complex Python scripts, gigabytes of CUDA packages, or uploading your private reading history to third-party cloud servers.
+Tradutores tradicionais de mangá exigem a instalação de scripts Python complexos e gigabytes de pacotes CUDA, ou o envio do seu histórico de leitura para servidores de terceiros.
 
-**Kites changes that.** It is a lightweight Chrome extension that runs state-of-the-art vision and language models **directly on your graphics card via WebGPU**.
+**O MangaLume 2.0 muda isso.** É uma extensão leve para Chrome que executa modelos modernos de visão e linguagem **diretamente na placa gráfica, usando WebGPU**.
 
-- ⚡ **Zero Setup:** Install with 1-click from the [Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb) and start reading immediately. No terminal, no Python, no dependencies.
-- 🔒 **100% Local & Private:** Optical character recognition (OCR) and background cleaning happen on your device. Your images never leave your browser.
-- 🎨 **Intelligent Background Repair:** AI inpainting erases foreign text cleanly while preserving linework, screentones, and textures.
-- ✍️ **Natural Typesetting:** Automatically measures speech balloons, balances line breaks, fits font sizes, and adapts font colors.
-- 🗨️ **Smart Speech Bubble Fit:** Advanced bubble detection (Heuristic & Neural YOLO) expands narrow CJK columns into roomy balloon chambers, eliminating tiny squeezed fonts.
-- 📜 **Full Webtoon Strip Support:** Seamlessly translates extreme long-strip webtoons ($>14,000\text{ px}$) with 1D in-memory canvas tiling at full native resolution.
-- 🛠️ **Built-in Studio:** Fix mistranslations, resize text balloons, or tweak typography on the fly.
+- ⚡ **Instalação simples:** instale a extensão e comece a ler. Para executar o projeto a partir do código-fonte, siga o guia de instalação abaixo.
+- 🔒 **Processamento local quando possível:** o reconhecimento de texto (OCR) e a limpeza do fundo são executados no dispositivo. A imagem não é enviada ao provedor de tradução; o texto reconhecido pode ser enviado ao serviço de tradução escolhido.
+- 🎨 **Restauração inteligente do fundo:** o preenchimento por IA remove o texto original preservando traços, retículas e texturas.
+- ✍️ **Composição natural:** mede balões, equilibra as quebras de linha, ajusta o tamanho da fonte e adapta suas cores.
+- 🗨️ **Ajuste inteligente de balões:** a detecção heurística e o YOLO neural ampliam áreas estreitas de leitura para evitar fontes excessivamente pequenas.
+- 📜 **Suporte a tiras longas de webtoon:** traduz tiras com mais de 14.000 px usando divisão em blocos na memória, sem reduzir a resolução original.
+- 🛠️ **Estúdio integrado:** corrija traduções, redimensione balões e ajuste a tipografia.
 
 ---
 
-## 🖼️ See It in Action
+## 🖼️ Veja em ação
 
-### Japanese → English
-> *Story: 佐藤さんは知っていた by [@09ra_19ra](https://x.com/09ra_19ra)*
+### Japonês → inglês
+> *História: 佐藤さんは知っていた, de [@09ra_19ra](https://x.com/09ra_19ra)*
 
 <div align="center">
 <table>
   <tr>
-    <th width="50%" align="center">Original Japanese</th>
-    <th width="50%" align="center">Kites Translated</th>
+    <th width="50%" align="center">Original em japonês</th>
+    <th width="50%" align="center">Traduzido pelo MangaLume 2.0</th>
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/input/demo2.jpeg" alt="Original Japanese Manga" width="100%" />
+      <img src="./README_images/input/demo2.jpeg" alt="Mangá original em japonês" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo2_result.png" alt="Kites English Translation" width="100%" />
+      <img src="./README_images/result/demo2_result.png" alt="Tradução para inglês pelo MangaLume 2.0" width="100%" />
     </td>
   </tr>
 </table>
 </div>
 
-### Japanese → Vietnamese
-> *Source: [Pixiv Artwork #145272482](https://www.pixiv.net/en/artworks/145272482)*
+### Japonês → vietnamita
+> *Fonte: [ilustração no Pixiv #145272482](https://www.pixiv.net/en/artworks/145272482)*
 
 <div align="center">
 <table>
   <tr>
-    <th width="50%" align="center">Original Japanese</th>
-    <th width="50%" align="center">Kites Translated</th>
+    <th width="50%" align="center">Original em japonês</th>
+    <th width="50%" align="center">Traduzido pelo MangaLume 2.0</th>
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/input/demo7.jpg" alt="Original Japanese Manga" width="100%" />
+      <img src="./README_images/input/demo7.jpg" alt="Mangá original em japonês" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo7_result.png" alt="Kites Vietnamese Translation" width="100%" />
+      <img src="./README_images/result/demo7_result.png" alt="Tradução para vietnamita pelo MangaLume 2.0" width="100%" />
     </td>
   </tr>
 </table>
@@ -93,97 +93,99 @@ Traditional manga translators require installing complex Python scripts, gigabyt
 
 ---
 
-## 🖱️ Instant In-Place Translation
+## 🖱️ Tradução instantânea na página
 
-Hover over any comic panel on Twitter/X, Pixiv, or manga sites. An unobtrusive floating badge appears using CSS Anchor Positioning—click it to translate dialogue directly inside the artwork with zero copy-pasting.
+Passe o cursor sobre qualquer imagem de quadrinho no Twitter/X, Pixiv ou em sites de mangá. Um botão discreto aparece próximo à imagem; clique nele para traduzir o diálogo diretamente na página, sem copiar e colar.
 
 <div align="center">
-  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Kites In-Page Hover Translation Button" width="620px" />
+  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Botão de tradução ao passar o cursor sobre a imagem" width="620px" />
 </div>
 
-- 🖱️ **Hover:** Translate instantly by hovering over any comic panel.
-- 📌 **Persistent:** Keep translate badges visible on all comic images.
-- 🚀 **Auto-Translate:** Automatically translates new panels as you scroll down the page.
-- ✂️ **Screen Crop:** Translate protected canvas elements, WebGL games, or custom crops via right-click or `Ctrl/Alt + Shift + X`.
-- ⚡ **Reading Hotkeys:** Press `F` to instantly peek at the original raw image, `Ctrl/Alt + Shift + Z` to translate the hovered panel, and `Ctrl/Alt + Shift + M` to open the chapter reader.
-- 🎯 **Right Click:** Translate any image on the web via the browser context menu.
+- 🖱️ **Passar o cursor:** traduza uma imagem instantaneamente.
+- 📌 **Botões persistentes:** mantenha os botões de tradução visíveis nas imagens.
+- 🚀 **Tradução automática:** traduza novas imagens enquanto percorre a página.
+- ✂️ **Recorte da tela:** traduza elementos canvas protegidos, jogos WebGL ou áreas selecionadas com o menu do botão direito ou `Ctrl/Alt + Shift + X`.
+- ⚡ **Atalhos de leitura:** pressione `F` para ver a imagem original, `Ctrl/Alt + Shift + Z` para traduzir a imagem sob o cursor e `Ctrl/Alt + Shift + M` para abrir o leitor de capítulos.
+- 🎯 **Botão direito:** traduza imagens da Web pelo menu de contexto do navegador.
 
 ---
 
-## 📖 Chapter Reader & Fast Scan
+## 📖 Leitor de capítulos e varredura rápida
 
-Read entire manga or webtoon chapters in one distraction-free view with automatic batch detection, continuous vertical webtoon mode, multi-page translation, and offline ZIP export:
+Leia capítulos inteiros de mangá ou webtoon em uma visualização sem distrações, com detecção automática de páginas, modo vertical contínuo, tradução em lote e exportação ZIP para leitura offline:
 
-[![Kites Chapter Reader](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
+[![Leitor de capítulos do MangaLume 2.0](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
 
-- **Fast Scan:** Automatically auto-scrolls and queues all lazy-loaded manga panels across chapter pages.
-- **Flexible Reader Modes:** Seamlessly switch between Webtoon continuous vertical strips, Single page, and Double spread layouts.
-- **Batch Chapter Translation:** Translate the entire chapter in one click with progress tracking and offline preservation.
-- **1-Click Chapter ZIP Export:** Package all translated pages into a clean, numbered ZIP archive for offline reading and archiving with zero server uploads.
-
----
-
-## 🛠️ Built-in Kites Studio
-
-Need to polish a scanlation or adjust phrasing? Open the full-screen **Kites Studio** straight from the extension.
-
-[![Kites Studio](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
-
-- **Direct Inline Editing:** Double-click any speech balloon to edit dialogue directly in place with subpixel vertical centering and live typesetting reflow.
-- **Interactive Canvas:** Drag and resize speech bubbles with 8-point handles.
-- **Localized AI Inpaint Brush:** Erase artwork defects, speech bubbles, or untranslated SFX with brush stroke precision.
-- **Side-by-Side Verification:** Compare original, cleaned, and typeset views with one click.
-- **Typography Control:** Live font sizing, colors, alignment, and line height adjustments.
-- **1-Click Export:** Download clean, translated pages at original resolution.
+- **Varredura rápida:** percorre automaticamente a página e coloca na fila as imagens carregadas sob demanda.
+- **Modos flexíveis:** alterne entre tiras verticais contínuas, página única e página dupla.
+- **Tradução em lote:** traduza o capítulo inteiro com um clique, acompanhando o progresso.
+- **Exportação ZIP:** reúna as páginas traduzidas em um arquivo numerado para leitura offline.
 
 ---
 
-## 🎛️ Extension Controls & Presets
+## 🛠️ Estúdio integrado do MangaLume 2.0
 
-Customize target languages, neural OCR models, and inpainting algorithms from the clean popup:
+Quer revisar a tradução ou ajustar o texto? Abra o **Estúdio MangaLume 2.0** em tela cheia pela extensão.
+
+[![Estúdio MangaLume 2.0](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
+
+- **Edição direta:** clique duas vezes em um balão para editar o diálogo no próprio lugar, com ajuste tipográfico em tempo real.
+- **Tela interativa:** arraste e redimensione balões usando alças de oito pontos.
+- **Pincel de preenchimento por IA:** remova imperfeições, balões ou efeitos sonoros não traduzidos com pinceladas precisas.
+- **Comparação lado a lado:** compare as versões original, limpa e diagramada.
+- **Controle tipográfico:** ajuste fonte, cores, alinhamento e espaçamento entre linhas.
+- **Exportação:** baixe páginas traduzidas e limpas na resolução original.
+
+---
+
+## 🎛️ Controles e predefinições da extensão
+
+Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchimento pelo painel da extensão:
 
 <div align="center">
 <table>
   <tr>
-    <th width="33%" align="center">Quick Control Popup</th>
-    <th width="33%" align="center">Chapter Reader &amp; Scanner</th>
-    <th width="34%" align="center">Customizable Engine Settings</th>
+    <th width="33%" align="center">Painel de controle</th>
+    <th width="33%" align="center">Leitor e scanner de capítulos</th>
+    <th width="34%" align="center">Configurações dos mecanismos</th>
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/UI-feature/main-panel.jpg" alt="Kites Main Popup" width="95%" />
+      <img src="./README_images/UI-feature/main-panel.jpg" alt="Painel principal do MangaLume 2.0" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Kites Chapter Reader and Scanner Panel" width="95%" />
+      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Painel do leitor e scanner de capítulos" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Kites Settings Panel" width="95%" />
+      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Painel de configurações" width="95%" />
     </td>
   </tr>
 </table>
 </div>
 
-- **Custom Glossary:** Define character names, honorifics, and specialized terminology to guide local and cloud LLM outputs.
-- **Site Domain Rules:** Enable, disable, or assign custom element selectors per domain.
+- **Glossário personalizado:** defina nomes de personagens, honoríficos e termos específicos para orientar os modelos locais e na nuvem.
+- **Regras por site:** ative, desative ou configure seletores de elementos para cada domínio.
 
 ---
 
-## 🧠 Powered by Modern AI
+## 🧠 IA moderna
 
-| Component | Options | Description |
+| Componente | Opções | Descrição |
 | :--- | :--- | :--- |
-| **Translation** | **WebLLM** *(Local WebGPU)*<br/>**Cloud Shared Pool** *(100/day free)*<br/>**Google Translate** *(Unlimited Free)*<br/>**Custom API** *(OpenAI, Claude, Gemini)* | Run unlimited local LLMs in-browser (Qwen 3.5, Qwen 3, Gemma 3, Llama 3.2), use unlimited Google Translate, access our shared cloud pool (100 free requests/day), or connect your own API key. |
-| **Inpainting** | **LaMa Manga** *(Neural)*<br/>**AOT-GAN** *(Fast Neural)*<br/>**Telea Diffusion** *(Instant)*<br/>**Simple Fill** | Erases text strictly inside character boundaries to preserve comic art. |
-| **OCR** | **PaddleOCR v3 – v6** | Industry-standard multilingual text detection and recognition with seamless 1D webtoon strip tiling. |
-| **Bubble Fit** | **Neural YOLO** *(WebGPU)*<br/>**Heuristic** *(Instant)*<br/>**Classic MST** | Expands dialogue into natural balloon whitespace with tail severing, eliminating tiny fonts. |
+| **Tradução** | **WebLLM** *(WebGPU local)*<br/>**Pool compartilhado na nuvem** *(100/dia)*<br/>**Google Translate**<br/>**API personalizada** *(OpenAI, Claude, Gemini)* | Execute modelos locais (Qwen 3.5, Qwen 3, Gemma 3, Llama 3.2), use o Google Translate, acesse o pool compartilhado ou conecte sua própria chave de API. |
+| **Preenchimento** | **LaMa Manga** *(neural)*<br/>**AOT-GAN** *(neural rápido)*<br/>**Difusão de Telea** *(instantânea)*<br/>**Preenchimento simples** | Remove texto dentro dos limites dos caracteres para preservar a arte. |
+| **OCR** | **PaddleOCR v3 – v6** | Detecção e reconhecimento multilíngue de texto, incluindo tiras longas de webtoon. |
+| **Ajuste de balões** | **YOLO neural** *(WebGPU)*<br/>**Heurístico** *(instantâneo)*<br/>**MST clássico** | Amplia o espaço de diálogo nos balões para evitar fontes muito pequenas. |
 
 ---
 
-## 🚀 Quick Start & Installation
+## 🚀 Início rápido e instalação
 
-### Option 1: Chrome Web Store (Recommended • 1-Click Install)
+> **Atenção:** os links da Chrome Web Store e de releases abaixo ainda apontam para a publicação do projeto original. Eles não instalam uma versão publicada do MangaLume 2.0.
 
-The official and easiest way to install Kites. Includes automatic background updates and Google Web Store security review:
+### Opção 1: versão publicada do projeto original
+
+A forma mais simples de instalar a extensão publicada. Inclui atualizações automáticas e a análise de segurança da Chrome Web Store:
 
 <div align="left">
   <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
@@ -191,67 +193,60 @@ The official and easiest way to install Kites. Includes automatic background upd
   </a>
 </div>
 
-1. Open **[Kites on the Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)**.
-2. Click **Add to Chrome** and confirm the prompt.
-3. Pin **Kites** to your browser toolbar for easy access.
-4. Browse any manga or comic page (on Twitter/X, Pixiv, MangaDex, etc.) and hover over a panel to translate!
+Esse link é mantido apenas para identificar a publicação original; não representa uma publicação do MangaLume 2.0.
 
 ---
 
-### Option 2: Pre-Built Zip (Manual Unpacked — Zero Terminal Required)
+### Opção 2: arquivo ZIP do projeto original
 
-For offline environments, manual testing, or loading specific releases:
+O link abaixo também pertence às releases do projeto original:
 
-1. Download **[`kites.zip`](https://github.com/Unheat/Kites/releases/latest)** from the latest GitHub Release.
-2. Unzip the downloaded `.zip` file into a folder on your computer.
-3. In Chrome, open `chrome://extensions/`.
-4. Enable **Developer mode** (toggle in the top-right corner).
-5. Click **Load unpacked** and select the unzipped folder.
-6. Pin **Kites** to your browser toolbar and start reading immediately!
+1. Baixe o arquivo ZIP na página de [releases do projeto original](https://github.com/Unheat/Kites/releases/latest).
+2. Extraia o `.zip` e carregue a pasta no Chrome por `chrome://extensions/` > **Modo do desenvolvedor** > **Carregar sem compactação**.
 
 ---
 
-### Option 3: Build from Source (Developers)
+### Opção 3: compilar a partir do código-fonte
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/Unheat/Kites.git
-cd Kites
+# 1. Clone seu próprio repositório (substitua os valores de exemplo)
+git clone https://github.com/SEU-USUARIO/MangaLume-2.0.git
+cd MangaLume-2.0
 
-# 2. Install dependencies & build extension
+# 2. Instale as dependências e compile a extensão
 npm ci
 npm run build
 ```
 
-1. In Chrome, open `chrome://extensions/`.
-2. Enable **Developer mode** (top-right toggle).
-3. Click **Load unpacked** and select the generated `dist/` folder.
-4. Pin **Kites** to your toolbar and start reading!
+1. No Chrome, abra `chrome://extensions/`.
+2. Ative o **Modo do desenvolvedor**.
+3. Clique em **Carregar sem compactação** e selecione a pasta `dist/` gerada.
+4. Fixe a extensão na barra do navegador.
 
 ---
 
-## 🤝 Contributing & Documentation
+## 🤝 Contribuição e documentação
 
-We warmly welcome contributions from developers, translators, and comic lovers!
+Contribuições de pessoas desenvolvedoras, tradutoras e leitoras são bem-vindas.
 
-- 📖 **[Documentation Hub](docs/README.md)** — Architectural diagrams, pipeline specifications, and runtime contracts.
-- 📐 **[Interactive Pipeline Map](docs/workflow.html)** — Standalone interactive visualization of Kites' detection, inpainting, and typesetting algorithm.
-- 🛠️ **[Contribution Guide](CONTRIBUTING.md)** — How to set up your dev environment, run tests, and submit PRs.
+- 📖 **[Central de documentação](docs/README.md)** — diagramas de arquitetura, especificações do pipeline e contratos de execução.
+- 📐 **[Mapa interativo do pipeline](docs/workflow.html)** — visualização interativa das etapas de detecção, preenchimento e composição.
+- 🛠️ **[Guia de contribuição](CONTRIBUTING.md)** — configuração do ambiente, execução de testes e envio de contribuições.
 
 ---
 
-## 📜 License & Acknowledgements
+## 📜 Licença e agradecimentos
 
-Kites is licensed under the **[GNU General Public License v3.0](LICENSE)**.
+Este projeto está licenciado sob a **[GNU General Public License v3.0](LICENSE)**.
 
-Heartfelt thanks to the incredible open-source projects that made Kites possible:
-- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** Groundbreaking spatial text grouping and typesetting algorithms.
-- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** Dynamic patch inpainting architectures and OCR noise filters.
-- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** High-speed neural text detection models.
-- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** Browser-native WebGPU runtime for large language models.
+Este projeto agradece às iniciativas de código aberto que tornaram seu desenvolvimento possível:
+- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** algoritmos de agrupamento espacial de texto e composição tipográfica.
+- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** arquiteturas de preenchimento por blocos dinâmicos e filtros de ruído de OCR.
+- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** modelos de alta velocidade para detecção de texto.
+- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** ambiente WebGPU nativo do navegador para modelos de linguagem grandes.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for manga and comic enthusiasts. Star ⭐ Kites if you love seamless reading!</sub>
+  <sub>Feito com ❤️ para quem gosta de mangás e quadrinhos.</sub>
 </div>

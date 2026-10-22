@@ -608,7 +608,7 @@ export const Studio: React.FC<StudioProps> = ({
             <button
               onClick={handleSaveImage}
               disabled={isSaving}
-              title="Save changes to Kites library"
+              title="Save changes to MangaLume 2.0 library"
               className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg bg-[#f4446d] hover:bg-[#e0355e] text-white text-xs font-semibold shadow-md shadow-[rgba(244,68,109,0.35)] transition disabled:opacity-50 cursor-pointer"
             >
               <Save className="w-3.5 h-3.5" /> {isSaving ? 'Saving...' : 'Save to DB'}
