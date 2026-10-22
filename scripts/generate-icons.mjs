@@ -3,18 +3,17 @@ import path from 'node:path';
 import { createCanvas, loadImage } from 'canvas';
 
 const ICONS_DIR = path.resolve('public/icons');
+const ICON_SOURCE_PATH = path.resolve('public/icon-source.png');
 if (!fs.existsSync(ICONS_DIR)) {
   fs.mkdirSync(ICONS_DIR, { recursive: true });
 }
 
+/**
+ * Generate Chrome extension PNG icons from the text-free master image.
+ * @returns {Promise<void>} Resolves after all configured icon sizes are written.
+ */
 async function main() {
-  const svgPath = path.resolve('public/icon.svg');
-  const svgContent = fs.readFileSync(svgPath, 'utf-8');
-
-  // Keep favicon in sync
-  fs.writeFileSync('public/favicon.svg', svgContent, 'utf-8');
-
-  const img = await loadImage(Buffer.from(svgContent));
+  const img = await loadImage(ICON_SOURCE_PATH);
 
   // Sizes required by Chrome Manifest V3:
   // 16: Extension toolbar & dropdown list

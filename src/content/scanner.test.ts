@@ -77,7 +77,7 @@ describe('scanner unit tests', () => {
 
     const img2 = document.createElement('img');
     img2.src = 'https://example.com/chapter/2.jpg';
-    img2.setAttribute('data-kites-translated', 'true');
+    img2.setAttribute('data-manga-garden-translated', 'true');
     vi.spyOn(img2, 'getBoundingClientRect').mockReturnValue({
       x: 0, y: 1200, top: 1200, left: 0, right: 800, bottom: 2400, width: 800, height: 1200, toJSON: () => ({}),
     } as DOMRect);

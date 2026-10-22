@@ -77,7 +77,7 @@ The model-selection button and download button are now siblings. Downloads use a
 
 ### Explicit Runtime Message Ownership
 
-Chrome documents that `runtime.sendMessage()` delivers a message to extension listeners and, when multiple `onMessage` listeners respond, only the first response affects the sender while the other listeners still run. Kites previously treated this broadcast as a point-to-point RPC:
+Chrome documents that `runtime.sendMessage()` delivers a message to extension listeners and, when multiple `onMessage` listeners respond, only the first response affects the sender while the other listeners still run. Manga Garden previously treated this broadcast as a point-to-point RPC:
 
 ```text
 popup broadcasts request
@@ -87,7 +87,7 @@ popup broadcasts request
   -> listeners compete to answer
 ```
 
-Kites now adds minimal routing metadata. Popup/dashboard control requests target background. Background is the single public request owner and retargets a new message to offscreen. Offscreen accepts requests only when `target === 'offscreen'`, `source === 'background'`, and `request === true`. These guards are required architecture, not decorative metadata.
+Manga Garden now adds minimal routing metadata. Popup/dashboard control requests target background. Background is the single public request owner and retargets a new message to offscreen. Offscreen accepts requests only when `target === 'offscreen'`, `source === 'background'`, and `request === true`. These guards are required architecture, not decorative metadata.
 
 ### Mandatory High-Performance Adapter Constraint
 
@@ -170,7 +170,7 @@ Provider logs now use the tracked value (`webgpu`, `wasm`, or `cpu`) rather than
 
 ### LaMa Patch Processing Kept Unchanged
 
-This incident did not justify changing the inpainting algorithm. Kites continues to:
+This incident did not justify changing the inpainting algorithm. Manga Garden continues to:
 
 1. Build a polygon mask.
 2. Cluster nearby text boxes.

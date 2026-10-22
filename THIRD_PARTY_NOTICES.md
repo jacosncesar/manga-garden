@@ -1,8 +1,8 @@
 # Third-Party Notices & Attribution
 
-This document contains licensing notices and copyright attributions for third-party open-source projects, algorithms, and assets incorporated into or ported by **Kites**.
+This document contains licensing notices and copyright attributions for third-party open-source projects, algorithms, and assets incorporated into or ported by **Manga Garden**.
 
-Kites is licensed under the **GNU General Public License v3.0 (or any later version)**. Under international copyright law (Berne Convention) and 17 U.S.C. § 101, translating or porting source code from one programming language to another (e.g. Python or Rust to TypeScript) constitutes a derivative work. Because Kites incorporates direct algorithmic ports from `manga-image-translator` (GPL-3.0), the combined distributable work is licensed under **GPL-3.0**.
+Manga Garden is licensed under the **GNU General Public License v3.0 (or any later version)**. Under international copyright law (Berne Convention) and 17 U.S.C. § 101, translating or porting source code from one programming language to another (e.g. Python or Rust to TypeScript) constitutes a derivative work. Because Manga Garden incorporates direct algorithmic ports from `manga-image-translator` (GPL-3.0), the combined distributable work is licensed under **GPL-3.0**.
 
 The permissions, disclaimers, and copyright notices of all upstream authors are gratefully acknowledged and preserved below in accordance with their respective licenses (MIT, Apache-2.0, and GNU GPL-3.0).
 
@@ -100,7 +100,7 @@ The permissions, disclaimers, and copyright notices of all upstream authors are 
     - Bubble bounding-box clustering with 24px padding and 64px multiple snapping to avoid WebGPU shader recompilation.
   - `src/content/index.tsx`:
     - CSP-safe same-origin Blob URL generation (`createSafeBlobUrlFromData`) ported from `extensions/xianscan-importer`.
-  - `src/App.tsx` (Kites Studio):
+  - `src/App.tsx` (Manga Garden Studio):
     - Multi-layer canvas editor, viewport navigation, and SVG bounding box controls modeled after XianScan Studio.
 
 ---

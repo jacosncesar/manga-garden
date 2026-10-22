@@ -1,5 +1,5 @@
 {
-  "name": "kites-translate-worker",
+  "name": "manga-garden-translate-worker",
   "version": "1.0.0",
   "description": "Zero-cost multi-provider translation backend with Cloudflare Durable Objects",
   "main": "src/index.ts",

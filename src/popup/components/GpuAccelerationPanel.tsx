@@ -121,12 +121,12 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
                   }
                 }}
                 disabled={state.webgpuSupported !== true}
-                className="kites-switch kites-switch-md"
+                className="manga-garden-switch manga-garden-switch-md"
                 data-state={state.webgpuMaster && state.webgpuSupported === true ? 'checked' : 'unchecked'}
                 data-disabled={state.webgpuSupported !== true ? 'true' : 'false'}
               >
                 <span className="sr-only">Toggle WebGPU Master</span>
-                <span className="kites-switch-thumb" />
+                <span className="manga-garden-switch-thumb" />
               </button>
             </div>
           </div>
@@ -145,10 +145,10 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
               </div>
               <button 
                 onClick={() => updateState({ webgpuOverrides: { ...state.webgpuOverrides, llm: !(state.webgpuOverrides?.llm !== false) }})}
-                className="kites-switch kites-switch-sm"
+                className="manga-garden-switch manga-garden-switch-sm"
                 data-state={state.webgpuOverrides?.llm !== false ? 'checked' : 'unchecked'}
               >
-                <span className="kites-switch-thumb" />
+                <span className="manga-garden-switch-thumb" />
               </button>
             </div>
 
@@ -161,10 +161,10 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
               </div>
               <button 
                 onClick={() => updateState({ webgpuOverrides: { ...state.webgpuOverrides, inpaint: !(state.webgpuOverrides?.inpaint !== false) }})}
-                className="kites-switch kites-switch-sm"
+                className="manga-garden-switch manga-garden-switch-sm"
                 data-state={state.webgpuOverrides?.inpaint !== false ? 'checked' : 'unchecked'}
               >
-                <span className="kites-switch-thumb" />
+                <span className="manga-garden-switch-thumb" />
               </button>
             </div>
 
@@ -177,10 +177,10 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
               </div>
               <button 
                 onClick={() => updateState({ webgpuOverrides: { ...state.webgpuOverrides, ocr: !(state.webgpuOverrides?.ocr !== false) }})}
-                className="kites-switch kites-switch-sm"
+                className="manga-garden-switch manga-garden-switch-sm"
                 data-state={state.webgpuOverrides?.ocr !== false ? 'checked' : 'unchecked'}
               >
-                <span className="kites-switch-thumb" />
+                <span className="manga-garden-switch-thumb" />
               </button>
             </div>
 
@@ -193,10 +193,10 @@ export default function GpuAccelerationPanel({ state, updateState }: GpuAccelera
               </div>
               <button 
                 onClick={() => updateState({ webgpuOverrides: { ...state.webgpuOverrides, bubble: !(state.webgpuOverrides?.bubble !== false) }})}
-                className="kites-switch kites-switch-sm"
+                className="manga-garden-switch manga-garden-switch-sm"
                 data-state={state.webgpuOverrides?.bubble !== false ? 'checked' : 'unchecked'}
               >
-                <span className="kites-switch-thumb" />
+                <span className="manga-garden-switch-thumb" />
               </button>
             </div>
 

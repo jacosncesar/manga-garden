@@ -17,8 +17,8 @@
 
 ## 1. Executive Summary & Problem Statement
 
-### 1.1 The Current Problem in Kites (Pure Cotrans Bottom-Up)
-Currently, Kites determines text block geometry solely through a **Bottom-Up Minimum Spanning Tree (MST)** line clustering algorithm (`OcrManager.ts` / Cotrans `quadrilateral_can_merge_region`). The merged bounding box tightly hugs the original source text lines (e.g. narrow vertical Japanese/Chinese columns measuring 20–30px wide).
+### 1.1 The Current Problem in Manga Garden (Pure Cotrans Bottom-Up)
+Currently, Manga Garden determines text block geometry solely through a **Bottom-Up Minimum Spanning Tree (MST)** line clustering algorithm (`OcrManager.ts` / Cotrans `quadrilateral_can_merge_region`). The merged bounding box tightly hugs the original source text lines (e.g. narrow vertical Japanese/Chinese columns measuring 20–30px wide).
 
 While this works adequately when original text spans wide areas, it triggers severe failure modes in common comic layouts:
 1. **Font Size Collapse (Teo chữ):** Translated English/Vietnamese sentences require $1.5\times - 2.5\times$ more horizontal width than compact CJK characters. Because the merged box is locked to the narrow CJK column width, the layout engine (`typesetLayout.ts`) is forced to wrap text after every 1–2 words, driving font sizes down to an unreadable 5–7px despite vast empty white space inside the balloon.
@@ -30,7 +30,7 @@ While this works adequately when original text spans wide areas, it triggers sev
 We introduce a **dual-route hybrid layout engine**:
 - **Dialogue inside Speech Balloons:** Handled by a **Top-Down Bubble Container Pipeline** (ported and enhanced from XianScan). The bubble provides the safe geometric boundary ceiling, tail-severed optical center, and slack expansion room.
 - **Free-Floating Text / SFX outside Balloons:** Handled by the **existing Bottom-Up Cotrans MST Merge Engine**, preserving 100% recall for sound effects, signs, chapter titles, and unanchored narrative prose.
-- **User Control:** Governed by an explicit, persistent setting toggle in the extension popup. If disabled, Kites executes the existing v1.1.1 MST pipeline with zero regression risk.
+- **User Control:** Governed by an explicit, persistent setting toggle in the extension popup. If disabled, Manga Garden executes the existing v1.1.1 MST pipeline with zero regression risk.
 
 ### 1.3 Strict Architectural Invariants & Boundary Rules
 1. **Inpainting Isolation (Polygon-Only Contract):**
@@ -53,8 +53,8 @@ Update `src/shared/types.ts` and `src/shared/constants.ts`:
 // In src/shared/constants.ts
 export const STORAGE_KEYS = {
   POPUP_STATE: 'popupState',
-  AUTH_TOKEN: 'kites_oauth_auth_token',
-  AUTH_EXPIRES_AT: 'kites_oauth_token_expires_at',
+  AUTH_TOKEN: 'manga_garden_oauth_auth_token',
+  AUTH_EXPIRES_AT: 'manga_garden_oauth_token_expires_at',
   WEBGPU_SUPPORTED: 'hardware_webgpu_supported',
 } as const;
 
@@ -262,7 +262,7 @@ Inside a single speech balloon, characters may speak two distinct lines separate
   2. Vertical gap $\Delta Y = Top(L_{i+1}) - Bottom(L_i) \ge (1.35 \times \text{median\_thickness})$.
 - If conditions met $\rightarrow$ split into two independent utterances ($U_1, U_2$).
 
-### Step 3.5: Shared-Container Sub-Chamber Partitioning (Kites upgrade, no XianScan equivalent)
+### Step 3.5: Shared-Container Sub-Chamber Partitioning (Manga Garden upgrade, no XianScan equivalent)
 When >= 2 split utterances resolve to the SAME physical container (a single YOLO box covering a connected multi-lobe balloon, or a heuristic flood-fill carrier merged across lobes), each utterance previously expanded into the FULL chamber and was re-centered on the shared container center — causing cross-lobe drift (top text pulled onto the bubble waist / artwork) and mutual over-push. Partitioning runs BEFORE expansion:
 
 1. **Shared-container grouping (`groupBoxesBySharedContainer`):** per-box carriers are grouped by pairwise IoU >= `SHARED_CONTAINER_IOU` (0.7) via transitive union-find; `null` carriers (free text) never group.
@@ -344,14 +344,14 @@ No schema migration or extra unused fields needed. `db.textBlocks` directly stor
 
 ---
 
-## 6. What to Port vs What Kites Upgrades Beyond XianScan
+## 6. What to Port vs What Manga Garden Upgrades Beyond XianScan
 
-| Component | XianScan Reference File | Kites Port / Upgrade Strategy | Rationale & Advantage over XianScan |
+| Component | XianScan Reference File | Manga Garden Port / Upgrade Strategy | Rationale & Advantage over XianScan |
 | :--- | :--- | :--- | :--- |
 | **Bubble Detector Model** | `src/ml/detect/rfdetr.rs` (145 MB) | **Custom Upgrade:** 0 MB Heuristic (Tier 1) + Optional 3.2 MB YOLO11n (Tier 2). | RF-DETR is too massive for Chrome Web Store MV3. Our 0 MB Tier 1 runs in $<1$ ms. |
 | **Carrier Chamber (Tail Cut)** | `src/pipeline/region_builder/geometry.rs:228-406` | **Custom Upgrade:** Downscaled normalized patch ($200\times 200$) with dynamic $R_{erode}$ clamp $[8, 16]$. | XianScan hardcodes $R=14$ on raw resolution, which over-erodes 720p images and under-erodes 4K webtoons. |
 | **Bubble Interior Color Test** | `src/ml/inpaint/shrinkwrap.rs:108-175` | **Custom Upgrade:** Adaptive background sampling via `sampleQuadBackground` and $\Delta E$ color distance. | XianScan hardcodes `RGB >= 200`, breaking on dark, screentone, or tinted bubbles. Our logic supports all color schemes. |
-| **FreeText / SFX Clustering** | `src/pipeline/region_builder/filter.rs` | **Retain Existing Kites Logic:** Cotrans Kruskal MST line merge. | XianScan uses 21 aggressive rejection filters that frequently discard artistic SFX. Cotrans MST preserves maximum recall. |
+| **FreeText / SFX Clustering** | `src/pipeline/region_builder/filter.rs` | **Retain Existing Manga Garden Logic:** Cotrans Kruskal MST line merge. | XianScan uses 21 aggressive rejection filters that frequently discard artistic SFX. Cotrans MST preserves maximum recall. |
 | **Utterance Splitting** | `src/pipeline/region_builder/clustering.rs` | **1:1 Port:** Post-merge split pass checking `ends_with_term` and vertical stagger gap $\ge 1.35\times$. | Solves staggered multi-utterance bubbles (Issue illustrated in user's Image 2). |
 | **Slack Expansion Math** | `src/pipeline/region_builder/expansion.rs:270-320` | **1:1 Port:** Centroid-anchored expansion with damping $0.60$, $1.45\times$ cap, and $2.20\times$ narrow-vertical cap. | Prevents font size collapse and keeps text comfortably inside comic bubble chambers. |
 | **Typesetting & Line Wrapping** | `web/src/lib/server/typeset/layout.ts` | **Already Ported:** `typesetLayout.ts` (`balancedWrapText`, `fitFontSizeWithLines`). | Balanced diamond wrap is already active; connecting `typeset_box` gives it optimal chamber dimensions. |
@@ -360,7 +360,7 @@ No schema migration or extra unused fields needed. `db.textBlocks` directly stor
 
 ## 7. Edge Case Matrix & Defensive Failure Handling
 
-| Edge Case | Failure Mode if Unhandled | Defensive Mechanism in Kites |
+| Edge Case | Failure Mode if Unhandled | Defensive Mechanism in Manga Garden |
 | :--- | :--- | :--- |
 | **Hand-Drawn Broken / Open Borders** | Flood fill leaks out of the gap into adjacent panel artwork. | **1.** Crop boundary clamp: flood fill cannot expand beyond bounding patch $+6$px.<br>**2.** Morphological Closing ($R=2$px) seals gaps $\le 4$px.<br>**3.** If outer border touched: aborts carrier and falls back to OCR box. |
 | **Inverted Dark Bubble (White text on black background)** | Fixed $RGB \ge 200$ test fails to recognize bubble interior. | Adaptive luminance probe checks seed background. If dark ($L < 0.20$), inverts thresholding: interior is $L < 0.25$, boundary is light stroke. |
@@ -427,14 +427,14 @@ No schema migration or extra unused fields needed. `db.textBlocks` directly stor
 - **Original model:** [huyvux3005/manga109-segmentation-bubble](https://huggingface.co/huyvux3005/manga109-segmentation-bubble), described upstream as a YOLO11n instance segmentation model.
 - **Third-party ONNX export:** [mednasserallah/manga109-segmentation-bubble-onnx](https://huggingface.co/mednasserallah/manga109-segmentation-bubble-onnx).
 - **Candidate artifact:** `manga109_segmentation_bubble_1024.onnx` — **11,845,329 bytes**, approximately **11.85 MB in decimal units** (not the earlier ~3.2 MB detector budget).
-- **Reported export metadata:** **1024 × 1024** letterboxed input, **ONNX opset 17**. The export card reports no quantization or retraining. These metadata/card statements are not evidence of successful inference in Kites or browser compatibility.
+- **Reported export metadata:** **1024 × 1024** letterboxed input, **ONNX opset 17**. The export card reports no quantization or retraining. These metadata/card statements are not evidence of successful inference in Manga Garden or browser compatibility.
 
 **Output contract to investigate:** segmentation produces bubble masks, not direct safe inner rectangles. The export card describes box/score/mask-coefficient output plus mask prototypes; decoding would require NMS, per-instance mask reconstruction and box cropping, and inverse letterbox mapping into page coordinates. Even a correctly decoded mask can contain border pixels, tails, holes, or segmentation errors. Deriving a conservative usable interior is a separate geometry problem; neither the prediction box nor the mask's outer AABB is a guaranteed inscribed typesetting area.
 
 **Acceptance gates before any integration decision:**
-1. Evaluate mask quality on representative Kites pages, including connected lobes, concave/spiky contours, translucent interiors, tails, and open borders. Upstream accuracy claims are not local quality verification.
+1. Evaluate mask quality on representative Manga Garden pages, including connected lobes, concave/spiky contours, translucent interiors, tails, and open borders. Upstream accuracy claims are not local quality verification.
 2. Verify actual ONNX Runtime Web execution in the MV3 offscreen document, including WebGPU operator support, WASM fallback, decoding correctness, memory use, and coordinate mapping. Browser compatibility is **not verified yet**.
-3. Measure cold-load/download cost and end-to-end latency (preprocessing, inference, mask decoding, geometry, and layout) on target hardware. Upstream native/server timings are not Kites browser benchmarks; latency is **not verified yet**.
+3. Measure cold-load/download cost and end-to-end latency (preprocessing, inference, mask decoding, geometry, and layout) on target hardware. Upstream native/server timings are not Manga Garden browser benchmarks; latency is **not verified yet**.
 4. Verify license and provenance for the original weights, the third-party export, dependencies, and training datasets before redistribution or commercial use. Model-card license labels alone do not establish that chain; license/provenance is **not verified yet**.
 
 No model download, dependency, engine, storage setting, or deployed behavior is authorized by this future-work note.

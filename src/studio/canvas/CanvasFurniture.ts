@@ -51,7 +51,7 @@ export class CanvasFurniture {
     ctx.stroke();
 
     // 3. Draw rotation handle nub (circle with curved rotation arrow badge)
-    this.drawHandleNub(ctx, obj.width / 2, -ROTATION_HANDLE_OFFSET, '#f4446d', true, '⟳');
+    this.drawHandleNub(ctx, obj.width / 2, -ROTATION_HANDLE_OFFSET, '#22d3ee', true, '⟳');
 
     // If rotated, show small angle tag above rotation nub
     if (obj.rotation) {
@@ -70,7 +70,7 @@ export class CanvasFurniture {
       ctx.roundRect(tagX, tagY, tagW, tagH, 3);
       ctx.fill();
       ctx.stroke();
-      ctx.fillStyle = '#f4446d';
+      ctx.fillStyle = '#22d3ee';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(angleText, obj.width / 2, tagY + tagH / 2);

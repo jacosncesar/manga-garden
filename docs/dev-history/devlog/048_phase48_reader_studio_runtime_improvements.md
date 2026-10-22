@@ -30,7 +30,7 @@ Resolve core interaction defects in Studio text manipulation (drag freezing on p
    - `TranslationManager.ts`: Reports initialization for local on-device LLMs (e.g. WebLLM / MLC models).
    - `BubbleManager.ts` & `NeuralBubbleDetector.ts`: Lazily captures and reports ONNX session creation for neural bubble detectors.
 3. **Pipeline Lifecycle Orchestration**: Extended `PipelineOrchestrator.ts` with `makeLifecycle` tracking active loading operations and a guaranteed cleanup in the `finally` block.
-4. **Fast UI Display**: Reduced initialization banner delay from 700ms to 150ms in `src/content/index.tsx`, dynamically formatting labels such as `"Preparing OCR (v6-medium)…"` and `"Preparing Inpainting (lama-manga)…"`, and bound real-time status to screen crop overlays (`kites-crop-loading-badge`).
+4. **Fast UI Display**: Reduced initialization banner delay from 700ms to 150ms in `src/content/index.tsx`, dynamically formatting labels such as `"Preparing OCR (v6-medium)…"` and `"Preparing Inpainting (lama-manga)…"`, and bound real-time status to screen crop overlays (`manga-garden-crop-loading-badge`).
 
 ### 3.3 Explicit Tensor Ownership & Memory Cleanup
 1. **Neural Bubble Detector**: Wrapped `NeuralBubbleDetector.detectFull` in `try ... finally` blocks to explicitly call `.dispose()` on input tensors (`tensorImages`, `orig_target_sizes`) and all returned output tensors.
@@ -78,7 +78,7 @@ Resolve core interaction defects in Studio text manipulation (drag freezing on p
   * *Root Cause*: Hiding the secondary action row when 0 checkboxes were checked broke user expectations, and long strings like `Open Reader for 14 Selected` truncated in two-column popup layouts.
   * *Resolution*: Made the action row permanent, adopted concise un-truncated labels (`Reader (N)`, `Open Reader (M)`, `Export ZIP (N)`), and decoupled general chapter reading/export from batch translation selection.
 * **Feature: Dual Studio Typesetting Engine (Auto Balloon vs Simple Wrap)**:
-  * *Auto Balloon*: Directly routes to Kites's core pipeline typesystem (`measureDefaultLayout`), generating comic diamond line envelopes, syllable hyphenation, and automatic font-size fitting as boxes resize.
+  * *Auto Balloon*: Directly routes to Manga Garden's core pipeline typesystem (`measureDefaultLayout`), generating comic diamond line envelopes, syllable hyphenation, and automatic font-size fitting as boxes resize.
   * *Simple Wrap*: Torii-ported greedy word-wrapping at fixed font size for rectangular captions and narration.
   * *UI Control*: Added a toggle in `TypographySettings.tsx` allowing instant switching between Auto Balloon and Simple Wrap per dialogue bubble.
 

@@ -60,7 +60,7 @@ import puppeteer from 'puppeteer';
 
     // Set storage state via page context (content script passes state or messaging)
     const success = await page.evaluate((state) => {
-      window.postMessage({ type: 'KITES_SET_STATE', payload: state }, '*');
+      window.postMessage({ type: 'manga_garden_SET_STATE', payload: state }, '*');
       return true;
     }, { activeEngineId, activeInpaintId, sourceLang: 'auto', targetLang: 'en' });
 

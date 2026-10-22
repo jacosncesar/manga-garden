@@ -4,7 +4,7 @@
 **Focus:** User Interface, State Persistence, DOM Optimization, Search Indexing
 
 ## Overview
-In Phase 2, we built out the complete popup interface for Kites. Because Kites allows users to select between local WebGPU models, local CPU ONNX models, and custom Cloud APIs, the UI needed to handle massive lists of models without dropping frames, while feeling cohesive and extremely fast.
+In Phase 2, we built out the complete popup interface for Manga Garden. Because Manga Garden allows users to select between local WebGPU models, local CPU ONNX models, and custom Cloud APIs, the UI needed to handle massive lists of models without dropping frames, while feeling cohesive and extremely fast.
 
 ## Key Features & Implementations
 

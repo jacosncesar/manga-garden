@@ -1,5 +1,5 @@
 /**
- * Kites Marketing Website - Interactive Comparison Slider & Controls
+ * Manga Garden Marketing Website - Interactive Comparison Slider & Controls
  *
  * Implements smooth before/after comparison with hardware-accelerated clip-path,
  * multi-image thumbnail selection, and interactive translation sweep animation.
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       original: 'assets/demo2-input.jpeg',
       translated: 'assets/demo2-result.png',
       originalAlt: 'Original Japanese Manga Scan - Romance comedy panel',
-      translatedAlt: 'Kites English Translation - Balanced lettering and line breaks'
+      translatedAlt: 'Manga Garden English Translation - Balanced lettering and line breaks'
     },
     demo7: {
       split: 50,
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       original: 'assets/demo7-input.jpg',
       translated: 'assets/demo7-result.png',
       originalAlt: 'Original Japanese Manga Scan - Dialogue-heavy panel',
-      translatedAlt: 'Kites Vietnamese Translation - Zero gray boxes, clean inpainting'
+      translatedAlt: 'Manga Garden Vietnamese Translation - Zero gray boxes, clean inpainting'
     }
   };
 

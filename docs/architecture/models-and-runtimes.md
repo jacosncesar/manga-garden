@@ -1,6 +1,6 @@
 # AI Models, Runtimes & Hardware Acceleration 🧠
 
-Kites combines modern computer vision, neural inpainting, and large language models (LLMs) to perform spatial comic translation directly in the user's browser. This document details the underlying neural architectures, execution providers, weight distribution, and cache lifecycles.
+Manga Garden combines modern computer vision, neural inpainting, and large language models (LLMs) to perform spatial comic translation directly in the user's browser. This document details the underlying neural architectures, execution providers, weight distribution, and cache lifecycles.
 
 ---
 
@@ -26,7 +26,7 @@ graph TD
 ```
 
 ### 1. WebGPU (JSEP) Execution Provider
-Kites leverages **ONNX Runtime Web (`onnxruntime-web` 1.30.0)** with the JavaScript Execution Provider (JSEP) for WebGPU:
+Manga Garden leverages **ONNX Runtime Web (`onnxruntime-web` 1.30.0)** with the JavaScript Execution Provider (JSEP) for WebGPU:
 - Direct shader dispatch for matrix multiplications, convolutions, and attention kernels.
 - Bypasses WebGL overhead and CPU round-trips.
 - Preference: `powerPreference: 'high-performance'` to engage discrete GPUs on dual-GPU laptops.
@@ -34,7 +34,7 @@ Kites leverages **ONNX Runtime Web (`onnxruntime-web` 1.30.0)** with the JavaScr
 
 ### 2. WebAssembly (WASM SIMD) Fallback
 If WebGPU is disabled by enterprise policy, unsupported by hardware, or encounters driver errors:
-- Kites gracefully falls back to multi-threaded WASM SIMD (`ort-wasm-simd-threaded.wasm`).
+- Manga Garden gracefully falls back to multi-threaded WASM SIMD (`ort-wasm-simd-threaded.wasm`).
 - Inpainting falls back to Alexandru Telea Fast Marching (FMM) or Instant Simple Fill.
 - Translation switches to the Cloudflare Shared Pool or remote APIs.
 
@@ -42,7 +42,7 @@ If WebGPU is disabled by enterprise policy, unsupported by hardware, or encounte
 
 ## 👁️ Text Detection & Recognition (PaddleOCR Engine)
 
-Kites employs an optimized TypeScript port of Baidu's **PaddleOCR (PP-OCR)** pipeline.
+Manga Garden employs an optimized TypeScript port of Baidu's **PaddleOCR (PP-OCR)** pipeline.
 
 ### 1. DBNet Scene Text Detection
 - **Architecture:** Differentiable Binarization Network (DBNet) with a lightweight MobileNetV3 / Student backbone.
@@ -125,7 +125,7 @@ flowchart TD
 
 ## 💬 Translation Engines & Large Language Models
 
-Kites provides multiple translation tiers depending on user preference, hardware, and privacy requirements:
+Manga Garden provides multiple translation tiers depending on user preference, hardware, and privacy requirements:
 
 ```mermaid
 graph TD
@@ -161,7 +161,7 @@ graph TD
 
 ## 🗨️ Speech Bubble Detection & Layout Subsystem
 
-Kites incorporates a dual-route bubble extraction subsystem to expand narrow vertical CJK text bounding boxes into comfortable, readable horizontal chambers:
+Manga Garden incorporates a dual-route bubble extraction subsystem to expand narrow vertical CJK text bounding boxes into comfortable, readable horizontal chambers:
 
 ```mermaid
 graph TD
@@ -202,7 +202,7 @@ graph TD
 
 ## 💾 Model Caching, Lifecycle Management & Tensor Disposal
 
-1. **Persistent Browser Cache API (`caches.open('kites-model-cache')`):**
+1. **Persistent Browser Cache API (`caches.open('manga-garden-model-cache')`):**
    - ONNX model buffers (`.onnx`), external tensor blobs (`.data`), and character dictionaries (`.txt`) are cached upon first download.
    - Subsequent extension launches load models from local disk cache with zero network requests.
 2. **Multi-Stage Cold-Start Lifecycle Feedback:**

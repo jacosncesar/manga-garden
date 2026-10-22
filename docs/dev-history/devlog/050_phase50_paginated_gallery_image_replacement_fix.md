@@ -47,10 +47,10 @@ On paginated single-page readers such as nhentai (`https://nhentai.net/g/677759/
 Because `record.sourcePage` and `window.location.href` are both the exact page URL (`https://nhentai.net/g/677759/1/`), they match on the current page, executing `replaceImageWithTranslation` immediately upon translation completion.
 
 #### 3.2 Auto-Healing & Instant Memory Restoration in `TranslateButton`
-Added active auto-healing to `TranslateButton`: when an image is known to be translated in the current session (`translatedRegistry.get(srcUrl)`) and the user has not chosen to view the original (`!showOriginal`), `TranslateButton` verifies whether the DOM element actually displays the translation. If recycled by the host site without Kites attributes, it immediately invokes `replaceImageWithTranslation(target, reg)` to eliminate any potential desync between the action buttons and the displayed image.
+Added active auto-healing to `TranslateButton`: when an image is known to be translated in the current session (`translatedRegistry.get(srcUrl)`) and the user has not chosen to view the original (`!showOriginal`), `TranslateButton` verifies whether the DOM element actually displays the translation. If recycled by the host site without Manga Garden attributes, it immediately invokes `replaceImageWithTranslation(target, reg)` to eliminate any potential desync between the action buttons and the displayed image.
 
 #### 3.3 Recycled Element Target Protection
-In `resolveTargetMedia`, Tier 1 in-memory lookup now verifies that an `HTMLImageElement` still displays the requested `originalUrl` or our `data-kites-applied-src` before returning it, preventing recycled DOM elements on page turns from receiving mismatched translations.
+In `resolveTargetMedia`, Tier 1 in-memory lookup now verifies that an `HTMLImageElement` still displays the requested `originalUrl` or our `data-manga-garden-applied-src` before returning it, preventing recycled DOM elements on page turns from receiving mismatched translations.
 
 ---
 
@@ -60,6 +60,6 @@ In `resolveTargetMedia`, Tier 1 in-memory lookup now verifies that an `HTMLImage
 2. **Playwright E2E Test (`npm run test:e2e:nhentai`)**: Automated test on live nhentai reader page (`https://nhentai.net/g/688293/1/`) using the real built extension in Chromium:
    - Successfully hovered over page 1 reader image.
    - Clicked Translate button.
-   - Verified `data-kites-translated: true` and `src: blob:https://nhentai.net/...` replaced immediately on first pass without touching Eye icon.
+   - Verified `data-manga-garden-translated: true` and `src: blob:https://nhentai.net/...` replaced immediately on first pass without touching Eye icon.
    - Verified 3 finished action buttons appeared.
    - Verified Eye toggle restored original artwork and toggled back to translated blob.

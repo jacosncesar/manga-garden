@@ -1,7 +1,7 @@
 # Devlog 023: Phase 23 - Speech Bubble Detection, Dynamic Chamber Expansion & Intelligent Typesetting
 
 ## 1. Problem Statement & Root Cause
-In manga/comic translation, original Japanese/Chinese/Korean text lines are frequently oriented vertically in narrow columns measuring only 20–30px wide. Previously in Kites (pure Cotrans bottom-up MST merge):
+In manga/comic translation, original Japanese/Chinese/Korean text lines are frequently oriented vertically in narrow columns measuring only 20–30px wide. Previously in Manga Garden (pure Cotrans bottom-up MST merge):
 1. **Font Size Collapse (Teo chữ):** Translated horizontal English/Vietnamese sentences require $1.5\times - 2.5\times$ more horizontal width than compact CJK characters. Constraining text layout to the narrow 25px OCR strip forced word-wrapping every 1–2 words, driving font sizes down to an unreadable 5–7px despite ample empty white space inside the speech balloon.
 2. **Optical Decentering:** Original text is often positioned off-center in the balloon. Typesetting inside the tight OCR box drew translated text off-balance instead of centered in the balloon's visual chamber.
 3. **Staggered Multi-Utterance Over-merging:** Two distinct utterances sharing a connected or staggered balloon were fused into a single bounding box, spanning awkwardly across panel artwork.

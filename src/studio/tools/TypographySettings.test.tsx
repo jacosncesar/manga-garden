@@ -84,7 +84,7 @@ describe('TypographySettings editing intent and reflow', () => {
     expect(studioStore.getState().textObjects).toBe(original);
     expect(measureDefaultLayout).not.toHaveBeenCalled();
     const simple = Array.from(container.querySelectorAll('button')).find((button) => button.textContent === 'Simple Wrap');
-    expect(simple?.className).toContain('text-[#f4446d]');
+    expect(simple?.className).toContain('text-[#22d3ee]');
   });
 
   it('changes only selected mode without touching lines or font size, then reflows its edit', async () => {

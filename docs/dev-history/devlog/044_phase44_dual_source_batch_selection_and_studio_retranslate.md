@@ -29,7 +29,7 @@
 * Error state retry: Failed translation jobs (`status === 'error'`) in history or page scan are classified as pending and re-queued.
 
 #### 2.3 Selective Chapter Reader Launch (`src/content/index.tsx`)
-* Updated `OPEN_CHAPTER_READER` message and `kites-open-chapter-reader` custom event to accept optional `pages` payload.
+* Updated `OPEN_CHAPTER_READER` message and `manga-garden-open-chapter-reader` custom event to accept optional `pages` payload.
 * When items are selected in the popup, only those selected pages are mounted into `ChapterReaderModal`.
 * When 0 items are selected, falls back to opening all detected chapter pages on the active tab.
 

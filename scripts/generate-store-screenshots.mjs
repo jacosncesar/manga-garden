@@ -117,7 +117,7 @@ const slides = [
             color: #cbd5e1;
             border: 1px solid #475569;
           }
-          .tag-kites {
+          .tag-Manga Garden {
             background: linear-gradient(135deg, #e11d48, #ff2a6d);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -202,10 +202,10 @@ const slides = [
           </div>
           <div class="arrow-box">
             <div class="arrow-circle">➔</div>
-            <div class="arrow-label">Kites AI</div>
+            <div class="arrow-label">Manga Garden AI</div>
           </div>
           <div class="card" style="border-color: rgba(255, 42, 109, 0.4); box-shadow: 0 20px 45px -10px rgba(255, 42, 109, 0.35);">
-            <div class="card-tag tag-kites">TRANSLATED IN-PAGE</div>
+            <div class="card-tag tag-Manga Garden">TRANSLATED IN-PAGE</div>
             <img src="${demo2Result}" />
           </div>
         </div>
@@ -387,7 +387,7 @@ const slides = [
               <div class="dot dot-red"></div>
               <div class="dot dot-yellow"></div>
               <div class="dot dot-green"></div>
-              <span class="window-title">Kites Chapter Reader: Webtoon Mode</span>
+              <span class="window-title">Manga Garden Chapter Reader: Webtoon Mode</span>
               <div class="window-controls">
                 <span class="window-pill">Webtoon View</span>
                 <span class="window-pill">Auto-Scroll</span>
@@ -808,9 +808,9 @@ const slides = [
     `
   },
 
-  // 5. Full Editing & Typesetting Control (Kites Studio)
+  // 5. Full Editing & Typesetting Control (Manga Garden Studio)
   {
-    name: '3_kites_studio.jpg',
+    name: '3_manga_garden_studio.jpg',
     html: `
       <!DOCTYPE html>
       <html>
@@ -921,7 +921,7 @@ const slides = [
       </head>
       <body>
         <div class="header">
-          <div class="badge">🛠️ Built-in Kites Studio</div>
+          <div class="badge">🛠️ Built-in Manga Garden Studio</div>
           <h1>Full Editing &amp; Typesetting Control</h1>
           <p class="subtitle">Inspect clean backgrounds, adjust speech bubbles with 8-point handles, and export 1:1 PNGs</p>
         </div>
@@ -930,7 +930,7 @@ const slides = [
             <div class="dot dot-red"></div>
             <div class="dot dot-yellow"></div>
             <div class="dot dot-green"></div>
-            <span class="window-title">Kites Studio Editor: Interactive Canvas Workspace</span>
+            <span class="window-title">Manga Garden Studio Editor: Interactive Canvas Workspace</span>
             <div class="pills-bar">
               <span class="pill">Triple-View Inspection</span>
               <span class="pill">Interactive Box Resize</span>
@@ -964,7 +964,7 @@ async function run() {
     '2_translate_vietnamese.jpg': '2_chapter_reader_fast_scan.jpg',
     'inplace_hover_translate.jpg': '3_hover_in_place_reading.jpg',
     '4_extension_ui_settings.jpg': '4_popup_and_engine_presets.jpg',
-    '3_kites_studio.jpg': '5_kites_studio_canvas_editor.jpg',
+    '3_manga_garden_studio.jpg': '5_manga_garden_studio_canvas_editor.jpg',
   };
 
   for (const slide of slides) {

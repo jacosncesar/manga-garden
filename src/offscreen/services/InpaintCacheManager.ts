@@ -1,5 +1,5 @@
 export class InpaintCacheManager {
-  private static CACHE_NAME = 'kites-inpaint-models-v1';
+  private static CACHE_NAME = 'manga-garden-inpaint-models-v1';
 
   /**
    * Checks if a model exists in the Cache API.

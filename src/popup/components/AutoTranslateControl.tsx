@@ -18,11 +18,11 @@ export default function AutoTranslateControl({ state, updateState }: AutoTransla
         </div>
         <button 
           onClick={() => updateState({ isAuto: !state.isAuto })}
-          className="kites-switch kites-switch-md"
+          className="manga-garden-switch manga-garden-switch-md"
           data-state={state.isAuto ? 'checked' : 'unchecked'}
         >
           <span className="sr-only">Toggle auto-translate</span>
-          <span className="kites-switch-thumb" />
+          <span className="manga-garden-switch-thumb" />
         </button>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 [Português (Brasil)](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
-# 🪁 MangaLume 2.0
+# 🪁 Manga Garden
 
 ### Leia mangás no seu idioma, direto no navegador.
 **Sem Python • Sem servidores próprios • Tradução com IA no navegador**
@@ -20,24 +20,24 @@
     <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/Unheat/Kites/releases/latest">
+  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
     <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
   </a>
 </p>
 
 <br/>
 
-[![Banner do MangaLume 2.0](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
+[![Banner do Manga Garden](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
 </div>
 
 ---
 
-## 💡 Por que o MangaLume 2.0?
+## 💡 Por que o Manga Garden?
 
 Tradutores tradicionais de mangá exigem a instalação de scripts Python complexos e gigabytes de pacotes CUDA, ou o envio do seu histórico de leitura para servidores de terceiros.
 
-**O MangaLume 2.0 muda isso.** É uma extensão leve para Chrome que executa modelos modernos de visão e linguagem **diretamente na placa gráfica, usando WebGPU**.
+**O Manga Garden muda isso.** É uma extensão leve para Chrome que executa modelos modernos de visão e linguagem **diretamente na placa gráfica, usando WebGPU**.
 
 - ⚡ **Instalação simples:** instale a extensão e comece a ler. Para executar o projeto a partir do código-fonte, siga o guia de instalação abaixo.
 - 🔒 **Processamento local quando possível:** o reconhecimento de texto (OCR) e a limpeza do fundo são executados no dispositivo. A imagem não é enviada ao provedor de tradução; o texto reconhecido pode ser enviado ao serviço de tradução escolhido.
@@ -58,14 +58,14 @@ Tradutores tradicionais de mangá exigem a instalação de scripts Python comple
 <table>
   <tr>
     <th width="50%" align="center">Original em japonês</th>
-    <th width="50%" align="center">Traduzido pelo MangaLume 2.0</th>
+    <th width="50%" align="center">Traduzido pelo Manga Garden</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo2.jpeg" alt="Mangá original em japonês" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo2_result.png" alt="Tradução para inglês pelo MangaLume 2.0" width="100%" />
+      <img src="./README_images/result/demo2_result.png" alt="Tradução para inglês pelo Manga Garden" width="100%" />
     </td>
   </tr>
 </table>
@@ -78,14 +78,14 @@ Tradutores tradicionais de mangá exigem a instalação de scripts Python comple
 <table>
   <tr>
     <th width="50%" align="center">Original em japonês</th>
-    <th width="50%" align="center">Traduzido pelo MangaLume 2.0</th>
+    <th width="50%" align="center">Traduzido pelo Manga Garden</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo7.jpg" alt="Mangá original em japonês" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo7_result.png" alt="Tradução para vietnamita pelo MangaLume 2.0" width="100%" />
+      <img src="./README_images/result/demo7_result.png" alt="Tradução para vietnamita pelo Manga Garden" width="100%" />
     </td>
   </tr>
 </table>
@@ -114,7 +114,7 @@ Passe o cursor sobre qualquer imagem de quadrinho no Twitter/X, Pixiv ou em site
 
 Leia capítulos inteiros de mangá ou webtoon em uma visualização sem distrações, com detecção automática de páginas, modo vertical contínuo, tradução em lote e exportação ZIP para leitura offline:
 
-[![Leitor de capítulos do MangaLume 2.0](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
+[![Leitor de capítulos do Manga Garden](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
 
 - **Varredura rápida:** percorre automaticamente a página e coloca na fila as imagens carregadas sob demanda.
 - **Modos flexíveis:** alterne entre tiras verticais contínuas, página única e página dupla.
@@ -123,11 +123,11 @@ Leia capítulos inteiros de mangá ou webtoon em uma visualização sem distraç
 
 ---
 
-## 🛠️ Estúdio integrado do MangaLume 2.0
+## 🛠️ Estúdio integrado do Manga Garden
 
-Quer revisar a tradução ou ajustar o texto? Abra o **Estúdio MangaLume 2.0** em tela cheia pela extensão.
+Quer revisar a tradução ou ajustar o texto? Abra o **Estúdio Manga Garden** em tela cheia pela extensão.
 
-[![Estúdio MangaLume 2.0](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
+[![Estúdio Manga Garden](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
 
 - **Edição direta:** clique duas vezes em um balão para editar o diálogo no próprio lugar, com ajuste tipográfico em tempo real.
 - **Tela interativa:** arraste e redimensione balões usando alças de oito pontos.
@@ -151,7 +151,7 @@ Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchime
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/UI-feature/main-panel.jpg" alt="Painel principal do MangaLume 2.0" width="95%" />
+      <img src="./README_images/UI-feature/main-panel.jpg" alt="Painel principal do Manga Garden" width="95%" />
     </td>
     <td align="center">
       <img src="./README_images/UI-feature/reader-panel.jpg" alt="Painel do leitor e scanner de capítulos" width="95%" />
@@ -181,11 +181,11 @@ Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchime
 
 ## 🚀 Início rápido e instalação
 
-> **Atenção:** os links da Chrome Web Store e de releases abaixo ainda apontam para a publicação do projeto original. Eles não instalam uma versão publicada do MangaLume 2.0.
+> **Atenção:** a publicação da Chrome Web Store ainda não foi atualizada com a nova marca Manga Garden. Use o código-fonte abaixo para compilar esta versão.
 
-### Opção 1: versão publicada do projeto original
+### Opção 1: publicação na Chrome Web Store
 
-A forma mais simples de instalar a extensão publicada. Inclui atualizações automáticas e a análise de segurança da Chrome Web Store:
+O link existente continuará apontando para a publicação anterior até que a versão Manga Garden seja enviada e aprovada pela Chrome Web Store:
 
 <div align="left">
   <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
@@ -193,15 +193,11 @@ A forma mais simples de instalar a extensão publicada. Inclui atualizações au
   </a>
 </div>
 
-Esse link é mantido apenas para identificar a publicação original; não representa uma publicação do MangaLume 2.0.
-
 ---
 
-### Opção 2: arquivo ZIP do projeto original
+### Opção 2: arquivo ZIP
 
-O link abaixo também pertence às releases do projeto original:
-
-1. Baixe o arquivo ZIP na página de [releases do projeto original](https://github.com/Unheat/Kites/releases/latest).
+1. Baixe o arquivo ZIP na página de [releases do repositório](https://github.com/jacosncesar/MangaLumeTwo/releases/latest), quando uma versão Manga Garden for publicada.
 2. Extraia o `.zip` e carregue a pasta no Chrome por `chrome://extensions/` > **Modo do desenvolvedor** > **Carregar sem compactação**.
 
 ---
@@ -209,9 +205,9 @@ O link abaixo também pertence às releases do projeto original:
 ### Opção 3: compilar a partir do código-fonte
 
 ```bash
-# 1. Clone seu próprio repositório (substitua os valores de exemplo)
-git clone https://github.com/SEU-USUARIO/MangaLume-2.0.git
-cd MangaLume-2.0
+# 1. Clone o repositório com um diretório local chamado manga-garden
+git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+cd manga-garden
 
 # 2. Instale as dependências e compile a extensão
 npm ci

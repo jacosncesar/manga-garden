@@ -51,6 +51,18 @@ const OFFSCREEN_HEALTH_CHECK_TIMEOUT_MS = 3 * 1000;
  * Chrome has settled the teardown before the replacement document is created.
  */
 const OFFSCREEN_RECREATE_DELAY_MS = 500;
+const CAPTURE_REQUEST_SCHEMES = ['manga-garden-capture:', 'kites-capture:'] as const;
+
+/**
+ * Extracts a capture request ID from either the current or legacy queued URL scheme.
+ * @param srcUrl - Translation source URL saved on a job.
+ * @returns The capture request ID, or undefined for regular image URLs.
+ */
+function getCaptureRequestId(srcUrl: string | undefined): string | undefined {
+  if (!srcUrl) return undefined;
+  const scheme = CAPTURE_REQUEST_SCHEMES.find((candidate) => srcUrl.startsWith(candidate));
+  return scheme ? srcUrl.slice(scheme.length) : undefined;
+}
 
 /**
  * Removes translation engines that are no longer supported from stored popup settings
@@ -184,7 +196,7 @@ chrome.contextMenus.onClicked.addListener(async (info: chrome.contextMenus.OnCli
     const data = await chrome.storage.local.get(STORAGE_KEYS.POPUP_STATE);
     const popupState = data[STORAGE_KEYS.POPUP_STATE] as PopupState | undefined;
     if (popupState && (popupState.isExtensionEnabled === false || isDomainDisabled(_tab?.url || '', popupState.disabledDomains))) {
-      console.log('[Background] Context menu ignored: Kites extension is disabled on this domain.');
+      console.log('[Background] Context menu ignored: Manga Garden extension is disabled on this domain.');
       return;
     }
     console.log('[Background] Context menu clicked. Target URL:', info.srcUrl);
@@ -197,7 +209,7 @@ chrome.contextMenus.onClicked.addListener(async (info: chrome.contextMenus.OnCli
     const data = await chrome.storage.local.get(STORAGE_KEYS.POPUP_STATE);
     const popupState = data[STORAGE_KEYS.POPUP_STATE] as PopupState | undefined;
     if (popupState && (popupState.isExtensionEnabled === false || isDomainDisabled(_tab?.url || '', popupState.disabledDomains))) {
-      console.log('[Background] Context menu ignored: Kites extension is disabled on this domain.');
+      console.log('[Background] Context menu ignored: Manga Garden extension is disabled on this domain.');
       return;
     }
     console.log('[Background] Context menu Crop & Translate Area clicked for tab:', _tab.id);
@@ -242,9 +254,9 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       // reclaims jobs that show no observable progress for the whole window.
       db.translationJobs.update(jobId, { timestamp: Date.now() }).catch(() => {});
 
-      const isCapture = job.srcUrl.startsWith('kites-capture:');
-      const identity = isCapture
-        ? { requestId: job.srcUrl.replace('kites-capture:', '') }
+      const requestId = getCaptureRequestId(job.srcUrl);
+      const identity = requestId
+        ? { requestId }
         : { originalUrl: job.srcUrl };
       chrome.tabs.sendMessage(job.tabId, {
         type: 'MODEL_INITIALIZATION',
@@ -323,7 +335,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         const popupState = data[STORAGE_KEYS.POPUP_STATE] as PopupState | undefined;
         const tabUrl = _sender.tab?.url;
         if (popupState && (popupState.isExtensionEnabled === false || isDomainDisabled(tabUrl || '', popupState.disabledDomains))) {
-          console.warn('[Background] Rejected TRANSLATE_IMAGE: Kites extension or domain is disabled.');
+          console.warn('[Background] Rejected TRANSLATE_IMAGE: Manga Garden extension or domain is disabled.');
           sendResponse({ status: 'error', error: 'Extension is disabled on this domain' });
           return;
         }
@@ -417,7 +429,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       const popupState = data[STORAGE_KEYS.POPUP_STATE] as PopupState | undefined;
       const tabUrl = _sender.tab?.url;
       if (popupState && (popupState.isExtensionEnabled === false || isDomainDisabled(tabUrl || '', popupState.disabledDomains))) {
-        console.warn('[Background] Rejected TRANSLATE_CAPTURED_IMAGE: Kites extension or domain is disabled.');
+        console.warn('[Background] Rejected TRANSLATE_CAPTURED_IMAGE: Manga Garden extension or domain is disabled.');
         sendResponse({ status: 'error', error: 'Extension is disabled on this domain' });
         return;
       }
@@ -878,7 +890,7 @@ export async function queueTranslation(srcUrl: string, tabId?: number, isBatch =
 async function queueCapturedTranslation(requestId: string, dataUrl: string, tabId?: number): Promise<void> {
   const response = await fetch(dataUrl);
   const blob = await response.blob();
-  const srcUrl = `kites-capture:${requestId}`;
+  const srcUrl = `manga-garden-capture:${requestId}`;
 
   const stateData = await chrome.storage.local.get(STORAGE_KEYS.POPUP_STATE);
   const popupState = stateData[STORAGE_KEYS.POPUP_STATE] as PopupState | undefined;
@@ -929,8 +941,8 @@ async function queueCapturedTranslation(requestId: string, dataUrl: string, tabI
  */
 function notifyTabJobFailed(job: TranslationJob, error: string): void {
   if (!job.tabId || !job.srcUrl) return;
-  if (job.srcUrl.startsWith('kites-capture:')) {
-    const requestId = job.srcUrl.replace('kites-capture:', '');
+  const requestId = getCaptureRequestId(job.srcUrl);
+  if (requestId) {
     chrome.tabs.sendMessage(job.tabId, {
       type: 'CAPTURE_TRANSLATION_ERROR',
       payload: { requestId, error },
@@ -1151,8 +1163,8 @@ async function processImageTranslation(jobId: number, srcUrl: string, tabId?: nu
     if (offscreenResponse?.status === 'success' && offscreenResponse?.bakedBase64) {
       await db.translationJobs.update(jobId, { status: 'completed' });
       if (tabId) {
-        if (srcUrl.startsWith('kites-capture:')) {
-          const requestId = srcUrl.replace('kites-capture:', '');
+        const requestId = getCaptureRequestId(srcUrl);
+        if (requestId) {
           console.log(`[Background] Sending CAPTURE_TRANSLATED to tab ${tabId} for request ${requestId}...`);
           chrome.tabs.sendMessage(tabId, {
             type: 'CAPTURE_TRANSLATED',
@@ -1189,8 +1201,8 @@ async function processImageTranslation(jobId: number, srcUrl: string, tabId?: nu
 
     // Notify tab immediately so the user interface spinner unfreezes without delay
     if (tabId) {
-      if (srcUrl.startsWith('kites-capture:')) {
-        const requestId = srcUrl.replace('kites-capture:', '');
+      const requestId = getCaptureRequestId(srcUrl);
+      if (requestId) {
         chrome.tabs.sendMessage(tabId, {
           type: 'CAPTURE_TRANSLATION_ERROR',
           payload: {

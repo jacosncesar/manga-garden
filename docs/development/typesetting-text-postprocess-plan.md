@@ -2,14 +2,14 @@
 
 Date: 2026-10-16  
 Status: Proposed implementation plan; active co-authoring draft.  
-Branch: `feat/typesetting-text-postprocess-improvements` (worktree `../Kites-typesetting`, branched from `main`).
+Branch: `feat/typesetting-text-postprocess-improvements` (worktree `../manga-garden-typesetting`, branched from `main`).
 
 ---
 
 ## 1. Scope, Architecture & Boundaries
 
 ### 1.1 Outcome and Objectives
-Elevate Kites text post-processing, line wrapping, and typography rendering to commercial scanlation quality across all supported language pairs, while reducing binary search typesetting compute by 60–75%.
+Elevate Manga Garden text post-processing, line wrapping, and typography rendering to commercial scanlation quality across all supported language pairs, while reducing binary search typesetting compute by 60–75%.
 
 Key deliverables:
 1. **Script Hygiene & Sanitization**: Complete Korean (Hangul) script protection, preserve Katakana middle dots in mixed text, and compact multi-punctuation runs.

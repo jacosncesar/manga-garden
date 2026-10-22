@@ -20,7 +20,7 @@ Add detailed pipeline timing and translation diagnostics for local development w
 3. **Restored CRXJS-Compatible Build Input:** Kept `build.rollupOptions` rather than adopting Vite 8's preferred `build.rolldownOptions`. Vite 8 accepts and aliases the old key internally, while CRXJS 2.7.1 still reads it directly from raw user configuration.
 4. **Pinned Development Entry Discovery:** Added explicit `optimizeDeps.entries` for `popup.html`, `index.html`, `src/offscreen/offscreen.html`, `src/content/index.tsx`, and `src/background/index.ts`. This makes Vite scan all extension execution contexts before Chrome requests them.
 5. **Excluded Native Node Dependencies:** Kept `ppu-paddle-ocr`, `ppu-paddle-ocr/node`, `@napi-rs/canvas`, `@napi-rs/canvas-darwin-arm64`, `canvas`, and `onnxruntime-node` out of browser optimization/build traversal. This prevents native `.node` binary parsing errors and avoids bundling the desktop/OpenCV fallback.
-6. **Protected Kites Tests from Reference Repositories:** Added `**/scratches/**` to Vitest exclusions after cloning the CRXJS source under `scratches/reference`; otherwise Kites' test command also discovered upstream repository tests.
+6. **Protected Manga Garden Tests from Reference Repositories:** Added `**/scratches/**` to Vitest exclusions after cloning the CRXJS source under `scratches/reference`; otherwise Manga Garden' test command also discovered upstream repository tests.
 7. **Prepared Upstream CRXJS Fix:** Cloned `crxjs/chrome-extension-tools`, updated CRXJS to read `rolldownOptions` with a `rollupOptions` fallback, added unit coverage for both configurations, and added a patch changeset.
 
 ---
@@ -38,7 +38,7 @@ Add detailed pipeline timing and translation diagnostics for local development w
 
 * **The Problem:** `ppu-paddle-ocr` exposes desktop paths involving `canvas`, `onnxruntime-node`, and platform-specific NAPI binaries. If the browser bundler traverses those paths, Rolldown may attempt to read a compiled `.node` file as UTF-8 or emit a large unused desktop/OpenCV chunk.
 * **The Solution:** Externalize the Node-only packages for production and exclude them from development dependency optimization.
-* **Reasoning:** Kites uses browser-safe OCR paths at runtime. Desktop packages exist for tests or upstream package internals and must not enter a Chrome extension bundle.
+* **Reasoning:** Manga Garden uses browser-safe OCR paths at runtime. Desktop packages exist for tests or upstream package internals and must not enter a Chrome extension bundle.
 
 ### Development Logs Must Not Affect Production Performance
 
@@ -50,7 +50,7 @@ Add detailed pipeline timing and translation diagnostics for local development w
 
 ## Verification
 
-* Ran Kites test suite: 26 test files and 166 tests passed.
+* Ran Manga Garden test suite: 26 test files and 166 tests passed.
 * Ran `npm run build`: Vite 8.1.4 transformed 1,869 modules and completed successfully.
 * Confirmed production output did not contain development timing messages such as `OCR stage complete in` or `Translation pairs`.
 * Ran CRXJS focused unit coverage: 14 test files and 95 tests passed.
@@ -61,5 +61,5 @@ Add detailed pipeline timing and translation diagnostics for local development w
 ## Next Steps / Key Takeaways
 
 * **Key Takeaway:** A deprecation warning does not mean an ecosystem plugin already supports the replacement field. Verify raw plugin configuration hooks before renaming compatibility-sensitive Vite options.
-* **Maintenance Rule:** Do not remove explicit `optimizeDeps.entries`, native-package exclusions, or `build.rollupOptions` until Kites upgrades to a released CRXJS version with verified Vite 8 `rolldownOptions` support.
+* **Maintenance Rule:** Do not remove explicit `optimizeDeps.entries`, native-package exclusions, or `build.rollupOptions` until Manga Garden upgrades to a released CRXJS version with verified Vite 8 `rolldownOptions` support.
 * **Next Action:** Submit the prepared CRXJS branch upstream after checking for duplicate issues or pull requests and following the repository contribution template.

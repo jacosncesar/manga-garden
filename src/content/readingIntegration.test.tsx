@@ -72,9 +72,9 @@ function move(): void {
 function finish(target: MediaTarget): void {
   content.translatedRegistry.remember(target.srcUrl, target);
   content.translatedRegistry.complete(target.srcUrl, 'data:image/png;base64,AA==', 7, target);
-  target.sourceElement.setAttribute('data-kites-orig-src', target.srcUrl);
-  target.sourceElement.setAttribute('data-kites-applied-src', 'blob:translated');
-  target.sourceElement.setAttribute('data-kites-translated', 'true');
+  target.sourceElement.setAttribute('data-manga-garden-orig-src', target.srcUrl);
+  target.sourceElement.setAttribute('data-manga-garden-applied-src', 'blob:translated');
+  target.sourceElement.setAttribute('data-manga-garden-translated', 'true');
   target.imgElement!.src = 'blob:translated';
 }
 
@@ -103,7 +103,7 @@ beforeEach(() => {
 });
 
 afterEach(async () => {
-  const root = (document.getElementById('kites-global-overlay') as (HTMLElement & { _reactRoot?: Root }) | null)?._reactRoot;
+  const root = (document.getElementById('manga-garden-global-overlay') as (HTMLElement & { _reactRoot?: Root }) | null)?._reactRoot;
   if (root) await act(async () => root.unmount());
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
@@ -132,7 +132,7 @@ describe('real content reading shortcut wiring', () => {
     move();
     await deliver({ type: 'TRANSLATE_HOVERED_IMAGE' });
     await deliver({ type: 'START_AREA_SELECTION' });
-    expect(document.querySelector('.kites-snipper-backdrop')).toBeNull();
+    expect(document.querySelector('.manga-garden-snipper-backdrop')).toBeNull();
     expect(document.body.textContent).not.toContain('Drag to select');
   });
 
@@ -143,18 +143,18 @@ describe('real content reading shortcut wiring', () => {
     await mount();
     move();
     await deliver({ type: 'START_AREA_SELECTION' });
-    expect(document.querySelectorAll('.kites-snipper-backdrop')).toHaveLength(1);
-    const backdrop = document.querySelector('.kites-snipper-backdrop')!;
+    expect(document.querySelectorAll('.manga-garden-snipper-backdrop')).toHaveLength(1);
+    const backdrop = document.querySelector('.manga-garden-snipper-backdrop')!;
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true, clientX: 50, clientY: 50 })); });
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointermove', { bubbles: true, clientX: 250, clientY: 250 })); });
     await act(async () => { backdrop.dispatchEvent(new MouseEvent('pointerup', { bubbles: true, clientX: 250, clientY: 250 })); });
     const button = document.querySelector<HTMLButtonElement>('[title="Translate area"]')!;
     expect(button).not.toBeNull();
     await act(async () => button.click());
-    expect(document.querySelector('.kites-crop-frozen')).not.toBeNull();
+    expect(document.querySelector('.manga-garden-crop-frozen')).not.toBeNull();
     await deliver({ type: 'START_AREA_SELECTION' });
     await deliver({ type: 'TRANSLATE_HOVERED_IMAGE' });
-    expect(document.querySelector('.kites-snipper-backdrop')).toBeNull();
+    expect(document.querySelector('.manga-garden-snipper-backdrop')).toBeNull();
     expect(sendMessage).not.toHaveBeenCalled();
   });
 
@@ -168,7 +168,7 @@ describe('real content reading shortcut wiring', () => {
     move();
     await act(async () => { document.dispatchEvent(new KeyboardEvent('keydown', { key: 'f', bubbles: true, cancelable: true })); });
     expect(target.imgElement!.src).toBe(target.srcUrl);
-    expect(document.querySelector('[data-kites-toggle-btn]')?.getAttribute('aria-label')).toBe('Show Translated Image');
+    expect(document.querySelector('[data-manga-garden-toggle-btn]')?.getAttribute('aria-label')).toBe('Show Translated Image');
   });
 
   it('clears persistent target when the pointer leaves the document', async () => {
@@ -210,6 +210,6 @@ describe('real content reading shortcut wiring', () => {
       },
     });
     expect(target.imgElement!.src).toBe('blob:translated');
-    expect(target.sourceElement.getAttribute('data-kites-translated')).toBe('true');
+    expect(target.sourceElement.getAttribute('data-manga-garden-translated')).toBe('true');
   });
 });

@@ -82,7 +82,7 @@ export const WarpSettings: React.FC = () => {
     <div className="space-y-4 text-xs text-slate-200">
       <div className="pb-2 border-b border-[#282d3f]">
         <div className="flex items-center gap-2">
-          <Maximize2 className="w-4 h-4 text-[#f4446d]" />
+          <Maximize2 className="w-4 h-4 text-[#22d3ee]" />
           <h3 className="font-semibold text-sm text-slate-100">Warp & Quad Perspective</h3>
         </div>
         <p className="text-[11px] text-slate-400 mt-1">
@@ -99,7 +99,7 @@ export const WarpSettings: React.FC = () => {
               onClick={() => handlePresetSelect(p.id)}
               className={`py-2 px-2.5 rounded-lg border text-left transition ${
                 currentPreset === p.id
-                  ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d] font-medium'
+                  ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee] font-medium'
                   : 'border-[#282d3f] bg-[#090a0f] text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -122,7 +122,7 @@ export const WarpSettings: React.FC = () => {
             step="0.05"
             value={currentBend}
             onChange={(e) => handleBendChange(Number(e.target.value))}
-            className="w-full accent-[#f4446d]"
+            className="w-full accent-[#22d3ee]"
           />
         </div>
       )}
@@ -137,7 +137,7 @@ export const WarpSettings: React.FC = () => {
         </button>
       </div>
 
-      <div className="p-3 rounded-lg bg-[#f4446d]/10 border border-[#f4446d]/30 text-[11px] text-[#f4446d] leading-relaxed">
+      <div className="p-3 rounded-lg bg-[#22d3ee]/10 border border-[#22d3ee]/30 text-[11px] text-[#22d3ee] leading-relaxed">
         💡 <strong>Interactive Handles:</strong> Drag any of the 4 corner handles on the canvas to freely distort text in 3D perspective space.
       </div>
     </div>

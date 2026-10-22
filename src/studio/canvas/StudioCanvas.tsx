@@ -535,7 +535,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
       imageLayers,
       textObjects
     );
-    await downloadCanvasAsFile(compositeCanvas, `kites-translated.${format === 'jpeg' ? 'jpg' : 'png'}`, format);
+    await downloadCanvasAsFile(compositeCanvas, `manga-garden-translated.${format === 'jpeg' ? 'jpg' : 'png'}`, format);
     setContextMenu(null);
   };
 
@@ -1584,7 +1584,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                   resize: 'none',
                   boxSizing: 'border-box',
                   overflow: 'hidden',
-                  caretColor: '#f4446d',
+                  caretColor: '#22d3ee',
                 }}
                 autoFocus
               />
@@ -1628,7 +1628,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                 }}
                 className="fixed z-40 flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#282d3f] bg-[#12141c]/95 backdrop-blur-md shadow-2xl text-slate-200 max-w-sm pointer-events-auto"
               >
-                <span className="text-[10px] uppercase font-bold text-[#f4446d] tracking-wider shrink-0 flex items-center gap-1">
+                <span className="text-[10px] uppercase font-bold text-[#22d3ee] tracking-wider shrink-0 flex items-center gap-1">
                   <Languages className="w-3 h-3" />
                   OCR:
                 </span>
@@ -1674,7 +1674,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                   }
                 }}
                 title="Edit Dialogue (Double-click bubble or Enter)"
-                className="p-1.5 rounded-lg hover:bg-[#1c1f2e] text-[#f4446d] hover:text-[#e0355e] transition cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#1c1f2e] text-[#22d3ee] hover:text-[#0ea5e9] transition cursor-pointer"
               >
                 <Edit3 className="w-3.5 h-3.5" />
               </button>
@@ -1684,7 +1684,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                 onClick={handleToggleBold}
                 title={isSelActive ? "Bold Selected Text (Ctrl+B)" : "Toggle Box Bold (Ctrl+B)"}
                 className={`p-1.5 rounded-lg transition cursor-pointer ${
-                  isBoldActive ? 'bg-[#f4446d]/20 text-[#f4446d]' : 'text-slate-300 hover:text-white hover:bg-[#1c1f2e]'
+                  isBoldActive ? 'bg-[#22d3ee]/20 text-[#22d3ee]' : 'text-slate-300 hover:text-white hover:bg-[#1c1f2e]'
                 }`}
               >
                 <Bold className="w-3.5 h-3.5" />
@@ -1695,7 +1695,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                 onClick={handleToggleItalic}
                 title={isSelActive ? "Italic Selected Text (Ctrl+I)" : "Toggle Box Italic (Ctrl+I)"}
                 className={`p-1.5 rounded-lg transition cursor-pointer ${
-                  isItalicActive ? 'bg-[#f4446d]/20 text-[#f4446d]' : 'text-slate-300 hover:text-white hover:bg-[#1c1f2e]'
+                  isItalicActive ? 'bg-[#22d3ee]/20 text-[#22d3ee]' : 'text-slate-300 hover:text-white hover:bg-[#1c1f2e]'
                 }`}
               >
                 <Italic className="w-3.5 h-3.5" />
@@ -1724,7 +1724,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handlePasteStyle}
                   title="Paste Typography Style"
-                  className="p-1.5 rounded-lg hover:bg-[#1c1f2e] text-[#f4446d] hover:text-[#e0355e] transition cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[#1c1f2e] text-[#22d3ee] hover:text-[#0ea5e9] transition cursor-pointer"
                 >
                   <ClipboardPaste className="w-3.5 h-3.5" />
                 </button>
@@ -1752,7 +1752,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={handleDeleteSelectedText}
                 title="Delete Bubble (Delete)"
-                className="p-1.5 rounded-lg hover:bg-[#f4446d]/15 text-[#f4446d] hover:text-[#e0355e] transition cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#22d3ee]/15 text-[#22d3ee] hover:text-[#0ea5e9] transition cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -1772,8 +1772,8 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
 
       {/* Local AI WebGPU Processing Spinner */}
       {isAiProcessing && (
-        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#f4446d]/40 bg-[#12141c]/90 backdrop-blur-md text-xs text-[#f4446d] shadow-xl">
-          <Sparkles className="w-4 h-4 animate-spin text-[#f4446d]" />
+        <div className="fixed top-16 right-6 z-50 flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#22d3ee]/40 bg-[#12141c]/90 backdrop-blur-md text-xs text-[#22d3ee] shadow-xl">
+          <Sparkles className="w-4 h-4 animate-spin text-[#22d3ee]" />
           <span>Local WebGPU Inference...</span>
         </div>
       )}
@@ -1797,7 +1797,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
             onClick={() => handleContextDownload('png')}
             className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] hover:text-white transition cursor-pointer text-left"
           >
-            <Download className="w-3.5 h-3.5 text-[#f4446d]" />
+            <Download className="w-3.5 h-3.5 text-[#22d3ee]" />
             <span>Save Image As (PNG)</span>
           </button>
           <button
@@ -1840,7 +1840,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                   }}
                   className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] hover:text-white transition cursor-pointer text-left"
                 >
-                  <Languages className="w-3.5 h-3.5 text-[#f4446d]" />
+                  <Languages className="w-3.5 h-3.5 text-[#22d3ee]" />
                   <span>Copy Original OCR</span>
                 </button>
               )}
@@ -1861,7 +1861,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
                   handleDeleteSelectedText();
                   setContextMenu(null);
                 }}
-                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#f4446d]/15 text-[#f4446d] hover:text-[#e0355e] transition cursor-pointer text-left"
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#22d3ee]/15 text-[#22d3ee] hover:text-[#0ea5e9] transition cursor-pointer text-left"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>Delete Bubble</span>
@@ -1873,7 +1873,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
               onClick={handleContextAddBoxHere}
               className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] hover:text-white transition cursor-pointer text-left"
             >
-              <Plus className="w-3.5 h-3.5 text-[#f4446d]" />
+              <Plus className="w-3.5 h-3.5 text-[#22d3ee]" />
               <span>Add Text Box Here</span>
             </button>
           )}

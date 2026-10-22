@@ -11,7 +11,7 @@
 
 ### 2. The Objective (The "Why")
 
-When translating images on dynamic single-page applications like `x.com` (Twitter), the translation pipeline completed successfully in the background worker, but the page never displayed the translated image. The goal was to eliminate silent image replacement drops, isolate the source of console Content Security Policy (CSP) errors, and upgrade Kites' content script image replacer to production-grade resilience across modern SPAs (React, Vue) and responsive HTML5 media.
+When translating images on dynamic single-page applications like `x.com` (Twitter), the translation pipeline completed successfully in the background worker, but the page never displayed the translated image. The goal was to eliminate silent image replacement drops, isolate the source of console Content Security Policy (CSP) errors, and upgrade Manga Garden' content script image replacer to production-grade resilience across modern SPAs (React, Vue) and responsive HTML5 media.
 
 ---
 
@@ -34,7 +34,7 @@ When translating images on dynamic single-page applications like `x.com` (Twitte
    - Substantially reduced DOM attribute memory overhead and avoided strict inline data URI CSP constraints.
    - Added automatic revocation on `beforeunload` to prevent memory leaks.
 4. **Wiped `srcset` & Sanitized Lazy Attributes (`sanitizeImageAttributes`):**
-   - Stored backups in `data-kites-orig-src` and `data-kites-orig-srcset`.
+   - Stored backups in `data-manga-garden-orig-src` and `data-manga-garden-orig-srcset`.
    - Cleared `targetImg.srcset = ''` and removed the attribute to adhere to W3C/HTML5 image candidate selection rules.
    - Stripped common lazy attributes to prevent site scripts from overriding the image.
 5. **Built React SPA Reversion Shield (`attachReversionShield` & `runSelfMutation`):**
@@ -44,13 +44,13 @@ When translating images on dynamic single-page applications like `x.com` (Twitte
 6. **Constructed Multi-Tier Element Resolution (`resolveTargetImageElement`):**
    - **Tier 1:** In-memory registry lookup (`imageElementRegistry`).
    - **Tier 2:** Exact `img.src` or `img.currentSrc` match.
-   - **Tier 3:** `data-kites-orig-src` match.
+   - **Tier 3:** `data-manga-garden-orig-src` match.
    - **Tier 4:** Normalized base URL match via `getNormalizedBaseUrl()` (stripping resolution parameters like `?name=medium` vs `?name=large`).
    - Added explicit diagnostic warning logs if an element cannot be found, preventing silent failures.
 7. **Suppressed Parent Background Images (`suppressParentBackgroundImage`):**
    - Inspected ancestor elements for Twitter placeholder `background-image: url(...)` styles and set them to `none`.
 8. **Fixed Global Auto-Translate MutationObserver:**
-   - Modified the observer in `src/content/index.tsx` so images are only marked as translated if their `src` begins with `blob:`/`data:` or has `data-kites-translated="true"`, preventing host resolution upgrades from blacklisting un-translated images.
+   - Modified the observer in `src/content/index.tsx` so images are only marked as translated if their `src` begins with `blob:`/`data:` or has `data-manga-garden-translated="true"`, preventing host resolution upgrades from blacklisting un-translated images.
 9. **Generalized Detection to Media Surfaces (`MediaTarget`):**
    - Added shared `MediaTarget` discovery for Hover, Persistent, and Auto modes, separating the replaceable `imgElement` from the visible/observable `surfaceElement`.
    - Source resolution now checks `currentSrc`, `src`, `srcset`, and established lazy-load attributes.
@@ -58,7 +58,7 @@ When translating images on dynamic single-page applications like `x.com` (Twitte
    - Persistent and Auto now consume the same deduplicated document discovery. Auto observes `surfaceElement`, not a potentially hidden backing image.
 10. **Supported Structurally Associated Hidden Backing Images:**
    - Hidden backing images are rejected unless a nearby visible ancestor has a matching background URL or matching rendered geometry.
-   - On successful translation, Kites preserves original inline styles, reveals the translated backing image with minimum opacity/z-index/pointer-event overrides, and suppresses the associated surface background.
+   - On successful translation, Manga Garden preserves original inline styles, reveals the translated backing image with minimum opacity/z-index/pointer-event overrides, and suppresses the associated surface background.
    - SPA shielding now restores translated source, visibility overrides, and suppressed surface background if host reconciliation reverts them.
    - Superseded per-image Blob URLs are revoked immediately; remaining active URLs retain unload cleanup.
 11. **Added Focused DOM Coverage:**
@@ -68,7 +68,7 @@ When translating images on dynamic single-page applications like `x.com` (Twitte
 
 ### 4. Roadblocks & Decisions (The Pivot Points)
 
-* **The Problem:** The user observed CSP violation logs in the browser console immediately beside Kites logs and assumed Twitter's CSP was actively blocking image replacement.
+* **The Problem:** The user observed CSP violation logs in the browser console immediately beside Manga Garden logs and assumed Twitter's CSP was actively blocking image replacement.
 * **The Investigation:**
   - `x.com` enforces a strict CSP for styles and scripts.
   - The `Mulish` font error was traced to an external extension (Poper Blocker) injecting un-allowlisted Google Fonts stylesheets.

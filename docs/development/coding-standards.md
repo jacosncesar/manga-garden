@@ -1,6 +1,6 @@
 # Coding Standards & Architectural Invariants 🛡️
 
-When contributing to Kites, please adhere to these core coding principles, performance invariants, and established library workarounds.
+When contributing to Manga Garden, please adhere to these core coding principles, performance invariants, and established library workarounds.
 
 ---
 
@@ -66,7 +66,7 @@ const INPAINT_MASK_STROKE_WIDTH = 4;
 
 ### SPA & Responsive Image Replacement Strategy
 When replacing comic panels in modern SPAs (Twitter/X, Reddit, MangaDex):
-1. **Always wipe `srcset`:** Modern browsers prioritize `srcset` candidates over `src`. Back up `data-kites-orig-srcset`, set `img.srcset = ''`, and call `img.removeAttribute('srcset')`.
+1. **Always wipe `srcset`:** Modern browsers prioritize `srcset` candidates over `src`. Back up `data-manga-garden-orig-srcset`, set `img.srcset = ''`, and call `img.removeAttribute('srcset')`.
 2. **Convert Base64 to Blob URLs:** Never assign multi-megabyte `data:image/png;base64,...` strings directly to `img.src`. Use `URL.createObjectURL(blob)`.
 3. **Use `isSelfMutating` Flags:** When programmatically updating image attributes, wrap updates in `runSelfMutation(() => { ... })` to prevent infinite mutation observer triggers.
 4. **Attach Reversion Shield:** Attach a targeted `MutationObserver` that restores the translated image if the SPA re-renders or updates virtual DOM props.
@@ -78,5 +78,5 @@ When replacing comic panels in modern SPAs (Twitter/X, Reddit, MangaDex):
 Never refactor, simplify, or delete patterns marked with `# WORKAROUND` or `// WORKAROUND`:
 
 - **Vite 8 + CRXJS 2.7.1 (`vite.config.ts`):** Keep `build.rollupOptions` (do not rename to `build.rolldownOptions`). CRXJS 2.7.1 reads the raw `build.rollupOptions` key to discover extra HTML entry points (`src/offscreen/offscreen.html`).
-- **Explicit `optimizeDeps.entries`:** Keep all Kites entry points listed in `optimizeDeps.entries` to prevent cold-start dependency re-optimization during service worker registration.
+- **Explicit `optimizeDeps.entries`:** Keep all Manga Garden entry points listed in `optimizeDeps.entries` to prevent cold-start dependency re-optimization during service worker registration.
 - **Native Package Exclusions:** Keep Node/native packages (`ppu-paddle-ocr`, `@napi-rs/canvas`, `canvas`, `onnxruntime-node`) in both `optimizeDeps.exclude` and `rollupOptions.external` so Rolldown does not attempt to bundle native binary modules into the extension.

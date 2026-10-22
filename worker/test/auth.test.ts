@@ -21,4 +21,10 @@ describe('Worker Google Auth Utils', () => {
     expect(hashA).not.toBe(hashB);
     expect(hashA).not.toBe(hashC);
   });
+
+  it('rejects an empty salt instead of falling back to a public value', async () => {
+    await expect(hashUserSubject('sub-1', '')).rejects.toThrow(
+      'JWT_SALT must be configured before hashing user subjects.'
+    );
+  });
 });

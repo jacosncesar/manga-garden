@@ -1,13 +1,14 @@
 import 'fake-indexeddb/auto';
+import Dexie from 'dexie';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cleanupOldJobs, db, JOB_RETENTION_DAYS, type TranslationJob } from './db';
+import { cleanupOldJobs, db, JOB_RETENTION_DAYS, migrateLegacyDatabase, type TranslationJob } from './db';
 import { STORAGE_KEYS } from './shared/constants';
 
 const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 const NOW = new Date('2026-09-07T12:00:00.000Z').getTime();
 
 /**
- * Clears every Kites table so each database test starts in isolation.
+ * Clears every Manga Garden table so each database test starts in isolation.
  *
  * @returns Resolves after all table records are removed.
  */
@@ -37,6 +38,35 @@ afterEach(async () => {
 });
 
 describe('translation job cleanup', () => {
+  it('copies existing history from the previous database into Manga Garden storage', async () => {
+    const legacyDb = new Dexie('KitesDatabase');
+    legacyDb.version(4).stores({
+      translationJobs: '++id, timestamp, status, folderId, srcUrl',
+      projectFolders: '++id, title, timestamp, isFavorite',
+      images: '++id, jobId',
+      textBlocks: '++id, imageId',
+    });
+
+    try {
+      await legacyDb.open();
+      const legacyId = await legacyDb.table('translationJobs').add({
+        timestamp: NOW,
+        status: 'completed',
+        srcUrl: 'https://example.com/page.jpg',
+      });
+
+      await migrateLegacyDatabase();
+
+      expect(await db.translationJobs.get(Number(legacyId))).toMatchObject({
+        timestamp: NOW,
+        srcUrl: 'https://example.com/page.jpg',
+      });
+    } finally {
+      legacyDb.close();
+      await legacyDb.delete();
+    }
+  });
+
   it('deletes jobs older than seven days and preserves newer jobs', async () => {
     const expiredJobId = await db.translationJobs.add({
       timestamp: NOW - (JOB_RETENTION_DAYS + 1) * MILLISECONDS_PER_DAY,

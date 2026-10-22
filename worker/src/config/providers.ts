@@ -167,8 +167,8 @@ export const PROVIDER_ROUTES: ProviderRouteConfig[] = [
     modelName: 'openrouter/free',
     apiKeyEnvVar: 'OPENROUTER_API_KEY',
     customHeaders: {
-      'HTTP-Referer': 'https://kites.ai',
-      'X-Title': 'Kites Manga Translator',
+      'HTTP-Referer': 'https://github.com/jacosncesar/MangaLumeTwo',
+      'X-Title': 'Manga Garden Manga Translator',
     },
     rpmLimit: 20,
     rpdLimit: 1000,

@@ -82,7 +82,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
           <span className="font-medium text-sm">Site Rules & Domains</span>
           <HelpTooltip
             size="sm"
-            content="Desative o MangaLume 2.0 em domínios específicos ou configure seletores CSS personalizados para imagens em sites de leitura complexos."
+            content="Desative o Manga Garden em domínios específicos ou configure seletores CSS personalizados para imagens em sites de leitura complexos."
           />
         </div>
         <button
@@ -122,7 +122,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
       {activeTab === 'disabled' && (
         <div className="flex flex-col gap-2.5">
           <p className="text-[11px] text-[var(--color-dust)]">
-            O MangaLume 2.0 funciona em todos os sites por padrão. Os sites listados abaixo serão ignorados.
+            O Manga Garden funciona em todos os sites por padrão. Os sites listados abaixo serão ignorados.
           </p>
 
           {/* Add input */}
@@ -168,7 +168,7 @@ export default function SiteRulesPanel({ state, updateState, onClose }: SiteRule
             </div>
           ) : (
             <p className="text-[11px] text-[var(--color-dust)] text-center py-2 italic">
-              Nenhum domínio desativado. O MangaLume 2.0 está ativo em todas as páginas compatíveis.
+              Nenhum domínio desativado. O Manga Garden está ativo em todas as páginas compatíveis.
             </p>
           )}
         </div>

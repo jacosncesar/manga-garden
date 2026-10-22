@@ -154,7 +154,7 @@ export const TypographySettings: React.FC = () => {
     ctx.drawImage(originalImage, sx, sy, sw, sh, 0, 0, sw, sh);
 
     // Outline the speech bubble bounds in signature rose
-    ctx.strokeStyle = '#f4446d';
+    ctx.strokeStyle = '#22d3ee';
     ctx.lineWidth = 2;
     ctx.setLineDash([4, 4]);
     ctx.strokeRect(selectedObj.x - sx, selectedObj.y - sy, selectedObj.width, selectedObj.height);
@@ -398,7 +398,7 @@ export const TypographySettings: React.FC = () => {
       <div className="flex items-center gap-2">
         <button
           onClick={handleAddNewEmptyTextBox}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#f4446d] hover:bg-[#e0355e] text-white text-xs font-semibold shadow-md shadow-[rgba(244,68,109,0.3)] transition cursor-pointer"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-md shadow-[rgba(34,211,238,0.3)] transition cursor-pointer"
         >
           <Plus className="w-3.5 h-3.5" />
           Add Text Box
@@ -422,7 +422,7 @@ export const TypographySettings: React.FC = () => {
           </p>
           <button
             onClick={() => studioStore.setState({ globalEditMode: true })}
-            className="w-full py-1.5 px-3 rounded-lg border border-[#282d3f] bg-[#1c1f2e] text-[#f4446d] hover:bg-[#282d3f] transition font-medium"
+            className="w-full py-1.5 px-3 rounded-lg border border-[#282d3f] bg-[#1c1f2e] text-[#22d3ee] hover:bg-[#282d3f] transition font-medium"
           >
             Enable Global Edit Mode
           </button>
@@ -431,12 +431,12 @@ export const TypographySettings: React.FC = () => {
         <>
           <div className="flex items-center justify-between pb-2 border-b border-[#282d3f]">
             <h3 className="font-semibold text-sm text-slate-100">Typography</h3>
-            <label className="flex items-center gap-1.5 text-[11px] text-[#f4446d] font-medium cursor-pointer">
+            <label className="flex items-center gap-1.5 text-[11px] text-[#22d3ee] font-medium cursor-pointer">
               <input
                 type="checkbox"
                 checked={globalEditMode}
                 onChange={(e) => studioStore.setState({ globalEditMode: e.target.checked })}
-                className="rounded border-[#282d3f] bg-[#090a0f] text-[#f4446d] focus:ring-0 accent-[#f4446d]"
+                className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0 accent-[#22d3ee]"
               />
               All Bubbles
             </label>
@@ -492,7 +492,7 @@ export const TypographySettings: React.FC = () => {
       <div className="space-y-1.5 p-2.5 rounded-xl bg-[#090a0f] border border-[#262a3b]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
-            <Languages className="w-3.5 h-3.5 text-[#f4446d]" />
+            <Languages className="w-3.5 h-3.5 text-[#22d3ee]" />
             <span>Original Source (OCR)</span>
           </div>
           <div className="flex items-center gap-1">
@@ -501,7 +501,7 @@ export const TypographySettings: React.FC = () => {
                 onClick={() => setShowCropPreview(!showCropPreview)}
                 title={showCropPreview ? 'Hide original panel crop' : 'Peek original panel crop'}
                 className={`p-1 rounded text-[10px] transition ${
-                  showCropPreview ? 'bg-[#1c1f2e] text-[#f4446d]' : 'text-slate-400 hover:text-white'
+                  showCropPreview ? 'bg-[#1c1f2e] text-[#22d3ee]' : 'text-slate-400 hover:text-white'
                 }`}
               >
                 <ImageIcon className="w-3 h-3" />
@@ -522,7 +522,7 @@ export const TypographySettings: React.FC = () => {
               title={isEditingOriginal ? 'Done editing original OCR' : 'Edit original OCR transcription'}
               className={`p-1 rounded text-[10px] transition ${
                 isEditingOriginal
-                  ? 'bg-[#f4446d]/20 text-[#f4446d]'
+                  ? 'bg-[#22d3ee]/20 text-[#22d3ee]'
                   : 'text-slate-400 hover:text-white hover:bg-[#1c1f2e]'
               }`}
             >
@@ -545,7 +545,7 @@ export const TypographySettings: React.FC = () => {
             onChange={(e) => handleUpdateOriginalText(e.target.value)}
             placeholder="Edit original raw text (e.g. Japanese, Korean)..."
             rows={2}
-            className="w-full rounded-lg border border-[#f4446d]/60 bg-[#12141c] p-2 text-xs text-slate-200 focus:outline-hidden resize-none font-sans"
+            className="w-full rounded-lg border border-[#22d3ee]/60 bg-[#12141c] p-2 text-xs text-slate-200 focus:outline-hidden resize-none font-sans"
           />
         ) : (
           <div className="p-2 rounded-lg bg-[#12141c]/70 border border-[#262a3b]/60 text-xs text-slate-300 max-h-24 overflow-y-auto select-text leading-relaxed font-sans">
@@ -569,7 +569,7 @@ export const TypographySettings: React.FC = () => {
       <div className="space-y-1.5 p-2.5 rounded-xl bg-[#090a0f] border border-[#262a3b]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-semibold text-xs">
-            <Type className="w-3.5 h-3.5 text-[#f4446d]" />
+            <Type className="w-3.5 h-3.5 text-[#22d3ee]" />
             <span>Dialogue Text</span>
           </div>
           <div className="flex items-center gap-1">
@@ -586,7 +586,7 @@ export const TypographySettings: React.FC = () => {
             <button
               onClick={handleClearText}
               title="Clear dialogue text"
-              className="px-1.5 py-0.5 rounded text-[10px] text-slate-400 hover:text-[#f4446d] hover:bg-[#1c1f2e] transition"
+              className="px-1.5 py-0.5 rounded text-[10px] text-slate-400 hover:text-[#22d3ee] hover:bg-[#1c1f2e] transition"
             >
               Clear
             </button>
@@ -629,11 +629,11 @@ export const TypographySettings: React.FC = () => {
           }}
           placeholder="Type translation dialogue here..."
           rows={3}
-          className="w-full rounded-lg border border-[#262a3b] bg-[#12141c] p-2.5 text-xs text-slate-100 placeholder:text-slate-600 focus:border-[#f4446d] focus:outline-hidden transition resize-y min-h-[64px] max-h-48 leading-relaxed font-sans"
+          className="w-full rounded-lg border border-[#262a3b] bg-[#12141c] p-2.5 text-xs text-slate-100 placeholder:text-slate-600 focus:border-[#22d3ee] focus:outline-hidden transition resize-y min-h-[64px] max-h-48 leading-relaxed font-sans"
         />
 
         {isSelectionActive && (
-          <div className="flex items-center justify-between text-[11px] text-[#f4446d] bg-[#f4446d]/10 px-2.5 py-1.5 rounded-lg border border-[#f4446d]/20 animate-in fade-in duration-150">
+          <div className="flex items-center justify-between text-[11px] text-[#22d3ee] bg-[#22d3ee]/10 px-2.5 py-1.5 rounded-lg border border-[#22d3ee]/20 animate-in fade-in duration-150">
             <span className="truncate max-w-[210px] font-medium">
               Formatting selection: "{obj.text?.slice(selStart, selEnd)}"
             </span>
@@ -674,12 +674,12 @@ export const TypographySettings: React.FC = () => {
             onClick={() => handleToggleTypesetMode('balloon')}
             className={`flex-1 py-1.5 px-2 rounded-md font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] ${
               effectiveTypesetMode === 'balloon'
-                ? 'bg-[#1c1f2e] text-[#f4446d] shadow-xs'
+                ? 'bg-[#1c1f2e] text-[#22d3ee] shadow-xs'
                 : 'text-slate-400 hover:text-white'
             }`}
             title="Auto Balloon: Balances lines into speech bubble diamond envelopes and auto-fits font size (Pipeline typesystem)"
           >
-            <Sparkles size={12} className={effectiveTypesetMode === 'balloon' ? 'text-[#f4446d]' : ''} />
+            <Sparkles size={12} className={effectiveTypesetMode === 'balloon' ? 'text-[#22d3ee]' : ''} />
             <span>Auto Balloon</span>
           </button>
           <button
@@ -687,12 +687,12 @@ export const TypographySettings: React.FC = () => {
             onClick={() => handleToggleTypesetMode('simple')}
             className={`flex-1 py-1.5 px-2 rounded-md font-semibold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-[11px] ${
               effectiveTypesetMode === 'simple'
-                ? 'bg-[#1c1f2e] text-[#f4446d] shadow-xs'
+                ? 'bg-[#1c1f2e] text-[#22d3ee] shadow-xs'
                 : 'text-slate-400 hover:text-white'
             }`}
             title="Simple Wrap: Greedy line wrapping without auto font scaling on subsequent edits"
           >
-            <AlignLeft size={12} className={effectiveTypesetMode === 'simple' ? 'text-[#f4446d]' : ''} />
+            <AlignLeft size={12} className={effectiveTypesetMode === 'simple' ? 'text-[#22d3ee]' : ''} />
             <span>Simple Wrap</span>
           </button>
         </div>
@@ -731,7 +731,7 @@ export const TypographySettings: React.FC = () => {
             max="120"
             value={effectiveFontSize}
             onChange={(e) => updateSelected({ fontSize: Number(e.target.value) })}
-            className="w-full accent-[#f4446d]"
+            className="w-full accent-[#22d3ee]"
           />
         </div>
         <div>
@@ -746,7 +746,7 @@ export const TypographySettings: React.FC = () => {
             step="0.1"
             value={obj.lineSpacing || 1.2}
             onChange={(e) => updateSelected({ lineSpacing: Number(e.target.value) })}
-            className="w-full accent-[#f4446d]"
+            className="w-full accent-[#22d3ee]"
           />
         </div>
       </div>
@@ -759,7 +759,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ bold: !effectiveBold })}
           className={`p-2 rounded-lg border transition ${
             effectiveBold
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Bold"
@@ -772,7 +772,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ italic: !effectiveItalic })}
           className={`p-2 rounded-lg border transition ${
             effectiveItalic
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Italic"
@@ -785,7 +785,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ uppercase: !obj.uppercase, lowercase: false })}
           className={`p-2 rounded-lg border transition ${
             obj.uppercase
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Uppercase"
@@ -798,7 +798,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ align: 'left' })}
           className={`p-2 rounded-lg border transition ${
             obj.align === 'left'
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Align Left"
@@ -811,7 +811,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ align: 'center' })}
           className={`p-2 rounded-lg border transition ${
             obj.align === 'center' || !obj.align
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Align Center"
@@ -824,7 +824,7 @@ export const TypographySettings: React.FC = () => {
           onClick={() => updateSelected({ align: 'right' })}
           className={`p-2 rounded-lg border transition ${
             obj.align === 'right'
-              ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d]'
+              ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee]'
               : 'border-[#282d3f] bg-[#090a0f] text-slate-400'
           }`}
           title="Align Right"
@@ -843,7 +843,7 @@ export const TypographySettings: React.FC = () => {
           type="checkbox"
           checked={obj.isVertical || false}
           onChange={(e) => updateSelected({ isVertical: e.target.checked })}
-          className="rounded border-[#282d3f] bg-[#12141c] text-[#f4446d] focus:ring-0 accent-[#f4446d]"
+          className="rounded border-[#282d3f] bg-[#12141c] text-[#22d3ee] focus:ring-0 accent-[#22d3ee]"
         />
       </div>
 
@@ -851,7 +851,7 @@ export const TypographySettings: React.FC = () => {
       <div className="space-y-1.5 p-2 rounded-lg bg-[#090a0f] border border-[#282d3f]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-300 font-medium">
-            <RotateCw className="w-3.5 h-3.5 text-[#f4446d]" />
+            <RotateCw className="w-3.5 h-3.5 text-[#22d3ee]" />
             <span>Rotation Angle</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -877,7 +877,7 @@ export const TypographySettings: React.FC = () => {
             step="1"
             value={obj.rotation || 0}
             onChange={(e) => updateSelected({ rotation: Number(e.target.value) })}
-            className="flex-1 accent-[#f4446d]"
+            className="flex-1 accent-[#22d3ee]"
           />
           <div className="flex items-center gap-1 shrink-0">
             <button
@@ -919,7 +919,7 @@ export const TypographySettings: React.FC = () => {
               type="checkbox"
               checked={obj.isGradient || false}
               onChange={(e) => updateSelected({ isGradient: e.target.checked })}
-              className="rounded border-[#282d3f] bg-[#090a0f] text-[#f4446d] focus:ring-0 accent-[#f4446d]"
+              className="rounded border-[#282d3f] bg-[#090a0f] text-[#22d3ee] focus:ring-0 accent-[#22d3ee]"
             />
             Linear Gradient
           </label>
@@ -934,7 +934,7 @@ export const TypographySettings: React.FC = () => {
           {obj.isGradient && (
             <input
               type="color"
-              value={obj.color2 || '#ef4444'}
+              value={obj.color2 || '#22d3ee'}
               onChange={(e) => updateSelected({ color2: e.target.value })}
               className="w-7 h-7 rounded border border-[#282d3f] bg-transparent cursor-pointer"
             />
@@ -967,7 +967,7 @@ export const TypographySettings: React.FC = () => {
             max="20"
             value={effectiveStrokeWidth}
             onChange={(e) => updateSelected({ strokeWidth: Number(e.target.value) })}
-            className="flex-1 accent-[#f4446d]"
+            className="flex-1 accent-[#22d3ee]"
           />
         </div>
 
@@ -984,7 +984,7 @@ export const TypographySettings: React.FC = () => {
               max="25"
               value={obj.shadowDistance || 0}
               onChange={(e) => updateSelected({ shadowDistance: Number(e.target.value) })}
-              className="w-full accent-[#f4446d]"
+              className="w-full accent-[#22d3ee]"
             />
           </div>
           <div>
@@ -998,7 +998,7 @@ export const TypographySettings: React.FC = () => {
               max="360"
               value={obj.shadowAngle || 45}
               onChange={(e) => updateSelected({ shadowAngle: Number(e.target.value) })}
-              className="w-full accent-[#f4446d]"
+              className="w-full accent-[#22d3ee]"
             />
           </div>
         </div>
@@ -1034,7 +1034,7 @@ export const TypographySettings: React.FC = () => {
                 max="30"
                 value={obj.backgroundPadding || 4}
                 onChange={(e) => updateSelected({ backgroundPadding: Number(e.target.value) })}
-                className="w-full accent-[#f4446d]"
+                className="w-full accent-[#22d3ee]"
               />
             </div>
             <div>
@@ -1048,7 +1048,7 @@ export const TypographySettings: React.FC = () => {
                 max="50"
                 value={obj.backgroundBorderRadius || 0}
                 onChange={(e) => updateSelected({ backgroundBorderRadius: Number(e.target.value) })}
-                className="w-full accent-[#f4446d]"
+                className="w-full accent-[#22d3ee]"
               />
             </div>
           </div>

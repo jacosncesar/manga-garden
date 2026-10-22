@@ -97,7 +97,7 @@ async function testModelConfig(browser, configName, popupState) {
 
     await page.evaluate(() => {
       // @ts-ignore
-      const btn = document.querySelector('#kites-translate-btn');
+      const btn = document.querySelector('#manga-garden-translate-btn');
       if (btn) btn.click();
     });
 

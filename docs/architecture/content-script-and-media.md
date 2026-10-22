@@ -1,6 +1,6 @@
 # Content Script & Media Subsystems 🖼️
 
-The Kites **Content Script** (`src/content/`) executes directly in the context of webpages. It is responsible for discovering comic images across diverse web architectures, anchoring non-intrusive UI controls, replacing images safely against reactive SPA frameworks, and providing manual screen-crop capture.
+The Manga Garden **Content Script** (`src/content/`) executes directly in the context of webpages. It is responsible for discovering comic images across diverse web architectures, anchoring non-intrusive UI controls, replacing images safely against reactive SPA frameworks, and providing manual screen-crop capture.
 
 ---
 
@@ -56,7 +56,7 @@ flowchart TD
 Standard extensions rely on simple `document.querySelectorAll('img')`. On modern comic reader platforms and social media, this approach fails due to complex layout techniques:
 
 ### 1. The `MediaTarget` Abstraction
-Kites abstracts media elements into a unified `MediaTarget` descriptor:
+Manga Garden abstracts media elements into a unified `MediaTarget` descriptor:
 ```ts
 export interface MediaTarget {
   kind: 'img' | 'background' | 'svg-image';
@@ -71,33 +71,33 @@ export interface MediaTarget {
 
 ### 2. Hidden Backing Surface Resolution (Twitter/X & Pixiv)
 On platforms like Twitter/X and Pixiv, images are rendered beneath transparent pointer overlays or pseudo-elements (`::after` click interceptors):
-- Kites inspects ancestor trees up to depth $D = 3$.
+- Manga Garden inspects ancestor trees up to depth $D = 3$.
 - Matches hidden backing `<img>` elements with their visible bounding box surfaces (size tolerance $\le 20\%$).
 - Attaches the translation trigger button to the visible surface while reading pixel data from the backing image.
 
 ### 3. SVG Placeholder & Pseudo-Element Filtering (Issue #2 Mitigation)
 Many manga readers (such as `roliascan.com`) lazy-load chapters inside empty `div` containers whose `::before` pseudo-element displays a spinner or placeholder as `background-image: url("data:image/svg+xml;base64,...")`.
 - **The Problem:** Naive scanners picked the SVG placeholder before the real comic image loaded, translating a blank spinner and locking the concurrency queue.
-- **The Mitigation:** Kites filters all SVG data URLs, blurhashes, and 1×1 loading spacers (`PLACEHOLDER_SOURCE` regex), waiting until the genuine high-resolution image URL hydrates into `src` or `data-src`.
+- **The Mitigation:** Manga Garden filters all SVG data URLs, blurhashes, and 1×1 loading spacers (`PLACEHOLDER_SOURCE` regex), waiting until the genuine high-resolution image URL hydrates into `src` or `data-src`.
 
 ---
 
 ## 🛡️ SPA Image Replacement & Reversion Shield
 
-Modern Single-Page Applications (React Native for Web, Vue, Next.js) manage DOM nodes through a virtual DOM. When Kites modifies an image's `src`, the SPA re-renders and silently reverts the comic page back to its untranslated state.
+Modern Single-Page Applications (React Native for Web, Vue, Next.js) manage DOM nodes through a virtual DOM. When Manga Garden modifies an image's `src`, the SPA re-renders and silently reverts the comic page back to its untranslated state.
 
-To guarantee permanent image translation without refreshing the page, Kites applies the **XianScan Reference Pattern**:
+To guarantee permanent image translation without refreshing the page, Manga Garden applies the **XianScan Reference Pattern**:
 
 ```mermaid
 sequenceDiagram
-    participant Kites as Kites Translation Engine
+    participant Manga Garden as Manga Garden Translation Engine
     participant DOM as Image Element (<img>)
     participant Shield as Reversion Shield (MutationObserver)
     participant SPA as Host SPA React/Vue Engine
 
-    Kites->>DOM: 1. Clear srcset attribute (target.removeAttribute('srcset'))
-    Kites->>DOM: 2. Set src = blob:http://... (Same-Origin Blob URL)
-    Kites->>Shield: 3. Record applied URL in data-kites-applied-src
+    manga-garden->>DOM: 1. Clear srcset attribute (target.removeAttribute('srcset'))
+    manga-garden->>DOM: 2. Set src = blob:http://... (Same-Origin Blob URL)
+    manga-garden->>Shield: 3. Record applied URL in data-manga-garden-applied-src
     Note over DOM: Translated comic visible to user
     SPA->>DOM: 4. Virtual DOM reconciles -> overwrites src with original raw URL
     Shield->>Shield: 5. MutationObserver fires (detects src mismatch)
@@ -107,19 +107,19 @@ sequenceDiagram
 
 ### Key Technical Invariants
 1. **Wipe `srcset`:** If `srcset` remains on the element, the browser prioritizes `srcset` breakpoints over `src`, undoing the translated image on window resize.
-2. **Same-Origin Blob URLs over Base64 Data URLs:** Long Base64 strings ($> 5\text{ MB}$) cause DOM memory leaks, break browser devtools, and violate strict site Content Security Policies. Kites converts image buffers into `blob:` URLs scoped to the host origin.
-3. **`isSelfMutating` Guard:** Programmatic image swaps are wrapped in a guard flag to prevent the `MutationObserver` from reacting to Kites' own writes, eliminating recursive execution loops.
+2. **Same-Origin Blob URLs over Base64 Data URLs:** Long Base64 strings ($> 5\text{ MB}$) cause DOM memory leaks, break browser devtools, and violate strict site Content Security Policies. Manga Garden converts image buffers into `blob:` URLs scoped to the host origin.
+3. **`isSelfMutating` Guard:** Programmatic image swaps are wrapped in a guard flag to prevent the `MutationObserver` from reacting to Manga Garden' own writes, eliminating recursive execution loops.
 
 ---
 
 ## 🎯 Button Overlays & Hover Race Mitigation
 
 ### 1. Modern CSS Anchor Positioning
-Kites uses native CSS Anchor Positioning where supported:
+Manga Garden uses native CSS Anchor Positioning where supported:
 ```css
-.kites-translate-button {
+.manga-garden-translate-button {
   position: absolute;
-  position-anchor: --kites-target-panel;
+  position-anchor: --manga-garden-target-panel;
   top: anchor(top 12px);
   left: anchor(left 12px);
 }
@@ -128,14 +128,14 @@ This guarantees the button stays pinned to the comic panel during layout shifts,
 
 ### 2. Pointer Halo Guard (Phase 20 Race Fix)
 When users move their cursor rapidly across panel boundaries, mouseleave events can fire prematurely before mouseenter registers on the button, causing annoying button flicker.
-- Kites attaches a **3px pointer tolerance halo** around the surface bounds.
+- Manga Garden attaches a **3px pointer tolerance halo** around the surface bounds.
 - If the cursor remains within the halo or on button descendants, dismissal timers are cancelled, producing smooth, reliable hover transitions.
 
 ---
 
 ## 📖 Distraction-Free Chapter Reader & Streaming Mode (`ChapterReaderModal.tsx`)
 
-To provide an immersive comic reading experience without intrusive webpage clutter or ads, Kites incorporates the **Distraction-Free Chapter Reader**:
+To provide an immersive comic reading experience without intrusive webpage clutter or ads, Manga Garden incorporates the **Distraction-Free Chapter Reader**:
 
 ```mermaid
 flowchart TD
@@ -154,8 +154,8 @@ flowchart TD
 ```
 
 ### 1. CSS Style Isolation & Recycled Image Guards
-- **Container Isolation:** Renders inside a dedicated root element (`#kites-reader-modal-root`) with CSS resets, ensuring host website styles, floating ads, and navigation bars cannot contaminate reader layouts.
-- **Recycled Image Reset:** Modern infinite-scroll manga websites recycle DOM `<img>` tags as users scroll down. Kites tracks image source hashes and resets translated overlays whenever an element is recycled for a new image.
+- **Container Isolation:** Renders inside a dedicated root element (`#manga-garden-reader-modal-root`) with CSS resets, ensuring host website styles, floating ads, and navigation bars cannot contaminate reader layouts.
+- **Recycled Image Reset:** Modern infinite-scroll manga websites recycle DOM `<img>` tags as users scroll down. Manga Garden tracks image source hashes and resets translated overlays whenever an element is recycled for a new image.
 
 ### 2. Canonical Chapter Scope Resolver (`getChapterScopeId`)
 - Defined in `src/shared/siteRules.ts` as the single source of truth across the Reader modal, ZIP exporter, and Stack selection hub.
@@ -175,20 +175,20 @@ flowchart TD
 ## ⌨️ In-Page Reading Shortcuts & Custom Site Rules
 
 ### 1. Cross-Platform Reading Hotkeys
-Kites registers global keyboard shortcuts with cross-platform keydown fallbacks:
+Manga Garden registers global keyboard shortcuts with cross-platform keydown fallbacks:
 - `Alt + Shift + Z`: Translates the currently hovered comic panel or visible viewport image.
 - `Alt + Shift + X`: Launches the Xnip-style Screen Crop overlay tool.
 - `F`: Instantly toggles between the translated composite and the original raw artwork (Peek mode).
 
 ### 2. Domain Disable Toggle & Blacklist
-- Users can disable Kites on specific domains with a single click from the popup.
+- Users can disable Manga Garden on specific domains with a single click from the popup.
 - Blacklisted domains and custom CSS selectors are persisted in `chrome.storage.local` under centralized keys registered in `STORAGE_KEYS`.
 
 ---
 
 ## ✂️ Screen Crop Translation Subsystem (`captureArea.ts`)
 
-For comics rendered inside protected HTML5 `<canvas>` elements, WebGL games, or complex iframe readers where direct DOM image extraction is impossible, Kites provides the **Screen Crop Tool**:
+For comics rendered inside protected HTML5 `<canvas>` elements, WebGL games, or complex iframe readers where direct DOM image extraction is impossible, Manga Garden provides the **Screen Crop Tool**:
 
 ```mermaid
 stateDiagram-v2
@@ -204,7 +204,7 @@ stateDiagram-v2
 
 ### 1. Xnip-Style Screen Pinning
 - The crop selection box is anchored using `position: fixed` in viewport coordinates, matching desktop snipping tools (Xnip, macOS Grab).
-- All Kites UI elements temporarily hide (`data-kites-crop-hiding = true`) before `chrome.tabs.captureVisibleTab` takes the screenshot to prevent capturing Kites' own buttons.
+- All Manga Garden UI elements temporarily hide (`data-manga-garden-crop-hiding = true`) before `chrome.tabs.captureVisibleTab` takes the screenshot to prevent capturing Manga Garden' own buttons.
 
 ### 2. Coordinate & Retina Display Normalization
 Modern displays feature High-DPI / Retina scaling ($\text{devicePixelRatio} = 2$ or $3$). Viewport CSS coordinates must be scaled to backing bitmap pixels:

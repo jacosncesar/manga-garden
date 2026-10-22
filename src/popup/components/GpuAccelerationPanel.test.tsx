@@ -51,7 +51,7 @@ describe('GpuAccelerationPanel', () => {
     expect(container.textContent).toContain('YOLO Bubble • ~15 MB');
 
     // Find all switches in granular config
-    const switches = Array.from(container.querySelectorAll<HTMLButtonElement>('.kites-switch-sm'));
+    const switches = Array.from(container.querySelectorAll<HTMLButtonElement>('.manga-garden-switch-sm'));
     expect(switches.length).toBe(4); // Translation, Image Cleaning, Text Detection, Bubble Detection
 
     const bubbleSwitch = switches[3];

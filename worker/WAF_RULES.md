@@ -1,86 +1,88 @@
-# Cloudflare Edge WAF Configuration Instructions
+# Instruções de configuração do WAF de borda da Cloudflare
 
-To protect your free Worker quota (100,000 requests/day) from denial-of-wallet, bots, and brute force attacks, configure Cloudflare Edge WAF rules in your Cloudflare dashboard.
+Para proteger sua cota gratuita do Worker (100.000 requisições/dia) contra abuso de custos, bots e ataques de força bruta, configure regras do WAF de borda da Cloudflare no painel da Cloudflare.
 
-Edge WAF rules run at Cloudflare's network perimeter **before** the Worker runtime is invoked. Blocked requests consume **0 Worker invocations** and **0 Durable Object requests**.
-
----
-
-## 1. Rate Limiting Rule (Cloudflare Free Tier)
-
-Cloudflare Free includes **1 Rate Limiting Rule**.
-
-### Configuration Steps:
-1. Open the `12094852.xyz` zone in the [Cloudflare Dashboard](https://dash.cloudflare.com/).
-2. Navigate to **Security** $\to$ **WAF** $\to$ **Rate limiting rules**.
-3. Click **Create rule**:
-   * **Rule name**: `Limit Translation Endpoint Bursts`
-   * **When incoming requests match**:
-     * Hostname equals `api.12094852.xyz`
-     * URI Path equals `/v1/chat/completions`
-     * Method equals `POST`
-   * **With the same characteristics**:
-     * Count by: `IP`
-   * **Requests**:
-     * Greater than: `15` requests
-     * Period: `10 seconds`
-     * This is the Cloudflare Free-plan equivalent of the Worker's `5 requests / 3 seconds` limit because Free WAF requires a 10-second measurement window.
-   * **Action**:
-     * Choose: `Block`
-     * Duration: `10 seconds` (or custom response: `HTTP 429 Too Many Requests`)
-4. Click **Deploy**.
-
-After the custom-domain endpoint passes an authenticated translation test, disable the production and preview `workers.dev` URLs under **Workers & Pages** $\to$ **kites-translate-pool** $\to$ **Domains**. Leaving the production `workers.dev` URL enabled allows callers to bypass this zone-level WAF rule.
+As regras do WAF de borda são executadas no perímetro da rede da Cloudflare, **antes** de o Worker ser iniciado. Requisições bloqueadas consomem **0 execuções do Worker** e **0 requisições ao Durable Object**.
 
 ---
 
-## 2. Custom WAF Security Rules (5 Rules on Free Tier)
+## 1. Regra de limitação de requisições (plano gratuito da Cloudflare)
 
-Cloudflare Free allows **5 Custom Rules**.
+O plano gratuito da Cloudflare inclui **1 regra de limitação de requisições**.
 
-### Rule A: Block Missing or Malformed Content-Type
-* **Rule name**: `Enforce JSON Content-Type`
-* **Expression**:
+### Etapas de configuração:
+1. Abra a zona `12094852.xyz` no [painel da Cloudflare](https://dash.cloudflare.com/).
+2. Acesse **Security** $\to$ **WAF** $\to$ **Rate limiting rules**.
+3. Clique em **Create rule**:
+   * **Nome da regra**: `Limit Translation Endpoint Bursts`
+   * **Quando as requisições recebidas corresponderem a**:
+     * Hostname igual a `api.12094852.xyz`
+     * Caminho URI igual a `/v1/chat/completions`
+     * Método igual a `POST`
+   * **Com as mesmas características**:
+     * Contar por: `IP`
+   * **Requisições**:
+     * Maior que: `15` requisições
+     * Período: `10 seconds`
+     * Esse é o equivalente, no plano gratuito da Cloudflare, ao limite do Worker de `5 requests / 3 seconds`, pois o WAF gratuito exige uma janela de medição de 10 segundos.
+   * **Ação**:
+     * Escolha: `Block`
+     * Duração: `10 seconds` (ou resposta personalizada: `HTTP 429 Too Many Requests`)
+4. Clique em **Deploy**.
+
+Depois que o endpoint no domínio personalizado passar em um teste de tradução autenticado, desative as URLs de produção e de pré-visualização `workers.dev` em **Workers & Pages** $\to$ **manga-garden-translate-pool** $\to$ **Domains**. Manter ativa a URL de produção `workers.dev` permite que clientes contornem essa regra do WAF configurada na zona.
+
+---
+
+## 2. Regras de segurança personalizadas do WAF (5 regras no plano gratuito)
+
+O plano gratuito da Cloudflare permite **5 regras personalizadas**.
+
+### Regra A: bloquear cabeçalho Content-Type ausente ou malformado
+* **Nome da regra**: `Enforce JSON Content-Type`
+* **Expressão**:
   ```text
   (http.request.uri.path eq "/v1/chat/completions" and http.request.method eq "POST" and not any(http.request.headers["content-type"][*] contains "application/json"))
   ```
-* **Action**: `Block` (HTTP 400)
+* **Ação**: `Block` (HTTP 400)
 
-### Rule B: Drop Non-POST/OPTIONS Methods
-* **Rule name**: `Strict HTTP Methods on Translation`
-* **Expression**:
+### Regra B: bloquear métodos diferentes de POST/OPTIONS
+* **Nome da regra**: `Strict HTTP Methods on Translation`
+* **Expressão**:
   ```text
   (http.request.uri.path eq "/v1/chat/completions" and not http.request.method in {"POST" "OPTIONS"})
   ```
-* **Action**: `Block` (HTTP 405)
+* **Ação**: `Block` (HTTP 405)
 
 ---
 
-## 3. Worker Secrets Deployment Commands
+## 3. Comandos para configurar os segredos do Worker
 
-Once your Worker is created in Cloudflare, set your secrets from the terminal:
+Depois de criar o Worker na Cloudflare, configure os segredos pelo terminal:
 
 ```bash
 cd worker
 
-# Google Auth Client ID (Audience)
+# ID do cliente de autenticação do Google (público/audience)
 npx wrangler secret put GOOGLE_CLIENT_ID
 
-# HMAC Salt for anonymous user quota tracking
+# Salt HMAC para acompanhar a cota de usuários anônimos
 npx wrangler secret put JWT_SALT
 
-# Active AI Provider Keys (as needed)
+# Chaves dos provedores de IA ativos (conforme necessário)
 npx wrangler secret put NVIDIA_API_KEY
 npx wrangler secret put OPENROUTER_API_KEY
 npx wrangler secret put GEMINI_API_KEY
 npx wrangler secret put GROQ_API_KEY
 ```
 
+`JWT_SALT` deve ser um valor privado, gerado aleatoriamente, e permanecer estável: alterá-lo muda os identificadores derivados usados no controle de cotas. Se esse segredo estiver ausente, o Worker retornará um erro de configuração; ele não usa um valor público alternativo.
+
 ---
 
-## 4. Local Development
+## 4. Desenvolvimento local
 
-Run the worker locally against local SQLite Durable Objects:
+Execute o Worker localmente usando Durable Objects com SQLite local:
 
 ```bash
 cd worker

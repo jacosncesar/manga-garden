@@ -16,7 +16,7 @@ Resolve Google Sign-In failures (`Error 400: invalid_request`, `bad client id`, 
 ### Incident & Root Cause Analysis
 
 #### 1. Google OAuth Sign-in Failure on Non-Chrome Browsers (`Error 400: invalid_request`)
-* **Symptom:** Users running Chromium derivatives (Brave, Edge, Arc, Opera) or Chrome profiles without Google Sync encountered `Error 400: invalid_request` (*"Access blocked: Kites Translator's request is invalid"*) upon clicking "Sign in with Google".
+* **Symptom:** Users running Chromium derivatives (Brave, Edge, Arc, Opera) or Chrome profiles without Google Sync encountered `Error 400: invalid_request` (*"Access blocked: Manga Garden Translator's request is invalid"*) upon clicking "Sign in with Google".
 * **Root Cause:** `chrome.identity.getAuthToken` relies on the host browser's native profile sync subsystem. Non-Chrome browsers either lack Google account sync or restrict internal token issuance, causing the underlying Chrome Identity API to reject the request.
 
 #### 2. Downstream OAuth Pitfalls (`bad client id` & `Only one web auth flow allowed`)
@@ -101,7 +101,7 @@ Resolve Google Sign-In failures (`Error 400: invalid_request`, `bad client id`, 
    * In Manifest V3, the translation pipeline executes inside the Offscreen Document (`src/offscreen/`).
    * Previously, `CloudflareTranslateEngine` requested the Google ID/access token from the Background Service Worker via `chrome.runtime.sendMessage({ type: 'GET_AUTH_TOKEN' })`.
    * Unaddressed or unrouted inter-process messaging across contexts could fail or resolve to `{}` under high load, causing the translation engine to dispatch HTTP POST requests to `https://api.12094852.xyz/v1/chat/completions` without an `Authorization` header, triggering a cryptic 401 `missing_token` error.
-   * Because both Background and Offscreen share the same extension origin, `CloudflareTranslateEngine.getAuthToken()` now checks `chrome.storage.local` directly (`kites_oauth_auth_token` and `kites_oauth_token_expires_at`). This provides zero-latency synchronous access to valid tokens and eliminates inter-process message drops.
+   * Because both Background and Offscreen share the same extension origin, `CloudflareTranslateEngine.getAuthToken()` now checks `chrome.storage.local` directly (`manga_garden_oauth_auth_token` and `manga_garden_oauth_token_expires_at`). This provides zero-latency synchronous access to valid tokens and eliminates inter-process message drops.
    * If unauthenticated, `CloudflareTranslateEngine` now throws a clear, actionable error (`Please sign in with Google in Settings to use Cloudflare Translate.`) instead of firing an empty request.
 
 2. **Auto-Fallback on Sign-Out:**
@@ -110,7 +110,7 @@ Resolve Google Sign-In failures (`Error 400: invalid_request`, `bad client id`, 
    * `normalizePopupState` also asserts that `cloudflare-translate` can only be considered a supported engine if `userAccount.signedIn === true`.
 
 3. **Centralized Storage Keys (`STORAGE_KEYS`):**
-   * Migrated all direct string literals (`'popupState'`, `'kites_oauth_auth_token'`, `'hardware_webgpu_supported'`) to a single centralized enum `STORAGE_KEYS` in `src/shared/constants.ts`.
+   * Migrated all direct string literals (`'popupState'`, `'manga_garden_oauth_auth_token'`, `'hardware_webgpu_supported'`) to a single centralized enum `STORAGE_KEYS` in `src/shared/constants.ts`.
    * Enforced single source of truth across Background, Offscreen, Popup, and Content scripts, backed by unit tests in `src/shared/constants.test.ts`.
 
 4. **WebLLM Context-Aware Prompt Refinement:**

@@ -1,6 +1,6 @@
 # Testing & Verification Guide 🧪
 
-Kites enforces a strict multi-tier testing strategy to ensure that background workers, neural models, spatial clustering algorithms, and browser overlays remain robust across Chromium releases.
+Manga Garden enforces a strict multi-tier testing strategy to ensure that background workers, neural models, spatial clustering algorithms, and browser overlays remain robust across Chromium releases.
 
 ---
 

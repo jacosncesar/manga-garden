@@ -69,7 +69,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({ userAccount, onAccount
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wide uppercase text-[var(--color-dust)]">
             <Sparkles className="w-3.5 h-3.5 text-[var(--color-editorial)]" />
-            <span>MangaLume 2.0 Cloud Pass</span>
+            <span>Manga Garden Cloud Pass</span>
           </div>
           <span className="flex items-center gap-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
             <CheckCircle2 className="w-3 h-3" />

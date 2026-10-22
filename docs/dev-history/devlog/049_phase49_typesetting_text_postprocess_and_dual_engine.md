@@ -9,7 +9,7 @@
 ---
 
 ## 2. Objective
-Elevate Kites' automated typesetting and line-wrapping quality to commercial scanlation grade across all supported languages (CJK and Western Latin). Resolve typography defects including orphaned punctuation, awkward short-word hyphenation, Korean Hangul misclassification, and aperture bleed during canvas rendering. Reduce binary search typesetting compute latency by 60–75% via token-level measurement memoization, and introduce a Studio-level dual typesetting engine toggle allowing instant switching between balanced speech bubble fitting and rigid rectangular word wrapping.
+Elevate Manga Garden' automated typesetting and line-wrapping quality to commercial scanlation grade across all supported languages (CJK and Western Latin). Resolve typography defects including orphaned punctuation, awkward short-word hyphenation, Korean Hangul misclassification, and aperture bleed during canvas rendering. Reduce binary search typesetting compute latency by 60–75% via token-level measurement memoization, and introduce a Studio-level dual typesetting engine toggle allowing instant switching between balanced speech bubble fitting and rigid rectangular word wrapping.
 
 ---
 
@@ -64,4 +64,4 @@ Elevate Kites' automated typesetting and line-wrapping quality to commercial sca
 ---
 
 ## 5. Key Takeaways
-All 77 test suites and 764 unit tests pass cleanly. Automated typography matches professional scanlation standards with zero orphan punctuation, clean Korean/Japanese script handling, authentic comic lettering, and a versatile dual-engine switcher in Kites Studio.
+All 77 test suites and 764 unit tests pass cleanly. Automated typography matches professional scanlation standards with zero orphan punctuation, clean Korean/Japanese script handling, authentic comic lettering, and a versatile dual-engine switcher in Manga Garden Studio.

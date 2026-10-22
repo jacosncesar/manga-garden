@@ -156,7 +156,7 @@ function wrapSimpleGreedy(
 }
 
 /**
- * Fits font size and wraps text into balanced diamond line envelopes using Kites's
+ * Fits font size and wraps text into balanced diamond line envelopes using Manga Garden's
  * exact pipeline typesetting engine (including punctuation sanitation, symbol compaction,
  * syllable hyphenation, and diamond envelopes) or fast simple wrapping.
  *

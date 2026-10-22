@@ -11,7 +11,7 @@
 ### 2. The Objective
 1. **Fix Image Distortion on Comparison Drag:** The prior landing page comparison element altered overlay container width containing an `img` with `width: 100%`, causing severe horizontal warping and stretching during slider dragging.
 2. **Interactive Showcase Parity:** Introduce a smooth comparison slider matching Torii's split-view UX, supporting multi-image selection (Japanese romance manga to English, and Japanese dialogue panel to Vietnamese) with instant thumbnail switching and zero white-flash artifacts.
-3. **Brand & Design Polish:** Apply anti-slop frontend standards (`design-taste-frontend`), eliminate em-dashes, align color accents with Kites authentic `#ff2a6d` rose palette, and provide responsive mobile collapsing.
+3. **Brand & Design Polish:** Apply anti-slop frontend standards (`design-taste-frontend`), eliminate em-dashes, align color accents with Manga Garden authentic `#ff2a6d` rose palette, and provide responsive mobile collapsing.
 4. **Marketing Asset Regeneration:** Replace legacy and duplicate Chrome Web Store promotional slides (1280×800) to showcase the new Chapter Reader, Fast Scan, and Deep Engine presets, archiving deprecated assets safely.
 
 ---

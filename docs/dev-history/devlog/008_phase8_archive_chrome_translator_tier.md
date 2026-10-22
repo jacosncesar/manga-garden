@@ -9,7 +9,7 @@
 
 ## Objective
 
-Retire the Chrome native Translator API route that was labelled “Gemini Nano” in the popup. The API availability and compatibility path was not dependable enough for Kites, so the active translation set is reduced to Google Translate, WebLLM, and separately implemented external API engines.
+Retire the Chrome native Translator API route that was labelled “Gemini Nano” in the popup. The API availability and compatibility path was not dependable enough for Manga Garden, so the active translation set is reduced to Google Translate, WebLLM, and separately implemented external API engines.
 
 ---
 

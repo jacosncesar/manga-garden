@@ -11,7 +11,7 @@ Always use `codebase-memory-mcp` tools over `grep` or reading whole files.
 
 # Workspace Instruction Profile: Antigravity Mentor Mode
 
-This file defines the behavior and guiding principles for Antigravity when collaborating on the **Spatial Image & Manga Translator (Kites)** project.
+This file defines the behavior and guiding principles for Antigravity when collaborating on the **Spatial Image & Manga Translator (Manga Garden)** project.
 ---
 
 ## 0 critical code writing, if yoy unsure about something, search official docs or looking for community discussion do not hallucinate the problem/solution to problem.
@@ -43,7 +43,7 @@ The developer of this project is a beginner learning full-stack, web extension, 
 *   **Performance vs UX Trade-offs**: Always implement the most efficient, modern approach (e.g., `MutationObserver` over polling, CSS Anchors over JS math) if there is no trade-off. However, if an efficient approach prevents a user feature or lowers the user experience, you MUST stop and ask the user to decide if the performance gain is worth the feature loss.
 *   **Mandatory Docstrings**: Each function must include a docstring detailing its general description/purpose, input parameters, and return value/outputs.
 *   **No Magic Numbers**: Extract magic numbers (like timeouts, minimum dimensions, or thresholds) into named constants at the top of the file with explanatory comments so they are easily adjustable in the future.
-*   **Centralized Storage Keys (No Magic Strings)**: All keys stored in or retrieved from `chrome.storage.local` MUST be registered in `src/shared/constants.ts` under `STORAGE_KEYS`. Never hardcode raw string keys (`'popupState'`, `'kites_oauth_auth_token'`, `'hardware_webgpu_supported'`, etc.) across background, popup, offscreen, or content scripts. Always import and use `STORAGE_KEYS` to maintain a single source of truth and prevent silent key mismatches.
+*   **Centralized Storage Keys (No Magic Strings)**: All keys stored in or retrieved from `chrome.storage.local` MUST be registered in `src/shared/constants.ts` under `STORAGE_KEYS`. Never hardcode raw string keys (`'popupState'`, `'manga_garden_oauth_auth_token'`, `'hardware_webgpu_supported'`, etc.) across background, popup, offscreen, or content scripts. Always import and use `STORAGE_KEYS` to maintain a single source of truth and prevent silent key mismatches.
 *   **Single Source of Truth & DRY Catalogs (Universal Principle)**: Never duplicate lists of options, feature tiers, strategies, or configuration variants across UI components and backend handlers. Every configurable or swappable capability across the entire codebase MUST define its canonical catalog in a shared module (`src/shared/`):
     1. **Canonical Definition**: Define a single typed array/record as the single source of truth. Export an invariant type derived from it via `(typeof CATALOG)[number]['id']`.
     2. **UI Consumption**: All UI components (dropdowns, selectors, settings panels) MUST derive their choices directly from the shared catalog. Never write duplicate hardcoded array literals in UI code.
@@ -103,7 +103,7 @@ Complete technical documentation and rationale for all mitigations live in [`doc
 * **Neural Inpainting Architecture**: Always inpaint localized patches snapped to 64px buckets; never run full canvas or squish to 512px. Expand polygon masks with $\ge 4$px round stroke (`UNCLIP_RATIO = 1.8`). Specs: [`docs/development/workarounds.md#4-neural-inpainting-architecture-lama--xianscan-dynamic-patch-strategy`](file:///Users/dangtruongan/study/Kites/docs/development/workarounds.md#4-neural-inpainting-architecture-lama--xianscan-dynamic-patch-strategy) · [`src/offscreen/engines/inpaint/LamaMangaInpaintEngine.ts`](file:///Users/dangtruongan/study/Kites/src/offscreen/engines/inpaint/LamaMangaInpaintEngine.ts) · [Devlog 016](file:///Users/dangtruongan/study/Kites/docs/dev-history/devlog/016_phase16_xianscan_dynamic_patch_inpainting_and_lama_quality_recovery.md).
 
 ## 10 before implement code:
-- check docs for /Users/dangtruongan/study/Kites/docs/development and /Users/dangtruongan/study/Kites/docs/dev-history to avoid making previous mistake, or making new mistake that can be avoided. also update/add dev-history, development, after you implement new feature, handle bugs,... etc
+- check docs for /Users/dangtruongan/study/Manga Garden/docs/development and /Users/dangtruongan/study/Manga Garden/docs/dev-history to avoid making previous mistake, or making new mistake that can be avoided. also update/add dev-history, development, after you implement new feature, handle bugs,... etc
 ## 11 Subagent spawn for zcode
 - spawn "reaserch" model when searching internet or local references in ~/scratches/reference for tools, solutions, ...
 -spawn "code-explore" model when plan to make change to code or analyze code.

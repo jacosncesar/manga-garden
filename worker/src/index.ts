@@ -80,6 +80,21 @@ export default {
 
     // 3. Translation Endpoint
     if (url.pathname === '/v1/chat/completions' && request.method === 'POST') {
+      const jwtSalt = env.JWT_SALT?.trim();
+      if (!jwtSalt) {
+        return jsonResponse(
+          {
+            error: {
+              message: 'Worker is misconfigured: JWT_SALT secret is missing.',
+              type: 'api_error',
+              code: 'missing_jwt_salt',
+            },
+          },
+          503,
+          cors
+        );
+      }
+
       const clientIp = request.headers.get('cf-connecting-ip') || 'unknown';
 
       // Ring 0: Pre-parse Payload Size Guard (prevents memory exhaustion before JSON parsing)
@@ -144,7 +159,7 @@ export default {
       try {
         const identity = await authManager.verifyToken(idToken, env);
         // Namespaced provider:sub prevents collisions across multiple identity providers
-        userHash = await hashUserSubject(`${identity.provider}:${identity.sub}`, env.JWT_SALT || 'kites-salt');
+        userHash = await hashUserSubject(`${identity.provider}:${identity.sub}`, jwtSalt);
       } catch (err: any) {
         ipRateLimiter.recordAuthFailure(clientIp);
         return jsonResponse(
@@ -238,6 +253,21 @@ export default {
 
     // GET /v1/quota: Read-only check for user remaining quota
     if (request.method === 'GET' && url.pathname === '/v1/quota') {
+      const jwtSalt = env.JWT_SALT?.trim();
+      if (!jwtSalt) {
+        return jsonResponse(
+          {
+            error: {
+              message: 'Worker is misconfigured: JWT_SALT secret is missing.',
+              type: 'api_error',
+              code: 'missing_jwt_salt',
+            },
+          },
+          503,
+          cors
+        );
+      }
+
       const authHeader = request.headers.get('Authorization') || '';
       if (!authHeader.startsWith('Bearer ')) {
         return jsonResponse(
@@ -258,7 +288,7 @@ export default {
 
       try {
         const identity = await authManager.verifyToken(idToken, env);
-        userHash = await hashUserSubject(`${identity.provider}:${identity.sub}`, env.JWT_SALT || 'kites-salt');
+        userHash = await hashUserSubject(`${identity.provider}:${identity.sub}`, jwtSalt);
       } catch (err: any) {
         return jsonResponse(
           {

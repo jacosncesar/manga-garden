@@ -16,7 +16,7 @@ Provide a clean, distraction-free full-screen reading experience for translated 
 ### 3. Architecture Decisions
 
 #### 3.1 In-Page Modal vs New Extension Tab
-- **Zero data transfer overhead**: Instead of serializing megabytes of images across IPC into a new extension tab, `ChapterReaderModal` mounts into `#kites-global-overlay` in the content script and renders same-origin blob URLs directly from `translatedRegistry`.
+- **Zero data transfer overhead**: Instead of serializing megabytes of images across IPC into a new extension tab, `ChapterReaderModal` mounts into `#manga-garden-global-overlay` in the content script and renders same-origin blob URLs directly from `translatedRegistry`.
 - **Scroll restoration & body lock**: Body overflow is locked (`document.body.style.overflow = 'hidden'`) while the reader is open and restored immediately on close, preserving the user's exact in-page reading position.
 
 #### 3.2 View Modes & Reading Navigation
@@ -33,7 +33,7 @@ Provide a clean, distraction-free full-screen reading experience for translated 
 
 #### 3.4 Popup Scrollbar & Gap Bugfix
 - When `SettingsView` content exceeded 600px, native Chrome popup scrollbar track had `background: transparent` and unstyled `body`, exposing a white-grey gap on the right.
-- Fixed by applying `kites-extension-page` class to `body`, setting `::-webkit-scrollbar-track` to `var(--color-paper)`, configuring `scrollbar-color`, and expanding root container to `w-full min-h-full`.
+- Fixed by applying `manga-garden-extension-page` class to `body`, setting `::-webkit-scrollbar-track` to `var(--color-paper)`, configuring `scrollbar-color`, and expanding root container to `w-full min-h-full`.
 
 ---
 
@@ -41,7 +41,7 @@ Provide a clean, distraction-free full-screen reading experience for translated 
 1. **Modal Component (`src/content/ChapterReaderModal.tsx` & `.test.tsx`)**: Fullscreen modal with Webtoon, Single, and Double spread modes, keyboard shortcuts (`Esc`, `F`, `W`, arrows), and scroll-position page tracking.
 2. **Floating Pill (`src/content/ChapterReaderFloatingPill.tsx` & `.test.tsx`)**: Bottom-right floating badge with scroll fade and dismiss button.
 3. **Popup Launch (`src/popup/components/ReaderLaunchControl.tsx` & `.test.tsx`)**: Status-polling button in popup footer.
-4. **Commands & Integration (`manifest.json`, `src/background/readingCommands.ts`, `src/content/index.tsx`)**: Added `open-chapter-reader` shortcut, `OPEN_CHAPTER_READER` message routing, and `kites-open-chapter-reader` custom event.
+4. **Commands & Integration (`manifest.json`, `src/background/readingCommands.ts`, `src/content/index.tsx`)**: Added `open-chapter-reader` shortcut, `OPEN_CHAPTER_READER` message routing, and `manga-garden-open-chapter-reader` custom event.
 5. **Scrollbar Fix (`popup.html`, `src/index.css`, `src/popup/index.tsx`)**: Styled popup body and scrollbar track to blend seamlessly with theme colors.
 
 ---

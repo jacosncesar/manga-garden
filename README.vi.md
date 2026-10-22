@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
-# 🪁 Kites
+# 🪁 Manga Garden
 
 ### Đọc Mọi Bộ Manga Bằng Ngôn Ngữ Của Bạn. Trực Tiếp Trên Trình Duyệt.
 **Không Cần Python • Không Cần Máy Chủ • Dịch Truyện AI 100% Cục Bộ & Bảo Mật Ngay Trong Tiện Ích Mở Rộng**
@@ -20,24 +20,24 @@
     <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/Unheat/Kites/releases/latest">
+  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
     <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
   </a>
 </p>
 
 <br/>
 
-[![Kites Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
+[![Manga Garden Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
 </div>
 
 ---
 
-## 💡 Tại sao lại chọn Kites?
+## 💡 Tại sao lại chọn Manga Garden?
 
 Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt môi trường Python phức tạp, hàng gigabyte gói CUDA nặng nề, hoặc bắt buộc phải tải toàn bộ lịch sử đọc truyện riêng tư của bạn lên máy chủ đám mây của bên thứ ba.
 
-**Kites thay đổi hoàn toàn điều đó.** Đây là một tiện ích mở rộng (extension) Chrome siêu nhẹ, vận hành các mô hình thị giác và ngôn ngữ AI tiên tiến nhất **trực tiếp trên card đồ họa của bạn thông qua WebGPU**.
+**Manga Garden thay đổi hoàn toàn điều đó.** Đây là một tiện ích mở rộng (extension) Chrome siêu nhẹ, vận hành các mô hình thị giác và ngôn ngữ AI tiên tiến nhất **trực tiếp trên card đồ họa của bạn thông qua WebGPU**.
 
 - ⚡ **Không cần cài đặt phức tạp:** Cài đặt chỉ với 1 cú click từ [Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb) và bắt đầu đọc ngay lập tức. Không dòng lệnh terminal, không Python, không phụ thuộc môi trường ngoài.
 - 🔒 **100% Cục bộ & Bảo mật:** Nhận diện ký tự quang học (OCR) và xóa thoại/cleaner nền diễn ra hoàn toàn trên thiết bị của bạn. Hình ảnh của bạn không bao giờ rời khỏi trình duyệt.
@@ -45,7 +45,7 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 - ✍️ **Typeset & Canh chỉnh tự nhiên:** Tự động đo kích thước khung thoại, cân bằng ngắt dòng hợp lý, tự co giãn cỡ chữ (font size) và chọn màu chữ/viền tương phản tối ưu.
 - 🗨️ **Tự động mở rộng theo khung thoại (Smart Bubble Fit):** Sử dụng thuật toán nhận diện bóng thoại thông minh (Heuristic & Neural YOLO) để mở rộng các cột chữ hẹp CJK thành khung bong bóng tròn rộng rãi, loại bỏ hoàn toàn tình trạng chữ bị bóp nghẹt li ti.
 - 📜 **Hỗ trợ trọn vẹn truyện tranh Webtoon dài tập:** Xử lý mượt mà các dải webtoon cuộn dọc cực dài ($>14.000\text{ px}$) nhờ thuật toán phân mảnh 1D trên bộ nhớ canvas ở độ phân giải gốc.
-- 🛠️ **Tích hợp Kites Studio:** Dễ dàng sửa lại câu từ chưa ưng ý, kéo giãn khung thoại hoặc tinh chỉnh typography trực tiếp ngay tức thì.
+- 🛠️ **Tích hợp Manga Garden Studio:** Dễ dàng sửa lại câu từ chưa ưng ý, kéo giãn khung thoại hoặc tinh chỉnh typography trực tiếp ngay tức thì.
 
 ---
 
@@ -58,14 +58,14 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 <table>
   <tr>
     <th width="50%" align="center">Bản gốc tiếng Nhật (Original Japanese)</th>
-    <th width="50%" align="center">Kites đã dịch (Kites Translated)</th>
+    <th width="50%" align="center">Manga Garden đã dịch (Manga Garden Translated)</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo2.jpeg" alt="Original Japanese Manga" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo2_result.png" alt="Kites English Translation" width="100%" />
+      <img src="./README_images/result/demo2_result.png" alt="Manga Garden English Translation" width="100%" />
     </td>
   </tr>
 </table>
@@ -78,14 +78,14 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 <table>
   <tr>
     <th width="50%" align="center">Bản gốc tiếng Nhật (Original Japanese)</th>
-    <th width="50%" align="center">Kites đã dịch (Kites Translated)</th>
+    <th width="50%" align="center">Manga Garden đã dịch (Manga Garden Translated)</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo7.jpg" alt="Original Japanese Manga" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo7_result.png" alt="Kites Vietnamese Translation" width="100%" />
+      <img src="./README_images/result/demo7_result.png" alt="Manga Garden Vietnamese Translation" width="100%" />
     </td>
   </tr>
 </table>
@@ -98,7 +98,7 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 Rê chuột qua bất kỳ khung tranh nào trên Twitter/X, Pixiv hoặc các trang đọc truyện. Nút dịch nổi gọn gàng sẽ xuất hiện thông qua CSS Anchor Positioning — chỉ cần nhấp để dịch ngay lời thoại trực tiếp trên trang truyện mà không cần copy-paste.
 
 <div align="center">
-  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Kites In-Page Hover Translation Button" width="620px" />
+  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Manga Garden In-Page Hover Translation Button" width="620px" />
 </div>
 
 - 🖱️ **Rê chuột (Hover):** Dịch tức thì bằng cách rê chuột lên khung truyện.
@@ -114,7 +114,7 @@ Rê chuột qua bất kỳ khung tranh nào trên Twitter/X, Pixiv hoặc các t
 
 Đọc trọn vẹn cả chương manga hoặc webtoon trong một giao diện tập trung, không phân tâm với tính năng tự động quét hàng loạt, chế độ cuộn dọc webtoon liền mạch, dịch nhiều trang song song và xuất file ZIP offline:
 
-[![Kites Chapter Reader](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
+[![Manga Garden Chapter Reader](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
 
 - **Quét nhanh (Fast Scan):** Tự động cuộn trang và thu thập toàn bộ các khung truyện được tải trễ (lazy-loaded) trong chương vào hàng đợi dịch.
 - **Đa dạng chế độ đọc:** Chuyển đổi linh hoạt giữa chế độ Webtoon cuộn dọc liên tục, Trang đơn (Single page), và Trang đôi (Double spread).
@@ -123,11 +123,11 @@ Rê chuột qua bất kỳ khung tranh nào trên Twitter/X, Pixiv hoặc các t
 
 ---
 
-## 🛠️ Trình biên tập Kites Studio tích hợp
+## 🛠️ Trình biên tập Manga Garden Studio tích hợp
 
-Cần trau chuốt lại bản dịch hoặc chỉnh lại font chữ? Mở ngay **Kites Studio** toàn màn hình trực tiếp từ tiện ích mở rộng.
+Cần trau chuốt lại bản dịch hoặc chỉnh lại font chữ? Mở ngay **Manga Garden Studio** toàn màn hình trực tiếp từ tiện ích mở rộng.
 
-[![Kites Studio](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
+[![Manga Garden Studio](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
 
 - **Chỉnh sửa trực tiếp tại chỗ:** Nhấp đúp vào bất kỳ bong bóng thoại nào để sửa lời thoại trực tiếp, hỗ trợ căn giữa dọc subpixel và tự động dàn trang (reflow) tức thì.
 - **Canvas tương tác linh hoạt:** Kéo thả và thay đổi kích thước khung thoại với 8 điểm neo điều khiển.
@@ -151,13 +151,13 @@ Tuỳ biến ngôn ngữ đích, mô hình AI OCR và thuật toán xóa chữ t
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/UI-feature/main-panel.jpg" alt="Kites Main Popup" width="95%" />
+      <img src="./README_images/UI-feature/main-panel.jpg" alt="Manga Garden Main Popup" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Kites Chapter Reader and Scanner Panel" width="95%" />
+      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Manga Garden Chapter Reader and Scanner Panel" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Kites Settings Panel" width="95%" />
+      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Manga Garden Settings Panel" width="95%" />
     </td>
   </tr>
 </table>
@@ -183,7 +183,7 @@ Tuỳ biến ngôn ngữ đích, mô hình AI OCR và thuật toán xóa chữ t
 
 ### Cách 1: Chrome Web Store (Khuyên dùng • Cài đặt 1-Click)
 
-Cách chính thức và thuận tiện nhất để cài đặt Kites. Tự động cập nhật phiên bản mới và đã qua kiểm duyệt bảo mật của Google:
+Cách chính thức và thuận tiện nhất để cài đặt Manga Garden. Tự động cập nhật phiên bản mới và đã qua kiểm duyệt bảo mật của Google:
 
 <div align="left">
   <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
@@ -191,9 +191,9 @@ Cách chính thức và thuận tiện nhất để cài đặt Kites. Tự đ�
   </a>
 </div>
 
-1. Mở trang **[Kites trên Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)**.
+1. Mở trang **[Manga Garden trên Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)**.
 2. Nhấp **Thêm vào Chrome** và xác nhận quyền cài đặt.
-3. Ghim **Kites** lên thanh công cụ trình duyệt để dễ dàng sử dụng.
+3. Ghim **Manga Garden** lên thanh công cụ trình duyệt để dễ dàng sử dụng.
 4. Lướt bất kỳ trang truyện manga hoặc minh họa nào (trên Twitter/X, Pixiv, MangaDex, v.v.) và rê chuột vào khung tranh để dịch!
 
 ---
@@ -202,12 +202,12 @@ Cách chính thức và thuận tiện nhất để cài đặt Kites. Tự đ�
 
 Phù hợp cho môi trường offline, thử nghiệm tính năng mới hoặc dùng các bản dựng cụ thể:
 
-1. Tải về file **[`kites.zip`](https://github.com/Unheat/Kites/releases/latest)** từ bản phát hành GitHub Release mới nhất.
+1. Tải về file **[`Manga Garden.zip`](https://github.com/jacosncesar/MangaLumeTwo/releases/latest)** từ bản phát hành GitHub Release mới nhất.
 2. Giải nén file `.zip` vừa tải vào một thư mục trên máy tính của bạn.
 3. Trong trình duyệt Chrome, mở đường dẫn `chrome://extensions/`.
 4. Bật chế độ **Chế độ dành cho nhà phát triển (Developer mode)** ở góc trên bên phải.
 5. Nhấp nút **Tải tiện ích đã giải nén (Load unpacked)** ở góc trên bên trái và chọn thư mục vừa giải nén.
-6. Ghim **Kites** lên thanh công cụ trình duyệt và bắt đầu thưởng thức truyện tranh ngay!
+6. Ghim **Manga Garden** lên thanh công cụ trình duyệt và bắt đầu thưởng thức truyện tranh ngay!
 
 ---
 
@@ -215,8 +215,8 @@ Phù hợp cho môi trường offline, thử nghiệm tính năng mới hoặc d
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/Unheat/Kites.git
-cd Kites
+git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+cd manga-garden
 
 # 2. Cài đặt thư viện phụ thuộc và build tiện ích
 npm ci
@@ -226,7 +226,7 @@ npm run build
 1. Trong Chrome, mở đường dẫn `chrome://extensions/`.
 2. Bật công tắc **Chế độ dành cho nhà phát triển (Developer mode)**.
 3. Nhấp **Tải tiện ích đã giải nén (Load unpacked)** và chọn thư mục `dist/` vừa được tạo ra.
-4. Ghim **Kites** lên thanh công cụ và bắt đầu trải nghiệm!
+4. Ghim **Manga Garden** lên thanh công cụ và bắt đầu trải nghiệm!
 
 ---
 
@@ -235,16 +235,16 @@ npm run build
 Chúng tôi rất hoan nghênh sự đóng góp từ các lập trình viên, dịch giả và những người đam mê truyện tranh!
 
 - 📖 **[Trung tâm tài liệu](docs/README.md)** — Sơ đồ kiến trúc, đặc tả pipeline và các ràng buộc hệ thống.
-- 📐 **[Bản đồ pipeline tương tác](docs/workflow.html)** — Mô phỏng trực quan thuật toán phát hiện, xóa chữ và dàn trang của Kites.
+- 📐 **[Bản đồ pipeline tương tác](docs/workflow.html)** — Mô phỏng trực quan thuật toán phát hiện, xóa chữ và dàn trang của Manga Garden.
 - 🛠️ **[Hướng dẫn đóng góp](CONTRIBUTING.md)** — Cách thiết lập môi trường phát triển, chạy kiểm thử và gửi PR.
 
 ---
 
 ## 📜 Giấy phép & Lời cảm ơn
 
-Kites được phát hành theo giấy phép **[GNU General Public License v3.0](LICENSE)**.
+Manga Garden được phát hành theo giấy phép **[GNU General Public License v3.0](LICENSE)**.
 
-Gửi lời cảm ơn chân thành đến các dự án mã nguồn mở tuyệt vời đã đặt nền tảng cho Kites:
+Gửi lời cảm ơn chân thành đến các dự án mã nguồn mở tuyệt vời đã đặt nền tảng cho Manga Garden:
 - **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** Thuật toán mang tính đột phá về phân nhóm không gian văn bản và dàn trang.
 - **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** Kiến trúc inpainting chia mảng động và bộ lọc nhiễu OCR.
 - **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** Mô hình mạng nơ-ron nhận diện văn bản đa ngôn ngữ hiệu suất cao.
@@ -253,5 +253,5 @@ Gửi lời cảm ơn chân thành đến các dự án mã nguồn mở tuyệt
 ---
 
 <div align="center">
-  <sub>Được phát triển với ❤️ dành cho cộng đồng yêu thích truyện tranh. Hãy tặng Kites một ⭐ Star trên GitHub nếu bạn thấy tiện ích này hữu ích!</sub>
+  <sub>Được phát triển với ❤️ dành cho cộng đồng yêu thích truyện tranh. Hãy tặng Manga Garden một ⭐ Star trên GitHub nếu bạn thấy tiện ích này hữu ích!</sub>
 </div>

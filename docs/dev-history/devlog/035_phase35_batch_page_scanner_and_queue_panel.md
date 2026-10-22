@@ -9,12 +9,12 @@
 ---
 
 ### 2. Objective
-Port XianScan's Importer / Page Scanner Gallery into Kites:
+Port XianScan's Importer / Page Scanner Gallery into Manga Garden:
 1. Provide a dedicated **Batch** tab in the popup header between Home and Settings.
 2. Auto-detect all comic and manga strip panels on the active tab using XianScan reader container heuristics, spatial coordinate sorting, outlier filtering, and deduplication.
 3. Support **Fast Scan** (`fastScrollPreload`) to programmatically scroll the reader page and mount lazy-loaded or virtualized comic panels without requiring manual page scrolling.
 4. Render a responsive 2-column thumbnail gallery in the popup showing page numbers (`#1`, `#2`), dimensions (`800×1200`), live translation status (`Ready`, `Queued`, `Processing`, `Done`), and multi-select checkboxes.
-5. Support 1-click batch translation dispatch (`[ 🪄 Translate X Selected Pages ]`) feeding into Kites' sequential background queue.
+5. Support 1-click batch translation dispatch (`[ 🪄 Translate X Selected Pages ]`) feeding into Manga Garden' sequential background queue.
 
 ---
 

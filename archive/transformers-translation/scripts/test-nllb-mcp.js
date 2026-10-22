@@ -81,11 +81,11 @@ async function runRealChromeNllbTest() {
   const targets = await browser.targets();
   const extTarget = targets.find((t) => t.url().includes('chrome-extension://'));
   if (!extTarget) {
-    console.error('❌ Extension not found in target Chrome browser. Ensure Kites extension is loaded.');
+    console.error('❌ Extension not found in target Chrome browser. Ensure Manga Garden extension is loaded.');
     process.exit(1);
   }
   const extId = extTarget.url().split('/')[2];
-  console.log(`✅ Kites Extension ID: ${extId}`);
+  console.log(`✅ Manga Garden Extension ID: ${extId}`);
 
   // Set popup state to NLLB-200 + simple inpaint
   const extPage = await browser.newPage();

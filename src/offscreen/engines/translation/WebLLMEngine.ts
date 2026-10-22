@@ -69,7 +69,7 @@ export class WebLLMEngine extends BaseLlmTranslationEngine {
 
     if (!masterOn || !llmOn) {
       throw new Error(
-        'GPU Acceleration is turned OFF in Kites Settings. Please enable GPU Acceleration in Settings to use WebGPU LLM models.'
+        'GPU Acceleration is turned OFF in Manga Garden Settings. Please enable GPU Acceleration in Settings to use WebGPU LLM models.'
       );
     }
 

@@ -6,7 +6,7 @@
  *   1. Open Chrome with the unpacked extension loaded.
  *   2. Configure Settings (GPU on, WebLLM model selected, Simple Fill, PaddleOCR).
  *   3. Visit a real page with a manga/comic image.
- *   4. Hover the image, click the Kites translate button.
+ *   4. Hover the image, click the Manga Garden translate button.
  *   5. Wait for the baked (translated) image to appear.
  *
  * The WebLLM model itself is NOT read from test/model/ -- the extension downloads it
@@ -145,7 +145,7 @@ async function main() {
   console.log(`[E2E] Local test-image server listening on http://localhost:${testServerPort}`);
 
   releaseStaleProfileLock();
-  console.log('[E2E] Launching Chrome with Kites extension (persistent profile)...');
+  console.log('[E2E] Launching Chrome with Manga Garden extension (persistent profile)...');
   const browser = await puppeteer.launch({
     headless: false, // extensions + real WebGPU require a real browser window
     userDataDir,
@@ -232,18 +232,18 @@ async function main() {
     // A real user's first run has an empty DB; this reproduces that.
     await settingsPage.evaluate(() => {
       return new Promise((resolve) => {
-        const req = indexedDB.deleteDatabase('KitesDatabase');
+        const req = indexedDB.deleteDatabase('MangaGardenDatabase');
         req.onsuccess = req.onerror = req.onblocked = () => resolve(true);
       });
     });
-    console.log('[E2E] Cleared KitesDatabase so the job queue starts empty.');
+    console.log('[E2E] Cleared MangaGardenDatabase so the job queue starts empty.');
 
     // Clear stale jobs. The persistent profile keeps IndexedDB between runs, so a job left in
     // 'processing' by an interrupted run permanently occupies a concurrency slot and the
     // background queue reports "Queue at capacity" and never dispatches the new job.
     const cleared = await settingsPage.evaluate(() => {
       return new Promise((resolve) => {
-        const req = indexedDB.open('KitesDatabase');
+        const req = indexedDB.open('MangaGardenDatabase');
         req.onsuccess = () => {
           const db = req.result;
           const names = Array.from(db.objectStoreNames);
@@ -288,7 +288,7 @@ async function main() {
 
     // --- Step 3: Hover + click, exactly like a real user ---
     await wait(1000); // let the content script's MutationObserver attach the hover button
-    console.log('[E2E] Hovering image to reveal the Kites translate button...');
+    console.log('[E2E] Hovering image to reveal the Manga Garden translate button...');
     const hovered = await page.evaluate((targetSrc) => {
       const imgs = Array.from(document.querySelectorAll('img'));
       const img = imgs.find((i) => i.src === targetSrc);
@@ -300,12 +300,12 @@ async function main() {
 
     await wait(500);
     const clicked = await page.evaluate(() => {
-      const btn = document.querySelector('#kites-translate-btn');
+      const btn = document.querySelector('#manga-garden-translate-btn');
       if (!btn) return false;
       btn.click();
       return true;
     });
-    if (!clicked) throw new Error('Kites translate button did not render after hover.');
+    if (!clicked) throw new Error('Manga Garden translate button did not render after hover.');
     console.log('[E2E] Clicked translate. Waiting for pipeline (WebLLM download + OCR + inpaint + translation)...');
 
     // --- Step 4: Wait for the real result ---

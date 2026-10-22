@@ -8,7 +8,7 @@
 
 ## Objective
 
-To robustly inject the Kites translation button into complex host websites (like Reddit) without breaking the host's CSS, and to finalize the hardware detection strategy for the local LLM translation engines.
+To robustly inject the Manga Garden translation button into complex host websites (like Reddit) without breaking the host's CSS, and to finalize the hardware detection strategy for the local LLM translation engines.
 
 ---
 
@@ -25,7 +25,7 @@ To robustly inject the Kites translation button into complex host websites (like
 
 ### Roadblock 1: Reddit's Stacking Contexts vs CSS Anchors
 * **The Problem:** We wanted to use modern CSS Anchor Positioning (`anchor-name`) to perfectly track images. However, websites like Reddit use complex modal overlays with `transform` and `filter: blur()`, which create strict stacking contexts. Our translation button was getting trapped *underneath* or *inside* these containers, clipping it out of view.
-* **The Solution:** We moved the React mount point to a completely isolated `<div id="kites-global-overlay">` appended directly to `document.body` with `style.display = 'contents'`. We abandoned standard CSS Anchors for "live" tracking on highly dynamic sites, pivoting to absolute `getBoundingClientRect` polling for precise screen-space coordinates, completely immune to host CSS traps. We also added logic to skip images that have `style.filter !== 'none'` to avoid drawing buttons on blurred background thumbnails.
+* **The Solution:** We moved the React mount point to a completely isolated `<div id="manga-garden-global-overlay">` appended directly to `document.body` with `style.display = 'contents'`. We abandoned standard CSS Anchors for "live" tracking on highly dynamic sites, pivoting to absolute `getBoundingClientRect` polling for precise screen-space coordinates, completely immune to host CSS traps. We also added logic to skip images that have `style.filter !== 'none'` to avoid drawing buttons on blurred background thumbnails.
 
 ### Roadblock 2: The Tailwind Preflight CSS Leak
 * **The Problem:** After a refactor, every `<svg>` icon on the host webpage (e.g. Reddit's upvote arrows, Twitter's icons) broke, either disappearing or moving to the top left of their containers.

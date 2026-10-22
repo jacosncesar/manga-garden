@@ -209,10 +209,10 @@ describe('translated media state', () => {
     const surface = document.createElement('div');
     const img = document.createElement('img');
     surface.append(img);
-    surface.setAttribute('data-kites-background-suppressed', 'true');
-    img.setAttribute('data-kites-applied-opacity', '1');
-    img.setAttribute('data-kites-applied-z-index', '1');
-    img.setAttribute('data-kites-applied-pointer-events', 'none');
+    surface.setAttribute('data-manga-garden-background-suppressed', 'true');
+    img.setAttribute('data-manga-garden-applied-opacity', '1');
+    img.setAttribute('data-manga-garden-applied-z-index', '1');
+    img.setAttribute('data-manga-garden-applied-pointer-events', 'none');
     img.style.opacity = '0';
     img.style.visibility = 'hidden';
     img.style.zIndex = '-1';

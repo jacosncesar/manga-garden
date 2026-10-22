@@ -108,7 +108,7 @@ function isCandidateForTranslation(model) {
 
   // 9. Multilingual Translation Capability Filtering:
   // Reject architectures that lack multilingual training or have zero CJK tokenizer support.
-  // Kites requires models capable of translating across our supported languages (ja, zh, ko, en, fr, de, es, it, pt, ru, ar, vi, th, etc.).
+  // Manga Garden requires models capable of translating across our supported languages (ja, zh, ko, en, fr, de, es, it, pt, ru, ar, vi, th, etc.).
   if (lower.includes('tinyllama')) return { keep: false, reason: 'English-only pretraining (SlimPajama, no CJK vocab)' };
   if (lower.includes('redpajama')) return { keep: false, reason: 'English-only pretraining (archaic 2023 model)' };
   if (lower.includes('smollm')) return { keep: false, reason: 'English-only pretraining (FineWeb-Edu, non-multilingual)' };

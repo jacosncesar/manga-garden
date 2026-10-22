@@ -5,10 +5,10 @@
 GOOGLE_CLIENT_ID=your-google-oauth-client-id.apps.googleusercontent.com
 
 # HMAC Salt for anonymous user quota hashing
-JWT_SALT=kites-production-secret-salt-replace-this
+JWT_SALT=replace-with-a-random-secret-before-use
 
 # Provider Secrets (Set whichever you have enabled in src/config/providers.ts)
-NVIDIA_API_KEY=nvapi-your-nvidia-api-key-here
-OPENROUTER_API_KEY=sk-or-v1-your-openrouter-key-here
-GEMINI_API_KEY=AIzaSy-your-gemini-key-here
-GROQ_API_KEY=gsk_your-groq-key-here
+NVIDIA_API_KEY=replace-with-your-nvidia-api-key
+OPENROUTER_API_KEY=replace-with-your-openrouter-api-key
+GEMINI_API_KEY=replace-with-your-gemini-api-key
+GROQ_API_KEY=replace-with-your-groq-api-key

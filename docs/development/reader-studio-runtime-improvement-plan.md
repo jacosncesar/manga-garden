@@ -132,7 +132,7 @@ The bottom Action Footer must be **permanent and spatially stable**—buttons mu
 
 ```text
 ┌──────────────────────────────────────────────────┐
-│  Kites                    ⏻   [Home] [Stack] [⚙] │
+│  Manga Garden                    ⏻   [Home] [Stack] [⚙] │
 ├──────────────────────────────────────────────────┤
 │  [ Current Chapter (14) ]   [ History (42) ]     │
 ├──────────────────────────────────────────────────┤

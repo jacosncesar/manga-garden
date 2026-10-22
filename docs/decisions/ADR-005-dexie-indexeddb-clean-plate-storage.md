@@ -6,7 +6,7 @@ Accepted
 ## Context
 When an image completes the translation pipeline, the result needs to be stored locally so users can:
 1. View their translation history.
-2. Open projects in Kites Studio for manual post-editing and proofreading.
+2. Open projects in Manga Garden Studio for manual post-editing and proofreading.
 3. Export high-resolution copies.
 
 Traditional translation tools bake translated text directly onto the saved bitmap. If the user notices a typo, wants to change the font family, or needs to resize an overflowing dialogue balloon, they cannot do so without re-running the entire OCR and inpainting pipeline from scratch.
@@ -27,7 +27,7 @@ Adopt a **Clean Plate Storage Architecture** backed by **Dexie.js over IndexedDB
 
 ## Consequences
 ### Positive
-- **Non-Destructive Post-Editing:** In Kites Studio, users can drag bounding boxes, edit translations, switch font presets, and modify text colors with instant preview without re-running inpainting or OCR.
+- **Non-Destructive Post-Editing:** In Manga Garden Studio, users can drag bounding boxes, edit translations, switch font presets, and modify text colors with instant preview without re-running inpainting or OCR.
 - **Zero-Cost Re-rendering:** Changing a font or fixing a spelling mistake re-renders in $< 10\text{ ms}$ on 2D Canvas instead of re-spending GPU time or AI tokens.
 - **Controlled Storage Footprint:** 7-day TTL ensures browser storage does not grow indefinitely.
 

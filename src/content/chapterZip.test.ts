@@ -106,7 +106,7 @@ describe('chapterZip', () => {
       const sourcePage = 'https://example.com/ch';
       const surface = document.createElement('img');
       document.body.append(surface);
-      surface.setAttribute('data-kites-applied-src', 'blob:new');
+      surface.setAttribute('data-manga-garden-applied-src', 'blob:new');
       const records = [4, 2, 3, 1].map((sequence): ChapterImageRecord => ({
         originalUrl: `page-${sequence}`, translatedUrl: `blob:${sequence}`, sourcePage,
         documentPath: [0, sequence % 2 === 0 ? 1 : 0], documentY: 0, sequence,

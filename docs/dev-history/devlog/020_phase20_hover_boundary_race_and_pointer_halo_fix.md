@@ -15,7 +15,7 @@ Eliminate intermittent "stuck" translate buttons when hovering off images at slo
 ### Incident & Root Cause Analysis
 
 1. **Chromium Event Coalescing:** Chrome does not emit continuous mouse events; it samples pointer coordinates roughly once per animation frame (~16ms).
-2. **Subpixel Tolerance Halo:** Kites' hit-tester (`surfaceContainsPoint`) intentionally grants a `POINTER_TOLERANCE_PX = 3px` buffer so hovering an image's boundary pixel counts as an active target.
+2. **Subpixel Tolerance Halo:** Manga Garden' hit-tester (`surfaceContainsPoint`) intentionally grants a `POINTER_TOLERANCE_PX = 3px` buffer so hovering an image's boundary pixel counts as an active target.
 3. **The Race Condition:**
    * When exiting an image, the browser emits `mouseout` on the `<img>`, which arms a 150ms dismiss timer (`scheduleHide()`).
    * The cursor immediately enters the parent container element (`div.comic-image-container`), emitting `mouseover` on the container.

@@ -10,7 +10,7 @@ const screenshotDir = path.join(__dirname, '..', 'scratches', 'test-artifacts', 
 fs.mkdirSync(screenshotDir, { recursive: true });
 
 (async () => {
-  console.log('[Visual Test] Launching Chrome with unpacked Kites extension...');
+  console.log('[Visual Test] Launching Chrome with unpacked Manga Garden extension...');
   const browser = await puppeteer.launch({
     headless: false,
     args: [
@@ -71,7 +71,7 @@ fs.mkdirSync(screenshotDir, { recursive: true });
 
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
 
-      const dbReq = indexedDB.open('KitesDatabase');
+      const dbReq = indexedDB.open('MangaGardenDatabase');
       const db = await new Promise((resolve, reject) => {
         dbReq.onsuccess = () => resolve(dbReq.result);
         dbReq.onerror = () => reject(dbReq.error);

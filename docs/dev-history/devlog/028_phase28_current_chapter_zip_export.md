@@ -37,7 +37,7 @@ Inspected standard browser manga extension ZIP exporter patterns:
 - Sequential gathering, MIME-aware naming, partial-failure reporting, and refusal to save an empty archive.
 - The streaming-writer rationale explaining why JSZip input/output remains memory-backed and why `streamFiles` is not a bounded-heap guarantee.
 
-Kites deliberately keeps the smaller JSZip implementation with a 256 MiB archive limit. The limit bounds archive/input bytes, **not total renderer heap**: registry blobs, per-image conversion, JSZip inputs, and output can coexist. The archive is local; no DB write or upload is part of this feature.
+Manga Garden deliberately keeps the smaller JSZip implementation with a 256 MiB archive limit. The limit bounds archive/input bytes, **not total renderer heap**: registry blobs, per-image conversion, JSZip inputs, and output can coexist. The archive is local; no DB write or upload is part of this feature.
 
 ### Known limits
 

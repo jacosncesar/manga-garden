@@ -130,7 +130,7 @@ server.listen(PORT);
           const bin = atob("${base64}");
           const bytes = new Uint8Array(bin.length);
           for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-          const cache = await caches.open('kites-bubble-models-v1');
+          const cache = await caches.open('manga-garden-bubble-models-v1');
           const url = 'https://huggingface.co/mednasserallah/manga109-segmentation-bubble-onnx/resolve/main/manga109_segmentation_bubble_1024.onnx';
           await cache.put(url, new Response(new Blob([bytes], { type: 'application/octet-stream' })));
           console.log('[Offscreen] YOLO11 model successfully cached in Cache API!');
@@ -147,7 +147,7 @@ server.listen(PORT);
   await page.goto(`http://localhost:${PORT}/`, { waitUntil: 'networkidle2' });
 
   // Hover over the image to show translate button
-  console.log('⚡ Hovering over image to activate Kites button...');
+  console.log('⚡ Hovering over image to activate Manga Garden button...');
   await page.evaluate(() => {
     const img = document.querySelector('#manga-img');
     if (img) {
@@ -160,7 +160,7 @@ server.listen(PORT);
   // Find and click the translate button
   console.log('⚡ Clicking translate button...');
   const clicked = await page.evaluate(() => {
-    const btn = document.querySelector('#kites-translate-btn') || document.querySelector('[data-kites-translate-button="true"]');
+    const btn = document.querySelector('#manga-garden-translate-btn') || document.querySelector('[data-manga-garden-translate-button="true"]');
     if (btn) {
       btn.click();
       return true;

@@ -16,8 +16,8 @@
   }
 
   // Prevent double-patching if loaded multiple times
-  if ((window as any).__kites_untaint_active__) return;
-  (window as any).__kites_untaint_active__ = true;
+  if ((window as any).__manga_garden_untaint_active__) return;
+  (window as any).__manga_garden_untaint_active__ = true;
 
   const isCrossOrigin = (src: string): boolean => {
     if (!src || src.startsWith('data:') || src.startsWith('blob:') || src.startsWith('chrome-extension:')) {
@@ -96,7 +96,7 @@
       try {
         draw(imgToDraw);
       } catch (err) {
-        console.warn('[Kites Untaint] Deferred draw replay error:', err);
+        console.warn('[Manga Garden Untaint] Deferred draw replay error:', err);
       }
     }
   };

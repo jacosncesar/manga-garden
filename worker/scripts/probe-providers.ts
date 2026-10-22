@@ -132,7 +132,7 @@ async function testOpenAICompatible(route: ProviderRouteConfig, apiKey: string):
 
 async function main() {
   console.log('\n======================================================');
-  console.log('   Kites Cloudflare Worker Provider Health Probe');
+  console.log('   Manga Garden Cloudflare Worker Provider Health Probe');
   console.log('======================================================\n');
 
   // 1. Probe Live Cloudflare Worker Gateway

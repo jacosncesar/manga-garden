@@ -1,5 +1,5 @@
 /**
- * Single Source of Truth for Inpainting Tiers across Kites.
+ * Single Source of Truth for Inpainting Tiers across Manga Garden.
  *
  * Consumed by:
  * - Frontend UI: Popup (EngineSelectionPanel) & Studio Canvas (StudioEngineSelector)

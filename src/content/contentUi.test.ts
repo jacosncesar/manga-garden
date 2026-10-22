@@ -47,13 +47,13 @@ describe('Frontend UI & Button CSS Contract', () => {
   it('ensures content.css defines required positioning and dimension styles for translate button and control wrapper', () => {
     const css = fs.readFileSync(CONTENT_CSS_PATH, 'utf-8');
 
-    // Regression prevention: .kites-translate-control, [data-kites-translate-control],
-    // #kites-translate-btn, [data-kites-translate-button] must all be styled in CSS.
-    expect(css).toContain('.kites-translate-control');
-    expect(css).toContain('[data-kites-translate-control]');
-    expect(css).toContain('#kites-translate-btn');
-    expect(css).toContain('[data-kites-translate-button]');
-    expect(css).toContain('.kites-translate-btn');
+    // Regression prevention: .manga-garden-translate-control, [data-manga-garden-translate-control],
+    // #manga-garden-translate-btn, [data-manga-garden-translate-button] must all be styled in CSS.
+    expect(css).toContain('.manga-garden-translate-control');
+    expect(css).toContain('[data-manga-garden-translate-control]');
+    expect(css).toContain('#manga-garden-translate-btn');
+    expect(css).toContain('[data-manga-garden-translate-button]');
+    expect(css).toContain('.manga-garden-translate-btn');
 
     // Inject content.css into the DOM
     const styleEl = document.createElement('style');
@@ -62,13 +62,13 @@ describe('Frontend UI & Button CSS Contract', () => {
 
     // Create TranslateButton DOM structure as rendered by React
     const wrapper = document.createElement('div');
-    wrapper.className = 'kites-translate-control';
-    wrapper.setAttribute('data-kites-translate-control', 'true');
+    wrapper.className = 'manga-garden-translate-control';
+    wrapper.setAttribute('data-manga-garden-translate-control', 'true');
 
     const button = document.createElement('button');
-    button.id = 'kites-translate-btn';
-    button.className = 'kites-translate-btn';
-    button.setAttribute('data-kites-translate-button', 'true');
+    button.id = 'manga-garden-translate-btn';
+    button.className = 'manga-garden-translate-btn';
+    button.setAttribute('data-manga-garden-translate-button', 'true');
 
     wrapper.appendChild(button);
     document.body.appendChild(wrapper);
@@ -80,22 +80,22 @@ describe('Frontend UI & Button CSS Contract', () => {
     expect(wrapperStyle.position).toBe('fixed');
     expect(wrapperStyle.zIndex).toBe('999999');
 
-    // Button MUST have non-zero dimensions and brand background color (#f4446d)
+    // Button MUST have non-zero dimensions and brand background color (#22d3ee)
     expect(buttonStyle.width).toBe('32px');
     expect(buttonStyle.height).toBe('32px');
     expect(buttonStyle.borderRadius).toBe('50%');
-    expect(buttonStyle.backgroundColor).toBe('rgb(244, 68, 109)');
+    expect(buttonStyle.backgroundColor).toBe('rgb(34, 211, 238)');
 
     // Finished actions and utility button classes in content.css
     const finishedActions = document.createElement('div');
-    finishedActions.className = 'kites-finished-actions';
+    finishedActions.className = 'manga-garden-finished-actions';
     document.body.appendChild(finishedActions);
     const finishedStyle = window.getComputedStyle(finishedActions);
     expect(finishedStyle.display).toBe('flex');
     expect(finishedStyle.alignItems).toBe('center');
 
     const actionBtn = document.createElement('button');
-    actionBtn.className = 'kites-action-btn';
+    actionBtn.className = 'manga-garden-action-btn';
     document.body.appendChild(actionBtn);
     const actionStyle = window.getComputedStyle(actionBtn);
     expect(actionStyle.width).toBe('28px');
@@ -202,13 +202,13 @@ describe('Manga Reader & Nested Image Hover Handling Logic', () => {
     expect(targets[0].srcUrl).toBe('https://i7.nhentai.net/galleries/12345/1.jpg');
   });
 
-  it('cleanses stale kites attributes and detects new image when single-page reader navigates to next page', () => {
+  it('cleanses stale Manga Garden attributes and detects new image when single-page reader navigates to next page', () => {
     const img = document.createElement('img');
     img.src = 'blob:chrome-extension://1234/translated-blob';
-    img.setAttribute('data-kites-translated', 'true');
-    img.setAttribute('data-kites-orig-src', 'https://i7.nhentai.net/galleries/12345/4.jpg');
-    img.setAttribute('data-kites-applied-src', 'blob:chrome-extension://1234/translated-blob');
-    img.setAttribute('data-kites-job-id', '42');
+    img.setAttribute('data-manga-garden-translated', 'true');
+    img.setAttribute('data-manga-garden-orig-src', 'https://i7.nhentai.net/galleries/12345/4.jpg');
+    img.setAttribute('data-manga-garden-applied-src', 'blob:chrome-extension://1234/translated-blob');
+    img.setAttribute('data-manga-garden-job-id', '42');
     document.body.appendChild(img);
 
     // Host site single-page reader (nhentai) navigates to page 5 on the recycled <img> element
@@ -218,18 +218,18 @@ describe('Manga Reader & Nested Image Hover Handling Logic', () => {
     const newSource = resolveImageSource(img);
     expect(newSource).toBe('https://i7.nhentai.net/galleries/12345/5.jpg');
 
-    // Stale kites attributes should be cleared so the element is recognized as fresh
-    expect(img.hasAttribute('data-kites-translated')).toBe(false);
-    expect(img.hasAttribute('data-kites-applied-src')).toBe(false);
-    expect(img.hasAttribute('data-kites-orig-src')).toBe(false);
-    expect(img.hasAttribute('data-kites-job-id')).toBe(false);
+    // Stale Manga Garden attributes should be cleared so the element is recognized as fresh
+    expect(img.hasAttribute('data-manga-garden-translated')).toBe(false);
+    expect(img.hasAttribute('data-manga-garden-applied-src')).toBe(false);
+    expect(img.hasAttribute('data-manga-garden-orig-src')).toBe(false);
+    expect(img.hasAttribute('data-manga-garden-job-id')).toBe(false);
   });
 
   it('verifies content.css defines scoped styles for chapter reader modal and floating pill', () => {
     const css = fs.readFileSync(CONTENT_CSS_PATH, 'utf-8');
-    expect(css).toContain('.kites-reader-modal');
-    expect(css).toContain('.kites-reader-header');
-    expect(css).toContain('.kites-reader-viewport');
-    expect(css).toContain('.kites-reader-pill');
+    expect(css).toContain('.manga-garden-reader-modal');
+    expect(css).toContain('.manga-garden-reader-header');
+    expect(css).toContain('.manga-garden-reader-viewport');
+    expect(css).toContain('.manga-garden-reader-pill');
   });
 });

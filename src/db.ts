@@ -76,19 +76,62 @@ export interface TextBlock {
   angle?: number;
 }
 
-const db = new Dexie('KitesDatabase') as Dexie & {
+const DATABASE_SCHEMA = {
+  translationJobs: '++id, timestamp, status, folderId, srcUrl',
+  projectFolders: '++id, title, timestamp, isFavorite',
+  images: '++id, jobId',
+  textBlocks: '++id, imageId',
+};
+const LEGACY_DATABASE_NAME = 'KitesDatabase';
+
+const db = new Dexie('MangaGardenDatabase') as Dexie & {
   translationJobs: EntityTable<TranslationJob, 'id'>;
   projectFolders: EntityTable<ProjectFolder, 'id'>;
   images: EntityTable<ImageRecord, 'id'>;
   textBlocks: EntityTable<TextBlock, 'id'>;
 };
 
-db.version(4).stores({
-  translationJobs: '++id, timestamp, status, folderId, srcUrl',
-  projectFolders: '++id, title, timestamp, isFavorite',
-  images: '++id, jobId',
-  textBlocks: '++id, imageId'
-});
+db.version(4).stores(DATABASE_SCHEMA);
+
+/**
+ * Copies records from the previous IndexedDB database into the renamed database.
+ * @returns Resolves after every legacy table is copied, leaving the source intact.
+ */
+export async function migrateLegacyDatabase(): Promise<void> {
+  if (typeof indexedDB === 'undefined' || typeof indexedDB.databases !== 'function') return;
+  if (typeof chrome !== 'undefined' && chrome.storage?.local?.get) {
+    const migrationState = await chrome.storage.local.get(STORAGE_KEYS.DATABASE_MIGRATED);
+    if (migrationState[STORAGE_KEYS.DATABASE_MIGRATED] === true) return;
+  }
+  const databaseNames = await indexedDB.databases();
+  if (!databaseNames.some((database) => database.name === LEGACY_DATABASE_NAME)) return;
+
+  const legacyDb = new Dexie(LEGACY_DATABASE_NAME);
+  legacyDb.version(4).stores(DATABASE_SCHEMA);
+  try {
+    await legacyDb.open();
+    const legacyTables = await Promise.all(legacyDb.tables.map(async (table) => ({
+      name: table.name,
+      records: await legacyDb.table(table.name).toArray(),
+    })));
+    await db.transaction('rw', db.tables, async () => {
+      for (const table of legacyTables) {
+        if (table.records.length > 0) {
+          await db.table(table.name).bulkPut(table.records);
+        }
+      }
+    });
+    if (typeof chrome !== 'undefined' && chrome.storage?.local?.set) {
+      await chrome.storage.local.set({ [STORAGE_KEYS.DATABASE_MIGRATED]: true });
+    }
+  } finally {
+    legacyDb.close();
+  }
+}
+
+db.on('ready', () => migrateLegacyDatabase().catch((error: unknown) => {
+  console.error('[Database] Manga Garden history migration failed; legacy records were retained:', error);
+}));
 
 /**
  * Deletes jobs and all associated image and text records in one transaction.

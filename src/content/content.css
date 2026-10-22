@@ -1,17 +1,17 @@
-/* Scope minimal resets only to our Kites components to avoid breaking host websites */
-.kites-translate-control,
-[data-kites-translate-control],
-#kites-translate-btn,
-[data-kites-translate-button],
-.kites-translate-btn,
-#kites-global-overlay * {
+/* Scope minimal resets only to our Manga Garden components to avoid breaking host websites */
+.manga-garden-translate-control,
+[data-manga-garden-translate-control],
+#manga-garden-translate-btn,
+[data-manga-garden-translate-button],
+.manga-garden-translate-btn,
+#manga-garden-global-overlay * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.kites-translate-control,
-[data-kites-translate-control] {
+.manga-garden-translate-control,
+[data-manga-garden-translate-control] {
   position: fixed;
   z-index: 999999;
   display: flex;
@@ -20,13 +20,13 @@
   pointer-events: auto;
 }
 
-#kites-translate-btn,
-[data-kites-translate-button],
-.kites-translate-btn {
+#manga-garden-translate-btn,
+[data-manga-garden-translate-button],
+.manga-garden-translate-btn {
   position: relative;
   z-index: 999999;
   border: none;
-  background-color: #f4446d;
+  background-color: #22d3ee;
   color: #ffffff;
   border-radius: 50%;
   display: flex;
@@ -43,21 +43,21 @@
   pointer-events: auto;
 }
 
-#kites-translate-btn:hover,
-[data-kites-translate-button]:hover,
-.kites-translate-btn:hover {
-  background-color: #e0335c;
+#manga-garden-translate-btn:hover,
+[data-manga-garden-translate-button]:hover,
+.manga-garden-translate-btn:hover {
+  background-color: #0ea5e9;
   transform: scale(1.05);
 }
 
-.kites-finished-actions {
+.manga-garden-finished-actions {
   display: flex;
   align-items: center;
   gap: 6px;
-  animation: kites-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: manga-garden-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.kites-action-btn {
+.manga-garden-action-btn {
   border: 1px solid #262a3b;
   background-color: #12141c;
   color: #ffffff;
@@ -75,18 +75,18 @@
   padding: 0;
 }
 
-.kites-action-btn:hover {
+.manga-garden-action-btn:hover {
   background-color: #1a1d29;
-  border-color: #f4446d;
-  color: #f4446d;
+  border-color: #22d3ee;
+  color: #22d3ee;
   transform: scale(1.08);
 }
 
-.kites-action-btn:active {
+.manga-garden-action-btn:active {
   transform: scale(0.95);
 }
 
-@keyframes kites-fade-in {
+@keyframes manga-garden-fade-in {
   from {
     opacity: 0;
     transform: scale(0.85);
@@ -97,19 +97,19 @@
   }
 }
 
-.kites-anim-spin {
-  animation: kites-spin 1s linear infinite !important;
+.manga-garden-anim-spin {
+  animation: manga-garden-spin 1s linear infinite !important;
   transform-origin: center center !important;
   display: inline-block !important;
 }
 
-@keyframes kites-spin {
+@keyframes manga-garden-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 /* Snipper full-screen capture backdrop */
-.kites-snipper-backdrop {
+.manga-garden-snipper-backdrop {
   position: fixed;
   inset: 0;
   z-index: 2147483646;
@@ -119,7 +119,7 @@
   touch-action: none;
 }
 
-.kites-snipper-hint {
+.manga-garden-snipper-hint {
   position: fixed;
   top: 24px;
   left: 50%;
@@ -140,15 +140,15 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.kites-snipper-selection {
+.manga-garden-snipper-selection {
   position: fixed;
-  border: 2px dashed #ff2d75;
-  background-color: rgba(255, 45, 117, 0.12);
+  border: 2px dashed #22d3ee;
+  background-color: rgba(34, 211, 238, 0.12);
   pointer-events: none;
   z-index: 2147483647;
 }
 
-.kites-snipper-badge {
+.manga-garden-snipper-badge {
   position: absolute;
   bottom: -28px;
   right: 0;
@@ -163,18 +163,18 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#kites-global-overlay.kites-capture-hidden,
-#kites-global-overlay.kites-capture-hidden * {
+#manga-garden-global-overlay.manga-garden-capture-hidden,
+#manga-garden-global-overlay.manga-garden-capture-hidden * {
   visibility: hidden !important;
 }
 
 /* Screen-pinned floating crop window (Xnip-style pin): position: fixed keeps
    the window at the exact on-screen location while the page scrolls; it only
    moves when the user drags it. Coordinates are viewport CSS pixels. */
-.kites-crop-overlay {
+.manga-garden-crop-overlay {
   position: fixed;
   z-index: 99999;
-  border: 2px solid #ff2d75;
+  border: 2px solid #22d3ee;
   border-radius: 3px;
   overflow: visible;
   box-sizing: border-box;
@@ -183,19 +183,19 @@
   cursor: move;
 }
 
-.kites-crop-editable {
+.manga-garden-crop-editable {
   border-style: dashed;
-  background: rgba(255, 45, 117, 0.08);
+  background: rgba(34, 211, 238, 0.08);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
-.kites-crop-frozen {
+.manga-garden-crop-frozen {
   border-style: solid;
   background: transparent;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.kites-crop-overlay-img {
+.manga-garden-crop-overlay-img {
   width: 100%;
   height: 100%;
   object-fit: fill;
@@ -204,7 +204,7 @@
   pointer-events: none;
 }
 
-.kites-crop-toolbar {
+.manga-garden-crop-toolbar {
   position: absolute;
   bottom: calc(100% + 4px);
   right: -2px;
@@ -220,13 +220,13 @@
   cursor: default;
 }
 
-.kites-crop-toolbar-inside {
+.manga-garden-crop-toolbar-inside {
   top: 4px;
   bottom: auto;
   right: 4px;
 }
 
-.kites-crop-toolbar-btn {
+.manga-garden-crop-toolbar-btn {
   width: 32px;
   height: 32px;
   background: transparent;
@@ -241,21 +241,21 @@
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.kites-crop-toolbar-btn:hover,
-.kites-crop-toolbar-btn:focus-visible {
+.manga-garden-crop-toolbar-btn:hover,
+.manga-garden-crop-toolbar-btn:focus-visible {
   background-color: rgba(255, 255, 255, 0.15);
   color: #ffffff;
-  outline: 2px solid #ff2d75;
+  outline: 2px solid #22d3ee;
   outline-offset: 1px;
 }
 
-.kites-crop-toolbar-btn.kites-crop-btn-active {
-  background-color: #ff2d75;
+.manga-garden-crop-toolbar-btn.manga-garden-crop-btn-active {
+  background-color: #22d3ee;
   color: #ffffff;
 }
 
-.kites-crop-loading-badge,
-.kites-crop-error-pill {
+.manga-garden-crop-loading-badge,
+.manga-garden-crop-error-pill {
   position: absolute;
   left: 8px;
   bottom: 8px;
@@ -278,52 +278,52 @@
   pointer-events: none;
 }
 
-.kites-crop-error-pill {
+.manga-garden-crop-error-pill {
   color: #fecaca;
   background: rgba(127, 29, 29, 0.96);
 }
 
-.kites-crop-resize-handle {
+.manga-garden-crop-resize-handle {
   position: absolute;
   z-index: 100001;
 }
 
-.kites-resize-n,
-.kites-resize-s {
+.manga-garden-resize-n,
+.manga-garden-resize-s {
   left: 20px;
   right: 20px;
   height: 14px;
   cursor: ns-resize;
 }
-.kites-resize-n { top: -7px; }
-.kites-resize-s { bottom: -7px; }
+.manga-garden-resize-n { top: -7px; }
+.manga-garden-resize-s { bottom: -7px; }
 
-.kites-resize-e,
-.kites-resize-w {
+.manga-garden-resize-e,
+.manga-garden-resize-w {
   top: 20px;
   bottom: 20px;
   width: 14px;
   cursor: ew-resize;
 }
-.kites-resize-e { right: -7px; }
-.kites-resize-w { left: -7px; }
+.manga-garden-resize-e { right: -7px; }
+.manga-garden-resize-w { left: -7px; }
 
-.kites-resize-nw,
-.kites-resize-ne,
-.kites-resize-se,
-.kites-resize-sw {
+.manga-garden-resize-nw,
+.manga-garden-resize-ne,
+.manga-garden-resize-se,
+.manga-garden-resize-sw {
   width: 20px;
   height: 20px;
 }
-.kites-resize-nw { top: -10px; left: -10px; cursor: nwse-resize; }
-.kites-resize-ne { top: -10px; right: -10px; cursor: nesw-resize; }
-.kites-resize-se { bottom: -10px; right: -10px; cursor: nwse-resize; }
-.kites-resize-sw { bottom: -10px; left: -10px; cursor: nesw-resize; }
+.manga-garden-resize-nw { top: -10px; left: -10px; cursor: nwse-resize; }
+.manga-garden-resize-ne { top: -10px; right: -10px; cursor: nesw-resize; }
+.manga-garden-resize-se { bottom: -10px; right: -10px; cursor: nwse-resize; }
+.manga-garden-resize-sw { bottom: -10px; left: -10px; cursor: nesw-resize; }
 
-.kites-resize-nw::after,
-.kites-resize-ne::after,
-.kites-resize-se::after,
-.kites-resize-sw::after {
+.manga-garden-resize-nw::after,
+.manga-garden-resize-ne::after,
+.manga-garden-resize-se::after,
+.manga-garden-resize-sw::after {
   content: '';
   position: absolute;
   left: 6px;
@@ -331,12 +331,12 @@
   width: 8px;
   height: 8px;
   border: 2px solid #ffffff;
-  background: #ff2d75;
+  background: #22d3ee;
   border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kites-crop-toolbar-btn {
+  .manga-garden-crop-toolbar-btn {
     transition: none;
   }
 }
@@ -345,7 +345,7 @@
    Chapter Reader Fullscreen Modal & Floating Controls
    ========================================================================== */
 
-.kites-reader-modal {
+.manga-garden-reader-modal {
   position: fixed !important;
   inset: 0 !important;
   top: 0 !important;
@@ -368,7 +368,7 @@
   box-sizing: border-box !important;
 }
 
-.kites-reader-header {
+.manga-garden-reader-header {
   height: 48px !important;
   min-height: 48px !important;
   background-color: rgba(18, 18, 18, 0.95) !important;
@@ -386,19 +386,19 @@
   box-sizing: border-box !important;
 }
 
-.kites-reader-header-left,
-.kites-reader-header-center,
-.kites-reader-header-right {
+.manga-garden-reader-header-left,
+.manga-garden-reader-header-center,
+.manga-garden-reader-header-right {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
 }
 
-.kites-reader-header-left {
+.manga-garden-reader-header-left {
   min-width: 0 !important;
 }
 
-.kites-reader-title {
+.manga-garden-reader-title {
   font-weight: 600 !important;
   color: #ffffff !important;
   white-space: nowrap !important;
@@ -408,14 +408,14 @@
   display: inline-block !important;
 }
 
-.kites-reader-page-counter {
+.manga-garden-reader-page-counter {
   font-size: 11px !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   color: rgba(255, 255, 255, 0.5) !important;
   white-space: nowrap !important;
 }
 
-.kites-reader-mode-group {
+.manga-garden-reader-mode-group {
   display: flex !important;
   align-items: center !important;
   gap: 2px !important;
@@ -425,7 +425,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.kites-reader-btn {
+.manga-garden-reader-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -444,30 +444,30 @@
   text-decoration: none !important;
 }
 
-.kites-reader-btn:hover {
+.manga-garden-reader-btn:hover {
   background-color: rgba(255, 255, 255, 0.12) !important;
   color: #ffffff !important;
 }
 
-.kites-reader-btn.active {
+.manga-garden-reader-btn.active {
   background-color: rgba(255, 255, 255, 0.22) !important;
   color: #ffffff !important;
   font-weight: 600 !important;
 }
 
-.kites-reader-btn-primary {
-  background-color: #f4446d !important;
+.manga-garden-reader-btn-primary {
+  background-color: #22d3ee !important;
   color: #ffffff !important;
-  border: 1px solid #f4446d !important;
+  border: 1px solid #22d3ee !important;
   font-weight: 600 !important;
 }
 
-.kites-reader-btn-primary:hover {
-  background-color: #e0335c !important;
-  border-color: #e0335c !important;
+.manga-garden-reader-btn-primary:hover {
+  background-color: #0ea5e9 !important;
+  border-color: #0ea5e9 !important;
 }
 
-.kites-reader-kbd {
+.manga-garden-reader-kbd {
   display: inline-block !important;
   padding: 2px 4px !important;
   border-radius: 4px !important;
@@ -478,7 +478,7 @@
   line-height: 1 !important;
 }
 
-.kites-reader-viewport {
+.manga-garden-reader-viewport {
   flex: 1 1 0% !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
@@ -493,7 +493,7 @@
 }
 
 /* Webtoon Continuous Vertical Stream */
-.kites-reader-webtoon-container {
+.manga-garden-reader-webtoon-container {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -502,19 +502,19 @@
   padding: 0 !important;
 }
 
-.kites-reader-webtoon-container.width-md {
+.manga-garden-reader-webtoon-container.width-md {
   max-width: 768px !important;
 }
 
-.kites-reader-webtoon-container.width-lg {
+.manga-garden-reader-webtoon-container.width-lg {
   max-width: 1024px !important;
 }
 
-.kites-reader-webtoon-container.width-full {
+.manga-garden-reader-webtoon-container.width-full {
   max-width: 100% !important;
 }
 
-.kites-reader-page-item {
+.manga-garden-reader-page-item {
   width: 100% !important;
   background-color: #000000 !important;
   line-height: 0 !important;
@@ -523,7 +523,7 @@
   position: relative !important;
 }
 
-.kites-reader-page-img {
+.manga-garden-reader-page-img {
   width: 100% !important;
   height: auto !important;
   display: block !important;
@@ -534,7 +534,7 @@
   border: none !important;
 }
 
-.kites-reader-page-badge {
+.manga-garden-reader-page-badge {
   position: absolute !important;
   right: 12px !important;
   bottom: 12px !important;
@@ -551,7 +551,7 @@
 }
 
 /* Single & Double Page Views */
-.kites-reader-panel-container {
+.manga-garden-reader-panel-container {
   flex: 1 1 0% !important;
   width: 100% !important;
   height: 100% !important;
@@ -563,7 +563,7 @@
   box-sizing: border-box !important;
 }
 
-.kites-reader-single-img {
+.manga-garden-reader-single-img {
   max-width: 100% !important;
   max-height: calc(100vh - 80px) !important;
   object-fit: contain !important;
@@ -571,7 +571,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
 }
 
-.kites-reader-double-container {
+.manga-garden-reader-double-container {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -580,7 +580,7 @@
   max-height: calc(100vh - 80px) !important;
 }
 
-.kites-reader-double-img {
+.manga-garden-reader-double-img {
   max-width: calc(50vw - 24px) !important;
   max-height: calc(100vh - 80px) !important;
   object-fit: contain !important;
@@ -588,8 +588,8 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
 }
 
-.kites-reader-nav-prev,
-.kites-reader-nav-next {
+.manga-garden-reader-nav-prev,
+.manga-garden-reader-nav-next {
   position: absolute !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
@@ -607,27 +607,27 @@
   z-index: 1000002 !important;
 }
 
-.kites-reader-nav-prev {
+.manga-garden-reader-nav-prev {
   left: 16px !important;
 }
 
-.kites-reader-nav-next {
+.manga-garden-reader-nav-next {
   right: 16px !important;
 }
 
-.kites-reader-nav-prev:hover,
-.kites-reader-nav-next:hover {
+.manga-garden-reader-nav-prev:hover,
+.manga-garden-reader-nav-next:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-.kites-reader-nav-prev:disabled,
-.kites-reader-nav-next:disabled {
+.manga-garden-reader-nav-prev:disabled,
+.manga-garden-reader-nav-next:disabled {
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
 /* Floating Launch Pill */
-.kites-reader-pill {
+.manga-garden-reader-pill {
   position: fixed !important;
   bottom: 20px !important;
   right: 20px !important;
@@ -649,7 +649,7 @@
   box-sizing: border-box !important;
 }
 
-.kites-reader-pill-btn {
+.manga-garden-reader-pill-btn {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -662,11 +662,11 @@
   font-size: 12px !important;
 }
 
-.kites-reader-pill-btn:hover {
-  color: #f4446d !important;
+.manga-garden-reader-pill-btn:hover {
+  color: #22d3ee !important;
 }
 
-.kites-reader-pill-count {
+.manga-garden-reader-pill-count {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   font-size: 10px !important;
   font-weight: 700 !important;
@@ -675,7 +675,7 @@
   border-radius: 9999px !important;
 }
 
-.kites-reader-pill-close {
+.manga-garden-reader-pill-close {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -686,6 +686,6 @@
   cursor: pointer !important;
 }
 
-.kites-reader-pill-close:hover {
+.manga-garden-reader-pill-close:hover {
   color: #ffffff !important;
 }

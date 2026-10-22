@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const extensionPath = path.join(__dirname, '..', 'dist');
 
 (async () => {
-  console.log('[Puppeteer] Launching Chrome with Kites extension...');
+  console.log('[Puppeteer] Launching Chrome with Manga Garden extension...');
   const browser = await puppeteer.launch({
     headless: false, // Must be false to load extensions
     args: [
@@ -69,7 +69,7 @@ const extensionPath = path.join(__dirname, '..', 'dist');
     // Wait for the hover button to attach (the content script uses a MutationObserver)
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Inject a script into the page context to programmatically click the kites button
+    // Inject a script into the page context to programmatically click the Manga Garden button
     // because hovering via puppeteer on CSS Anchors can sometimes be tricky
     console.log('[Puppeteer] Simulating hover and click on translation button...');
     const success = await page.evaluate((targetSrc) => {
@@ -94,7 +94,7 @@ const extensionPath = path.join(__dirname, '..', 'dist');
     // Click the actual translation button
     await page.evaluate(() => {
       // @ts-ignore
-      const btn = document.querySelector('#kites-translate-btn');
+      const btn = document.querySelector('#manga-garden-translate-btn');
       if (btn) {
         btn.click();
       }

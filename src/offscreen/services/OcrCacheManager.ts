@@ -2,11 +2,11 @@ import { ocrRegistry, resolveOcrTier } from '../engines/ocr/ocrRegistry';
 
 /**
  * Cache and download manager for OCR models and character dictionaries.
- * Stores weights in Cache API under 'kites-ocr-models-v1' to ensure 100% offline
+ * Stores weights in Cache API under 'manga-garden-ocr-models-v1' to ensure 100% offline
  * loading and zero network latency during active translation jobs.
  */
 export class OcrCacheManager {
-  private static CACHE_NAME = 'kites-ocr-models-v1';
+  private static CACHE_NAME = 'manga-garden-ocr-models-v1';
 
   /**
    * Checks if an exact URL is cached in the Cache API.

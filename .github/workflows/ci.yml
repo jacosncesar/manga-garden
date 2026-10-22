@@ -1,4 +1,4 @@
-name: Kites CI/CD
+name: Manga Garden CI/CD
 
 # Trigger the workflow on pushes to main and on pull requests
 on:
@@ -44,6 +44,6 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: kites-extension-build
+          name: manga-garden-extension-build
           path: dist/ # Vite output directory
           retention-days: 7

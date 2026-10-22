@@ -15,7 +15,7 @@ export interface BubbleDetectionResult {
 }
 
 /**
- * Common Object-Oriented Interface for all speech bubble detection engines in Kites.
+ * Common Object-Oriented Interface for all speech bubble detection engines in Manga Garden.
  * Conforms to the Open/Closed Principle alongside IOcrEngine and IInpaintEngine.
  */
 export interface IBubbleEngine {

@@ -123,7 +123,7 @@ import { db } from '../db';
 const STALE_WINDOW_MS = 2 * 60 * 1000;
 
 /**
- * Removes every Kites record so each test starts from an empty queue.
+ * Removes every Manga Garden record so each test starts from an empty queue.
  *
  * @returns Resolves once all tables are cleared.
  */

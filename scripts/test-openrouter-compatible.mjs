@@ -46,7 +46,7 @@ function preview(value) {
 }
 
 /**
- * Sends one Kites-compatible delimiter batch to OpenRouter.
+ * Sends one manga-garden-compatible delimiter batch to OpenRouter.
  *
  * @param {string[]} blocks - OCR strings in this batch.
  * @param {number} batchNumber - One-based batch index for diagnostics.
@@ -74,8 +74,8 @@ async function translateBatch(blocks, batchNumber, apiKey) {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://kites.ai',
-        'X-Title': 'Kites Manga Translator',
+        'HTTP-Referer': 'https://github.com/jacosncesar/MangaLumeTwo',
+        'X-Title': 'Manga Garden Manga Translator',
       },
       body: JSON.stringify(body),
     });
@@ -108,7 +108,7 @@ async function translateBatch(blocks, batchNumber, apiKey) {
 }
 
 /**
- * Replays the exact OCR block set through Kites' sequential ten-line batching behavior.
+ * Replays the exact OCR block set through Manga Garden' sequential ten-line batching behavior.
  *
  * @returns {Promise<void>} Resolves after all batches complete.
  */

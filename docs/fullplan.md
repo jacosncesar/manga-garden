@@ -40,7 +40,7 @@ Only used for authentication and subscription management when the user opts for 
 
 ### A. How to run AI locally for Non-Tech Users (Zero Setup)
 *The Problem:* We want users to translate locally without installing Python, Docker, or external keys.
-*The Solution:* Kites uses WebLLM for users with capable WebGPU hardware. Google Translate is the default online option. The former Transformers.js / NLLB model path is archived and is not an active engine.
+*The Solution:* Manga Garden uses WebLLM for users with capable WebGPU hardware. Google Translate is the default online option. The former Transformers.js / NLLB model path is archived and is not an active engine.
 
 **Supported translation engines:**
 1. **WebLLM (WebGPU):** Runs supported MLC models locally through WebGPU. Models are bundled in the static registry because they must match the installed WebLLM runtime.
@@ -140,7 +140,7 @@ To solve this, we implement a **6-Tier Hybrid Inpainting Pipeline** wrapped in a
 
 > [!NOTE]
 > **Architectural Note (Deliberate Exception to Cotrans Alignment):**
-> Inpainting is the **explicit architectural exception** where Kites does NOT strictly follow Cotrans Python. While Cotrans hardcodes a single heavy Python inpainting model, Kites provides a flexible 6-Tier hybrid engine where **Tier 1 (Direct 4-Point Polygon Patching & Dominant Edge Color Fill)** is used by default for 0MB download footprint and instant microsecond execution. Users can optionally select Tier 2 (Telea Math) or Tiers 3–4 (AOT-GAN / LaMa ONNX) depending on their device capabilities, balancing speed vs visual hallucination quality.
+> Inpainting is the **explicit architectural exception** where Manga Garden does NOT strictly follow Cotrans Python. While Cotrans hardcodes a single heavy Python inpainting model, Manga Garden provides a flexible 6-Tier hybrid engine where **Tier 1 (Direct 4-Point Polygon Patching & Dominant Edge Color Fill)** is used by default for 0MB download footprint and instant microsecond execution. Users can optionally select Tier 2 (Telea Math) or Tiers 3–4 (AOT-GAN / LaMa ONNX) depending on their device capabilities, balancing speed vs visual hallucination quality.
 
 > [!WARNING]
 > **LOCKED DECISION — Polygon-Only Engine Contract (do not change without user approval):**
@@ -250,7 +250,7 @@ The following tools and libraries are critical references for the development of
 
 
 ===========================================================================
-                      KITES IMAGE PROCESSING PIPELINE
+                      Manga Garden IMAGE PROCESSING PIPELINE
 ===========================================================================
 
 [1. RAW IMAGE UPLOAD] 

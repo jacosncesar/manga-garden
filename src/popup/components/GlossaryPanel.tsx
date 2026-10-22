@@ -79,7 +79,7 @@ export default function GlossaryPanel({
             content={
               <>
                 Map source terms to preferred translations for WebLLM, Custom API, and Shared Pool.
-                LLMs may not always follow these preferences. Google Translate does not support glossary in MangaLume 2.0.
+                LLMs may not always follow these preferences. Google Translate does not support glossary in Manga Garden.
                 <span className="block mt-1 text-[var(--color-dust)]">
                   When using Custom API or Shared Pool, glossary terms are included in translation prompts sent to the respective cloud provider. Do not add sensitive data.
                 </span>
@@ -94,11 +94,11 @@ export default function GlossaryPanel({
             aria-checked={glossaryEnabled}
             aria-label="Enable translation glossary"
             onClick={() => updateState({ glossaryEnabled: !glossaryEnabled })}
-            className="kites-switch kites-switch-sm"
+            className="manga-garden-switch manga-garden-switch-sm"
             data-state={glossaryEnabled ? 'checked' : 'unchecked'}
           >
             <span className="sr-only">Enable translation glossary</span>
-            <span className="kites-switch-thumb" />
+            <span className="manga-garden-switch-thumb" />
           </button>
           <button
             aria-label="Close translation glossary"

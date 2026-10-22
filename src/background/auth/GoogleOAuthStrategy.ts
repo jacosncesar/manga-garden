@@ -13,7 +13,7 @@
  */
 
 import type { UserAccountInfo } from '../../shared/types';
-import { STORAGE_KEYS } from '../../shared/constants';
+import { LEGACY_STORAGE_KEYS, migrateLegacyAuthStorage, STORAGE_KEYS } from '../../shared/constants';
 import type { IOAuthStrategy } from './types';
 import {
   buildGoogleAuthUrl,
@@ -311,9 +311,21 @@ export class GoogleOAuthStrategy implements IOAuthStrategy {
    */
   private async loadSavedToken(): Promise<{ token?: string; expiresAt?: number } | undefined> {
     if (typeof chrome !== 'undefined' && chrome.storage?.local) {
-      const data = await chrome.storage.local.get([AUTH_STORAGE_KEY, AUTH_STORAGE_EXPIRES_KEY]);
-      const token = typeof data?.[AUTH_STORAGE_KEY] === 'string' ? data[AUTH_STORAGE_KEY] : undefined;
-      const expiresAt = typeof data?.[AUTH_STORAGE_EXPIRES_KEY] === 'number' ? data[AUTH_STORAGE_EXPIRES_KEY] : undefined;
+      try {
+        await migrateLegacyAuthStorage();
+      } catch (error) {
+        console.error('[GoogleOAuthStrategy] Failed to migrate saved credentials; attempting legacy read:', error);
+      }
+      const data = await chrome.storage.local.get([
+        AUTH_STORAGE_KEY,
+        AUTH_STORAGE_EXPIRES_KEY,
+        LEGACY_STORAGE_KEYS.AUTH_TOKEN,
+        LEGACY_STORAGE_KEYS.AUTH_EXPIRES_AT,
+      ]);
+      const storedToken = data?.[AUTH_STORAGE_KEY] ?? data?.[LEGACY_STORAGE_KEYS.AUTH_TOKEN];
+      const storedExpiresAt = data?.[AUTH_STORAGE_EXPIRES_KEY] ?? data?.[LEGACY_STORAGE_KEYS.AUTH_EXPIRES_AT];
+      const token = typeof storedToken === 'string' ? storedToken : undefined;
+      const expiresAt = typeof storedExpiresAt === 'number' ? storedExpiresAt : undefined;
       return { token, expiresAt };
     }
     return undefined;
@@ -324,7 +336,12 @@ export class GoogleOAuthStrategy implements IOAuthStrategy {
    */
   private async clearSavedToken(): Promise<void> {
     if (typeof chrome !== 'undefined' && chrome.storage?.local) {
-      await chrome.storage.local.remove([AUTH_STORAGE_KEY, AUTH_STORAGE_EXPIRES_KEY]);
+      await chrome.storage.local.remove([
+        AUTH_STORAGE_KEY,
+        AUTH_STORAGE_EXPIRES_KEY,
+        LEGACY_STORAGE_KEYS.AUTH_TOKEN,
+        LEGACY_STORAGE_KEYS.AUTH_EXPIRES_AT,
+      ]);
     }
   }
 }

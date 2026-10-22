@@ -45,8 +45,8 @@ const MAX_PARENT_BG_SEARCH_DEPTH = 2;
 const REVEALED_BACKING_OPACITY = '1';
 const REVEALED_BACKING_Z_INDEX = '1';
 const REVEALED_BACKING_POINTER_EVENTS = 'none';
-const TRANSLATE_CONTROL_SELECTOR = '[data-kites-translate-control]';
-const IMAGE_DISPLAY_CHANGED_EVENT = 'kites-image-display-changed';
+const TRANSLATE_CONTROL_SELECTOR = '[data-manga-garden-translate-control]';
+const IMAGE_DISPLAY_CHANGED_EVENT = 'manga-garden-image-display-changed';
 // Snappy feedback: 150ms delay avoids flickering on sub-100ms no-ops while catching all genuine model inits
 const MODEL_INITIALIZATION_LABEL_DELAY_MS = 150;
 const MODEL_INITIALIZATION_LABEL = 'Preparing AI model…';
@@ -83,7 +83,7 @@ const activeObjectUrls = new Set<string>();
 // WeakMap holding active MutationObserver shields for each translated image element
 const activeShieldObservers = new WeakMap<HTMLImageElement, MutationObserver>();
 
-// Guard flag suppressing internal MutationObservers during Kites DOM modifications
+// Guard flag suppressing internal MutationObservers during Manga Garden DOM modifications
 let isSelfMutating = false;
 
 /**
@@ -124,31 +124,31 @@ function getNormalizedBaseUrl(url: string): string {
 }
 
 /**
- * Attaches a unique Kites tracking ID and registers a media target in the in-memory URL map.
+ * Attaches a unique Manga Garden tracking ID and registers a media target in the in-memory URL map.
  *
  * @param target - Media target and source URL to register.
  * @returns The assigned tracking ID.
  */
 function registerMediaTarget(target: MediaTarget): string {
   const { sourceElement, srcUrl } = target;
-  let kitesId = sourceElement.getAttribute('data-kites-id');
-  if (!kitesId) {
-    kitesId = `kites-${Math.random().toString(36).substring(2, 11)}`;
-    sourceElement.setAttribute('data-kites-id', kitesId);
+  let mangaGardenId = sourceElement.getAttribute('data-manga-garden-id');
+  if (!mangaGardenId) {
+    mangaGardenId = `manga-garden-${Math.random().toString(36).substring(2, 11)}`;
+    sourceElement.setAttribute('data-manga-garden-id', mangaGardenId);
   }
   mediaTargetRegistry.set(srcUrl, target);
   const normalized = getNormalizedBaseUrl(srcUrl);
   if (normalized) {
     mediaTargetRegistry.set(normalized, target);
   }
-  return kitesId;
+  return mangaGardenId;
 }
 
 /**
  * Resolves a media target using a robust multi-tier fallback lookup:
  * 1. Direct in-memory registry reference when image and surface remain attached.
  * 2. Exact resolved-source match across native, responsive, and lazy attributes.
- * 3. Match on data-kites-orig-src attribute.
+ * 3. Match on data-manga-garden-orig-src attribute.
  * 4. Normalized base URL match (stripping CDN resolution parameters).
  *
  * @param originalUrl - The original image URL requested for translation.
@@ -159,8 +159,8 @@ function resolveTargetMedia(originalUrl: string): MediaTarget | null {
   const registered = mediaTargetRegistry.get(originalUrl);
   if (registered && registered.sourceElement.isConnected && registered.surfaceElement.isConnected) {
     if (registered.sourceElement instanceof HTMLImageElement) {
-      const origSrc = registered.sourceElement.getAttribute('data-kites-orig-src');
-      const appliedSrc = registered.sourceElement.getAttribute('data-kites-applied-src');
+      const origSrc = registered.sourceElement.getAttribute('data-manga-garden-orig-src');
+      const appliedSrc = registered.sourceElement.getAttribute('data-manga-garden-applied-src');
       const currentSrc = registered.sourceElement.currentSrc || registered.sourceElement.src || '';
       const matchesOrig = origSrc === originalUrl || (currentSrc && (currentSrc === originalUrl || currentSrc === appliedSrc));
       if (matchesOrig) {
@@ -176,8 +176,8 @@ function resolveTargetMedia(originalUrl: string): MediaTarget | null {
     const normRegistered = mediaTargetRegistry.get(normalized);
     if (normRegistered && normRegistered.sourceElement.isConnected && normRegistered.surfaceElement.isConnected) {
       if (normRegistered.sourceElement instanceof HTMLImageElement) {
-        const origSrc = normRegistered.sourceElement.getAttribute('data-kites-orig-src');
-        const appliedSrc = normRegistered.sourceElement.getAttribute('data-kites-applied-src');
+        const origSrc = normRegistered.sourceElement.getAttribute('data-manga-garden-orig-src');
+        const appliedSrc = normRegistered.sourceElement.getAttribute('data-manga-garden-applied-src');
         const currentSrc = normRegistered.sourceElement.currentSrc || normRegistered.sourceElement.src || '';
         const matchesOrig = origSrc === originalUrl || (currentSrc && (currentSrc === originalUrl || currentSrc === appliedSrc));
         if (matchesOrig) {
@@ -195,8 +195,8 @@ function resolveTargetMedia(originalUrl: string): MediaTarget | null {
   const exactMatch = targets.find((target) => target.srcUrl === originalUrl);
   if (exactMatch) return exactMatch;
 
-  // Tier 3: Match on data-kites-orig-src attribute
-  const origAttrMatch = targets.find((target) => target.sourceElement.getAttribute('data-kites-orig-src') === originalUrl);
+  // Tier 3: Match on data-manga-garden-orig-src attribute
+  const origAttrMatch = targets.find((target) => target.sourceElement.getAttribute('data-manga-garden-orig-src') === originalUrl);
   if (origAttrMatch) return origAttrMatch;
 
   // Tier 4: Match on normalized base URL
@@ -254,16 +254,16 @@ function createSafeBlobUrlFromData(dataUrl: string): string {
  * @param img - Target image element to sanitize.
  */
 function sanitizeImageAttributes(img: HTMLImageElement): void {
-  if (!img.getAttribute('data-kites-orig-src')) {
-    img.setAttribute('data-kites-orig-src', img.src || img.getAttribute('data-src') || '');
-    img.setAttribute('data-kites-orig-srcset', img.srcset || '');
+  if (!img.getAttribute('data-manga-garden-orig-src')) {
+    img.setAttribute('data-manga-garden-orig-src', img.src || img.getAttribute('data-src') || '');
+    img.setAttribute('data-manga-garden-orig-srcset', img.srcset || '');
   }
 
   for (const attr of LAZY_LOAD_ATTRIBUTES) {
     if (img.hasAttribute(attr)) {
       const val = img.getAttribute(attr);
-      if (val && !img.hasAttribute(`data-kites-orig-${attr}`)) {
-        img.setAttribute(`data-kites-orig-${attr}`, val);
+      if (val && !img.hasAttribute(`data-manga-garden-orig-${attr}`)) {
+        img.setAttribute(`data-manga-garden-orig-${attr}`, val);
       }
       img.removeAttribute(attr);
     }
@@ -283,14 +283,14 @@ function sanitizeImageAttributes(img: HTMLImageElement): void {
 function suppressParentBackgroundImage(img: HTMLImageElement, surfaceElement: HTMLElement = img): void {
   let parent: HTMLElement | null = surfaceElement === img ? img.parentElement : surfaceElement;
   let depth = 0;
-  const originalSource = getNormalizedBaseUrl(img.getAttribute('data-kites-orig-src') || resolveImageSource(img));
+  const originalSource = getNormalizedBaseUrl(img.getAttribute('data-manga-garden-orig-src') || resolveImageSource(img));
   while (parent && depth < MAX_PARENT_BG_SEARCH_DEPTH) {
     const bg = parent.style.backgroundImage || window.getComputedStyle(parent).backgroundImage;
     if (bg && bg !== 'none' && bg.includes('url(') && (!originalSource || bg.includes(originalSource) || surfaceElement === parent)) {
-      if (!parent.hasAttribute('data-kites-orig-bg')) {
-        parent.setAttribute('data-kites-orig-bg', parent.style.backgroundImage);
+      if (!parent.hasAttribute('data-manga-garden-orig-bg')) {
+        parent.setAttribute('data-manga-garden-orig-bg', parent.style.backgroundImage);
       }
-      parent.setAttribute('data-kites-background-suppressed', 'true');
+      parent.setAttribute('data-manga-garden-background-suppressed', 'true');
       parent.style.backgroundImage = 'none';
     }
     parent = parent.parentElement;
@@ -355,7 +355,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   }
   if (message.type === 'OPEN_CHAPTER_READER') {
     document.dispatchEvent(
-      new CustomEvent('kites-open-chapter-reader', {
+      new CustomEvent('manga-garden-open-chapter-reader', {
         detail: message.payload,
       })
     );
@@ -420,14 +420,14 @@ function attachReversionShield(img: HTMLImageElement, safeUrl: string, surfaceEl
 
     for (const mutation of mutations) {
       if (mutation.type === 'attributes') {
-        const appliedSrc = img.getAttribute('data-kites-applied-src') || safeUrl;
-        const origSrc = img.getAttribute('data-kites-orig-src');
+        const appliedSrc = img.getAttribute('data-manga-garden-applied-src') || safeUrl;
+        const origSrc = img.getAttribute('data-manga-garden-orig-src');
         if (mutation.attributeName === 'src') {
           const currentSrc = img.getAttribute('src') || img.src;
           if (!currentSrc || currentSrc === appliedSrc) continue;
 
           // If user is previewing original image, do not revert back to translated
-          if (img.getAttribute('data-kites-show-original') === 'true') {
+          if (img.getAttribute('data-manga-garden-show-original') === 'true') {
             continue;
           }
 
@@ -438,15 +438,15 @@ function attachReversionShield(img: HTMLImageElement, safeUrl: string, surfaceEl
             console.log('[Content Script] New image detected on recycled element; disconnecting shield and resetting translation state.');
             observer.disconnect();
             activeShieldObservers.delete(img);
-            img.removeAttribute('data-kites-translated');
-            img.removeAttribute('data-kites-applied-src');
-            img.removeAttribute('data-kites-show-original');
-            img.removeAttribute('data-kites-orig-src');
-            img.removeAttribute('data-kites-orig-srcset');
-            img.removeAttribute('data-kites-job-id');
-            surfaceElement.removeAttribute('data-kites-translated');
-            surfaceElement.removeAttribute('data-kites-show-original');
-            surfaceElement.removeAttribute('data-kites-job-id');
+            img.removeAttribute('data-manga-garden-translated');
+            img.removeAttribute('data-manga-garden-applied-src');
+            img.removeAttribute('data-manga-garden-show-original');
+            img.removeAttribute('data-manga-garden-orig-src');
+            img.removeAttribute('data-manga-garden-orig-srcset');
+            img.removeAttribute('data-manga-garden-job-id');
+            surfaceElement.removeAttribute('data-manga-garden-translated');
+            surfaceElement.removeAttribute('data-manga-garden-show-original');
+            surfaceElement.removeAttribute('data-manga-garden-job-id');
             continue;
           }
 
@@ -471,7 +471,7 @@ function attachReversionShield(img: HTMLImageElement, safeUrl: string, surfaceEl
         if (mutation.attributeName === 'style') {
           const imageStyleReverted = mutation.target === img;
           const surfaceStyleReverted = mutation.target === surfaceElement
-            && surfaceElement.getAttribute('data-kites-background-suppressed') === 'true'
+            && surfaceElement.getAttribute('data-manga-garden-background-suppressed') === 'true'
             && surfaceElement.style.backgroundImage !== 'none';
           if (imageStyleReverted || surfaceStyleReverted) {
             console.log('[Content Script] Host SPA reset detected on media style, restoring translated presentation.');
@@ -509,24 +509,24 @@ function replaceImageWithTranslation(target: MediaTarget, record: TranslatedImag
   record.sourceElement = sourceElement;
 
   if (jobId) {
-    sourceElement.setAttribute('data-kites-job-id', String(jobId));
-    surfaceElement.setAttribute('data-kites-job-id', String(jobId));
+    sourceElement.setAttribute('data-manga-garden-job-id', String(jobId));
+    surfaceElement.setAttribute('data-manga-garden-job-id', String(jobId));
   }
 
   runSelfMutation(() => {
-    sourceElement.setAttribute('data-kites-applied-src', safeUrl);
-    sourceElement.setAttribute('data-kites-translated', 'true');
-    surfaceElement.setAttribute('data-kites-translated', 'true');
+    sourceElement.setAttribute('data-manga-garden-applied-src', safeUrl);
+    sourceElement.setAttribute('data-manga-garden-translated', 'true');
+    surfaceElement.setAttribute('data-manga-garden-translated', 'true');
     if (targetImg) {
       sanitizeImageAttributes(targetImg);
       targetImg.src = safeUrl;
       targetImg.style.display = '';
       targetImg.style.filter = 'none';
       if (hiddenBacking) {
-        if (!targetImg.hasAttribute('data-kites-orig-style')) targetImg.setAttribute('data-kites-orig-style', targetImg.getAttribute('style') || '');
-        targetImg.setAttribute('data-kites-applied-opacity', REVEALED_BACKING_OPACITY);
-        targetImg.setAttribute('data-kites-applied-z-index', REVEALED_BACKING_Z_INDEX);
-        targetImg.setAttribute('data-kites-applied-pointer-events', REVEALED_BACKING_POINTER_EVENTS);
+        if (!targetImg.hasAttribute('data-manga-garden-orig-style')) targetImg.setAttribute('data-manga-garden-orig-style', targetImg.getAttribute('style') || '');
+        targetImg.setAttribute('data-manga-garden-applied-opacity', REVEALED_BACKING_OPACITY);
+        targetImg.setAttribute('data-manga-garden-applied-z-index', REVEALED_BACKING_Z_INDEX);
+        targetImg.setAttribute('data-manga-garden-applied-pointer-events', REVEALED_BACKING_POINTER_EVENTS);
         targetImg.style.opacity = REVEALED_BACKING_OPACITY;
         targetImg.style.visibility = 'visible';
         targetImg.style.zIndex = REVEALED_BACKING_Z_INDEX;
@@ -535,7 +535,7 @@ function replaceImageWithTranslation(target: MediaTarget, record: TranslatedImag
       suppressParentBackgroundImage(targetImg, surfaceElement);
       attachReversionShield(targetImg, safeUrl, surfaceElement);
     } else if (kind === 'background') {
-      if (!surfaceElement.hasAttribute('data-kites-orig-bg')) surfaceElement.setAttribute('data-kites-orig-bg', surfaceElement.style.backgroundImage);
+      if (!surfaceElement.hasAttribute('data-manga-garden-orig-bg')) surfaceElement.setAttribute('data-manga-garden-orig-bg', surfaceElement.style.backgroundImage);
       surfaceElement.style.backgroundImage = `url("${safeUrl}")`;
     } else {
       sourceElement.setAttribute('href', safeUrl);
@@ -561,33 +561,33 @@ function toggleImageDisplay(target: MediaTarget, showOriginal: boolean): void {
 
   runSelfMutation(() => {
     if (showOriginal) {
-      sourceElement.setAttribute('data-kites-show-original', 'true');
-      surfaceElement.setAttribute('data-kites-show-original', 'true');
+      sourceElement.setAttribute('data-manga-garden-show-original', 'true');
+      surfaceElement.setAttribute('data-manga-garden-show-original', 'true');
 
       if (targetImg) {
-        const origSrc = targetImg.getAttribute('data-kites-orig-src') || target.srcUrl;
-        const origSrcset = targetImg.getAttribute('data-kites-orig-srcset');
+        const origSrc = targetImg.getAttribute('data-manga-garden-orig-src') || target.srcUrl;
+        const origSrcset = targetImg.getAttribute('data-manga-garden-orig-srcset');
         targetImg.src = origSrc;
         if (origSrcset) {
           targetImg.srcset = origSrcset;
         }
-        const origBg = surfaceElement.getAttribute('data-kites-orig-bg');
+        const origBg = surfaceElement.getAttribute('data-manga-garden-orig-bg');
         if (origBg) {
           surfaceElement.style.backgroundImage = origBg;
         }
       } else if (kind === 'background') {
-        const origBg = surfaceElement.getAttribute('data-kites-orig-bg') || '';
+        const origBg = surfaceElement.getAttribute('data-manga-garden-orig-bg') || '';
         surfaceElement.style.backgroundImage = origBg;
       } else {
-        const origSrc = sourceElement.getAttribute('data-kites-orig-src') || target.srcUrl;
+        const origSrc = sourceElement.getAttribute('data-manga-garden-orig-src') || target.srcUrl;
         sourceElement.setAttribute('href', origSrc);
         sourceElement.setAttributeNS('http://www.w3.org/1999/xlink', 'href', origSrc);
       }
     } else {
-      sourceElement.removeAttribute('data-kites-show-original');
-      surfaceElement.removeAttribute('data-kites-show-original');
+      sourceElement.removeAttribute('data-manga-garden-show-original');
+      surfaceElement.removeAttribute('data-manga-garden-show-original');
 
-      const appliedSrc = sourceElement.getAttribute('data-kites-applied-src') || record?.translatedUrl;
+      const appliedSrc = sourceElement.getAttribute('data-manga-garden-applied-src') || record?.translatedUrl;
       if (appliedSrc) {
         if (targetImg) {
           targetImg.src = appliedSrc;
@@ -621,7 +621,7 @@ type OverlayImage = MediaTarget & {
 function getAnchorName(element: HTMLElement): string {
   let anchorName = element.style.getPropertyValue('anchor-name');
   if (!anchorName) {
-    anchorName = `--kites-img-${Math.random().toString(36).substring(2, 11)}`;
+    anchorName = `--manga-garden-img-${Math.random().toString(36).substring(2, 11)}`;
     element.style.setProperty('anchor-name', anchorName);
   }
   return anchorName;
@@ -672,20 +672,20 @@ function TranslateButton({
     }
 
     // 2. DOM attribute check on anchorElement or inner img
-    if (anchorElement.getAttribute('data-kites-translated') === 'true') {
+    if (anchorElement.getAttribute('data-manga-garden-translated') === 'true') {
       return true;
     }
 
     const img = anchorElement instanceof HTMLImageElement ? anchorElement : anchorElement.querySelector('img');
-    if (img && img.getAttribute('data-kites-translated') === 'true') {
+    if (img && img.getAttribute('data-manga-garden-translated') === 'true') {
       return true;
     }
 
     // 3. MediaTarget resolution fallback
     const target = resolveTargetMedia(srcUrl);
     if (
-      target?.sourceElement?.getAttribute('data-kites-translated') === 'true' ||
-      target?.surfaceElement?.getAttribute('data-kites-translated') === 'true'
+      target?.sourceElement?.getAttribute('data-manga-garden-translated') === 'true' ||
+      target?.surfaceElement?.getAttribute('data-manga-garden-translated') === 'true'
     ) {
       return true;
     }
@@ -697,13 +697,13 @@ function TranslateButton({
   const [showOriginal, setShowOriginal] = useState(() => {
     return Boolean(
       translatedRegistry.get(srcUrl)?.showOriginal ||
-      anchorElement.getAttribute('data-kites-show-original') === 'true'
+      anchorElement.getAttribute('data-manga-garden-show-original') === 'true'
     );
   });
   const [jobId, setJobId] = useState<number | null>(() => {
     const reg = translatedRegistry.get(srcUrl)?.jobId;
     if (reg) return reg;
-    const attr = anchorElement.getAttribute('data-kites-job-id');
+    const attr = anchorElement.getAttribute('data-manga-garden-job-id');
     return attr ? Number(attr) : null;
   });
 
@@ -734,9 +734,9 @@ function TranslateButton({
   useEffect(() => {
     const update = () => {
       const reg = translatedRegistry.get(srcUrl);
-      if (reg?.translatedUrl && !reg.showOriginal && anchorElement.getAttribute('data-kites-show-original') !== 'true') {
-        const isDomApplied = anchorElement.getAttribute('data-kites-translated') === 'true' ||
-          (anchorElement instanceof HTMLImageElement ? anchorElement.getAttribute('data-kites-translated') === 'true' : anchorElement.querySelector('img')?.getAttribute('data-kites-translated') === 'true');
+      if (reg?.translatedUrl && !reg.showOriginal && anchorElement.getAttribute('data-manga-garden-show-original') !== 'true') {
+        const isDomApplied = anchorElement.getAttribute('data-manga-garden-translated') === 'true' ||
+          (anchorElement instanceof HTMLImageElement ? anchorElement.getAttribute('data-manga-garden-translated') === 'true' : anchorElement.querySelector('img')?.getAttribute('data-manga-garden-translated') === 'true');
         if (!isDomApplied) {
           const target = resolveTargetMedia(srcUrl);
           if (target) {
@@ -748,10 +748,10 @@ function TranslateButton({
       setIsTranslated(isElementTranslated());
       setShowOriginal(
         reg?.showOriginal ??
-        (anchorElement.getAttribute('data-kites-show-original') === 'true')
+        (anchorElement.getAttribute('data-manga-garden-show-original') === 'true')
       );
       const regJobId = reg?.jobId;
-      const attr = anchorElement.getAttribute('data-kites-job-id');
+      const attr = anchorElement.getAttribute('data-manga-garden-job-id');
       setJobId(regJobId ?? (attr ? Number(attr) : null));
     };
 
@@ -760,14 +760,14 @@ function TranslateButton({
     const observer = new MutationObserver(update);
     observer.observe(anchorElement, {
       attributes: true,
-      attributeFilter: ['src', 'data-kites-translated', 'data-kites-applied-src', 'data-kites-show-original'],
+      attributeFilter: ['src', 'data-manga-garden-translated', 'data-manga-garden-applied-src', 'data-manga-garden-show-original'],
     });
 
     const img = anchorElement instanceof HTMLImageElement ? null : anchorElement.querySelector('img');
     if (img) {
       observer.observe(img, {
         attributes: true,
-        attributeFilter: ['src', 'data-kites-translated', 'data-kites-applied-src', 'data-kites-show-original'],
+        attributeFilter: ['src', 'data-manga-garden-translated', 'data-manga-garden-applied-src', 'data-manga-garden-show-original'],
       });
     }
 
@@ -806,13 +806,13 @@ function TranslateButton({
     e.stopPropagation();
     const target = resolveTargetMedia(srcUrl);
     const downloadUrl =
-      target?.sourceElement.getAttribute('data-kites-applied-src') ||
+      target?.sourceElement.getAttribute('data-manga-garden-applied-src') ||
       translatedRegistry.get(srcUrl)?.translatedUrl;
     if (!downloadUrl) return;
 
     const link = document.createElement('a');
     link.href = downloadUrl;
-    link.download = `kites-translated-${Date.now()}.png`;
+    link.download = `manga-garden-translated-${Date.now()}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -825,7 +825,7 @@ function TranslateButton({
     const targetJobId =
       jobId ||
       translatedRegistry.get(srcUrl)?.jobId ||
-      (target ? Number(target.sourceElement.getAttribute('data-kites-job-id')) : null);
+      (target ? Number(target.sourceElement.getAttribute('data-manga-garden-job-id')) : null);
 
     try {
       chrome.runtime.sendMessage({
@@ -997,8 +997,8 @@ function TranslateButton({
   return (
     <div
       ref={buttonRef}
-      className="kites-translate-control"
-      data-kites-translate-control="true"
+      className="manga-garden-translate-control"
+      data-manga-garden-translate-control="true"
       style={{
         position: 'fixed',
         zIndex: 999999,
@@ -1011,8 +1011,8 @@ function TranslateButton({
       }}
     >
       <button
-        id="kites-translate-btn"
-        data-kites-translate-button="true"
+        id="manga-garden-translate-btn"
+        data-manga-garden-translate-button="true"
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -1027,14 +1027,14 @@ function TranslateButton({
           onTranslate(srcUrl);
         }}
         disabled={activeTranslating}
-        className={`kites-translate-btn ${activeTranslating ? 'kites-anim-spin' : ''}`}
+        className={`manga-garden-translate-btn ${activeTranslating ? 'manga-garden-anim-spin' : ''}`}
         style={{
           width: '32px',
           height: '32px',
           minWidth: '32px',
           minHeight: '32px',
           borderRadius: '50%',
-          backgroundColor: hasFailed ? '#dc2626' : '#f4446d',
+          backgroundColor: hasFailed ? '#dc2626' : '#22d3ee',
           border: 'none',
           display: 'flex',
           alignItems: 'center',
@@ -1065,8 +1065,8 @@ function TranslateButton({
           <Languages
             size={18}
             aria-hidden="true"
-            className={activeTranslating ? 'kites-anim-spin' : ''}
-            style={activeTranslating ? { animation: 'kites-spin 1s linear infinite' } : undefined}
+            className={activeTranslating ? 'manga-garden-anim-spin' : ''}
+            style={activeTranslating ? { animation: 'manga-garden-spin 1s linear infinite' } : undefined}
           />
         )}
       </button>
@@ -1074,7 +1074,7 @@ function TranslateButton({
       {/* Snappy 180ms Custom Tooltip */}
       {isTooltipVisible && !activeTranslating && (
         <div
-          className="kites-custom-tooltip"
+          className="manga-garden-custom-tooltip"
           role="tooltip"
           style={{
             position: 'absolute',
@@ -1092,7 +1092,7 @@ function TranslateButton({
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.45)',
             pointerEvents: 'none',
             zIndex: 1000000,
-            animation: 'kites-fade-in 0.15s ease-out',
+            animation: 'manga-garden-fade-in 0.15s ease-out',
           }}
         >
           {hasFailed
@@ -1105,8 +1105,8 @@ function TranslateButton({
 
       {isTranslated && !activeTranslating && (
         <div
-          className="kites-finished-actions"
-          data-kites-finished-actions="true"
+          className="manga-garden-finished-actions"
+          data-manga-garden-finished-actions="true"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -1115,17 +1115,17 @@ function TranslateButton({
         >
           <button
             type="button"
-            data-kites-toggle-btn="true"
+            data-manga-garden-toggle-btn="true"
             onClick={handleToggleOriginal}
-            className="kites-action-btn"
+            className="manga-garden-action-btn"
             style={{
               width: '28px',
               height: '28px',
               minWidth: '28px',
               minHeight: '28px',
               borderRadius: '50%',
-              backgroundColor: showOriginal ? '#f4446d' : '#12141c',
-              border: showOriginal ? '1px solid #f4446d' : '1px solid #262a3b',
+              backgroundColor: showOriginal ? '#22d3ee' : '#12141c',
+              border: showOriginal ? '1px solid #22d3ee' : '1px solid #262a3b',
               color: '#ffffff',
               display: 'flex',
               alignItems: 'center',
@@ -1142,9 +1142,9 @@ function TranslateButton({
 
           <button
             type="button"
-            data-kites-download-btn="true"
+            data-manga-garden-download-btn="true"
             onClick={handleDownload}
-            className="kites-action-btn"
+            className="manga-garden-action-btn"
             style={{
               width: '28px',
               height: '28px',
@@ -1169,9 +1169,9 @@ function TranslateButton({
 
           <button
             type="button"
-            data-kites-edit-btn="true"
+            data-manga-garden-edit-btn="true"
             onClick={handleEditInStudio}
-            className="kites-action-btn"
+            className="manga-garden-action-btn"
             style={{
               width: '28px',
               height: '28px',
@@ -1288,18 +1288,18 @@ function ScreenSnipper({ onComplete, onCancel }: ScreenSnipperProps) {
 
   return (
     <div
-      className="kites-snipper-backdrop"
+      className="manga-garden-snipper-backdrop"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
-      <div className="kites-snipper-hint">
+      <div className="manga-garden-snipper-hint">
         <Crop size={15} />
         Drag to select area · Esc to cancel
       </div>
       {activeSelection && (
         <div
-          className="kites-snipper-selection"
+          className="manga-garden-snipper-selection"
           style={{
             left: `${activeSelection.left}px`,
             top: `${activeSelection.top}px`,
@@ -1307,7 +1307,7 @@ function ScreenSnipper({ onComplete, onCancel }: ScreenSnipperProps) {
             height: `${activeSelection.height}px`,
           }}
         >
-          <div className="kites-snipper-badge">
+          <div className="manga-garden-snipper-badge">
             {activeSelection.width} × {activeSelection.height} px
           </div>
         </div>
@@ -1326,14 +1326,14 @@ interface CropOverlayBoxProps {
 }
 
 const CROP_RESIZE_HANDLES: Array<{ handle: CropDragHandle; className: string }> = [
-  { handle: 'n', className: 'kites-resize-n' },
-  { handle: 'e', className: 'kites-resize-e' },
-  { handle: 's', className: 'kites-resize-s' },
-  { handle: 'w', className: 'kites-resize-w' },
-  { handle: 'nw', className: 'kites-resize-nw' },
-  { handle: 'ne', className: 'kites-resize-ne' },
-  { handle: 'se', className: 'kites-resize-se' },
-  { handle: 'sw', className: 'kites-resize-sw' },
+  { handle: 'n', className: 'manga-garden-resize-n' },
+  { handle: 'e', className: 'manga-garden-resize-e' },
+  { handle: 's', className: 'manga-garden-resize-s' },
+  { handle: 'w', className: 'manga-garden-resize-w' },
+  { handle: 'nw', className: 'manga-garden-resize-nw' },
+  { handle: 'ne', className: 'manga-garden-resize-ne' },
+  { handle: 'se', className: 'manga-garden-resize-se' },
+  { handle: 'sw', className: 'manga-garden-resize-sw' },
 ];
 
 function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggleOriginal, onRemove }: CropOverlayBoxProps) {
@@ -1422,7 +1422,7 @@ function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggle
 
   return (
     <div
-      className={`kites-crop-overlay ${isEditable ? 'kites-crop-editable' : 'kites-crop-frozen'}`}
+      className={`manga-garden-crop-overlay ${isEditable ? 'manga-garden-crop-editable' : 'manga-garden-crop-frozen'}`}
       style={{
         left: `${crop.left}px`,
         top: `${crop.top}px`,
@@ -1435,18 +1435,18 @@ function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggle
       onPointerCancel={endInteraction}
     >
       <div
-        className={`kites-crop-toolbar ${crop.top < 44 ? 'kites-crop-toolbar-inside' : ''}`}
+        className={`manga-garden-crop-toolbar ${crop.top < 44 ? 'manga-garden-crop-toolbar-inside' : ''}`}
         onPointerDown={(event) => event.stopPropagation()}
       >
         {isEditable && (
-          <button type="button" className="kites-crop-toolbar-btn" onClick={() => onTranslate(crop.id)} title="Translate area">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onTranslate(crop.id)} title="Translate area">
             <Languages size={18} />
           </button>
         )}
         {crop.status === 'completed' && crop.originalDataUrl && (
           <button
             type="button"
-            className={`kites-crop-toolbar-btn ${crop.showOriginal ? 'kites-crop-btn-active' : ''}`}
+            className={`manga-garden-crop-toolbar-btn ${crop.showOriginal ? 'manga-garden-crop-btn-active' : ''}`}
             onClick={() => onToggleOriginal(crop.id)}
             title={crop.showOriginal ? 'View Translated' : 'View Original'}
           >
@@ -1454,37 +1454,37 @@ function CropOverlayBox({ crop, onTranslate, onReset, onGeometryChange, onToggle
           </button>
         )}
         {crop.status === 'completed' && (
-          <button type="button" className="kites-crop-toolbar-btn" onClick={() => onReset(crop.id)} title="Reset crop">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onReset(crop.id)} title="Reset crop">
             <RotateCcw size={18} />
           </button>
         )}
         {crop.jobId && (
-          <button type="button" className="kites-crop-toolbar-btn" onClick={openInStudio} title="Open in Studio">
+          <button type="button" className="manga-garden-crop-toolbar-btn" onClick={openInStudio} title="Open in Studio">
             <ExternalLink size={18} />
           </button>
         )}
-        <button type="button" className="kites-crop-toolbar-btn" onClick={() => onRemove(crop.id)} title="Close">
+        <button type="button" className="manga-garden-crop-toolbar-btn" onClick={() => onRemove(crop.id)} title="Close">
           <X size={18} />
         </button>
       </div>
 
       {displayUrl && (
-        <img src={displayUrl} alt="Cropped manga panel" className="kites-crop-overlay-img" draggable={false} />
+        <img src={displayUrl} alt="Cropped manga panel" className="manga-garden-crop-overlay-img" draggable={false} />
       )}
 
       {isTranslating && crop.originalDataUrl && (
-        <div className="kites-crop-loading-badge">
-          <Languages size={16} className="kites-anim-spin" />
+        <div className="manga-garden-crop-loading-badge">
+          <Languages size={16} className="manga-garden-anim-spin" />
           <span>{initFeedback || (crop.status === 'capturing' ? 'Capturing...' : 'Translating...')}</span>
         </div>
       )}
 
-      {crop.status === 'failed' && crop.error && <div className="kites-crop-error-pill">{crop.error}</div>}
+      {crop.status === 'failed' && crop.error && <div className="manga-garden-crop-error-pill">{crop.error}</div>}
 
       {isEditable && CROP_RESIZE_HANDLES.map(({ handle, className }) => (
         <div
           key={handle}
-          className={`kites-crop-resize-handle ${className}`}
+          className={`manga-garden-crop-resize-handle ${className}`}
           onPointerDown={(event) => beginInteraction(event, handle)}
           aria-hidden="true"
         />
@@ -1628,8 +1628,8 @@ function GlobalOverlay() {
         setIsReaderOpen(true);
       }
     };
-    document.addEventListener('kites-open-chapter-reader', handleOpenReader);
-    return () => document.removeEventListener('kites-open-chapter-reader', handleOpenReader);
+    document.addEventListener('manga-garden-open-chapter-reader', handleOpenReader);
+    return () => document.removeEventListener('manga-garden-open-chapter-reader', handleOpenReader);
   }, [refreshChapterPages]);
 
   /**
@@ -1667,7 +1667,7 @@ function GlobalOverlay() {
       cachedRecord.translatedUrl &&
       target &&
       targetEl &&
-      targetEl.getAttribute('data-kites-translated') !== 'true'
+      targetEl.getAttribute('data-manga-garden-translated') !== 'true'
     ) {
       console.log('[Content Script] Re-applying existing translation from memory for:', srcUrl);
       if (image) {
@@ -1717,7 +1717,7 @@ function GlobalOverlay() {
     // Page scrolling must never move it (issue #1).
     setCrops((prev) => [...prev, {
       id: requestId,
-      sourceKey: `kites-capture:${requestId}`,
+      sourceKey: `manga-garden-capture:${requestId}`,
       left: selection.left,
       top: selection.top,
       width: selection.width,
@@ -1729,8 +1729,8 @@ function GlobalOverlay() {
   };
 
   const requestVisibleTabCapture = async (): Promise<string> => {
-    const overlayRoot = document.getElementById('kites-global-overlay');
-    overlayRoot?.classList.add('kites-capture-hidden');
+    const overlayRoot = document.getElementById('manga-garden-global-overlay');
+    overlayRoot?.classList.add('manga-garden-capture-hidden');
     try {
       await waitForCleanFrames();
       return await new Promise<string>((resolve, reject) => {
@@ -1746,7 +1746,7 @@ function GlobalOverlay() {
         );
       });
     } finally {
-      overlayRoot?.classList.remove('kites-capture-hidden');
+      overlayRoot?.classList.remove('manga-garden-capture-hidden');
     }
   };
 
@@ -1856,7 +1856,7 @@ function GlobalOverlay() {
       const newId = `crop_${Date.now()}`;
       const newCrop: CropOverlayItem = {
         id: newId,
-        sourceKey: `kites-capture:${newId}`,
+        sourceKey: `manga-garden-capture:${newId}`,
         left: Math.max(0, Math.min(window.innerWidth - last.width, last.left)),
         top: Math.max(0, Math.min(window.innerHeight - last.height, last.top)),
         width: last.width,
@@ -2148,7 +2148,7 @@ function GlobalOverlay() {
       for (const mutation of mutations) {
         if (mutation.type === 'attributes' && mutation.target instanceof HTMLImageElement && mutation.attributeName === 'src') {
           const target = mutation.target;
-          if (target.getAttribute('data-kites-translated') === 'true' || target.src.startsWith('blob:') || target.src.startsWith('data:')) {
+          if (target.getAttribute('data-manga-garden-translated') === 'true' || target.src.startsWith('blob:') || target.src.startsWith('data:')) {
             translatedSources.add(target);
           }
         }
@@ -2440,10 +2440,10 @@ function GlobalOverlay() {
 }
 
 try {
-  let overlayRoot = document.getElementById('kites-global-overlay');
+  let overlayRoot = document.getElementById('manga-garden-global-overlay');
   if (!overlayRoot) {
     overlayRoot = document.createElement('div');
-    overlayRoot.id = 'kites-global-overlay';
+    overlayRoot.id = 'manga-garden-global-overlay';
     overlayRoot.style.display = 'contents';
     document.body.appendChild(overlayRoot);
   }
@@ -2454,7 +2454,7 @@ try {
     (overlayRoot as any)._reactRoot = root;
   }
   root.render(<GlobalOverlay />);
-  console.log('[Content Script] Initialized Kites image translation overlay.');
+  console.log('[Content Script] Initialized Manga Garden image translation overlay.');
 } catch (error) {
   console.error('[Content Script] Failed to initialize overlay:', error);
 }

@@ -1,15 +1,15 @@
-# Contributing to Kites 🪁
+# Contributing to Manga Garden 🪁
 
-Thank you for your interest in contributing to **Kites**! Whether you are fixing a bug, improving OCR dictionaries, optimizing inpainting shaders, tuning typesetting heuristics, or writing documentation, your help is warmly welcomed.
+Thank you for your interest in contributing to **Manga Garden**! Whether you are fixing a bug, improving OCR dictionaries, optimizing inpainting shaders, tuning typesetting heuristics, or writing documentation, your help is warmly welcomed.
 
-Kites is an open-source, local-first manga and comic translator built with **Manifest V3, React 19, TypeScript, WebGPU, and ONNX Runtime Web**.
+Manga Garden is an open-source, local-first manga and comic translator built with **Manifest V3, React 19, TypeScript, WebGPU, and ONNX Runtime Web**.
 
 ---
 
 ## 🌟 Contributor Notice: Open to Contributions!
 
 We actively encourage and welcome contributions from the community:
-- 💡 **Feature Ideas & Discussion:** Open a [GitHub Discussion](https://github.com/Unheat/Kites/discussions) or issue to discuss new engines, UI improvements, or site support.
+- 💡 **Feature Ideas & Discussion:** Open a [GitHub Discussion](https://github.com/jacosncesar/MangaLumeTwo/discussions) or issue to discuss new engines, UI improvements, or site support.
 - 🐛 **Bug Reports:** If an image fails to translate, speech bubbles are clipped, or a site doesn't load controls, please submit an issue with a sample URL/screenshot.
 - 🔤 **Language Dictionaries & Typography:** Help improve character recognition for Japanese Kanji, Korean Hangul, Chinese Hanzi, or Latin fonts.
 - 🚀 **Pull Requests:** PRs of all sizes—from single-line bugfixes to major pipeline optimizations—are appreciated.
@@ -20,7 +20,7 @@ We actively encourage and welcome contributions from the community:
 
 Before diving into the code, please review our comprehensive architecture documentation:
 
-- **[Documentation Hub](docs/README.md)** — Main entry point to Kites technical documentation.
+- **[Documentation Hub](docs/README.md)** — Main entry point to Manga Garden technical documentation.
 - **[System Architecture](docs/architecture/overview.md)** — Chrome MV3 Service Worker, Content Scripts, WebGPU Offscreen Document, and IndexedDB persistence.
 - **[Translation Pipeline & Algorithm Guide](docs/architecture/pipeline.md)** — Detailed breakdown of OCR detection, Kruskal-MST bubble grouping, neural inpainting, and binary-search typesetting.
 - **[Interactive Pipeline Map (`workflow.html`)](docs/workflow.html)** — Standalone interactive visual workflow with pan/zoom and clickable node inspection.
@@ -39,8 +39,8 @@ Before diving into the code, please review our comprehensive architecture docume
 
 ### 2. Clone and Install
 ```bash
-git clone https://github.com/Unheat/Kites.git
-cd Kites
+git clone https://github.com/jacosncesar/MangaLumeTwo.git
+cd Manga Garden
 
 # Install exact dependencies
 npm ci
@@ -57,7 +57,7 @@ npm run build
 2. Enable **Developer mode** (toggle in the top-right corner).
 3. Click **Load unpacked**.
 4. Select the `dist/` directory generated in the project root.
-5. The Kites icon will appear in your extension toolbar.
+5. The Manga Garden icon will appear in your extension toolbar.
 
 ### 5. Running with Hot Reload (Dev Server)
 ```bash
@@ -124,7 +124,7 @@ When opening a PR, ensure:
 ## 💬 Getting Help
 
 If you have questions or get stuck:
-- Open an issue on [GitHub Issues](https://github.com/Unheat/Kites/issues).
+- Open an issue on [GitHub Issues](https://github.com/jacosncesar/MangaLumeTwo/issues).
 - Check the [Development History Archive](docs/dev-history/) for past phase logs, research documents, and architecture decision context.
 
-Thank you for making Kites better for comic readers everywhere! 🪁
+Thank you for making Manga Garden better for comic readers everywhere! 🪁

@@ -10,8 +10,8 @@ const rootDir = path.resolve(__dirname, '..');
 const pres = new pptxgen();
 pres.layout = 'LAYOUT_WIDE'; // 13.33 x 7.5 inches
 pres.author = 'Unheat';
-pres.company = 'Kites Project';
-pres.title = 'Kites: Spatial In-Browser Manga Translator — Presentation Deck';
+pres.company = 'Manga Garden Project';
+pres.title = 'Manga Garden: Spatial In-Browser Manga Translator — Presentation Deck';
 
 // Palette Constants
 const COLOR = {
@@ -92,7 +92,7 @@ s1.addText('⚡ AI BUILDERS HACKATHON 2026', {
 });
 
 // Main Title
-s1.addText('Kites', {
+s1.addText('Manga Garden', {
   x: M, y: 1.8, w: 6.0, h: 1.1,
   fontSize: 54, fontFace: 'Segoe UI', bold: true,
   color: COLOR.TEXT_WHITE
@@ -124,7 +124,7 @@ s1.addText([
   { text: 'Live Demo: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
   { text: 'https://kites-translator.pages.dev  •  ', options: { color: COLOR.TEXT_MUTED } },
   { text: 'GitHub: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
-  { text: 'Unheat/Kites', options: { color: COLOR.TEXT_MUTED } }
+  { text: 'Unheat/Manga Garden', options: { color: COLOR.TEXT_MUTED } }
 ], {
   x: M + 0.25, y: 5.75, w: 5.3, h: 0.8,
   fontSize: 12, fontFace: 'Segoe UI'
@@ -196,7 +196,7 @@ problems.forEach((p, idx) => {
 // -------------------------------------------------------------
 const s3 = pres.addSlide();
 s3.background = { color: COLOR.BG_DARK };
-addSlideHeader(s3, '02 · Solution Overview', 'Kites: 100% Local-First In-Browser AI Translation', 'An ultra-lightweight Chrome Extension running neural computer vision, generative inpainting, and typesetting right inside your browser.');
+addSlideHeader(s3, '02 · Solution Overview', 'Manga Garden: 100% Local-First In-Browser AI Translation', 'An ultra-lightweight Chrome Extension running neural computer vision, generative inpainting, and typesetting right inside your browser.');
 
 const solutionPillars = [
   {
@@ -266,26 +266,26 @@ solutionPillars.forEach((p, idx) => {
 // -------------------------------------------------------------
 const s4 = pres.addSlide();
 s4.background = { color: COLOR.BG_DARK };
-addSlideHeader(s4, '03 · Target Users', 'Who Needs Kites: Global Manga & Web Comic Ecosystem', 'Serving millions of international comic enthusiasts, social media readers, and scanlation creators.');
+addSlideHeader(s4, '03 · Target Users', 'Who Needs Manga Garden: Global Manga & Web Comic Ecosystem', 'Serving millions of international comic enthusiasts, social media readers, and scanlation creators.');
 
 const userPersonas = [
   {
     num: '01',
     role: 'Global Manga & Webtoon Fans',
     need: '70M+ readers globally wait weeks or months for fan scanlations of Japanese raw chapters.',
-    kitesValue: 'Translate untranslated chapters instantly on raw manga sites with one click, preserving original panel art and dialogue emotion.'
+    mangaGardenValue: 'Translate untranslated chapters instantly on raw manga sites with one click, preserving original panel art and dialogue emotion.'
   },
   {
     num: '02',
     role: 'Social Media Comic Readers',
     need: 'Millions of comic strips and indie creator illustrations are shared daily on X (Twitter), Pixiv, and Reddit in Japanese, Korean, or Chinese.',
-    kitesValue: 'The subtle CSS-anchored Hover button lets users read indie artwork directly in their timeline without taking screenshots or copying text.'
+    mangaGardenValue: 'The subtle CSS-anchored Hover button lets users read indie artwork directly in their timeline without taking screenshots or copying text.'
   },
   {
     num: '03',
     role: 'Scanlators & Content Creators',
     need: 'Manual scanlation requires hours of tedious Photoshop editing: cloning stamps, redrawing screentones, and retyping fonts.',
-    kitesValue: 'Kites Studio provides an interactive 8-point bounding box editor to polish translations, adjust balloon text, and export 1:1 lossless PNGs.'
+    mangaGardenValue: 'Manga Garden Studio provides an interactive 8-point bounding box editor to polish translations, adjust balloon text, and export 1:1 lossless PNGs.'
   }
 ];
 
@@ -323,12 +323,12 @@ userPersonas.forEach((u, idx) => {
     color: COLOR.TEXT_MUTED, lineSpacing: 16
   });
 
-  s4.addText('HOW KITES EMPOWERS THEM:', {
+  s4.addText('HOW Manga Garden EMPOWERS THEM:', {
     x: cardX + 0.3, y: cardY + 3.1, w: 3.25, h: 0.3,
     fontSize: 10, fontFace: 'Segoe UI', bold: true,
     color: COLOR.ACCENT_EMERALD
   });
-  s4.addText(u.kitesValue, {
+  s4.addText(u.mangaGardenValue, {
     x: cardX + 0.3, y: cardY + 3.4, w: 3.25, h: 1.1,
     fontSize: 12, fontFace: 'Segoe UI',
     color: COLOR.TEXT_WHITE, lineSpacing: 16
@@ -369,7 +369,7 @@ const featureItems = [
     desc: 'Keep action badges pinned across all comic panels, or enable Viewport Auto-Translate to queue chapters automatically as you scroll.'
   },
   {
-    title: '🛠️ Built-in Kites Studio',
+    title: '🛠️ Built-in Manga Garden Studio',
     desc: 'Triple-view inspection (Original, Clean Inpaint, Typeset), 8-point interactive bounding box resizing, and lossless 1:1 PNG export.'
   },
   {
@@ -530,7 +530,7 @@ archSteps.forEach((a, idx) => {
 // -------------------------------------------------------------
 const s8 = pres.addSlide();
 s8.background = { color: COLOR.BG_DARK };
-addSlideHeader(s8, '07 · AI Technologies', 'The 4 Core Pillars of the Kites AI Engine', 'Orchestrating computer vision, graph clustering, generative diffusion, and LLM inference.');
+addSlideHeader(s8, '07 · AI Technologies', 'The 4 Core Pillars of the Manga Garden AI Engine', 'Orchestrating computer vision, graph clustering, generative diffusion, and LLM inference.');
 
 const aiPillars = [
   {
@@ -629,14 +629,14 @@ stats.forEach((st, idx) => {
   });
 });
 
-// Bottom Comparison: Before Kites vs With Kites
+// Bottom Comparison: Before Manga Garden vs With Manga Garden
 s9.addShape(pres.shapes.ROUNDED_RECTANGLE, {
   x: M, y: 4.0, w: 5.9, h: 2.7,
   fill: { color: '1A1523' },
   line: { color: '4B1A2E', width: 1 },
   rectRadius: 0.15
 });
-s9.addText('WITHOUT KITES (STATUS QUO)', {
+s9.addText('WITHOUT Manga Garden (STATUS QUO)', {
   x: M + 0.3, y: 4.2, w: 5.3, h: 0.3,
   fontSize: 12, fontFace: 'Segoe UI', bold: true, color: COLOR.ACCENT_PINK
 });
@@ -656,7 +656,7 @@ s9.addShape(pres.shapes.ROUNDED_RECTANGLE, {
   line: { color: '134E4A', width: 1 },
   rectRadius: 0.15
 });
-s9.addText('WITH KITES (LOCAL-FIRST ERA)', {
+s9.addText('WITH Manga Garden (LOCAL-FIRST ERA)', {
   x: 7.13, y: 4.2, w: 5.3, h: 0.3,
   fontSize: 12, fontFace: 'Segoe UI', bold: true, color: COLOR.ACCENT_EMERALD
 });
@@ -675,7 +675,7 @@ s9.addText([
 // -------------------------------------------------------------
 const s10 = pres.addSlide();
 s10.background = { color: COLOR.BG_DARK };
-addSlideHeader(s10, '09 · Roadmap & Future Vision', 'Scaling Kites: Next Milestones & Community Launch', 'Expanding platform reach, multi-language OCR coverage, and creator tooling.');
+addSlideHeader(s10, '09 · Roadmap & Future Vision', 'Scaling Manga Garden: Next Milestones & Community Launch', 'Expanding platform reach, multi-language OCR coverage, and creator tooling.');
 
 const roadmap = [
   {
@@ -683,7 +683,7 @@ const roadmap = [
     status: 'COMPLETED',
     statusColor: COLOR.ACCENT_EMERALD,
     title: 'Core Engine & Release v1.0.3',
-    items: ['WebGPU ONNX PaddleOCR & LaMa Inpainting', 'Kruskal-MST spatial bubble clustering', 'Interactive Kites Studio 8-point editor', 'Pre-built zip & Chrome Web Store submission']
+    items: ['WebGPU ONNX PaddleOCR & LaMa Inpainting', 'Kruskal-MST spatial bubble clustering', 'Interactive Manga Garden Studio 8-point editor', 'Pre-built zip & Chrome Web Store submission']
   },
   {
     quarter: 'Q4 2026',
@@ -754,10 +754,10 @@ s10.addShape(pres.shapes.ROUNDED_RECTANGLE, {
 });
 
 s10.addText([
-  { text: 'Try Kites Today: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
+  { text: 'Try Manga Garden Today: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
   { text: 'https://kites-translator.pages.dev  •  ', options: { color: COLOR.ACCENT_SKY } },
   { text: 'GitHub: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
-  { text: 'https://github.com/Unheat/Kites  •  ', options: { color: COLOR.TEXT_MUTED } },
+  { text: 'https://github.com/jacosncesar/MangaLumeTwo  •  ', options: { color: COLOR.TEXT_MUTED } },
   { text: 'Contact: ', options: { bold: true, color: COLOR.TEXT_WHITE } },
   { text: 'andangtruong085@gmail.com', options: { color: COLOR.TEXT_MUTED } }
 ], {
@@ -766,6 +766,6 @@ s10.addText([
 });
 
 // Output File
-const outputPath = path.resolve(rootDir, 'kites-presentation-deck.pptx');
+const outputPath = path.resolve(rootDir, 'manga-garden-presentation-deck.pptx');
 await pres.writeFile({ fileName: outputPath });
 console.log(`Presentation deck generated successfully: ${outputPath}`);

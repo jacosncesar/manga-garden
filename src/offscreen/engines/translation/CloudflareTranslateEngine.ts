@@ -1,7 +1,7 @@
 /**
  * CloudflareTranslateEngine
  * 
- * ITranslationEngine implementation connecting Kites to the fixed
+ * ITranslationEngine implementation connecting Manga Garden to the fixed
  * Cloudflare Worker translation microservice.
  * 
  * Uses Google OAuth token via chrome.identity for per-user quota attribution.
@@ -12,6 +12,7 @@ import { BaseLlmTranslationEngine, type LlmChatMessage } from './BaseLlmTranslat
 import {
   CLOUDFLARE_TRANSLATE_DEFAULT_ENDPOINT,
   CLOUDFLARE_TRANSLATE_MODEL,
+  migrateLegacyAuthStorage,
   STORAGE_KEYS,
 } from '../../../shared/constants';
 
@@ -64,6 +65,7 @@ export class CloudflareTranslateEngine extends BaseLlmTranslationEngine {
     // 1. Direct storage retrieval (instant & eliminates inter-process message failure)
     if (typeof chrome !== 'undefined' && chrome.storage?.local) {
       try {
+        await migrateLegacyAuthStorage();
         const data = (await chrome.storage.local.get([
           STORAGE_KEYS.AUTH_TOKEN,
           STORAGE_KEYS.AUTH_EXPIRES_AT,
@@ -108,7 +110,7 @@ export class CloudflareTranslateEngine extends BaseLlmTranslationEngine {
       }
     }
     // Return placeholder or test token if mock available in globalThis
-    return (globalThis as any).__KITES_TEST_ID_TOKEN__ || (process.env.NODE_ENV === 'test' ? 'test-id-token' : '');
+    return (globalThis as any).__manga_garden_TEST_ID_TOKEN__ || (process.env.NODE_ENV === 'test' ? 'test-id-token' : '');
   }
 
   /**
@@ -149,8 +151,8 @@ export class CloudflareTranslateEngine extends BaseLlmTranslationEngine {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          'HTTP-Referer': 'https://kites.ai',
-          'X-Title': 'Kites Manga Translator',
+          'HTTP-Referer': 'https://github.com/jacosncesar/MangaLumeTwo',
+          'X-Title': 'Manga Garden Manga Translator',
         },
         body: JSON.stringify({
           model: CLOUDFLARE_TRANSLATE_MODEL,

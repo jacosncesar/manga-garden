@@ -98,7 +98,7 @@ const extensionPath = path.join(__dirname, '..', 'dist');
   await new Promise(r => setTimeout(r, 1000));
 
   await page.evaluate(() => {
-    const btn = document.querySelector('#kites-translate-btn');
+    const btn = document.querySelector('#manga-garden-translate-btn');
     if (btn) btn.click();
   });
 

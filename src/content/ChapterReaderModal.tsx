@@ -194,7 +194,7 @@ export default function ChapterReaderModal({
       role="dialog"
       aria-modal="true"
       aria-label="Distraction-Free Chapter Reader"
-      className="kites-reader-modal"
+      className="manga-garden-reader-modal"
       style={{
         position: 'fixed',
         inset: 0,
@@ -212,7 +212,7 @@ export default function ChapterReaderModal({
     >
       {/* Top Controls Header Bar */}
       <header
-        className="kites-reader-header"
+        className="manga-garden-reader-header"
         style={{
           height: '48px',
           minHeight: '48px',
@@ -230,10 +230,10 @@ export default function ChapterReaderModal({
         }}
       >
         {/* Left: Close & Title & Page counter */}
-        <div className="kites-reader-header-left" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+        <div className="manga-garden-reader-header-left" style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
           <button
             onClick={onClose}
-            className="kites-reader-btn"
+            className="manga-garden-reader-btn"
             style={{
               padding: '6px 8px',
               borderRadius: '6px',
@@ -248,7 +248,7 @@ export default function ChapterReaderModal({
             title="Exit Reader (Esc)"
           >
             <X size={15} />
-            <kbd className="kites-reader-kbd" style={{ fontSize: '10px', padding: '1px 4px', borderRadius: '3px', background: 'rgba(255, 255, 255, 0.15)' }}>
+            <kbd className="manga-garden-reader-kbd" style={{ fontSize: '10px', padding: '1px 4px', borderRadius: '3px', background: 'rgba(255, 255, 255, 0.15)' }}>
               Esc
             </kbd>
           </button>
@@ -257,14 +257,14 @@ export default function ChapterReaderModal({
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
             <span
-              className="kites-reader-title"
+              className="manga-garden-reader-title"
               style={{ fontWeight: 600, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '240px' }}
               title={title || document.title}
             >
               {title || document.title}
             </span>
             <span
-              className="kites-reader-page-counter"
+              className="manga-garden-reader-page-counter"
               style={{ fontSize: '11px', fontFamily: 'monospace', color: 'rgba(255, 255, 255, 0.5)', whiteSpace: 'nowrap' }}
             >
               {viewMode === 'webtoon'
@@ -276,7 +276,7 @@ export default function ChapterReaderModal({
 
         {/* Center: View Mode Selector */}
         <div
-          className="kites-reader-mode-group"
+          className="manga-garden-reader-mode-group"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -289,7 +289,7 @@ export default function ChapterReaderModal({
         >
           <button
             onClick={() => setViewMode('webtoon')}
-            className={`kites-reader-btn ${viewMode === 'webtoon' ? 'active' : ''}`}
+            className={`manga-garden-reader-btn ${viewMode === 'webtoon' ? 'active' : ''}`}
             style={{
               padding: '4px 8px',
               borderRadius: '6px',
@@ -310,7 +310,7 @@ export default function ChapterReaderModal({
           </button>
           <button
             onClick={() => setViewMode('single')}
-            className={`kites-reader-btn ${viewMode === 'single' ? 'active' : ''}`}
+            className={`manga-garden-reader-btn ${viewMode === 'single' ? 'active' : ''}`}
             style={{
               padding: '4px 8px',
               borderRadius: '6px',
@@ -331,7 +331,7 @@ export default function ChapterReaderModal({
           </button>
           <button
             onClick={() => setViewMode('double')}
-            className={`kites-reader-btn ${viewMode === 'double' ? 'active' : ''}`}
+            className={`manga-garden-reader-btn ${viewMode === 'double' ? 'active' : ''}`}
             style={{
               padding: '4px 8px',
               borderRadius: '6px',
@@ -353,7 +353,7 @@ export default function ChapterReaderModal({
         </div>
 
         {/* Right: Translate All / Width / Flip / Direction / ZIP */}
-        <div className="kites-reader-header-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="manga-garden-reader-header-right" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {/* Top-to-Bottom Translate All Action Button */}
           {isAllTranslated ? (
             <div
@@ -385,7 +385,7 @@ export default function ChapterReaderModal({
                 alignItems: 'center',
                 gap: '6px',
                 backgroundColor: 'rgba(244, 68, 109, 0.15)',
-                color: '#f4446d',
+                color: '#22d3ee',
                 border: '1px solid rgba(244, 68, 109, 0.3)',
               }}
               title="Translating pages in background sequentially"
@@ -396,7 +396,7 @@ export default function ChapterReaderModal({
           ) : onTranslateAll && untranslatedUrls.length > 0 ? (
             <button
               onClick={() => onTranslateAll(untranslatedUrls)}
-              className="kites-reader-btn kites-reader-btn-primary"
+              className="manga-garden-reader-btn manga-garden-reader-btn-primary"
               style={{
                 padding: '5px 12px',
                 borderRadius: '6px',
@@ -406,9 +406,9 @@ export default function ChapterReaderModal({
                 alignItems: 'center',
                 gap: '6px',
                 cursor: 'pointer',
-                backgroundColor: '#f4446d',
+                backgroundColor: '#22d3ee',
                 color: '#ffffff',
-                border: '1px solid #f4446d',
+                border: '1px solid #22d3ee',
                 boxShadow: '0 2px 8px rgba(244, 68, 109, 0.35)',
               }}
               title="Translate all pages in top-to-bottom sequence"
@@ -435,7 +435,7 @@ export default function ChapterReaderModal({
                 <button
                   key={preset}
                   onClick={() => setWebtoonWidth(preset)}
-                  className={`kites-reader-btn ${webtoonWidth === preset ? 'active' : ''}`}
+                  className={`manga-garden-reader-btn ${webtoonWidth === preset ? 'active' : ''}`}
                   style={{
                     padding: '3px 6px',
                     borderRadius: '4px',
@@ -460,7 +460,7 @@ export default function ChapterReaderModal({
           {(viewMode === 'single' || viewMode === 'double') && (
             <button
               onClick={() => setIsRtl((prev) => !prev)}
-              className="kites-reader-btn"
+              className="manga-garden-reader-btn"
               style={{
                 padding: '4px 8px',
                 borderRadius: '6px',
@@ -483,7 +483,7 @@ export default function ChapterReaderModal({
           {/* Original vs Translated Flip Toggle */}
           <button
             onClick={() => setShowOriginal((prev) => !prev)}
-            className="kites-reader-btn"
+            className="manga-garden-reader-btn"
             style={{
               padding: '4px 8px',
               borderRadius: '6px',
@@ -501,7 +501,7 @@ export default function ChapterReaderModal({
           >
             {showOriginal ? <EyeOff size={13} /> : <Eye size={13} />}
             <span>{showOriginal ? 'Original' : 'Translated'}</span>
-            <kbd className="kites-reader-kbd" style={{ fontSize: '9px', padding: '1px 4px', background: 'rgba(255, 255, 255, 0.2)' }}>
+            <kbd className="manga-garden-reader-kbd" style={{ fontSize: '9px', padding: '1px 4px', background: 'rgba(255, 255, 255, 0.2)' }}>
               F
             </kbd>
           </button>
@@ -511,7 +511,7 @@ export default function ChapterReaderModal({
             <button
               onClick={handleZipClick}
               disabled={isExporting}
-              className="kites-reader-btn"
+              className="manga-garden-reader-btn"
               style={{
                 padding: '6px 8px',
                 borderRadius: '6px',
@@ -530,7 +530,7 @@ export default function ChapterReaderModal({
                   : `Download Chapter ZIP (${translatedCount} page${translatedCount === 1 ? '' : 's'})`
               }
             >
-              {isExporting ? <Loader size={14} className="animate-spin text-[#f4446d]" /> : <Download size={14} />}
+              {isExporting ? <Loader size={14} className="animate-spin text-[#22d3ee]" /> : <Download size={14} />}
             </button>
           )}
         </div>
@@ -570,7 +570,7 @@ export default function ChapterReaderModal({
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="kites-reader-viewport"
+        className="manga-garden-reader-viewport"
         style={{
           flex: '1 1 0%',
           overflowY: 'auto',
@@ -605,7 +605,7 @@ export default function ChapterReaderModal({
         ) : viewMode === 'webtoon' ? (
           /* Continuous Vertical Stream (Webtoon) */
           <div
-            className={`kites-reader-webtoon-container ${WIDTH_CLASSES[webtoonWidth]}`}
+            className={`manga-garden-reader-webtoon-container ${WIDTH_CLASSES[webtoonWidth]}`}
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -625,7 +625,7 @@ export default function ChapterReaderModal({
                 <div
                   key={page.id || `${page.url}-${idx}`}
                   data-reader-page={idx + 1}
-                  className="kites-reader-page-item"
+                  className="manga-garden-reader-page-item"
                   style={{
                     position: 'relative',
                     width: '100%',
@@ -640,7 +640,7 @@ export default function ChapterReaderModal({
                     src={src}
                     alt={`Page ${idx + 1}`}
                     loading={idx < 3 ? 'eager' : 'lazy'}
-                    className="kites-reader-page-img"
+                    className="manga-garden-reader-page-img"
                     style={{
                       width: '100%',
                       height: 'auto',
@@ -664,7 +664,7 @@ export default function ChapterReaderModal({
                         backgroundColor: 'rgba(0, 0, 0, 0.82)',
                         backdropFilter: 'blur(6px)',
                         WebkitBackdropFilter: 'blur(6px)',
-                        color: '#f4446d',
+                        color: '#22d3ee',
                         fontSize: '11px',
                         fontFamily: 'system-ui, sans-serif',
                         fontWeight: 600,
@@ -685,7 +685,7 @@ export default function ChapterReaderModal({
 
                   {/* Subtle page indicator badge */}
                   <div
-                    className="kites-reader-page-badge"
+                    className="manga-garden-reader-page-badge"
                     style={{
                       position: 'absolute',
                       right: '12px',
@@ -709,7 +709,7 @@ export default function ChapterReaderModal({
         ) : viewMode === 'single' ? (
           /* Single Page View */
           <div
-            className="kites-reader-panel-container"
+            className="manga-garden-reader-panel-container"
             style={{
               flex: '1 1 0%',
               width: '100%',
@@ -731,7 +731,7 @@ export default function ChapterReaderModal({
                       : pages[currentIndex].translatedUrl
                   }
                   alt={`Page ${currentIndex + 1}`}
-                  className="kites-reader-single-img"
+                  className="manga-garden-reader-single-img"
                   style={{
                     maxHeight: 'calc(100vh - 80px)',
                     maxWidth: '100%',
@@ -749,7 +749,7 @@ export default function ChapterReaderModal({
                       left: '12px',
                       bottom: '12px',
                       backgroundColor: 'rgba(0, 0, 0, 0.82)',
-                      color: '#f4446d',
+                      color: '#22d3ee',
                       fontSize: '11px',
                       fontWeight: 600,
                       padding: '4px 10px',
@@ -771,7 +771,7 @@ export default function ChapterReaderModal({
             <button
               onClick={() => setCurrentIndex((prev) => (isRtl ? Math.min(totalPages - 1, prev + 1) : Math.max(0, prev - 1)))}
               disabled={isRtl ? currentIndex >= totalPages - 1 : currentIndex <= 0}
-              className="kites-reader-nav-prev"
+              className="manga-garden-reader-nav-prev"
               style={{
                 position: 'absolute',
                 left: '16px',
@@ -796,7 +796,7 @@ export default function ChapterReaderModal({
             <button
               onClick={() => setCurrentIndex((prev) => (isRtl ? Math.max(0, prev - 1) : Math.min(totalPages - 1, prev + 1)))}
               disabled={isRtl ? currentIndex <= 0 : currentIndex >= totalPages - 1}
-              className="kites-reader-nav-next"
+              className="manga-garden-reader-nav-next"
               style={{
                 position: 'absolute',
                 right: '16px',
@@ -822,7 +822,7 @@ export default function ChapterReaderModal({
         ) : (
           /* Double Page Spread View */
           <div
-            className="kites-reader-panel-container"
+            className="manga-garden-reader-panel-container"
             style={{
               flex: '1 1 0%',
               width: '100%',
@@ -836,7 +836,7 @@ export default function ChapterReaderModal({
             }}
           >
             <div
-              className="kites-reader-double-container"
+              className="manga-garden-reader-double-container"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -856,7 +856,7 @@ export default function ChapterReaderModal({
                         : pages[currentIndex].translatedUrl
                     }
                     alt={`Page ${currentIndex + 1}`}
-                    className="kites-reader-double-img"
+                    className="manga-garden-reader-double-img"
                     style={{
                       maxHeight: 'calc(100vh - 80px)',
                       maxWidth: 'calc(50vw - 24px)',
@@ -874,7 +874,7 @@ export default function ChapterReaderModal({
                         left: '8px',
                         bottom: '8px',
                         backgroundColor: 'rgba(0, 0, 0, 0.82)',
-                        color: '#f4446d',
+                        color: '#22d3ee',
                         fontSize: '10px',
                         fontWeight: 600,
                         padding: '3px 8px',
@@ -900,7 +900,7 @@ export default function ChapterReaderModal({
                         : pages[currentIndex + 1].translatedUrl
                     }
                     alt={`Page ${currentIndex + 2}`}
-                    className="kites-reader-double-img"
+                    className="manga-garden-reader-double-img"
                     style={{
                       maxHeight: 'calc(100vh - 80px)',
                       maxWidth: 'calc(50vw - 24px)',
@@ -918,7 +918,7 @@ export default function ChapterReaderModal({
                         left: '8px',
                         bottom: '8px',
                         backgroundColor: 'rgba(0, 0, 0, 0.82)',
-                        color: '#f4446d',
+                        color: '#22d3ee',
                         fontSize: '10px',
                         fontWeight: 600,
                         padding: '3px 8px',
@@ -941,7 +941,7 @@ export default function ChapterReaderModal({
             <button
               onClick={() => setCurrentIndex((prev) => (isRtl ? Math.min(totalPages - 1, prev + 2) : Math.max(0, prev - 2)))}
               disabled={isRtl ? currentIndex + 1 >= totalPages - 1 : currentIndex <= 0}
-              className="kites-reader-nav-prev"
+              className="manga-garden-reader-nav-prev"
               style={{
                 position: 'absolute',
                 left: '16px',
@@ -966,7 +966,7 @@ export default function ChapterReaderModal({
             <button
               onClick={() => setCurrentIndex((prev) => (isRtl ? Math.max(0, prev - 2) : Math.min(totalPages - 1, prev + 2)))}
               disabled={isRtl ? currentIndex <= 0 : currentIndex + 1 >= totalPages - 1}
-              className="kites-reader-nav-next"
+              className="manga-garden-reader-nav-next"
               style={{
                 position: 'absolute',
                 right: '16px',

@@ -14,8 +14,8 @@ const WEBLLM_NO_FEWSHOT = process.env.WEBLLM_NO_FEWSHOT === '1';
 const TRANSLATE_TIMEOUT_MS = 15 * 60 * 1000;
 const TARGET_TIMEOUT_MS = 30_000;
 const TEST_FILES = ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.png', 'image6.jpg', 'image7.jpg'];
-const BUTTON_SELECTOR = '[data-kites-translate-button], #kites-translate-btn';
-const TRANSLATED_IMAGE_SELECTOR = 'img[data-kites-translated="true"][data-kites-applied-src^="blob:"]';
+const BUTTON_SELECTOR = '[data-manga-garden-translate-button], #manga-garden-translate-btn';
+const TRANSLATED_IMAGE_SELECTOR = 'img[data-manga-garden-translated="true"][data-manga-garden-applied-src^="blob:"]';
 type TranslationLogEntry = { file: string; source: string; translated: string };
 
 /**
@@ -108,7 +108,7 @@ async function assertHardwareWebGpuInOffscreen(
   });
   const result = await session.send('Runtime.evaluate', {
     expression: `(async () => {
-      globalThis.__KITES_WEBLLM_NO_FEWSHOT__ = ${WEBLLM_NO_FEWSHOT ? 'true' : 'false'};
+      globalThis.__manga_garden_WEBLLM_NO_FEWSHOT__ = ${WEBLLM_NO_FEWSHOT ? 'true' : 'false'};
       if (!navigator.gpu) return { ok: false, reason: 'navigator.gpu unavailable' };
       const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
       if (!adapter) return { ok: false, reason: 'high-performance adapter unavailable' };
@@ -222,7 +222,7 @@ async function main(): Promise<void> {
       const page = await browser.newPage();
       try {
         await page.evaluateOnNewDocument((noFewShot) => {
-          (globalThis as any).__KITES_WEBLLM_NO_FEWSHOT__ = noFewShot;
+          (globalThis as any).__manga_garden_WEBLLM_NO_FEWSHOT__ = noFewShot;
         }, WEBLLM_NO_FEWSHOT);
         await page.setViewport({ width: 1280, height: 900 });
         await page.goto(`http://127.0.0.1:${address.port}/${encodeURIComponent(testFile)}`, { waitUntil: 'networkidle2' });

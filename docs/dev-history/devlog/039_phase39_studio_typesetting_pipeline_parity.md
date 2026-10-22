@@ -9,7 +9,7 @@
 ---
 
 ### 2. The Objective
-When a user double-clicked a translated dialogue box in Kites Studio, the text unexpectedly jumped and reflowed into a different line wrap count (e.g. 7 lines collapsed into 6 lines) and slightly smaller font size, despite the box dimensions not changing. The objective was to diagnose why the Studio editor diverged from the translation pipeline's typesetting output, align `recalculateBlockTypeset` with the exact pipeline typesetting rules, ensure zero visual shift on double-click, and branch off into a dedicated feature branch.
+When a user double-clicked a translated dialogue box in Manga Garden Studio, the text unexpectedly jumped and reflowed into a different line wrap count (e.g. 7 lines collapsed into 6 lines) and slightly smaller font size, despite the box dimensions not changing. The objective was to diagnose why the Studio editor diverged from the translation pipeline's typesetting output, align `recalculateBlockTypeset` with the exact pipeline typesetting rules, ensure zero visual shift on double-click, and branch off into a dedicated feature branch.
 
 ---
 

@@ -292,7 +292,7 @@ export const Studio: React.FC<StudioProps> = ({
       imageLayers,
       textObjects
     );
-    const filename = `kites-${getCleanBaseFilename()}-translated.${format === 'jpeg' ? 'jpg' : 'png'}`;
+    const filename = `manga-garden-${getCleanBaseFilename()}-translated.${format === 'jpeg' ? 'jpg' : 'png'}`;
     await downloadCanvasAsFile(compositeCanvas, filename, format);
     setToastMessage(`Exported ${format.toUpperCase()} image successfully!`);
     setTimeout(() => setToastMessage(null), 3000);
@@ -494,7 +494,7 @@ export const Studio: React.FC<StudioProps> = ({
                 title={isInfoPanelOpen ? 'Close Page & Translation Info' : 'Page & Translation Info (I)'}
                 className={`p-1 rounded-md transition cursor-pointer ${
                   isInfoPanelOpen
-                    ? 'bg-[#f4446d] text-white shadow-md shadow-[rgba(244,68,109,0.35)]'
+                    ? 'bg-[#22d3ee] text-white shadow-md shadow-[rgba(34,211,238,0.35)]'
                     : 'text-slate-400 hover:text-white hover:bg-[#1c1f2e]'
                 }`}
               >
@@ -533,7 +533,7 @@ export const Studio: React.FC<StudioProps> = ({
                 title={`${t.label} (${t.shortcut})`}
                 className={`flex items-center justify-center aspect-square rounded-md transition ${
                   activeTool === t.id && !isInfoPanelOpen
-                    ? 'bg-[#f4446d] text-white shadow-md shadow-[rgba(244,68,109,0.35)]'
+                    ? 'bg-[#22d3ee] text-white shadow-md shadow-[rgba(34,211,238,0.35)]'
                     : 'text-slate-400 hover:text-white hover:bg-[#1c1f2e]'
                 }`}
               >
@@ -565,7 +565,7 @@ export const Studio: React.FC<StudioProps> = ({
               onClick={() => studioStore.setState({ globalEditMode: !globalEditMode })}
               className={`w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg border text-xs font-semibold uppercase tracking-wider transition ${
                 globalEditMode
-                  ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d] shadow-md shadow-[rgba(244,68,109,0.2)]'
+                  ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee] shadow-md shadow-[rgba(34,211,238,0.2)]'
                   : 'border-[#262a3b] bg-[#090a0f] text-slate-400 hover:text-white hover:bg-[#1c1f2e]'
               }`}
             >
@@ -608,8 +608,8 @@ export const Studio: React.FC<StudioProps> = ({
             <button
               onClick={handleSaveImage}
               disabled={isSaving}
-              title="Save changes to MangaLume 2.0 library"
-              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg bg-[#f4446d] hover:bg-[#e0355e] text-white text-xs font-semibold shadow-md shadow-[rgba(244,68,109,0.35)] transition disabled:opacity-50 cursor-pointer"
+              title="Save changes to Manga Garden library"
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-md shadow-[rgba(34,211,238,0.35)] transition disabled:opacity-50 cursor-pointer"
             >
               <Save className="w-3.5 h-3.5" /> {isSaving ? 'Saving...' : 'Save to DB'}
             </button>
@@ -617,11 +617,11 @@ export const Studio: React.FC<StudioProps> = ({
               onClick={handleRetranslatePage}
               disabled={isRetranslating || !originalImage}
               title="Re-run full OCR detection, inpainting, and translation on the original page"
-              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] hover:text-[#f4446d] hover:border-[#f4446d]/40 disabled:opacity-30 disabled:pointer-events-none transition cursor-pointer"
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg border border-[#262a3b] bg-[#090a0f] text-xs font-medium text-slate-300 hover:bg-[#1c1f2e] hover:text-[#22d3ee] hover:border-[#22d3ee]/40 disabled:opacity-30 disabled:pointer-events-none transition cursor-pointer"
             >
               {isRetranslating ? (
                 <>
-                  <Loader className="w-3.5 h-3.5 animate-spin text-[#f4446d]" /> Retranslating…
+                  <Loader className="w-3.5 h-3.5 animate-spin text-[#22d3ee]" /> Retranslating…
                 </>
               ) : (
                 <>
@@ -656,7 +656,7 @@ export const Studio: React.FC<StudioProps> = ({
                 title="Show pristine untouched raw artwork"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'original'
-                    ? 'bg-[#f4446d] text-white shadow-xs'
+                    ? 'bg-[#22d3ee] text-white shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
                 }`}
               >
@@ -668,7 +668,7 @@ export const Studio: React.FC<StudioProps> = ({
                 title="Show cleaned background artwork without text"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'inpainted'
-                    ? 'bg-[#f4446d] text-white shadow-xs'
+                    ? 'bg-[#22d3ee] text-white shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
                 }`}
               >
@@ -680,7 +680,7 @@ export const Studio: React.FC<StudioProps> = ({
                 title="Show translated artwork with typography overlay"
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition cursor-pointer ${
                   viewMode === 'translated'
-                    ? 'bg-[#f4446d] text-white shadow-xs'
+                    ? 'bg-[#22d3ee] text-white shadow-xs'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-[#1c1f2e]/50'
                 }`}
               >
@@ -696,7 +696,7 @@ export const Studio: React.FC<StudioProps> = ({
                 viewMode !== 'translated'
                   ? 'opacity-40 cursor-not-allowed border-[#262a3b] bg-[#090a0f] text-slate-500'
                   : hideBoxes
-                  ? 'border-[#f4446d] bg-[#f4446d]/15 text-[#f4446d] cursor-pointer'
+                  ? 'border-[#22d3ee] bg-[#22d3ee]/15 text-[#22d3ee] cursor-pointer'
                   : 'border-[#262a3b] bg-[#090a0f] text-slate-300 hover:bg-[#1c1f2e] cursor-pointer'
               }`}
             >
@@ -774,7 +774,7 @@ export const Studio: React.FC<StudioProps> = ({
               <button
                 type="button"
                 onClick={() => setExportDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#f4446d] hover:bg-[#e0355e] text-white text-xs font-semibold shadow-xs transition cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#22d3ee] hover:bg-[#0ea5e9] text-white text-xs font-semibold shadow-xs transition cursor-pointer"
                 title="Export or download image"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -792,7 +792,7 @@ export const Studio: React.FC<StudioProps> = ({
                     onClick={() => handleExportImage('png')}
                     className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-[#1c1f2e] text-slate-200 text-left transition cursor-pointer"
                   >
-                    <Download className="w-3.5 h-3.5 text-[#f4446d]" />
+                    <Download className="w-3.5 h-3.5 text-[#22d3ee]" />
                     <span>Download PNG</span>
                   </button>
                   <button
@@ -848,8 +848,8 @@ export const Studio: React.FC<StudioProps> = ({
 
       {/* Floating Toast Feedback for Retranslate / Actions */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 py-2 px-4 rounded-lg bg-[#141724] border border-[#f4446d]/40 shadow-xl shadow-black/60 text-xs font-medium text-slate-200 flex items-center gap-2 animate-fadeIn pointer-events-none">
-          <Sparkles className="w-4 h-4 text-[#f4446d] shrink-0" />
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 py-2 px-4 rounded-lg bg-[#141724] border border-[#22d3ee]/40 shadow-xl shadow-black/60 text-xs font-medium text-slate-200 flex items-center gap-2 animate-fadeIn pointer-events-none">
+          <Sparkles className="w-4 h-4 text-[#22d3ee] shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}

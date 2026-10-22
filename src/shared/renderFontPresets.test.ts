@@ -17,7 +17,7 @@ describe('renderFontPresets', () => {
 
     expect(DEFAULT_RENDER_FONT_PRESET_ID).toBe('standard');
     expect(presetMap.get('standard')).toBe('sans-serif');
-    expect(presetMap.get('comic')).toBe('"Kites Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
+    expect(presetMap.get('comic')).toBe('"Manga Garden Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
     expect(presetMap.get('anime-ace')).toBe('"MTO Comic 2", "SVN-Anime Ace 2.0", "Anime Ace 2.0 BB", "Anime Ace", cursive, sans-serif');
     expect(presetMap.get('comic-hand')).toBe('"Patrick Hand SC", "Comic Sans MS", cursive, sans-serif');
     expect(presetMap.get('serif')).toBe('Georgia, "Times New Roman", serif');
@@ -44,8 +44,8 @@ describe('renderFontPresets', () => {
   });
 
   it('resolves font family stacks with safe fallback', () => {
-    expect(resolveRenderFontFamily('comic')).toBe('"Kites Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
-    expect(resolveRenderFontFamily('wild-words')).toBe('"Kites Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
+    expect(resolveRenderFontFamily('comic')).toBe('"Manga Garden Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
+    expect(resolveRenderFontFamily('wild-words')).toBe('"Manga Garden Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif');
     expect(resolveRenderFontFamily('anime-ace')).toBe('"MTO Comic 2", "SVN-Anime Ace 2.0", "Anime Ace 2.0 BB", "Anime Ace", cursive, sans-serif');
     expect(resolveRenderFontFamily('comic-hand')).toBe('"Patrick Hand SC", "Comic Sans MS", cursive, sans-serif');
     expect(resolveRenderFontFamily('serif')).toBe('Georgia, "Times New Roman", serif');

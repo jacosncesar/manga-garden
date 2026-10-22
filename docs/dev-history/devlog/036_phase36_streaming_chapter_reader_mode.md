@@ -12,7 +12,7 @@
 * **Problem:** Previously, the reader mode only loaded already-translated images from memory. If zero images were translated, opening the reader displayed an empty screen. Users had to manually hover over each page on the host site to translate it first, which made reading an entire chapter tedious.
 * **Solution:**
   1. **Instant Raw Open:** When opening Chapter Reader Mode (`Alt+Shift+R`, bottom-right pill, or popup), the reader immediately discovers all chapter panels (`scanChapterPages()`) and renders all pages ($1 \dots N$) with their original raw artwork. Zero wait time, zero blank screens.
-  2. **Translate Chapter Action:** Top control bar displays a prominent `[ 🪄 Translate Chapter (N) ]` button. Clicking it queues all untranslated pages in top-to-bottom sequence into Kites' background sequential queue.
+  2. **Translate Chapter Action:** Top control bar displays a prominent `[ 🪄 Translate Chapter (N) ]` button. Clicking it queues all untranslated pages in top-to-bottom sequence into Manga Garden' background sequential queue.
   3. **Streaming Pre-Buffer & Live Hot-Swap:** As the user reads Page 1, subsequent pages are already translating in the background. As each job finishes, `IMAGE_TRANSLATED` updates the page reactively, cross-fading directly into the translated image in place without scroll-jumping or layout shifts (using pre-scanned aspect ratios).
   4. **Always-Available Floating Pill:** `ChapterReaderFloatingPill` triggers whenever 2+ comic panels exist on the reading page, enabling 1-click entry into Reader Mode upon page load.
 

@@ -78,7 +78,7 @@ const extensionPath = path.join(__dirname, '..', 'dist');
   </style>
 </head>
 <body>
-  <h1>Kites Manga Test Page</h1>
+  <h1>Manga Garden Manga Test Page</h1>
   <p>Target Image (Japanese Text Manga):</p>
   <img id="test-manga-img" src="https://i.imgur.com/DvQce3b_d.webp?maxwidth=760&fidelity=grand" crossorigin="anonymous" />
 </body>
@@ -142,7 +142,7 @@ const extensionPath = path.join(__dirname, '..', 'dist');
     await new Promise(r => setTimeout(r, 1000));
 
     await page.evaluate(() => {
-      const btn = document.querySelector('#kites-translate-btn');
+      const btn = document.querySelector('#manga-garden-translate-btn');
       if (btn) btn.click();
     });
 

@@ -203,7 +203,7 @@ const slidesHtml = `
     <div class="cover-layout">
       <div>
         <div class="badge">⚡ Devpost AI Builders Hackathon 2026</div>
-        <div class="cover-title">Kites</div>
+        <div class="cover-title">Manga Garden</div>
         <div class="cover-sub">Spatial In-Browser Manga & Comic Translator</div>
         <div class="cover-desc">
           100% Client-Side WebGPU Neural Pipeline • Zero Python • Zero Cloud Lock-in • Authentic Comic Lettering in Real-Time
@@ -211,7 +211,7 @@ const slidesHtml = `
         <div class="cover-meta">
           <strong>Creator:</strong> Unheat (dangtruongan)<br/>
           <strong>Live Demo:</strong> https://kites-translator.pages.dev<br/>
-          <strong>Source Code:</strong> https://github.com/Unheat/Kites
+          <strong>Source Code:</strong> https://github.com/jacosncesar/MangaLumeTwo
         </div>
       </div>
       <div class="cover-img-frame">
@@ -253,7 +253,7 @@ const slidesHtml = `
   <!-- SLIDE 3: Solution Overview -->
   <div class="slide">
     <div class="badge">02 · Solution Overview</div>
-    <h2 class="slide-title">Kites: 100% Local-First In-Browser AI Translation</h2>
+    <h2 class="slide-title">Manga Garden: 100% Local-First In-Browser AI Translation</h2>
     <p class="slide-sub">A zero-install Chrome extension running computer vision, generative inpainting, and typography directly on your graphics card.</p>
 
     <div class="grid-4col">
@@ -283,7 +283,7 @@ const slidesHtml = `
   <!-- SLIDE 4: Target Users -->
   <div class="slide">
     <div class="badge">03 · Target Users</div>
-    <h2 class="slide-title">Who Needs Kites: Global Manga & Web Comic Ecosystem</h2>
+    <h2 class="slide-title">Who Needs Manga Garden: Global Manga & Web Comic Ecosystem</h2>
     <p class="slide-sub">Serving international comic readers, social media art fans, and scanlation creators worldwide.</p>
 
     <div class="grid-3col">
@@ -292,7 +292,7 @@ const slidesHtml = `
         <div class="card-title">Global Manga & Webtoon Fans</div>
         <p style="font-size: 14px; font-weight: 700; color: #64748b; margin-bottom: 8px;">CHALLENGE:</p>
         <p class="card-desc" style="margin-bottom: 16px;">70M+ readers globally wait weeks or months for fan scanlation groups to translate raw Japanese, Korean, and Chinese releases.</p>
-        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW KITES EMPOWERS THEM:</p>
+        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW Manga Garden EMPOWERS THEM:</p>
         <p class="card-desc">Translate raw chapters instantly on manga sites with one click, preserving original artwork and dialogue emotion.</p>
       </div>
 
@@ -301,7 +301,7 @@ const slidesHtml = `
         <div class="card-title">Social Media Art Fans</div>
         <p style="font-size: 14px; font-weight: 700; color: #64748b; margin-bottom: 8px;">CHALLENGE:</p>
         <p class="card-desc" style="margin-bottom: 16px;">Millions of short comics and illustrations are shared daily on X (Twitter), Pixiv, and Reddit by creators without official translations.</p>
-        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW KITES EMPOWERS THEM:</p>
+        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW Manga Garden EMPOWERS THEM:</p>
         <p class="card-desc">The floating hover button translates comic strips directly inside the social media timeline with zero screenshots or copy-pasting.</p>
       </div>
 
@@ -310,8 +310,8 @@ const slidesHtml = `
         <div class="card-title">Scanlation Teams & Creators</div>
         <p style="font-size: 14px; font-weight: 700; color: #64748b; margin-bottom: 8px;">CHALLENGE:</p>
         <p class="card-desc" style="margin-bottom: 16px;">Manual cleaning, cloning, text redrawing, and typesetting in Photoshop takes 4–8 hours per manga chapter.</p>
-        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW KITES EMPOWERS THEM:</p>
-        <p class="card-desc">Kites Studio provides an interactive 8-point bounding box editor to polish translations, adjust fonts, and export 1:1 lossless PNGs.</p>
+        <p style="font-size: 14px; font-weight: 700; color: #10b981; margin-bottom: 8px;">HOW Manga Garden EMPOWERS THEM:</p>
+        <p class="card-desc">Manga Garden Studio provides an interactive 8-point bounding box editor to polish translations, adjust fonts, and export 1:1 lossless PNGs.</p>
       </div>
     </div>
   </div>
@@ -336,7 +336,7 @@ const slidesHtml = `
           <div class="card-desc">Keep action badges pinned across all comic panels, or enable Viewport Auto-Translate to queue chapters automatically as you scroll.</div>
         </div>
         <div class="card" style="padding: 20px 24px;">
-          <div class="card-title" style="font-size: 20px; color: #10b981;">🛠️ Built-in Kites Studio</div>
+          <div class="card-title" style="font-size: 20px; color: #10b981;">🛠️ Built-in Manga Garden Studio</div>
           <div class="card-desc">Triple-view inspection (Original, Clean Inpaint, Typeset), 8-point interactive bounding box resizing, and lossless 1:1 PNG export.</div>
         </div>
         <div class="card" style="padding: 20px 24px;">
@@ -360,7 +360,7 @@ const slidesHtml = `
           <img src="${demo2In}" />
           <img src="${demo2Out}" />
         </div>
-        <p style="text-align: center; margin-top: 14px; font-size: 14px; color: #94a3b8;">Original Scan (Left) vs. Kites Translated (Right)</p>
+        <p style="text-align: center; margin-top: 14px; font-size: 14px; color: #94a3b8;">Original Scan (Left) vs. Manga Garden Translated (Right)</p>
       </div>
 
       <div class="proof-col">
@@ -369,7 +369,7 @@ const slidesHtml = `
           <img src="${demo7In}" />
           <img src="${demo7Out}" />
         </div>
-        <p style="text-align: center; margin-top: 14px; font-size: 14px; color: #94a3b8;">Original Scan (Left) vs. Kites Translated (Right)</p>
+        <p style="text-align: center; margin-top: 14px; font-size: 14px; color: #94a3b8;">Original Scan (Left) vs. Manga Garden Translated (Right)</p>
       </div>
     </div>
   </div>
@@ -430,7 +430,7 @@ const slidesHtml = `
   <!-- SLIDE 8: AI Technologies Used -->
   <div class="slide">
     <div class="badge">07 · AI Technologies</div>
-    <h2 class="slide-title">The 4 Core Pillars of the Kites AI Engine</h2>
+    <h2 class="slide-title">The 4 Core Pillars of the Manga Garden AI Engine</h2>
     <p class="slide-sub">Orchestrating computer vision, graph clustering, generative diffusion, and LLM inference.</p>
 
     <div class="grid-2x2">
@@ -483,7 +483,7 @@ const slidesHtml = `
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1;">
       <div class="card" style="background: #1a1523; border-color: #4b1a2e;">
-        <div style="color: #ff2d75; font-weight: 800; font-size: 16px; margin-bottom: 12px;">WITHOUT KITES (STATUS QUO)</div>
+        <div style="color: #ff2d75; font-weight: 800; font-size: 16px; margin-bottom: 12px;">WITHOUT Manga Garden (STATUS QUO)</div>
         <ul style="color: #94a3b8; font-size: 15px; line-height: 1.8; padding-left: 20px;">
           <li>$10/month cloud subscription fees with harsh daily token limits</li>
           <li>Painful terminal setup (Python, PyTorch, CUDA, Git dependencies)</li>
@@ -493,7 +493,7 @@ const slidesHtml = `
       </div>
 
       <div class="card" style="background: #0d2423; border-color: #134e4a;">
-        <div style="color: #10b981; font-weight: 800; font-size: 16px; margin-bottom: 12px;">WITH KITES (LOCAL-FIRST ERA)</div>
+        <div style="color: #10b981; font-weight: 800; font-size: 16px; margin-bottom: 12px;">WITH Manga Garden (LOCAL-FIRST ERA)</div>
         <ul style="color: #f8fafc; font-size: 15px; line-height: 1.8; padding-left: 20px;">
           <li>100% Free & Unlimited reading with zero monthly subscriptions</li>
           <li>One-click Chrome extension install (no terminal or coding required)</li>
@@ -507,7 +507,7 @@ const slidesHtml = `
   <!-- SLIDE 10: Future Roadmap & Vision -->
   <div class="slide">
     <div class="badge">09 · Roadmap & Future Vision</div>
-    <h2 class="slide-title">Scaling Kites: Next Milestones & Community Launch</h2>
+    <h2 class="slide-title">Scaling Manga Garden: Next Milestones & Community Launch</h2>
     <p class="slide-sub">Expanding platform reach, multi-language OCR coverage, and creator tooling.</p>
 
     <div class="grid-3col" style="flex: 1; margin-bottom: 30px;">
@@ -520,7 +520,7 @@ const slidesHtml = `
         <ul style="color: #94a3b8; font-size: 15px; line-height: 1.8; padding-left: 20px; margin-top: 12px;">
           <li>WebGPU ONNX PaddleOCR & LaMa Inpainting</li>
           <li>Kruskal-MST spatial bubble clustering</li>
-          <li>Interactive Kites Studio 8-point editor</li>
+          <li>Interactive Manga Garden Studio 8-point editor</li>
           <li>Pre-built zip & Chrome Web Store submission</li>
         </ul>
       </div>
@@ -556,8 +556,8 @@ const slidesHtml = `
 
     <div class="card" style="padding: 20px 32px; align-items: center; text-align: center; border-color: #38bdf8; background: #1e293b;">
       <div style="font-size: 18px; color: #fff;">
-        <strong>Try Kites:</strong> <a href="https://kites-translator.pages.dev" style="color: #38bdf8; text-decoration: none;">https://kites-translator.pages.dev</a> &nbsp;•&nbsp;
-        <strong>GitHub:</strong> <a href="https://github.com/Unheat/Kites" style="color: #38bdf8; text-decoration: none;">https://github.com/Unheat/Kites</a> &nbsp;•&nbsp;
+        <strong>Try Manga Garden:</strong> <a href="https://kites-translator.pages.dev" style="color: #38bdf8; text-decoration: none;">https://kites-translator.pages.dev</a> &nbsp;•&nbsp;
+        <strong>GitHub:</strong> <a href="https://github.com/jacosncesar/MangaLumeTwo" style="color: #38bdf8; text-decoration: none;">https://github.com/jacosncesar/MangaLumeTwo</a> &nbsp;•&nbsp;
         <strong>Contact:</strong> andangtruong085@gmail.com
       </div>
     </div>
@@ -579,7 +579,7 @@ async function run() {
   await page.setContent(slidesHtml, { waitUntil: 'networkidle0' });
 
   // Generate PDF
-  const pdfPath = path.resolve(rootDir, 'kites-presentation-deck.pdf');
+  const pdfPath = path.resolve(rootDir, 'manga-garden-presentation-deck.pdf');
   await page.pdf({
     path: pdfPath,
     width: '1920px',

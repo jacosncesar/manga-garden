@@ -1,8 +1,8 @@
-# Devlog 055: Marca MangaLume 2.0 e documentação principal em pt-BR
+# Devlog 055: Marca Manga Garden e documentação principal em pt-BR
 
 ## Objetivo
 
-Iniciar a adaptação visual do projeto para MangaLume 2.0 e tornar os documentos principais de entrada mais acessíveis a leitores brasileiros.
+Iniciar a adaptação visual do projeto para Manga Garden e tornar os documentos principais de entrada mais acessíveis a leitores brasileiros.
 
 ## Alterações
 

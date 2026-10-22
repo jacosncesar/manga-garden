@@ -1,6 +1,6 @@
 # System Architecture Overview 🏛️
 
-Kites is built as a **Chrome Manifest V3 (MV3)** extension designed to process and translate comic images with spatial awareness while keeping computation local, private, and fast.
+Manga Garden is built as a **Chrome Manifest V3 (MV3)** extension designed to process and translate comic images with spatial awareness while keeping computation local, private, and fast.
 
 This document outlines the multi-tier extension architecture, runtime boundaries, communication contracts, storage schema, and supporting backend services.
 
@@ -10,7 +10,7 @@ This document outlines the multi-tier extension architecture, runtime boundaries
 
 Chrome Manifest V3 enforces strict security boundaries: service workers are ephemeral, background contexts cannot access DOM or WebGPU adapters reliably, and page scripts cannot execute untrusted code.
 
-Kites overcomes these constraints using a coordinated five-tier architecture:
+Manga Garden overcomes these constraints using a coordinated five-tier architecture:
 
 ```mermaid
 graph TB
@@ -48,7 +48,7 @@ graph TB
 
     subgraph DesktopUI["6. Extension UI & Dashboard"]
         PopupView["Quick Menu & Batch Scanner<br/>Language, Domain Rules & Queue Hub"]
-        StudioApp["Kites Studio V2<br/>Canvas Tools, Inpaint & Dual Typeset"]
+        StudioApp["Manga Garden Studio V2<br/>Canvas Tools, Inpaint & Dual Typeset"]
         ReaderModal["Chapter Reader Modal<br/>Fullscreen, Webtoon Scroll & ZIP Export"]
     end
 
@@ -89,7 +89,7 @@ graph TB
   - SVG placeholder handling: Detects and skips inline data-URL SVG placeholders without wedging queues.
   - CSS `background-image` extraction on div-based readers.
 - **CSS Anchor Positioning & Hover Halo:** Floats translation action buttons directly over comic panels using modern CSS Anchor Positioning with a 3px boundary halo to prevent pointer flicker.
-- **Single-Page Application (SPA) Reversion Shield:** Modern reactive SPAs (React Native for Web, Vue) re-render and wipe mutated `src` attributes. Kites mounts a targeted `MutationObserver` (`attachReversionShield`):
+- **Single-Page Application (SPA) Reversion Shield:** Modern reactive SPAs (React Native for Web, Vue) re-render and wipe mutated `src` attributes. Manga Garden mounts a targeted `MutationObserver` (`attachReversionShield`):
   - Clears `srcset` attributes to prevent responsive image resets.
   - Converts large Base64 strings to same-origin Blob URLs (`URL.createObjectURL(blob)`) to avoid DOM bloat and CSP rejections.
   - Intercepts SPA re-renders and re-applies the translated image.
@@ -128,7 +128,7 @@ graph TB
 
 ### 4. Local Database & Clean Plate Storage (`src/db.ts`)
 - **Dexie.js on IndexedDB:** Persists full translation records locally on the user's device.
-- **Clean Plate Storage Invariant:** Rather than destructively baking translated text into the stored database image, Kites saves the **raw inpainted background plate** alongside structured `TextBlock[]` arrays (coordinates, original text, translated text, font size, color, stroke).
+- **Clean Plate Storage Invariant:** Rather than destructively baking translated text into the stored database image, Manga Garden saves the **raw inpainted background plate** alongside structured `TextBlock[]` arrays (coordinates, original text, translated text, font size, color, stroke).
 - **Automatic 7-Day TTL Cleanup:** On startup, an orphan-recovery and garbage collection routine purges records older than 7 days to keep disk usage lean.
 
 ---
@@ -144,7 +144,7 @@ graph TB
 
 ---
 
-### 6. Kites Studio & Typesetting Editor (`src/App.tsx`)
+### 6. Manga Garden Studio & Typesetting Editor (`src/App.tsx`)
 - A full-screen desktop dashboard built with React 19 and Tailwind CSS 4.
 - **Interactive 8-Point Bounding Boxes & Gesture State Machine:** 3px drag deadzone, RAF-throttled reflow, decoupled double-click editing, and clamped handle hit radii.
 - **Dual Typesetting Mode (Auto Balloon vs Simple Wrap):** Switch between dynamic binary-search diamond stanzas and predictable rectangular caption wrapping per dialogue box or globally.

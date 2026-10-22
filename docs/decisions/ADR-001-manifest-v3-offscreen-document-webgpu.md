@@ -7,7 +7,7 @@ Accepted
 Chrome Extensions running Manifest V3 (MV3) enforce strict runtime constraints:
 1. **Ephemeral Background Service Workers:** Service workers are terminated by Chromium when idle or after long-running tasks exceed 30 seconds.
 2. **Missing Web APIs in Service Workers:** Service workers lack DOM access (`document`, `HTMLCanvasElement`, `createImageBitmap` in older versions) and cannot reliably acquire WebGPU adapters across all operating systems.
-3. **Hardware-Accelerated AI Requirements:** Kites requires persistent memory contexts for:
+3. **Hardware-Accelerated AI Requirements:** Manga Garden requires persistent memory contexts for:
    - ONNX Runtime Web WebGPU JSEP shaders (PaddleOCR, LaMa Manga, AOT-GAN).
    - MLC WebLLM KV-cache buffers and WebGPU shaders.
    - 2D Canvas operations (perspective warping, bicubic scaling, font measurement).

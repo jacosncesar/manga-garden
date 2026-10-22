@@ -9,7 +9,7 @@
 
 ## Objective
 
-Build a zero-cost, high-reliability serverless translation proxy for Kites extension users using Cloudflare Workers and Durable Objects. The backend aggregates multiple free-tier LLM providers (Mistral 3B, Google Gemini, Cloudflare Workers AI, Groq, OpenRouter) and enforces strict per-user rolling 24-hour rate limits (100 requests/day) authenticated via Google OAuth.
+Build a zero-cost, high-reliability serverless translation proxy for Manga Garden extension users using Cloudflare Workers and Durable Objects. The backend aggregates multiple free-tier LLM providers (Mistral 3B, Google Gemini, Cloudflare Workers AI, Groq, OpenRouter) and enforces strict per-user rolling 24-hour rate limits (100 requests/day) authenticated via Google OAuth.
 
 ---
 

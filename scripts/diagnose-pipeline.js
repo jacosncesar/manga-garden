@@ -107,7 +107,7 @@ server.listen(8089);
   });
   await new Promise(r => setTimeout(r, 1500));
 
-  const hasButton = await page.evaluate(() => !!document.querySelector('#kites-translate-btn'));
+  const hasButton = await page.evaluate(() => !!document.querySelector('#manga-garden-translate-btn'));
   console.log(`🔘 Translate button visible: ${hasButton}`);
 
   if (!hasButton) {
@@ -119,7 +119,7 @@ server.listen(8089);
   console.log('\n🖱️  Step 2: Clicking translate button...');
   const startMs = Date.now();
   await page.evaluate(() => {
-    const btn = document.querySelector('#kites-translate-btn');
+    const btn = document.querySelector('#manga-garden-translate-btn');
     if (btn) btn.click();
   });
 

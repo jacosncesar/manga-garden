@@ -195,7 +195,7 @@ export function waitForCleanFrames(): Promise<void> {
   });
 }
 
-const LAST_CROP_STORAGE_KEY = 'kites_last_screen_crop';
+const LAST_CROP_STORAGE_KEY = 'manga_garden_last_screen_crop';
 
 /**
  * Persists the coordinates of the last translated screen crop to sessionStorage.

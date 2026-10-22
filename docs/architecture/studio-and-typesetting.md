@@ -1,6 +1,6 @@
 # Studio Editor & Typesetting Architecture 🎨
 
-The **Kites Studio** (`src/App.tsx`) and **Typesetting Engine** (`src/offscreen/utils/canvasTypesetting.ts`, `typesetLayout.ts`, `cotransDefaultRenderer.ts`) provide an interactive desktop environment for reviewing comic translations, editing dialogue, adjusting typography, and exporting publication-ready comic pages.
+The **Manga Garden Studio** (`src/App.tsx`) and **Typesetting Engine** (`src/offscreen/utils/canvasTypesetting.ts`, `typesetLayout.ts`, `cotransDefaultRenderer.ts`) provide an interactive desktop environment for reviewing comic translations, editing dialogue, adjusting typography, and exporting publication-ready comic pages.
 
 ---
 
@@ -13,7 +13,7 @@ flowchart TD
         TextBlockStore["Structured TextBlock Records<br/>(pos, size, font, color, lines)"]
     end
 
-    subgraph StudioUI["Kites Studio Editor (src/App.tsx)"]
+    subgraph StudioUI["Manga Garden Studio Editor (src/App.tsx)"]
         CanvasViewport["Zoom & Pan Viewport<br/>(Preserves Natural Aspect Ratio)"]
         InteractiveBoxes["Interactive 8-Handle Overlay<br/>(Drag, Resize, Selection)"]
         InspectorPanel["Dialogue & Typography Inspector<br/>(Font, Size, Color, Text Edit)"]
@@ -50,7 +50,7 @@ flowchart TD
 
 Traditional translation tools destructively burn translated text into the image, making it impossible to fix typos or adjust layout after the pipeline completes.
 
-Kites adopts a **Clean Plate Architecture**:
+Manga Garden adopts a **Clean Plate Architecture**:
 1. **Separation of Background and Text:**
    - The database persists `translatedImageBlob` as a **clean inpainted background plate** (character text erased, artwork reconstructed).
    - Dialogue data is persisted independently as an array of `TextBlock` records:
@@ -81,7 +81,7 @@ Kites adopts a **Clean Plate Architecture**:
 
 ## 📐 Interactive Bounding Box Manipulation & Gesture State Machine
 
-In Kites Studio, each speech balloon is represented as an interactive bounding box overlay managed through a robust gesture state machine:
+In Manga Garden Studio, each speech balloon is represented as an interactive bounding box overlay managed through a robust gesture state machine:
 
 ### 1. Pointer Gesture State Machine & Drag Deadzone
 To eliminate conflicts between selection, double-click editing, and dragging:
@@ -94,7 +94,7 @@ To eliminate conflicts between selection, double-click editing, and dragging:
 5. **Cancellation Rollback:** Handling `pointercancel` cleanly restores the box transform to the `initialTransform` snapshot without saving dirty undo transactions.
 
 ### 2. Viewport-to-Canvas Coordinate Normalization
-User pointer interactions take place in viewport CSS pixels, which vary with zoom level and pan offsets. Kites normalizes pointer coordinates to the image's original native pixels:
+User pointer interactions take place in viewport CSS pixels, which vary with zoom level and pan offsets. Manga Garden normalizes pointer coordinates to the image's original native pixels:
 $$X_{\text{natural}} = \frac{X_{\text{pointer}} - X_{\text{pan}}}{\text{Scale}}$$
 $$Y_{\text{natural}} = \frac{Y_{\text{pointer}} - Y_{\text{pan}}}{\text{Scale}}$$
 
@@ -133,12 +133,12 @@ flowchart TD
 
 ## 🔤 Typography & Font Preset System (`renderFontPresets.ts`)
 
-Kites includes an extensible font registry tailored for manga and comics lettering:
+Manga Garden includes an extensible font registry tailored for manga and comics lettering:
 
 | Preset ID | Family Label | Typographic Role | Primary Font Stack |
 | :--- | :--- | :--- | :--- |
 | `standard` | Standard | Clean modern sans-serif | `sans-serif` |
-| `comic` | Wild Words | Classic manga dialogue | `"Kites Comic", "Wild Words", cursive, sans-serif` |
+| `comic` | Wild Words | Classic manga dialogue | `"Manga Garden Comic", "Wild Words", cursive, sans-serif` |
 | `anime-ace`| Anime Ace | Shonen action lettering | `"Anime Ace 2.0 BB", "Anime Ace", cursive` |
 | `comic-hand`| Comic Hand | Informal handwriting / small caps | `"Patrick Hand SC", "Comic Sans MS", cursive` |
 | `serif` | Serif | Literary prose & narration boxes | `Georgia, "Times New Roman", serif` |
@@ -159,7 +159,7 @@ This guarantees that `ctx.measureText` reflects real glyph metrics rather than s
 
 Comic text appears on diverse backgrounds: bright white speech balloons, dark nighttime panels, or screaming black spiky balloons. Hardcoding black-on-white text destroys dark panels.
 
-Kites ports XianScan's **color sampling algorithm** (`textColor.ts`):
+Manga Garden ports XianScan's **color sampling algorithm** (`textColor.ts`):
 1. **Sampling Ring:** Samples pixels in a narrow band outside the text polygon but inside the speech bubble perimeter.
 2. **Perceived Luminance Formula:**
    $$Y = 0.299R + 0.587G + 0.114B$$
@@ -172,7 +172,7 @@ Kites ports XianScan's **color sampling algorithm** (`textColor.ts`):
 
 ## 📐 4-Pass Binary Search Typesetting Layout
 
-To fill irregularly shaped comic speech balloons without overflowing, Kites runs an iterative layout engine:
+To fill irregularly shaped comic speech balloons without overflowing, Manga Garden runs an iterative layout engine:
 
 1. **Pass 1 (Binary Fit):** Binary searches font size between $6\text{ px}$ and the balloon height until all lines wrap within safety margins.
 2. **Pass 2 (Tall-Box Aspect Cap):** When balloon aspect ratio $H / W \ge 2.0$, clamps font size to prevent narrow speech bubbles from blowing up font sizes unnaturally.
@@ -220,7 +220,7 @@ Studio V2 provides direct on-canvas dialogue editing and interactive inpainting:
 
 ## 📤 High-Resolution Lossless Export & Canvas Untaint
 
-Kites Studio renders directly onto a hidden full-resolution `OffscreenCanvas`:
+Manga Garden Studio renders directly onto a hidden full-resolution `OffscreenCanvas`:
 1. **Canvas Untaint Guard:** Ensures all source images (clean plate blobs and background layers) are loaded as same-origin Blobs or authenticated Data URLs. Prevents browser security exceptions (`SecurityError: The operation is insecure`) when invoking `toDataURL()` or `toBlob()`.
 2. **Lossless Vector Composition:**
    - Renders the clean inpainted background bitmap at 100% native resolution.

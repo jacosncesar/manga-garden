@@ -9,7 +9,7 @@
 
 ## Objective
 
-Remove the non-working local Transformers.js translation route from the active Kites extension without touching working WebLLM, Google Translate, Chrome Translator, OCR, or inpainting. Preserve the implementation and its NLLB/Marian catalog outside the build so it can be reconsidered later without leaving selectable dead models in the popup.
+Remove the non-working local Transformers.js translation route from the active Manga Garden extension without touching working WebLLM, Google Translate, Chrome Translator, OCR, or inpainting. Preserve the implementation and its NLLB/Marian catalog outside the build so it can be reconsidered later without leaving selectable dead models in the popup.
 
 ---
 
@@ -21,7 +21,7 @@ Remove the non-working local Transformers.js translation route from the active K
 4. **Migrated saved settings:** The background `GET_POPUP_STATE` boundary now replaces an archived or invalid active engine with `gg-translate` and strips invalid, duplicate, and primary-engine entries from the fallback chain before returning and saving the normalized state.
 5. **Removed stale controls:** Deleted the inert “Import Local .onnx Model” popup button. It had no click handler, file picker, model validation, storage, protocol, or runtime path. OCR and inpainting ONNX downloads remain unchanged.
 6. **Updated retained tooling:** Kept mixed Google/WebLLM diagnostic scripts active but removed their Transformer runs and Transformer fallback IDs. Removed the `@huggingface/transformers` package dependency while retaining both ONNX Runtime packages for OCR and inpainting.
-7. **Updated current architecture documents:** Removed Transformers.js and NLLB from `docs/kites_flow.md` and `docs/fullplan.md`. Earlier devlogs remain historical records.
+7. **Updated current architecture documents:** Removed Transformers.js and NLLB from `docs/manga_garden_flow.md` and `docs/fullplan.md`. Earlier devlogs remain historical records.
 
 ---
 

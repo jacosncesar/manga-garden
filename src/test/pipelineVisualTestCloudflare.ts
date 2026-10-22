@@ -21,7 +21,7 @@ async function runPipelineVisualTestCloudflare(): Promise<void> {
   console.log('--- Starting End-to-End Pipeline Visual Test (Cloudflare Tier) ---');
   const token = process.env.GOOGLE_ID_TOKEN?.trim();
   if (!token) throw new Error('GOOGLE_ID_TOKEN is required for the Cloudflare visual test.');
-  (globalThis as any).__KITES_TEST_ID_TOKEN__ = token;
+  (globalThis as any).__manga_garden_TEST_ID_TOKEN__ = token;
 
   const testImgDir = path.join(__dirname, 'test-img');
   const ocrManager = new OcrManager();
@@ -79,7 +79,7 @@ async function runPipelineVisualTestCloudflare(): Promise<void> {
     fs.writeFileSync(path.join(RESULT_DIR, 'translation-log.json'), JSON.stringify(translationLog, null, 2));
     if (generatedImageCount === 0) throw new Error('Cloudflare visual test produced zero PNG outputs.');
   } finally {
-    delete (globalThis as any).__KITES_TEST_ID_TOKEN__;
+    delete (globalThis as any).__manga_garden_TEST_ID_TOKEN__;
     await Promise.allSettled([ocrManager.cleanup(), inpaintManager.cleanup()]);
   }
 }

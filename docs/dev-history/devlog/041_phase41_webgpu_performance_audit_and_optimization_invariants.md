@@ -8,7 +8,7 @@
 ---
 
 ### 2. The Objective
-Investigate all WebGPU performance switches documented by Chrome (`developer.chrome.com/docs/web-platform/webgpu`) and evaluate what code changes can increase raw execution speed in Kites across text recognition (PaddleOCR), localized inpainting (LaMa / AOT-GAN), speech bubble detection (YOLO), and on-device translation (WebLLM). Clarify why certain optimizations are already active, why others are ineffective or counter-productive, and assess the feasibility and accuracy impact of `shader-f16` specifically for YOLO bubble detection.
+Investigate all WebGPU performance switches documented by Chrome (`developer.chrome.com/docs/web-platform/webgpu`) and evaluate what code changes can increase raw execution speed in Manga Garden across text recognition (PaddleOCR), localized inpainting (LaMa / AOT-GAN), speech bubble detection (YOLO), and on-device translation (WebLLM). Clarify why certain optimizations are already active, why others are ineffective or counter-productive, and assess the feasibility and accuracy impact of `shader-f16` specifically for YOLO bubble detection.
 
 ---
 
@@ -17,7 +17,7 @@ Investigate all WebGPU performance switches documented by Chrome (`developer.chr
 #### A. Adapter Power Preference (`powerPreference: 'high-performance'`)
 * **Mechanism:** `navigator.gpu.requestAdapter({ powerPreference: 'high-performance' })`.
 * **Behavior:** Influences underlying OS GPU selection (D3D12/Vulkan/Metal). Forces discrete GPUs (NVIDIA/AMD) over integrated GPUs (Intel/AMD iGPU) on multi-GPU laptops.
-* **Status in Kites:** **Already Active.**
+* **Status in Manga Garden:** **Already Active.**
   - Locked across `hardware.ts`, `LamaBaseInpaintEngine.ts`, `PaddleOcrEngine.ts`, and `NeuralBubbleDetector.ts`.
   - On single-GPU systems, this is a hardware no-op. On dual-GPU laptops, it provides massive throughput gains.
 
@@ -25,8 +25,8 @@ Investigate all WebGPU performance switches documented by Chrome (`developer.chr
 * **Mechanism:** `adapter.requestDevice({ requiredLimits: { maxStorageBufferBindingSize, maxBufferSize, maxComputeWorkgroupStorageSize } })`.
 * **Behavior:** Unclamps WebGPU's ultra-conservative default limits (128 MB storage buffer, 256 MB total buffer, 16 KB workgroup memory) up to adapter hardware maximums (1 GB–4 GB+).
 * **Why NLLB 600M Still Crashed:** Raising `requiredLimits` did not prevent browser crashes with Transformers.js. The crash was caused by per-token buffer allocation leaks and Chrome renderer process memory ceiling exhaustion, not by a single buffer exceeding 128 MB.
-* **Why Kites Vision Models Do Not Need It:**
-  - Kites operates on localized, sliced patches:
+* **Why Manga Garden Vision Models Do Not Need It:**
+  - Manga Garden operates on localized, sliced patches:
     - PaddleOCR text line strips: ~3 MB.
     - LaMa 64px bucketed inpaint patches: ~1 MB to 8 MB.
     - YOLO 640×640 detection tensor: ~5 MB.
@@ -61,7 +61,7 @@ Investigate all WebGPU performance switches documented by Chrome (`developer.chr
 
 ```
 +-----------------------------------------------------------------------------------+
-|                        WebGPU Optimization Matrix for Kites                       |
+|                        WebGPU Optimization Matrix for Manga Garden                       |
 +--------------------------+-----------------------+---------------+----------------+
 | Optimization             | Target Engines        | Speed Impact  | Decision       |
 +--------------------------+-----------------------+---------------+----------------+
@@ -81,7 +81,7 @@ Investigate all WebGPU performance switches documented by Chrome (`developer.chr
 
 1. **Task Dynamics:** Object detection predicts coarse bounding box coordinates $(x, y, w, h)$ and 1–2 class probabilities (bubble vs text). It does not perform delicate character classification or frequency transforms.
 2. **Coordinate Drift:** In standard FP32 vs FP16 evaluations on YOLO (Ultralytics / TensorRT), bounding box boundaries deviate by at most **0.1 to 0.3 pixels** at $640 \times 640$ resolution.
-3. **Absorption by Heuristics:** Kites expands detected bubbles with safety padding (4px–12px) and merges overlapping boxes via IoU. Any 0.2px variance is completely absorbed by post-processing padding.
+3. **Absorption by Heuristics:** Manga Garden expands detected bubbles with safety padding (4px–12px) and merges overlapping boxes via IoU. Any 0.2px variance is completely absorbed by post-processing padding.
 4. **Concrete Benefits:**
    - **Download Size:** Model drops from ~12 MB to **~6 MB** (50% reduction in network payload and disk footprint).
    - **VRAM Bandwidth:** Half the memory traffic on GPU compute passes.
@@ -94,6 +94,6 @@ Investigate all WebGPU performance switches documented by Chrome (`developer.chr
 ---
 
 ### 5. Next Steps / Key Takeaways
-1. **Takeaway:** Do not chase generic WebGPU flags (`requiredLimits`, `NHWC`, `subgroups`) for vision models. Vision performance in Kites is already optimized via algorithmic tiling (1000px strip OCR) and dynamic 64px localized inpaint patching.
+1. **Takeaway:** Do not chase generic WebGPU flags (`requiredLimits`, `NHWC`, `subgroups`) for vision models. Vision performance in Manga Garden is already optimized via algorithmic tiling (1000px strip OCR) and dynamic 64px localized inpaint patching.
 2. **Takeaway:** WebLLM already extracts maximum WebGPU performance under the hood (`requiredLimits`, `subgroups`, `shader-f16`).
 3. **Future Optimization Ticket:** When optimizing speech bubble detection in a future milestone, export `yolo11n-bubble-fp16.onnx` (6 MB) and conditionally dispatch it in `NeuralBubbleDetector.ts` when `adapter.features.has('shader-f16')` is available.

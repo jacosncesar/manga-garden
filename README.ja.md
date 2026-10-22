@@ -2,7 +2,7 @@
 
 [English](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
-# 🪁 Kites
+# 🪁 Manga Garden
 
 ### どんな言語のマンガも、ブラウザ上でそのまま読める。
 **Python不要 • サーバー通信ゼロ • 100% 完全ローカル＆プライベートなブラウザ拡張機能 AI 翻訳**
@@ -20,24 +20,24 @@
     <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/Unheat/Kites/releases/latest">
+  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
     <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
   </a>
 </p>
 
 <br/>
 
-[![Kites Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
+[![Manga Garden Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
 </div>
 
 ---
 
-## 💡 なぜ Kites なのか？
+## 💡 なぜ Manga Garden なのか？
 
 従来のマンガ翻訳ツールは、複雑な Python 環境の構築やギガバイト単位の CUDA パッケージの導入が必要だったり、個人の閲覧履歴を外部クラウドサーバーにアップロードする必要がありました。
 
-**Kites はそれを一変させます。** 最先端の画像認識および大規模言語モデルを、**WebGPU 経由でお使いの GPU 上で直接実行**する軽量な Chrome 拡張機能です。
+**Manga Garden はそれを一変させます。** 最先端の画像認識および大規模言語モデルを、**WebGPU 経由でお使いの GPU 上で直接実行**する軽量な Chrome 拡張機能です。
 
 - ⚡ **セットアップ不要：** [Chrome ウェブストア](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb) から 1 クリックでインストールしてすぐ使えます。コマンドライン、Python、追加の環境構築は一切不要です。
 - 🔒 **100% ローカル＆プライベート：** 文字認識 (OCR) と背景のテキスト消去はすべてお使いのデバイス上で完結。画像がブラウザの外に送信されることはありません。
@@ -45,7 +45,7 @@
 - ✍️ **自然な写植・タイポグラフィ：** 吹き出しのサイズを自動計測し、適切な改行バランス、フォントサイズ、文字・縁取りカラーを美しく自動調整します。
 - 🗨️ **吹き出し形状へのスマート適応 (Smart Bubble Fit)：** 高度な吹き出し検出（ヒューリスティックおよび YOLO 神経網）により、縦長になりがちな CJK のテキスト領域を広々とした吹き出し全体へ自然に拡張。極小文字への押しつぶしを防止します。
 - 📜 **縦スクロール Webtoon 完全対応：** 1D インメモリキャンバス分割処理により、超長尺の縦スクロールマンガ（$>14,000\text{ px}$）も原寸解像度のままシームレスに翻訳。
-- 🛠️ **内蔵 Kites Studio：** 訳文の微調整、吹き出しのリサイズ、フォントスタイルの変更などをブラウザ上でそのまま手軽に行えます。
+- 🛠️ **内蔵 Manga Garden Studio：** 訳文の微調整、吹き出しのリサイズ、フォントスタイルの変更などをブラウザ上でそのまま手軽に行えます。
 
 ---
 
@@ -58,14 +58,14 @@
 <table>
   <tr>
     <th width="50%" align="center">日本語原文 (Original Japanese)</th>
-    <th width="50%" align="center">Kites 翻訳後 (Kites Translated)</th>
+    <th width="50%" align="center">Manga Garden 翻訳後 (Manga Garden Translated)</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo2.jpeg" alt="Original Japanese Manga" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo2_result.png" alt="Kites English Translation" width="100%" />
+      <img src="./README_images/result/demo2_result.png" alt="Manga Garden English Translation" width="100%" />
     </td>
   </tr>
 </table>
@@ -78,14 +78,14 @@
 <table>
   <tr>
     <th width="50%" align="center">日本語原文 (Original Japanese)</th>
-    <th width="50%" align="center">Kites 翻訳後 (Kites Translated)</th>
+    <th width="50%" align="center">Manga Garden 翻訳後 (Manga Garden Translated)</th>
   </tr>
   <tr>
     <td align="center">
       <img src="./README_images/input/demo7.jpg" alt="Original Japanese Manga" width="100%" />
     </td>
     <td align="center">
-      <img src="./README_images/result/demo7_result.png" alt="Kites Vietnamese Translation" width="100%" />
+      <img src="./README_images/result/demo7_result.png" alt="Manga Garden Vietnamese Translation" width="100%" />
     </td>
   </tr>
 </table>
@@ -98,7 +98,7 @@
 Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗せるだけ。CSS Anchor Positioning によるスマートな翻訳バッジが浮き上がり、クリックひとつでコマ上のセリフが直接翻訳されます。コピペの手間は一切不要です。
 
 <div align="center">
-  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Kites In-Page Hover Translation Button" width="620px" />
+  <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Manga Garden In-Page Hover Translation Button" width="620px" />
 </div>
 
 - 🖱️ **ホバー翻訳 (Hover)：** マンガのコマにカーソルを合わせるだけで即座に翻訳。
@@ -114,7 +114,7 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
 
 マンガや Webtoon の 1 話全体を、集中しやすい専用ビューで快適に読書：遅延読み込み画像の自動バッチ検出、シームレスな縦スクロール表示、複数ページの並列翻訳、オフライン ZIP エクスポートに対応：
 
-[![Kites Chapter Reader](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
+[![Manga Garden Chapter Reader](./README_images/UI-feature/reader.jpg)](./README_images/UI-feature/reader.png)
 
 - **高速スキャン (Fast Scan)：** ページを自動スクロールしながら、遅延読み込み（lazy-load）されるコマをすべて検知して翻訳キューに追加。
 - **多彩なリーダー表示：** Webtoon の連続縦スクロール、単ページ表示、見開き 2 ページ表示を自在に切り替え。
@@ -123,11 +123,11 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
 
 ---
 
-## 🛠️ 内蔵 Kites Studio
+## 🛠️ 内蔵 Manga Garden Studio
 
-翻訳を推敲したり、文字配置をこだわりたいですか？ 拡張機能からフルスクリーンの **Kites Studio** を直接起動できます。
+翻訳を推敲したり、文字配置をこだわりたいですか？ 拡張機能からフルスクリーンの **Manga Garden Studio** を直接起動できます。
 
-[![Kites Studio](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
+[![Manga Garden Studio](./README_images/UI-feature/kite_studio_editing.jpg)](./README_images/UI-feature/studio-editor.png)
 
 - **インライン直接編集：** 吹き出しをダブルクリックするだけでその場でセリフを修正可能。サブピクセル単位の垂直中央揃えと自動リフローに対応。
 - **直感的なキャンバス操作：** 8 点ハンドルで吹き出しの位置やサイズを自由に調整。
@@ -151,13 +151,13 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
   </tr>
   <tr>
     <td align="center">
-      <img src="./README_images/UI-feature/main-panel.jpg" alt="Kites Main Popup" width="95%" />
+      <img src="./README_images/UI-feature/main-panel.jpg" alt="Manga Garden Main Popup" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Kites Chapter Reader and Scanner Panel" width="95%" />
+      <img src="./README_images/UI-feature/reader-panel.jpg" alt="Manga Garden Chapter Reader and Scanner Panel" width="95%" />
     </td>
     <td align="center">
-      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Kites Settings Panel" width="95%" />
+      <img src="./README_images/UI-feature/setting-panel.jpg" alt="Manga Garden Settings Panel" width="95%" />
     </td>
   </tr>
 </table>
@@ -191,9 +191,9 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
   </a>
 </div>
 
-1. **[Chrome ウェブストアの Kites ページ](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)** を開きます。
+1. **[Chrome ウェブストアの Manga Garden ページ](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)** を開きます。
 2. **Chrome に追加** をクリックし、インストールの確認を承認します。
-3. すぐにアクセスできるように **Kites** をブラウザのツールバーに固定します。
+3. すぐにアクセスできるように **Manga Garden** をブラウザのツールバーに固定します。
 4. Twitter/X、Pixiv、MangaDex などで任意のマンガを開き、コマにマウスを合わせて翻訳を開始します！
 
 ---
@@ -202,12 +202,12 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
 
 オフライン環境、手動テスト、または特定のリリースの動作確認に最適です：
 
-1. 最新の GitHub リリースから **[`kites.zip`](https://github.com/Unheat/Kites/releases/latest)** をダウンロードします。
+1. 最新の GitHub リリースから **[`Manga Garden.zip`](https://github.com/jacosncesar/MangaLumeTwo/releases/latest)** をダウンロードします。
 2. ダウンロードした `.zip` ファイルをお使いの PC のフォルダに展開します。
 3. Chrome で `chrome://extensions/` を開きます。
 4. 右上の **デベロッパー モード (Developer mode)** をオンにします。
 5. 左上の **パッケージ化されていない拡張機能を読み込む (Load unpacked)** をクリックし、展開したフォルダを選択します。
-6. **Kites** をツールバーに固定すれば、すぐにマンガを読み始められます！
+6. **Manga Garden** をツールバーに固定すれば、すぐにマンガを読み始められます！
 
 ---
 
@@ -215,8 +215,8 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
 
 ```bash
 # 1. リポジトリをクローン
-git clone https://github.com/Unheat/Kites.git
-cd Kites
+git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+cd manga-garden
 
 # 2. 依存関係のインストールとビルド
 npm ci
@@ -226,7 +226,7 @@ npm run build
 1. Chrome で `chrome://extensions/` を開きます。
 2. 右上の **デベロッパー モード** をオンにします。
 3. **パッケージ化されていない拡張機能を読み込む** をクリックし、生成された `dist/` フォルダを選択します。
-4. **Kites** をツールバーに固定してデバッグ・閲覧を開始します！
+4. **Manga Garden** をツールバーに固定してデバッグ・閲覧を開始します！
 
 ---
 
@@ -235,16 +235,16 @@ npm run build
 開発者、翻訳者、マンガを愛するすべての方々からの貢献を心より歓迎します！
 
 - 📖 **[ドキュメントハブ](docs/README.md)** — アーキテクチャ図、処理パイプライン仕様、ランタイム設計。
-- 📐 **[インタラクティブ・パイプラインマップ](docs/workflow.html)** — Kites のテキスト検出、背景消去、写植アルゴリズムの流れを体験できる視覚化ツール。
+- 📐 **[インタラクティブ・パイプラインマップ](docs/workflow.html)** — Manga Garden のテキスト検出、背景消去、写植アルゴリズムの流れを体験できる視覚化ツール。
 - 🛠️ **[コントリビューションガイド](CONTRIBUTING.md)** — 開発環境の構築、テストの実行、プルリクエストの提出方法。
 
 ---
 
 ## 📜 ライセンス・謝辞
 
-Kites は **[GNU General Public License v3.0](LICENSE)** のもとで公開されています。
+Manga Garden は **[GNU General Public License v3.0](LICENSE)** のもとで公開されています。
 
-Kites の実現に不可欠だった素晴らしいオープンソースプロジェクトに心より感謝申し上げます：
+Manga Garden の実現に不可欠だった素晴らしいオープンソースプロジェクトに心より感謝申し上げます：
 - **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** 画期的な空間テキストグループ化および写植レンダリングアルゴリズム。
 - **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** 動的パッチインペインティングアーキテクチャおよび OCR ノイズ除去フィルター。
 - **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** 高速かつ高精度な多言語ニューラルテキスト検出・認識モデル。

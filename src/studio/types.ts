@@ -1,5 +1,5 @@
 /**
- * Core type definitions for Kites Studio V2.
+ * Core type definitions for Manga Garden Studio V2.
  * Comprehensive model for 2D viewport, raster brushes, typography,
  * bounded undo/redo patches, warp quad coordinates, and sticker layers.
  */

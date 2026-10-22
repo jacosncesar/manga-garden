@@ -29,21 +29,21 @@ export interface MediaTarget {
 /**
  * Reapplies translated visibility and associated background suppression after host style reversion.
  *
- * @param img - Translated image carrying Kites applied-style attributes.
+ * @param img - Translated image carrying Manga Garden applied-style attributes.
  * @param surfaceElement - Visible media surface associated with the image.
  * @returns Nothing.
  */
 export function reapplyMediaTargetStyles(img: HTMLImageElement, surfaceElement: HTMLElement): void {
-  const opacity = img.getAttribute('data-kites-applied-opacity');
-  const zIndex = img.getAttribute('data-kites-applied-z-index');
-  const pointerEvents = img.getAttribute('data-kites-applied-pointer-events');
+  const opacity = img.getAttribute('data-manga-garden-applied-opacity');
+  const zIndex = img.getAttribute('data-manga-garden-applied-z-index');
+  const pointerEvents = img.getAttribute('data-manga-garden-applied-pointer-events');
   if (opacity !== null) {
     img.style.opacity = opacity;
     img.style.visibility = 'visible';
   }
   if (zIndex !== null) img.style.zIndex = zIndex;
   if (pointerEvents !== null) img.style.pointerEvents = pointerEvents;
-  if (surfaceElement.getAttribute('data-kites-background-suppressed') === 'true') {
+  if (surfaceElement.getAttribute('data-manga-garden-background-suppressed') === 'true') {
     surfaceElement.style.backgroundImage = 'none';
   }
 }
@@ -115,25 +115,25 @@ function resolveBestSrcsetUrl(srcset: string): string {
  * @returns Best usable source URL, or an empty string.
  */
 export function resolveElementSource(element: Element): string {
-  const origSrc = element.getAttribute('data-kites-orig-src');
+  const origSrc = element.getAttribute('data-manga-garden-orig-src');
   if (origSrc && !isPlaceholderSource(origSrc)) {
     if (element instanceof HTMLImageElement) {
-      const appliedSrc = element.getAttribute('data-kites-applied-src');
+      const appliedSrc = element.getAttribute('data-manga-garden-applied-src');
       const currentSrc = element.currentSrc || element.src || '';
       // If currentSrc is neither applied blob nor origSrc (e.g. host single-page reader navigated to next page),
-      // the DOM element has been recycled for a new image. Clear stale Kites attributes so the new image is recognized.
+      // the DOM element has been recycled for a new image. Clear stale Manga Garden attributes so the new image is recognized.
       if (
         currentSrc &&
         !isPlaceholderSource(currentSrc) &&
         currentSrc !== appliedSrc &&
         currentSrc !== origSrc
       ) {
-        element.removeAttribute('data-kites-orig-src');
-        element.removeAttribute('data-kites-orig-srcset');
-        element.removeAttribute('data-kites-applied-src');
-        element.removeAttribute('data-kites-translated');
-        element.removeAttribute('data-kites-show-original');
-        element.removeAttribute('data-kites-job-id');
+        element.removeAttribute('data-manga-garden-orig-src');
+        element.removeAttribute('data-manga-garden-orig-srcset');
+        element.removeAttribute('data-manga-garden-applied-src');
+        element.removeAttribute('data-manga-garden-translated');
+        element.removeAttribute('data-manga-garden-show-original');
+        element.removeAttribute('data-manga-garden-job-id');
       } else {
         return origSrc;
       }
@@ -306,7 +306,7 @@ function findAssociatedSurface(img: HTMLImageElement, srcUrl: string): HTMLEleme
  * Resolves a document-tree anchor for CSS anchor positioning.
  *
  * @param surface - Actual visible media surface.
- * @returns Surface, SVG container, or Shadow DOM host visible to Kites' overlay root.
+ * @returns Surface, SVG container, or Shadow DOM host visible to Manga Garden' overlay root.
  */
 function resolveAnchorElement(surface: Element): HTMLElement | null {
   let anchor: Element = surface instanceof SVGElement ? surface.ownerSVGElement || surface : surface;

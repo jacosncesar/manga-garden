@@ -7,7 +7,7 @@
 
 ## Problem
 
-Kites had no keyboard shortcuts. Users relied exclusively on mouse hover and click to trigger translations or toggle originals. Power readers working through dozens of manga pages needed faster ergonomics: one key to translate the hovered panel, one key to start area crop, and one key to flip between original and translated artwork without touching the mouse button.
+Manga Garden had no keyboard shortcuts. Users relied exclusively on mouse hover and click to trigger translations or toggle originals. Power readers working through dozens of manga pages needed faster ergonomics: one key to translate the hovered panel, one key to start area crop, and one key to flip between original and translated artwork without touching the mouse button.
 
 ---
 
@@ -161,7 +161,7 @@ import ReadingShortcutsHelp from './ReadingShortcutsHelp';
 ## Test Results
 
 ```
-Command: node_modules/.bin/vitest run --root /Users/dangtruongan/study/Kites src/background/readingCommands.test.ts src/content/readingShortcuts.test.ts
+Command: node_modules/.bin/vitest run --root /Users/dangtruongan/study/Manga Garden src/background/readingCommands.test.ts src/content/readingShortcuts.test.ts
 
  ✓ src/background/readingCommands.test.ts (18 tests) 7ms
  ✓ src/content/readingShortcuts.test.ts (40 tests) 16ms

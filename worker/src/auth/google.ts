@@ -49,7 +49,7 @@ export async function getGoogleJwks(): Promise<GoogleJwksKey[]> {
   }
 
   const response = await fetch('https://www.googleapis.com/oauth2/v3/certs', {
-    headers: { 'User-Agent': 'Kites-Translate-Worker' },
+    headers: { 'User-Agent': 'manga-garden-Translate-Worker' },
   });
 
   if (!response.ok) {
@@ -235,7 +235,7 @@ export class GoogleAuthVerifier implements IAuthProviderVerifier {
     if (token.startsWith('ya29.')) {
       try {
         const response = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(token)}`, {
-          headers: { 'User-Agent': 'Kites-Translate-Worker' },
+          headers: { 'User-Agent': 'manga-garden-Translate-Worker' },
         });
 
         if (!response.ok) {
@@ -298,7 +298,11 @@ export class GoogleAuthVerifier implements IAuthProviderVerifier {
  * @param salt - Secret salt string from worker environment (JWT_SALT).
  * @returns A 64-character lowercase hex string representing the HMAC-SHA256 digest.
  */
-export async function hashUserSubject(sub: string, salt: string = 'kites-default-salt'): Promise<string> {
+export async function hashUserSubject(sub: string, salt: string): Promise<string> {
+  if (!salt.trim()) {
+    throw new Error('JWT_SALT must be configured before hashing user subjects.');
+  }
+
   const key = await crypto.subtle.importKey(
     'raw',
     new TextEncoder().encode(salt),

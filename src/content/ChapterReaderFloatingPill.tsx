@@ -43,7 +43,7 @@ export default function ChapterReaderFloatingPill({
 
   return (
     <div
-      className={`kites-reader-pill ${isScrolling ? 'kites-scrolling' : ''}`}
+      className={`manga-garden-reader-pill ${isScrolling ? 'manga-garden-scrolling' : ''}`}
       style={{
         position: 'fixed',
         bottom: '20px',
@@ -68,7 +68,7 @@ export default function ChapterReaderFloatingPill({
     >
       <button
         onClick={onOpen}
-        className="kites-reader-pill-btn"
+        className="manga-garden-reader-pill-btn"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -84,10 +84,10 @@ export default function ChapterReaderFloatingPill({
         }}
         title="Open Distraction-Free Chapter Reader"
       >
-        <BookOpen size={14} color="#f4446d" />
+        <BookOpen size={14} color="#22d3ee" />
         <span>Open Reader</span>
         <span
-          className="kites-reader-pill-count"
+          className="manga-garden-reader-pill-count"
           style={{
             fontFamily: 'monospace',
             fontSize: '10px',
@@ -106,7 +106,7 @@ export default function ChapterReaderFloatingPill({
           e.stopPropagation();
           onDismiss();
         }}
-        className="kites-reader-pill-close"
+        className="manga-garden-reader-pill-close"
         style={{
           display: 'flex',
           alignItems: 'center',

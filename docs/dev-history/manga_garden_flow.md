@@ -1,8 +1,8 @@
-# Kites Architecture & Execution Flow Map
+# Manga Garden Architecture & Execution Flow Map
 
 **Pipeline Orchestrator**: `src/offscreen/services/PipelineOrchestrator.ts` -> `PipelineOrchestrator.runPipeline(jobId)`
 
-Below is the complete step-by-step technical execution flow for image translation in the **Kites** browser extension codebase.
+Below is the complete step-by-step technical execution flow for image translation in the **Manga Garden** browser extension codebase.
 
 ---
 
@@ -100,12 +100,12 @@ Below is the complete step-by-step technical execution flow for image translatio
 
 ---
 
-### Detailed Kites Code Reference & Function Index
+### Detailed Manga Garden Code Reference & Function Index
 
 #### Stage 1: Pipeline Message Entry & DB Fetch
 * **Message Listener**: `src/offscreen/index.ts` -> `chrome.runtime.onMessage.addListener()`
 * **Main Orchestrator Entry**: `src/offscreen/services/PipelineOrchestrator.ts` -> `PipelineOrchestrator.runPipeline(jobId)`
-* **Database Models**: `src/db.ts` -> `KitesDatabase` (`translationJobs`, `images`, `textBlocks`)
+* **Database Models**: `src/db.ts` -> `MangaGardenDatabase` (`translationJobs`, `images`, `textBlocks`)
 
 #### Stage 2: OCR & Text Detection
 * **OCR Manager**: `src/offscreen/services/OcrManager.ts` -> `OcrManager.processImage()`

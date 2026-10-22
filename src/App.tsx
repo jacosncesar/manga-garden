@@ -406,7 +406,7 @@ export default function App() {
             <div className="w-16 h-16 rounded-2xl border border-[#282d3f] bg-[#12141c] flex items-center justify-center mb-4 shadow-xl">
               <Layers className="w-8 h-8 text-indigo-400" />
             </div>
-            <h2 className="text-base font-semibold text-slate-100">MangaLume 2.0 Studio</h2>
+            <h2 className="text-base font-semibold text-slate-100">Manga Garden Studio</h2>
             <p className="text-xs text-slate-400 max-w-sm mt-1">
               Upload a comic or manga page to edit inpainting, restore artwork, tweak CJK typography, or run local WebGPU translations.
             </p>

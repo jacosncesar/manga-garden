@@ -73,7 +73,7 @@ Glossary operates purely at the prompt level. The keyed JSON alignment schema (`
 #### Popup Component (`src/popup/components/GlossaryPanel.tsx`)
 - Standalone component with own props interface (does not import `PopupState`).
 - Toggle switch for enable/disable, add/remove rows, capacity indicator. Source/Preferred inputs and toggle/close controls have accessible names; existing styling is preserved.
-- Explicit UI copy: "LLMs may not always follow these preferences. Google Translate does not support glossary in Kites." This describes this adapter, not all Google translation products.
+- Explicit UI copy: "LLMs may not always follow these preferences. Google Translate does not support glossary in Manga Garden." This describes this adapter, not all Google translation products.
 - Privacy note: "When using Custom API or Shared Pool, glossary terms are included in translation prompts sent to the respective cloud provider."
 
 ---

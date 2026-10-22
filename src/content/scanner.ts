@@ -270,7 +270,7 @@ export function scanChapterPages(
     }
 
     const check = isTranslatedCheck ? isTranslatedCheck(rawUrl) : { isTranslated: false };
-    const hasDomTranslated = el?.getAttribute('data-kites-translated') === 'true';
+    const hasDomTranslated = el?.getAttribute('data-manga-garden-translated') === 'true';
 
     scanned.push({
       id: canonical || rawUrl,

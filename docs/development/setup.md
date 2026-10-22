@@ -1,6 +1,6 @@
 # Guia de configuração do ambiente de desenvolvimento 🛠️
 
-Este guia explica como configurar o ambiente local para desenvolver, compilar e depurar o **MangaLume 2.0**.
+Este guia explica como configurar o ambiente local para desenvolver, compilar e depurar o **Manga Garden**.
 
 ---
 
@@ -18,10 +18,9 @@ Este guia explica como configurar o ambiente local para desenvolver, compilar e 
 ## 🚀 Instalação passo a passo
 
 ### 1. Clone o repositório
-Use a URL do seu próprio repositório:
 ```bash
-git clone https://github.com/SEU-USUARIO/MangaLume-2.0.git
-cd MangaLume-2.0
+git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+cd manga-garden
 ```
 
 ### 2. Verifique a versão do Node.js
@@ -54,9 +53,9 @@ A extensão compilada, pronta para carregar, ficará na pasta `dist/`.
 1. Abra o navegador Chromium e acesse `chrome://extensions/`.
 2. Ative o **Modo do desenvolvedor** no canto superior direito.
 3. Clique em **Carregar sem compactação**.
-4. Selecione a pasta `dist/` dentro da pasta do projeto MangaLume 2.0.
-5. A extensão **MangaLume 2.0** deverá aparecer na lista.
-6. Clique no ícone de extensões da barra do navegador e fixe o MangaLume 2.0.
+4. Selecione a pasta `dist/` dentro da pasta do projeto Manga Garden.
+5. A extensão **Manga Garden** deverá aparecer na lista.
+6. Clique no ícone de extensões da barra do navegador e fixe o Manga Garden.
 
 ---
 
@@ -81,7 +80,7 @@ npm run dev
 ```
 - Inicia o servidor Vite em `http://localhost:5173/`.
 - O Hot Module Replacement (HMR) atualiza arquivos de interface em `src/popup/` e `src/App.tsx`.
-- **Sobre recarregar a extensão:** depois de alterar arquivos em `src/background/` ou `src/content/`, clique no ícone 🔄 **Atualizar** do MangaLume 2.0 em `chrome://extensions/` para recarregar o contexto da extensão no Chrome.
+- **Sobre recarregar a extensão:** depois de alterar arquivos em `src/background/` ou `src/content/`, clique no ícone 🔄 **Atualizar** do Manga Garden em `chrome://extensions/` para recarregar o contexto da extensão no Chrome.
 
 ### Execute verificações rápidas de qualidade
 ```bash
@@ -103,7 +102,10 @@ cd worker
 npm ci
 cp .dev.vars.example .dev.vars
 
-# Preencha .dev.vars com as chaves de API de teste dos provedores
+# Substitua os valores de exemplo em .dev.vars por valores reais.
+# Configure JWT_SALT como um segredo aleatório e mantenha-o estável.
+# Nunca compartilhe nem faça commit de .dev.vars.
 npm run dev
 ```
+O Worker não inicia operações autenticadas sem `JWT_SALT`; sem esse segredo, os endpoints de tradução e cota retornam erro de configuração. Em produção, configure-o no Cloudflare com `npx wrangler secret put JWT_SALT`.
 Para informações sobre implantação em produção, consulte [`worker/WAF_RULES.md`](../../worker/WAF_RULES.md).

@@ -3,13 +3,13 @@
  *
  * Reproduces the reported bug scenario on https://roliascan.com/ with the real built
  * extension: the reader lazy-loads every page after the first behind a long inline SVG
- * placeholder (in `src` and the container's `::before` background). Before the fix, Kites
+ * placeholder (in `src` and the container's `::before` background). Before the fix, Manga Garden
  * queued the placeholder itself and every page after the first failed silently.
  *
  * What it asserts, per comic page:
  *  1. The content script queues the REAL page URL (console log must show an http(s)
  *     `Sending TRANSLATE_IMAGE to background: …` line — never a `data:` placeholder).
- *  2. The img ends up translated: `data-kites-translated="true"` and a `blob:` source.
+ *  2. The img ends up translated: `data-manga-garden-translated="true"` and a `blob:` source.
  *
  * Usage:
  *   npm run build                     # dist/ must contain the current manifest
@@ -22,9 +22,9 @@
  *   - devDependency `playwright-core`
  *   - A Chromium binary: either `npx playwright@<version> install chromium` (auto-used
  *     from the default ms-playwright cache), or Google Chrome installed (falls back to
- *     the `chrome` channel). Override with KITES_CHROMIUM_PATH=/path/to/chrome.
+ *     the `chrome` channel). Override with manga_garden_CHROMIUM_PATH=/path/to/chrome.
  *
- * The persistent profile (os.tmpdir()/kites-playwright-verify-profile) keeps model caches
+ * The persistent profile (os.tmpdir()/manga-garden-playwright-verify-profile) keeps model caches
  * between runs, so the second run skips the OCR download.
  */
 import { existsSync } from 'node:fs';
@@ -35,7 +35,7 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const EXTENSION_PATH = join(REPO_ROOT, 'dist');
-const PROFILE_DIR = join(tmpdir(), 'kites-playwright-verify-profile');
+const PROFILE_DIR = join(tmpdir(), 'manga-garden-playwright-verify-profile');
 
 const DEFAULT_CHAPTER_URL = 'https://roliascan.com/read/moon-slayer/ch1-324495/';
 // Generous per-page budget: a first-run job can download OCR weights before translating.
@@ -70,8 +70,8 @@ const { chromium } = playwrightCore;
  * @returns {Promise<{executablePath?: string, channel?: string}>} Launch options for chromium.
  */
 async function resolveChromium() {
-  if (process.env.KITES_CHROMIUM_PATH) {
-    return { executablePath: process.env.KITES_CHROMIUM_PATH };
+  if (process.env.manga_garden_CHROMIUM_PATH) {
+    return { executablePath: process.env.manga_garden_CHROMIUM_PATH };
   }
   const cacheRoot = process.env.PLAYWRIGHT_BROWSERS_PATH
     || join(homedir(), 'Library', 'Caches', 'ms-playwright');
@@ -111,7 +111,7 @@ function trackQueuedUrls(page) {
 
 /**
  * Scrolls the target comic page so its top edge is inside the viewport and waits for the
- * site's lazy loader to swap in the real image. Kites' translate button anchors to the
+ * site's lazy loader to swap in the real image. Manga Garden' translate button anchors to the
  * image's top-left corner, so an off-screen top means an off-screen button.
  *
  * @param {import('playwright-core').Page} page - Reader page.
@@ -146,7 +146,7 @@ async function dismissTourModal(page) {
 }
 
 /**
- * Hovers the comic page to summon Kites' hover translate button, then clicks it.
+ * Hovers the comic page to summon Manga Garden' hover translate button, then clicks it.
  *
  * @param {import('playwright-core').Page} page - Reader page.
  * @param {number} index - Zero-based comic page index.
@@ -164,13 +164,13 @@ async function clickTranslateButton(page, index) {
   // Also dispatch a synthetic mouseover to handle site backdrops reliably
   await img.dispatchEvent('mouseover', { clientX: targetX, clientY: targetY, bubbles: true, composed: true });
 
-  const button = page.locator('#kites-translate-btn');
+  const button = page.locator('#manga-garden-translate-btn');
   await button.waitFor({ state: 'visible', timeout: 6000 });
   await button.click();
 }
 
 /**
- * Waits until the comic page is translated (data-kites-translated + blob source).
+ * Waits until the comic page is translated (data-manga-garden-translated + blob source).
  *
  * @param {import('playwright-core').Page} page - Reader page.
  * @param {number} index - Zero-based comic page index.
@@ -181,7 +181,7 @@ async function waitForTranslated(page, index) {
     (i) => {
       const img = document.querySelectorAll('img.comic-image')[i];
       return !!img
-        && img.getAttribute('data-kites-translated') === 'true'
+        && img.getAttribute('data-manga-garden-translated') === 'true'
         && (img.currentSrc || '').startsWith('blob:');
     },
     index,
@@ -217,7 +217,7 @@ try {
     console.log(`[verify-roliascan] ${label}: clicked translate, waiting for completion…`);
     try {
       await waitForTranslated(page, index);
-      console.log(`[verify-roliascan] ${label}: PASS (data-kites-translated + blob src)`);
+      console.log(`[verify-roliascan] ${label}: PASS (data-manga-garden-translated + blob src)`);
     } catch (error) {
       failures += 1;
       console.error(`[verify-roliascan] ${label}: FAIL (${error.message.split('\n')[0]})`);

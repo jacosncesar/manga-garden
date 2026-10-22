@@ -1,6 +1,6 @@
 # Cloudflare Zero-Cost Worker Backend Architecture ☁️
 
-The **Kites Cloudflare Worker Backend** (`worker/`) powers the shared community translation pool (`api.12094852.xyz`). It provides high-speed, zero-cost LLM translation to extension users without requiring them to purchase or manage API keys, while strictly enforcing rate limits, quota fairness, and zero-cost operational ceilings.
+The **Manga Garden Cloudflare Worker Backend** (`worker/`) powers the shared community translation pool (`api.12094852.xyz`). It provides high-speed, zero-cost LLM translation to extension users without requiring them to purchase or manage API keys, while strictly enforcing rate limits, quota fairness, and zero-cost operational ceilings.
 
 ---
 
@@ -66,7 +66,7 @@ flowchart TD
 
 ## ⚖️ Quota Authority & SQLite Storage Optimization
 
-Cloudflare Workers Free Tier permits **100,000 SQLite writes per day**. To prevent quota exhaustion under heavy usage, Kites implements a strict **single-upsert contract**:
+Cloudflare Workers Free Tier permits **100,000 SQLite writes per day**. To prevent quota exhaustion under heavy usage, Manga Garden implements a strict **single-upsert contract**:
 
 ### 1. Rolling 24-Hour Window (100 Translations/Day)
 - Each user receives an allowance of 100 translation requests per 24 hours.
@@ -87,7 +87,7 @@ Cloudflare Workers Free Tier permits **100,000 SQLite writes per day**. To preve
 
 ## ⚡ Multi-Provider Waterfall & Resilience
 
-Different free-tier and low-cost AI providers have variable rate limits, latency spikes, and transient outages. Kites organizes providers in a declarative priority waterfall (`providers.ts`):
+Different free-tier and low-cost AI providers have variable rate limits, latency spikes, and transient outages. Manga Garden organizes providers in a declarative priority waterfall (`providers.ts`):
 
 ```mermaid
 stateDiagram-v2
@@ -112,7 +112,7 @@ When a provider returns HTTP 429 (Too Many Requests) or HTTP 5xx:
 - While in cooldown, incoming requests **bypass the broken provider instantly** ($0\text{ ms}$ overhead), eliminating cascading latency.
 
 ### 2. Token-Normalized EMA Adaptive Timeout (Phase 22)
-Fixed HTTP timeouts either cut off slow large batches or hang unnecessarily on dead providers. Kites calculates dynamic timeouts using an Exponential Moving Average (EMA) of token generation speeds:
+Fixed HTTP timeouts either cut off slow large batches or hang unnecessarily on dead providers. Manga Garden calculates dynamic timeouts using an Exponential Moving Average (EMA) of token generation speeds:
 
 $$\text{EstimatedTime} = \text{BatchTokens} \times \text{EMA}_{\text{ms/token}} + \text{BaseNetworkRTT}$$
 

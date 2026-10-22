@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Kites Comic';
+  font-family: 'Manga Garden Comic';
   src: local('SVN-Wild Words'),
        local('CC Wild Words'),
        local('HL-Wild Words'),
@@ -18,7 +18,7 @@
 }
 
 @font-face {
-  font-family: 'Kites Comic';
+  font-family: 'Manga Garden Comic';
   src: local('SVN-Wild Words Bold'),
        local('CC Wild Words Bold'),
        local('HL-Wild Words Bold'),
@@ -52,12 +52,12 @@
 }
 
 @theme {
-  /* Kites Design Tokens - Editor's Light Table */
+  /* Manga Garden palette keeps the light editor legible while echoing the blue/cyan logo. */
   --color-paper: #E4E0D9;
   --color-glass: #0B0C10;
   --color-ink: #111111;
   --color-vellum: #EFECE6;
-  --color-editorial: #D9381E;
+  --color-editorial: #087EAD;
   --color-dust: #A19F9A;
 
   --font-display: 'Cabinet Grotesk', 'Space Grotesk', 'Clash Display', sans-serif;
@@ -71,11 +71,11 @@
   --color-glass: #1A1A1A;
   --color-ink: #E0E0E0;
   --color-vellum: #1E1E1E;
-  --color-editorial: #FF2A6D;
+  --color-editorial: #22D3EE;
   --color-dust: #4A4A4A;
 }
 
-html.kites-extension-page, body.kites-extension-page {
+html.manga-garden-extension-page, body.manga-garden-extension-page {
   font-family: var(--font-body);
   background-color: var(--color-paper);
   color: var(--color-ink);
@@ -102,39 +102,39 @@ html.kites-extension-page, body.kites-extension-page {
 }
 
 /* Reusable Switch Components */
-.kites-switch {
+.manga-garden-switch {
   @apply relative inline-flex items-center rounded-full transition-colors focus:outline-none cursor-pointer;
   background-color: var(--color-dust);
 }
-.kites-switch[data-state="checked"] {
+.manga-garden-switch[data-state="checked"] {
   background-color: var(--color-editorial);
 }
-.kites-switch[data-disabled="true"] {
+.manga-garden-switch[data-disabled="true"] {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.kites-switch-thumb {
+.manga-garden-switch-thumb {
   @apply inline-block transform rounded-full bg-[var(--color-paper)] shadow transition-transform;
 }
 
 /* Medium size (Auto-Translate, Master WebGPU) */
-.kites-switch-md {
+.manga-garden-switch-md {
   @apply h-6 w-11;
 }
-.kites-switch-md .kites-switch-thumb {
+.manga-garden-switch-md .manga-garden-switch-thumb {
   @apply h-4 w-4 translate-x-1;
 }
-.kites-switch-md[data-state="checked"] .kites-switch-thumb {
+.manga-garden-switch-md[data-state="checked"] .manga-garden-switch-thumb {
   @apply translate-x-6;
 }
 
 /* Small size (WebGPU child overrides) */
-.kites-switch-sm {
+.manga-garden-switch-sm {
   @apply h-4 w-7;
 }
-.kites-switch-sm .kites-switch-thumb {
+.manga-garden-switch-sm .manga-garden-switch-thumb {
   @apply h-3 w-3 translate-x-0.5;
 }
-.kites-switch-sm[data-state="checked"] .kites-switch-thumb {
+.manga-garden-switch-sm[data-state="checked"] .manga-garden-switch-thumb {
   @apply translate-x-3.5;
 }

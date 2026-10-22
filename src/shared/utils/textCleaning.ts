@@ -408,7 +408,7 @@ export function compactSpecialSymbols(text: string): string {
  * Checks whether a font family belongs to a comic lettering font family stack.
  */
 export function isComicLetteringFont(fontFamily: string): boolean {
-  return /wild\s*words|anime\s*ace|comic\s*neue|comic\s*sans|bangers|kites\s*comic/i.test(fontFamily);
+  return /wild\s*words|anime\s*ace|comic\s*neue|comic\s*sans|bangers|Manga Garden\s*comic/i.test(fontFamily);
 }
 
 /**

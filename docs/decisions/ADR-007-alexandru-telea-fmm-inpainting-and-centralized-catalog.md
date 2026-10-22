@@ -9,7 +9,7 @@ Accepted
 ## Context
 In manga translation, erasing original Japanese text strokes prior to rendering translated dialogue is critical to prevent ink bleed-through.
 
-Historically, Kites offered an all-or-nothing trade-off:
+Historically, Manga Garden offered an all-or-nothing trade-off:
 1. **Simple Inpaint (Dominant Color Fill):** Evaluated inside-polygon luminance and filled entire convex polygons with a flat median color. While microsecond-fast with a 0MB download footprint, flat fills erased screentones, speech balloon border art, and textured backgrounds behind text.
 2. **Neural Inpainting (LaMa / AOT-GAN):** Generative deep learning models that hallucinate complex textures, but require downloading 30–100 MB of ONNX model weights and consume substantial WebGPU memory or 5–10s on WASM CPU.
 

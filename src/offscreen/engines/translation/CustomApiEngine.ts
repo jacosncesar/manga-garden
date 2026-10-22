@@ -125,8 +125,8 @@ export class CustomApiEngine extends BaseLlmTranslationEngine {
           baseURL,
           apiKey: this.config.apiKey,
           headers: {
-            'HTTP-Referer': 'https://kites.ai',
-            'X-Title': 'Kites Manga Translator',
+            'HTTP-Referer': 'https://github.com/jacosncesar/MangaLumeTwo',
+            'X-Title': 'Manga Garden Manga Translator',
           },
         });
         return customOpenAi.chat(this.config.modelName);

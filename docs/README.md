@@ -1,6 +1,6 @@
-# Central de documentação técnica do MangaLume 2.0 🪁
+# Central de documentação técnica do Manga Garden 🪁
 
-Esta é a documentação de engenharia e arquitetura do **MangaLume 2.0**. Este diretório reúne especificações do sistema, guias de algoritmos, contratos de execução, registros de decisões de arquitetura (ADRs) e fluxos de trabalho de desenvolvimento.
+Esta é a documentação de engenharia e arquitetura do **Manga Garden**. Este diretório reúne especificações do sistema, guias de algoritmos, contratos de execução, registros de decisões de arquitetura (ADRs) e fluxos de trabalho de desenvolvimento.
 
 ## 🗺️ Visão geral do sistema e ciclo do pipeline
 
@@ -38,7 +38,7 @@ flowchart TD
 
     subgraph StorageLayer["4. Armazenamento e pós-edição (db.ts e App.tsx)"]
         IndexedDB["IndexedDB com Dexie.js<br/>(fundo limpo + blocos de texto, TTL de 7 dias)"]:::storage
-        StudioApp["Estúdio MangaLume 2.0 e leitor de capítulos<br/>(máquina de estados de gestos, preenchimento e exportação ZIP)"]:::storage
+        StudioApp["Estúdio Manga Garden e leitor de capítulos<br/>(máquina de estados de gestos, preenchimento e exportação ZIP)"]:::storage
     end
 
     DOMImg --> HoverBtn
@@ -62,7 +62,7 @@ Para explorar de forma interativa e detalhada todo o algoritmo de tradução:
 
 👉 **[Abrir o fluxo interativo (`workflow.html`)](workflow.html)**
 
-- **Sem dependências:** arquivo HTML independente, gerado pelo compilador **Archify** a partir de `docs/kites-workflow.json`.
+- **Sem dependências:** arquivo HTML independente, gerado pelo compilador **Archify** a partir de `docs/manga-garden-workflow.json`.
 - **Como abrir:** execute `open docs/workflow.html` ou abra o arquivo em um navegador.
 - **Recursos:** cinco visualizações especializadas (fluxo completo, detalhes e filtros de OCR, algoritmo de busca de fontes, computação paralela de IA e armazenamento local), com painéis de inspeção interativos.
 
@@ -107,7 +107,7 @@ Para explorar de forma interativa e detalhada todo o algoritmo de tradução:
    - Categorias completas do PaddleOCR (`v6-small`, `v6-medium`, `v6-tiny`, `v5`, `v4`, `v3`)
    - Modelos de preenchimento: LaMa Manga (Fast Fourier Convolutions), AOT-GAN (Contextual Transformations) e Simple Adaptive Polarity
    - Mecanismos de tradução: WebLLM (MLC-AI WebGPU), pool compartilhado Cloudflare, Google Translate e API personalizada
-   - Cache API persistente do navegador (`kites-model-cache`) e progresso monotônico de downloads
+   - Cache API persistente do navegador (`manga-garden-model-cache`) e progresso monotônico de downloads
 
 ---
 

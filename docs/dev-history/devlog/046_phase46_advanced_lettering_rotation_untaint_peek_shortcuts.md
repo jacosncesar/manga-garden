@@ -2,14 +2,14 @@
 
 ### 1. Metadata
 * **Date:** 2026-10-15
-* **Feature/Task:** Implement high-ROI scanlation lettering and reader capabilities into Kites without architectural bloat (features 1 to 7)
+* **Feature/Task:** Implement high-ROI scanlation lettering and reader capabilities into Manga Garden without architectural bloat (features 1 to 7)
 * **Ticket/Issue:** N/A (Solo Architectural Milestone)
 * **Status:** Completed
 
 ---
 
 ### 2. The Objective (The "Why")
-Commercial web extension donor patterns v2.22.6 introduced several usability improvements across web extensions and manga editing. While legacy commercial tools implemented these features in a single 26,789-line monolithic `content.js`, Kites requires modular, maintainable, single-responsibility components with strict test coverage and zero regression on existing local WebGPU pipelines.
+Commercial web extension donor patterns v2.22.6 introduced several usability improvements across web extensions and manga editing. While legacy commercial tools implemented these features in a single 26,789-line monolithic `content.js`, Manga Garden requires modular, maintainable, single-responsibility components with strict test coverage and zero regression on existing local WebGPU pipelines.
 
 The goal was to implement:
 1. Pure local-coordinate projection math for rotating and resizing dialogue boxes in Studio.

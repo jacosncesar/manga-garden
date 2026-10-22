@@ -98,7 +98,7 @@ async function run() {
       <div class="overlay">
         <div class="brand">
           <img src="${iconImg}" />
-          <span class="brand-name">Kites</span>
+          <span class="brand-name">Manga Garden</span>
         </div>
         <div class="tagline">Spatial In-Browser Manga Translator</div>
         <div class="subtag">100% Local-First • WebGPU AI • Zero Cost</div>

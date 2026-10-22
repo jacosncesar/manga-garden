@@ -2,7 +2,7 @@
  * Cache manager for neural speech bubble detector ONNX models using the browser Cache API.
  */
 export class BubbleCacheManager {
-  private static CACHE_NAME = 'kites-bubble-models-v1';
+  private static CACHE_NAME = 'manga-garden-bubble-models-v1';
 
   /**
    * Checks if a bubble detector model exists in the Cache API.

@@ -9,7 +9,7 @@
 ---
 
 ### 2. Objective
-Allow users to easily disable Kites on specific domains with a single click in the popup (e.g. social media, banking, or non-manga sites), while running everywhere by default. Additionally, support custom CSS image selectors per domain (with built-in manga reader container heuristics ported from XianScan) to cleanly target chapter strips and avoid banner ads on tricky reader websites.
+Allow users to easily disable Manga Garden on specific domains with a single click in the popup (e.g. social media, banking, or non-manga sites), while running everywhere by default. Additionally, support custom CSS image selectors per domain (with built-in manga reader container heuristics ported from XianScan) to cleanly target chapter strips and avoid banner ads on tricky reader websites.
 
 ---
 

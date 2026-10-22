@@ -27,7 +27,7 @@ export const fontRegistry: Record<string, RenderFontPreset> = {
   'comic': {
     id: 'comic',
     label: 'Wild Words',
-    fontFamily: '"Kites Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif',
+    fontFamily: '"Manga Garden Comic", "SVN-Wild Words", "CC Wild Words", "HL-Wild Words", "VNF-Wild Words", "MTO COMIC 1", cursive, sans-serif',
     description: 'Authentic manga dialogue font'
   },
   'anime-ace': {

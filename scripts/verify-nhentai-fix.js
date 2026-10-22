@@ -4,7 +4,7 @@
  * Verifies that on a paginated manga reader (nhentai /g/123/1/):
  * 1. The image is detected and hover button appears.
  * 2. Clicking Translate successfully translates and REPLACES img.src immediately with blob URL.
- * 3. data-kites-translated="true" is present immediately on first pass (WITHOUT clicking Eye).
+ * 3. data-manga-garden-translated="true" is present immediately on first pass (WITHOUT clicking Eye).
  * 4. The 3 finished action buttons appear (Eye, Download, Studio).
  * 5. Toggling the Eye icon works to show original and switch back to translated.
  */
@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const EXTENSION_PATH = join(REPO_ROOT, 'dist');
-const PROFILE_DIR = join(tmpdir(), 'kites-nhentai-verify-profile');
+const PROFILE_DIR = join(tmpdir(), 'manga-garden-nhentai-verify-profile');
 
 const DEFAULT_URL = 'https://nhentai.net/g/688293/1/';
 
@@ -28,8 +28,8 @@ if (!existsSync(join(EXTENSION_PATH, 'manifest.json'))) {
 const { chromium } = await import('playwright-core');
 
 async function resolveChromium() {
-  if (process.env.KITES_CHROMIUM_PATH) {
-    return { executablePath: process.env.KITES_CHROMIUM_PATH };
+  if (process.env.manga_garden_CHROMIUM_PATH) {
+    return { executablePath: process.env.manga_garden_CHROMIUM_PATH };
   }
   const cacheRoot = process.env.PLAYWRIGHT_BROWSERS_PATH
     || join(homedir(), 'Library', 'Caches', 'ms-playwright');
@@ -52,7 +52,7 @@ async function resolveChromium() {
 }
 
 const launchOptions = await resolveChromium();
-console.log(`[verify-nhentai] Launching Chromium (${launchOptions.executablePath || launchOptions.channel}) with Kites extension...`);
+console.log(`[verify-nhentai] Launching Chromium (${launchOptions.executablePath || launchOptions.channel}) with Manga Garden extension...`);
 
 const context = await chromium.launchPersistentContext(PROFILE_DIR, {
   headless: false,
@@ -105,7 +105,7 @@ await imgLocator.waitFor({ state: 'visible', timeout: 15000 });
 const initialSrc = await imgLocator.getAttribute('src');
 console.log('[verify-nhentai] Initial image src:', initialSrc);
 
-// Scroll image top into view so Kites anchor button is visible
+// Scroll image top into view so Manga Garden anchor button is visible
 await page.evaluate(() => {
   const img = document.querySelector('#image-container img');
   if (img) img.scrollIntoView({ block: 'center' });
@@ -126,9 +126,9 @@ await imgLocator.dispatchEvent('mouseover', {
 });
 
 // Wait for translate button
-const translateBtn = page.locator('#kites-translate-btn');
+const translateBtn = page.locator('#manga-garden-translate-btn');
 await translateBtn.waitFor({ state: 'visible', timeout: 10000 });
-console.log('[verify-nhentai] Kites Translate button visible.');
+console.log('[verify-nhentai] Manga Garden Translate button visible.');
 
 // Click Translate
 console.log('[verify-nhentai] Clicking Translate Image button...');
@@ -140,7 +140,7 @@ await page.waitForFunction(
   () => {
     const img = document.querySelector('#image-container img');
     return (
-      img?.getAttribute('data-kites-translated') === 'true' &&
+      img?.getAttribute('data-manga-garden-translated') === 'true' &&
       (img?.getAttribute('src')?.startsWith('blob:') || img?.currentSrc?.startsWith('blob:'))
     );
   },
@@ -148,24 +148,24 @@ await page.waitForFunction(
 );
 
 const replacedSrc = await imgLocator.getAttribute('src');
-const isTranslatedAttr = await imgLocator.getAttribute('data-kites-translated');
+const isTranslatedAttr = await imgLocator.getAttribute('data-manga-garden-translated');
 console.log('[verify-nhentai] SUCCESS! Image replaced immediately on first pass:');
-console.log('  data-kites-translated:', isTranslatedAttr);
+console.log('  data-manga-garden-translated:', isTranslatedAttr);
 console.log('  replaced src:', replacedSrc);
 
 if (!replacedSrc?.startsWith('blob:')) {
   throw new Error(`FAIL: Image src was not replaced with blob URL: ${replacedSrc}`);
 }
 if (isTranslatedAttr !== 'true') {
-  throw new Error(`FAIL: data-kites-translated is not true: ${isTranslatedAttr}`);
+  throw new Error(`FAIL: data-manga-garden-translated is not true: ${isTranslatedAttr}`);
 }
 
 // Verify finished action buttons appear
-const finishedActions = page.locator('[data-kites-finished-actions="true"]');
+const finishedActions = page.locator('[data-manga-garden-finished-actions="true"]');
 await finishedActions.waitFor({ state: 'visible', timeout: 5000 });
-const toggleBtn = page.locator('[data-kites-toggle-btn="true"]');
-const downloadBtn = page.locator('[data-kites-download-btn="true"]');
-const editBtn = page.locator('[data-kites-edit-btn="true"]');
+const toggleBtn = page.locator('[data-manga-garden-toggle-btn="true"]');
+const downloadBtn = page.locator('[data-manga-garden-download-btn="true"]');
+const editBtn = page.locator('[data-manga-garden-edit-btn="true"]');
 
 if (!(await toggleBtn.isVisible())) throw new Error('FAIL: Eye toggle button missing');
 if (!(await downloadBtn.isVisible())) throw new Error('FAIL: Download button missing');

@@ -1,6 +1,6 @@
 # Translation Pipeline & Algorithm Guide 📐
 
-This document provides a comprehensive technical walkthrough of Kites' 5-stage spatial comic translation pipeline.
+This document provides a comprehensive technical walkthrough of Manga Garden' 5-stage spatial comic translation pipeline.
 
 > 💡 **Want to explore interactively?** Open [`docs/workflow.html`](../workflow.html) for an explorable architecture diagram with inspectable parameters and formula cards.
 
@@ -60,7 +60,7 @@ flowchart LR
 #### 1. Automatic 1D Vertical Tiling for Tall Webtoons
 Modern webtoons (Naver, Kakao, Webtoon, Bilibili) are rendered as tall stitched image strips often reaching 10,000–30,000 pixels in height. Processing these full-canvas causes GPU memory crashes or squashes aspect ratios into illegibility.
 
-When an image height exceeds `2500 px` ($H \ge 2500$), Kites activates **1D in-memory canvas tiling**:
+When an image height exceeds `2500 px` ($H \ge 2500$), Manga Garden activates **1D in-memory canvas tiling**:
 - **Tile Dimensions:** Sliding window of height $H_{\text{tile}} = 1000\text{ px}$ with step size $S = 700\text{ px}$, creating an overlap zone of $300\text{ px}$.
 - **Local OCR Inference:** Each slice is cropped onto a reusable offscreen canvas and recognized independently.
 - **Coordinate Re-projection:** Polygon coordinates $(x, y)$ are projected back to full-page coordinates by adding the tile's vertical offset $Y_{\text{offset}}$.
@@ -82,7 +82,7 @@ When an image height exceeds `2500 px` ($H \ge 2500$), Kites activates **1D in-m
 
 ### Stage 2: Geometric Filtering & Kruskal-MST Grouping (`OcrManager.ts` & `textCleaning.ts`)
 
-Raw OCR detection contains noise from artwork cross-hatching, screentones, watermark URLs, and sound effects. Kites runs a multi-stage filtering and grouping pipeline ported from Cotrans and XianScan.
+Raw OCR detection contains noise from artwork cross-hatching, screentones, watermark URLs, and sound effects. Manga Garden runs a multi-stage filtering and grouping pipeline ported from Cotrans and XianScan.
 
 #### 1. The 14-Stage Noise Filtering Battery
 1. **Micro-Box Rejection:** Drops boxes with width or height $< 10\text{ px}$ unless high-confidence dialogue.
@@ -138,7 +138,7 @@ After clustering, bubbles across the entire page must be sequenced logically so 
 
 All inpainting engines are registered in the canonical **Centralized Inpaint Catalog** (`src/shared/inpaintTiers.ts`), which acts as the single source of truth across the entire codebase.
 
-For stroke-level text erasure without neural hallucination, Kites runs the **Binarizer** (`src/offscreen/engines/inpaint/Binarizer.ts`):
+For stroke-level text erasure without neural hallucination, Manga Garden runs the **Binarizer** (`src/offscreen/engines/inpaint/Binarizer.ts`):
 1. **Grayscale & Luminance:** Converts local crops to grayscale using perceived luminance ($Y = 0.299R + 0.587G + 0.114B$).
 2. **Polarity Detection:** Samples outer border pixels to determine background paper color.
 3. **Otsu Adaptive Thresholding:** Dynamically calculates the optimal bimodal threshold to separate text ink from paper.
@@ -205,7 +205,7 @@ flowchart TD
 ```
 
 #### 1. Keyed JSON Protocol
-Historical delimiter tagging (`⟦0⟧ dialogue ⟦1⟧`) suffered from model delimiter hallucination, dropped brackets, and delimiter collisions. Kites implements the **Keyed JSON Protocol**:
+Historical delimiter tagging (`⟦0⟧ dialogue ⟦1⟧`) suffered from model delimiter hallucination, dropped brackets, and delimiter collisions. Manga Garden implements the **Keyed JSON Protocol**:
 - Text segments are structured into a numbered JSON payload:
   ```json
   {
@@ -221,14 +221,14 @@ Historical delimiter tagging (`⟦0⟧ dialogue ⟦1⟧`) suffered from model de
 - Batches are clamped to `DEFAULT_LLM_BATCH_SIZE = 15` segments to prevent small on-device models from dropping lines.
 
 #### 3. Resilient Waterfall Fallback Chain
-If the primary translation engine fails (rate limit, out of memory, network drop), Kites automatically falls back through the user's configured chain:
+If the primary translation engine fails (rate limit, out of memory, network drop), Manga Garden automatically falls back through the user's configured chain:
 $$\text{WebLLM} \longrightarrow \text{Cloudflare Shared Pool} \longrightarrow \text{Google Translate} \longrightarrow \text{Custom API}$$
 
 ---
 
 ### Stage 5: Bubble Container Extraction & Layout Resolution (`BubbleLayoutService.ts`)
 
-To prevent narrow vertical CJK text lines ($20-30\text{ px}$) from forcing horizontal English translations to collapse into tiny unreadable $5-7\text{ px}$ fonts, Kites incorporates the **Speech Bubble Detection & Layout Subsystem**:
+To prevent narrow vertical CJK text lines ($20-30\text{ px}$) from forcing horizontal English translations to collapse into tiny unreadable $5-7\text{ px}$ fonts, Manga Garden incorporates the **Speech Bubble Detection & Layout Subsystem**:
 
 ```mermaid
 flowchart TD
@@ -287,7 +287,7 @@ flowchart TD
 ```
 
 #### 1. Background Color Sampling (XianScan `color.ts` Port)
-Before drawing text, Kites inspects the local pixel neighborhood around the bubble polygon:
+Before drawing text, Manga Garden inspects the local pixel neighborhood around the bubble polygon:
 - Samples RGB values outside the text polygon but inside the speech bubble boundary.
 - Calculates perceived luminance:
   $$Y = 0.299R + 0.587G + 0.114B$$

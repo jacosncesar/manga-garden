@@ -98,7 +98,7 @@ Investigate an additional optional segmentation tier, distinct from the existing
 
 The output is a segmentation mask after decoding, **not a direct safe inner rectangle**. NMS, mask reconstruction/cropping, coordinate mapping, and conservative usable-interior derivation would be separate work. The component-enclosing AABB from today's heuristic and the outer AABB of a future mask do not guarantee an inscribed typesetting area.
 
-Local quality, browser/ONNX Runtime Web compatibility, end-to-end latency, and license/provenance are **not verified yet**. Upstream model-card accuracy, native timing figures, or license labels must not be presented as Kites validation or permission to redistribute. Any future integration requires representative-page evaluation, target-browser/provider testing, measured load/inference/decoding/layout cost, and review of the original weights, export, dependencies, and dataset terms.
+Local quality, browser/ONNX Runtime Web compatibility, end-to-end latency, and license/provenance are **not verified yet**. Upstream model-card accuracy, native timing figures, or license labels must not be presented as Manga Garden validation or permission to redistribute. Any future integration requires representative-page evaluation, target-browser/provider testing, measured load/inference/decoding/layout cost, and review of the original weights, export, dependencies, and dataset terms.
 
 ### B. Curved Ownership & Layout Research
 

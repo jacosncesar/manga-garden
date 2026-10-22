@@ -54,7 +54,7 @@ async function runTest() {
   await new Promise((resolve) => server.listen(3456, resolve));
   console.log('[Test] Local server listening on http://127.0.0.1:3456');
 
-  console.log('[Test] Launching Chrome with unpacked Kites extension...');
+  console.log('[Test] Launching Chrome with unpacked Manga Garden extension...');
   const browser = await puppeteer.launch({
     headless: false,
     args: [
@@ -92,7 +92,7 @@ async function runTest() {
     await new Promise((r) => setTimeout(r, 1000));
 
     // Verify translate button appears
-    const translateBtn = await page.$('#kites-translate-btn');
+    const translateBtn = await page.$('#manga-garden-translate-btn');
     if (!translateBtn) {
       throw new Error('Translate button did not appear on hover!');
     }
@@ -118,9 +118,9 @@ async function runTest() {
     await new Promise((r) => setTimeout(r, 1000));
 
     // Check if finished actions cluster appeared
-    const toggleBtn = await page.$('[data-kites-toggle-btn="true"]');
-    const downloadBtn = await page.$('[data-kites-download-btn="true"]');
-    const editBtn = await page.$('[data-kites-edit-btn="true"]');
+    const toggleBtn = await page.$('[data-manga-garden-toggle-btn="true"]');
+    const downloadBtn = await page.$('[data-manga-garden-download-btn="true"]');
+    const editBtn = await page.$('[data-manga-garden-edit-btn="true"]');
 
     if (!toggleBtn || !downloadBtn || !editBtn) {
       console.log('Finished buttons status:', {

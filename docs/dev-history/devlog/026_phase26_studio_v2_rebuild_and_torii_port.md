@@ -1,4 +1,4 @@
-# Devlog 026: Phase 26 — Kites Studio V2 Rebuild & Canvas Architecture Port
+# Devlog 026: Phase 26 — Manga Garden Studio V2 Rebuild & Canvas Architecture Port
 
 **Date:** 2026-10-12  
 **Branch:** `feat/studio-editor-v2-rebuild`  
@@ -8,13 +8,13 @@
 
 ## 1. Context & Motivation
 
-The original Kites Studio (`src/App.tsx`) was created in Phase 11 as a minimal review dashboard. While sufficient for inspecting baked outputs, it lacked core creative manga editing capabilities:
+The original Manga Garden Studio (`src/App.tsx`) was created in Phase 11 as a minimal review dashboard. While sufficient for inspecting baked outputs, it lacked core creative manga editing capabilities:
 - **No Undo/Redo (`Ctrl+Z` / `Ctrl+Shift+Z`):** Erroneous box drags, text modifications, or deletions could not be reversed.
 - **Flawed Canvas Navigation:** Mouse wheel events unconditionally zoomed the viewport instead of scrolling vertically; panning required awkward buttons.
 - **Zero Raster Editing:** Could not fix imperfect inpainting or paint custom patches.
 - **Restricted Typography:** Lacked CJK vertical text layout, outline stroke drop shadows, gradients, and 4-point perspective warp.
 
-By auditing the **Koharu Manga Editor** (`v0.83.5`) and modern Canvas 2D editing architectures, we designed a modular, production-grade Studio V2 for Kites while keeping it 100% client-side and free of remote credit walls.
+By auditing the **Koharu Manga Editor** (`v0.83.5`) and modern Canvas 2D editing architectures, we designed a modular, production-grade Studio V2 for Manga Garden while keeping it 100% client-side and free of remote credit walls.
 
 ---
 
@@ -23,9 +23,9 @@ By auditing the **Koharu Manga Editor** (`v0.83.5`) and modern Canvas 2D editing
 ### 2.1 The Privacy Boundary: Local WebGPU vs. Cloud API
 In typical cloud translation editors, live inpaint and live re-OCR operations crop small bounding boxes and POST them to a cloud endpoint, consuming paid user credits.
 
-In Kites Studio V2:
+In Manga Garden Studio V2:
 - The editor crops the exact same tight padded bounding box (e.g. 150×150 px).
-- The patch is dispatched via Chrome Extension runtime messaging (`STUDIO_INPAINT` / `STUDIO_OCR`) through `background` to Kites' local **Offscreen Document**.
+- The patch is dispatched via Chrome Extension runtime messaging (`STUDIO_INPAINT` / `STUDIO_OCR`) through `background` to Manga Garden' local **Offscreen Document**.
 - Local WebGPU inference runs our optimized **LaMa** dynamic 64px bucket model and **PaddleOCR v6**, executing in <80ms with 100% client-side privacy, zero cloud dependency, and zero credit cost.
 
 ### 2.2 Bounded Dirty-Rect Undo/Redo
@@ -95,7 +95,7 @@ src/studio/
    - Retained Cotrans-typeset wrapped lines (`b.lines`) from Dexie database with automatic multi-line word-wrapping fallback.
 
 4. **Brand Tone & Palette Alignment:**
-   - Replaced generic colors with Kites official signature Hot Rose / Strawberry Pink `#f4446d` (RGB: 244, 68, 109) across active tool highlights, action pills, sliders, and badges over dark matte obsidian (`#090a0f`, `#121212`, `#18181b`).
+   - Replaced generic colors with Manga Garden official signature Hot Rose / Strawberry Pink `#f4446d` (RGB: 244, 68, 109) across active tool highlights, action pills, sliders, and badges over dark matte obsidian (`#090a0f`, `#121212`, `#18181b`).
 
 ---
 
@@ -118,21 +118,21 @@ src/studio/
 Implemented finished-state controls in `src/content/index.tsx` (`TranslateButton`):
 - **State Memory (`translatedRegistry`):** Tracks each translated image's canonical original URL, safe blob URL, and database `jobId`. Even after navigating or moving the cursor away, re-hovering remembers that the image is translated.
 - **Action Cluster:** When translated, the control cluster seamlessly expands with three utility buttons alongside the primary toggle button:
-  1. **Toggle Original / Translated (`data-kites-toggle-btn`):** Switches between showing the translated artwork and previewing the raw original foreign text (`toggleImageDisplay`).
-  2. **Download Image (`data-kites-download-btn`):** Immediately triggers client-side download of the translated image blob without network round-trips.
-  3. **Edit in Studio (`data-kites-edit-btn`):** Directly opens the Studio tab (`index.html?jobId=${jobId}` via `OPEN_DASHBOARD`), automatically selecting that exact translated image from Dexie for editing.
+  1. **Toggle Original / Translated (`data-manga-garden-toggle-btn`):** Switches between showing the translated artwork and previewing the raw original foreign text (`toggleImageDisplay`).
+  2. **Download Image (`data-manga-garden-download-btn`):** Immediately triggers client-side download of the translated image blob without network round-trips.
+  3. **Edit in Studio (`data-manga-garden-edit-btn`):** Directly opens the Studio tab (`index.html?jobId=${jobId}` via `OPEN_DASHBOARD`), automatically selecting that exact translated image from Dexie for editing.
 
 ### 6.2 Reversion Shield Coexistence
-To prevent modern SPA frameworks (Twitter/X, Reddit, Threads) or Kites' own MutationObserver shield from mistaking a user's intentional "Show Original" preview for a hostile DOM reset:
-- Sets `data-kites-show-original="true"` on the source and surface elements.
-- `attachReversionShield` explicitly checks `img.getAttribute('data-kites-show-original') === 'true'` and ignores mutations while previewing original artwork, cleanly restoring full protection when toggled back to translated.
+To prevent modern SPA frameworks (Twitter/X, Reddit, Threads) or Manga Garden' own MutationObserver shield from mistaking a user's intentional "Show Original" preview for a hostile DOM reset:
+- Sets `data-manga-garden-show-original="true"` on the source and surface elements.
+- `attachReversionShield` explicitly checks `img.getAttribute('data-manga-garden-show-original') === 'true'` and ignores mutations while previewing original artwork, cleanly restoring full protection when toggled back to translated.
 
 ---
 
 ## 7. In-Studio Multi-Tier Engine Selection & Global/Local Sync
 
 ### 7.1 Architecture & Parity with Extension Popup
-Unlike single-model cloud systems, Kites incorporates multi-tier local and WebGPU engines directly selectable inside Studio:
+Unlike single-model cloud systems, Manga Garden incorporates multi-tier local and WebGPU engines directly selectable inside Studio:
 - **Inpaint Tiers:** `Simple Fill` (fast color), `Telea Diffusion` (fast diffusion), `LaMa Manga` (neural dynamic patch, ~50MB), `AOT-GAN` (neural high-detail, ~60MB), and `None (Bypass)`.
 - **OCR Tiers:** `PaddleOCR v6 Small` (~4MB), `v6 Medium` (~8MB), `v6 Tiny` (~2MB), `v5 Mobile` (~4MB), and `v5 Server` (~20MB).
 

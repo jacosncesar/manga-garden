@@ -300,7 +300,7 @@ export function orderChapterImages(records: Iterable<ChapterImageRecord>, source
     if (record.sourcePage !== sourcePage || !record.translatedUrl) continue;
     // A recycled element belongs to its new page. Never refresh the archived page from that slot.
     const live = record.surfaceElement?.isConnected &&
-      record.sourceElement?.getAttribute('data-kites-applied-src') === record.translatedUrl;
+      record.sourceElement?.getAttribute('data-manga-garden-applied-src') === record.translatedUrl;
     const position = live ? captureChapterPosition(record.surfaceElement, sourcePage, record.sequence) : null;
     unique.set(record.originalUrl, {
       ...record,

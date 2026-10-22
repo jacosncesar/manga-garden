@@ -1,6 +1,6 @@
 # Architectural Workarounds & Upstream Library Mitigations
 
-This document preserves the complete technical background, rationale, and implementation details for non-obvious workarounds across the Kites codebase. Always consult this document before attempting to refactor or "clean up" non-standard patterns marked with `WORKAROUND` or `HACK`.
+This document preserves the complete technical background, rationale, and implementation details for non-obvious workarounds across the Manga Garden codebase. Always consult this document before attempting to refactor or "clean up" non-standard patterns marked with `WORKAROUND` or `HACK`.
 
 ---
 
@@ -12,7 +12,7 @@ This document preserves the complete technical background, rationale, and implem
 
 * **Do not rename `build.rollupOptions` to `build.rolldownOptions` in `vite.config.ts` yet:**
   Vite 8 accepts and internally aliases the deprecated `build.rollupOptions` key, but `@crxjs/vite-plugin` 2.7.1 inspects the raw `build.rollupOptions` key to discover extra HTML entry points. Using only `rolldownOptions` omits `src/offscreen/offscreen.html` and `index.html` from CRXJS dev dependency discovery. Vite can then re-optimize dependencies while Chrome is registering the MV3 service worker, returning `504 Outdated Optimize Dep` and making Chrome fail registration with status code 3.
-* **Keep explicit `optimizeDeps.entries` for every Kites runtime entry:**
+* **Keep explicit `optimizeDeps.entries` for every Manga Garden runtime entry:**
   Entries include `popup.html`, `index.html`, `src/offscreen/offscreen.html`, `src/content/index.tsx`, and `src/background/index.ts`. These entries force cold-start dependency discovery before the extension requests modules.
 * **Keep Node/native packages in both `optimizeDeps.exclude` and `build.rollupOptions.external`:**
   Packages: `ppu-paddle-ocr`, `ppu-paddle-ocr/node`, `@napi-rs/canvas`, `@napi-rs/canvas-darwin-arm64`, `canvas`, and `onnxruntime-node`. Without these exclusions, Rolldown may attempt to parse native `.node` binaries as UTF-8 and bundle the desktop/OpenCV fallback into the browser extension.
@@ -51,11 +51,11 @@ This document preserves the complete technical background, rationale, and implem
 **Related Devlog:** [`014_phase14_spa_image_replacement_and_xianscan_pattern.md`](file:///Users/dangtruongan/study/Kites/docs/dev-history/devlog/014_phase14_spa_image_replacement_and_xianscan_pattern.md)
 
 * **Always wipe `srcset` when updating `src`:**
-  Per the W3C HTML5 specification, when an `<img>` has a non-empty `srcset` attribute, the browser rendering engine prioritizes `srcset` candidates over `src`. Setting `targetImg.src` alone leaves the original image visible on modern responsive sites (Twitter, Reddit, MangaDex). Always backup `data-kites-orig-srcset`, set `targetImg.srcset = ''`, and call `targetImg.removeAttribute('srcset')`.
+  Per the W3C HTML5 specification, when an `<img>` has a non-empty `srcset` attribute, the browser rendering engine prioritizes `srcset` candidates over `src`. Setting `targetImg.src` alone leaves the original image visible on modern responsive sites (Twitter, Reddit, MangaDex). Always backup `data-manga-garden-orig-srcset`, set `targetImg.srcset = ''`, and call `targetImg.removeAttribute('srcset')`.
 * **Convert Base64 Data URLs to Same-Origin Blob URLs:**
   Do not assign multi-megabyte `data:image/png;base64,...` strings directly to `img.src`. Use `URL.createObjectURL(blob)` via `createSafeBlobUrlFromData()`. This prevents DOM memory bloat, avoids strict host-page CSP rejections (e.g. `img-src` omitting `data:`), and revokes cleanly on tab unload.
 * **Guard Against SPA Virtual DOM Reconciliation:**
-  In SPAs (React Native for Web on x.com, Reddit, Threads), framework reconciliation compares real DOM against virtual DOM props and reverts manual DOM mutations on hover, scroll, or re-render. Attach a targeted `MutationObserver` (`attachReversionShield`) that intercepts `src` and `srcset` resets, immediately restoring `data-kites-applied-src`.
+  In SPAs (React Native for Web on x.com, Reddit, Threads), framework reconciliation compares real DOM against virtual DOM props and reverts manual DOM mutations on hover, scroll, or re-render. Attach a targeted `MutationObserver` (`attachReversionShield`) that intercepts `src` and `srcset` resets, immediately restoring `data-manga-garden-applied-src`.
 * **Use `isSelfMutating` Flags:**
   When performing programmatic DOM updates (`src`, `srcset`, lazy attributes), wrap them in `runSelfMutation(() => { ... })` with an `isSelfMutating` flag. This prevents internal content-script observers from catching their own mutations and triggering infinite loops.
 * **Normalize CDN Base URLs for Element Lookup:**
@@ -133,7 +133,7 @@ This document preserves the complete technical background, rationale, and implem
 **Related Devlog:** [`041_phase41_webgpu_performance_audit_and_optimization_invariants.md`](file:///Users/dangtruongan/study/Kites/docs/dev-history/devlog/041_phase41_webgpu_performance_audit_and_optimization_invariants.md)
 
 * **Do not add `requiredLimits` to vision models:**
-  WebGPU's default 128 MB storage buffer and 256 MB buffer limits easily accommodate Kites' sliced vision patches (text strips ~3 MB, LaMa 64px buckets ~1–8 MB, YOLO 640×640 ~5 MB). Unclamping limits gives zero speed gain. WebLLM automatically requests adapter limits internally in TVM.
+  WebGPU's default 128 MB storage buffer and 256 MB buffer limits easily accommodate Manga Garden' sliced vision patches (text strips ~3 MB, LaMa 64px buckets ~1–8 MB, YOLO 640×640 ~5 MB). Unclamping limits gives zero speed gain. WebLLM automatically requests adapter limits internally in TVM.
 * **Do not expect `subgroups` to accelerate vision models:**
   `onnxruntime-web` (JSEP) has no subgroup kernels for spatial 2D convolutions (`Conv2d`). Subgroups are active and automated in WebLLM (`sg32`), but provide 0% gain for PaddleOCR and LaMa.
 * **Never force `preferredLayout: 'NHWC'` on NCHW vision models:**
