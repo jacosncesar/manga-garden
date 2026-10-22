@@ -240,6 +240,7 @@ Este projeto agradece às iniciativas de código aberto que tornaram seu desenvo
 - **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** arquiteturas de preenchimento por blocos dinâmicos e filtros de ruído de OCR.
 - **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** modelos de alta velocidade para detecção de texto.
 - **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** ambiente WebGPU nativo do navegador para modelos de linguagem grandes.
+- Agradecimento especial a [**Unheat**An Dang](https://github.com/Unheat).
 
 ---
 
