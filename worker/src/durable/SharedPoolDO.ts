@@ -24,9 +24,7 @@ const MIN_TIMEOUT_MS = 2000;
 const MAX_TIMEOUT_MS = 6000;
 const MAX_TOTAL_WATERFALL_MS = 12_500;
 
-export class SharedPoolDO extends DurableObject {
-  private env: Env;
-  
+export class SharedPoolDO extends DurableObject<Env> {
   // In-memory cache to minimize SQLite reads
   private userQuotaCache = new Map<string, UserQuotaRecord>();
   
@@ -42,7 +40,6 @@ export class SharedPoolDO extends DurableObject {
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
-    this.env = env;
     this.initSqlite();
     this.loadProviderMetrics();
     this.initDayCounter();

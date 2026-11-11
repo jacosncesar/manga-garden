@@ -34,7 +34,14 @@ export async function executeWorkersAI(
   }
 
   // Extract prompt text from last user message
-  const userMsg = request.messages.findLast((m) => m.role === 'user')?.content || '';
+  let userMsg = '';
+  for (let index = request.messages.length - 1; index >= 0; index--) {
+    const message = request.messages[index];
+    if (message.role === 'user') {
+      userMsg = message.content;
+      break;
+    }
+  }
 
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeoutPromise = new Promise<never>((_, reject) => {
