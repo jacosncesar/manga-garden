@@ -31,6 +31,7 @@
     'Open navigation menu': 'Abrir menu de navegação',
     'Close navigation menu': 'Fechar menu de navegação',
     'Temporarily unavailable': 'Temporariamente indisponível',
+    'Unavailable': 'Indisponível',
     'Chrome Web Store · Temporarily unavailable': 'Chrome Web Store · temporariamente indisponível',
     'Chrome Web Store Listing · Temporarily unavailable': 'Página da Chrome Web Store · temporariamente indisponível',
     'GitHub ⭐': 'GitHub ⭐',
