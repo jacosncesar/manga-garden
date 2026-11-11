@@ -124,6 +124,8 @@ graph TB
 
 👉 *Detailed guide: [`docs/architecture/pipeline.md`](pipeline.md)*
 
+👉 *End-to-end application map, external API calls, available translators and quotas: [`docs/architecture/application-flow-map.md`](application-flow-map.md)*
+
 ---
 
 ### 4. Local Database & Clean Plate Storage (`src/db.ts`)
@@ -135,10 +137,8 @@ graph TB
 
 ### 5. Cloudflare Zero-Cost Worker Backend (`worker/`)
 - **API Gateway (`api.12094852.xyz`):** An edge-hosted translation proxy enabling shared community AI access without requiring users to purchase API keys.
-- **Durable Objects with SQLite:** Enforces daily user quotas (e.g. 50 pages/day) and sliding-window rate limits per Google account.
-- **Resilient Multi-Provider Waterfall:**
-  $$\text{Groq} \longrightarrow \text{Mistral} \longrightarrow \text{Google AI Studio} \longrightarrow \text{Cloudflare Workers AI}$$
-  If one provider experiences downtime or rate limits (HTTP 429), the Worker automatically cascades to the next provider within milliseconds.
+- **Durable Objects with SQLite:** Enforces a rolling quota of 100 translation requests per user per 24 hours (not 100 pages) and a global daily safety ceiling.
+- **Resilient Multi-Provider Waterfall:** The Worker tries its nine enabled upstream routes in configured priority order and continues after provider errors or rate limits. The exact current order is documented in [`docs/architecture/application-flow-map.md`](application-flow-map.md).
 
 👉 *Detailed guide: [`docs/architecture/backend-worker.md`](backend-worker.md)*
 

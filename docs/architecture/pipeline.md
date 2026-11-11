@@ -193,14 +193,13 @@ Translation runs concurrently with inpainting via `Promise.all`:
 flowchart TD
     RawTexts["Grouped Dialogue Array<br/>[b0, b1, ..., bN]"] --> FilterPassthrough{"Deterministic Filter<br/>(Empty, Punctuation, Ellipsis)"}
     FilterPassthrough -->|Instant| ReturnSame["Pass Through Unchanged"]
-    FilterPassthrough -->|Needs LLM| Batching["Batching (Max 15 per prompt)"]
+    FilterPassthrough -->|Needs translation| Batching["Engine-specific batching"]
     Batching --> Waterfall{"Engine Waterfall"}
-    Waterfall -->|1st Choice| WebLLM["WebLLM (Local WebGPU)"]
-    Waterfall -->|Fallback 1| CloudPool["Cloudflare Shared Pool"]
-    Waterfall -->|Fallback 2| Google["Google Translate API"]
-    Waterfall -->|Fallback 3| CustomAPI["Custom API (OpenAI/Claude/Gemini)"]
-    Waterfall --> JSONParser["Keyed JSON Protocol Parser"]
-    JSONParser --> CleanFormatting["Strip Markdown Decorators"]
+    Waterfall -->|Primary selected by user| Primary["Selected Translation Engine"]
+    Primary -->|On error, if configured| Fallback["User-configured fallbackChain, in order"]
+    Primary -->|Success| Parse["Engine-specific response parsing/alignment"]
+    Fallback --> Parse
+    Parse --> CleanFormatting["Clean response formatting"]
     CleanFormatting --> TranslatedArray["Aligned Translation Array"]
 ```
 
@@ -221,8 +220,7 @@ Historical delimiter tagging (`⟦0⟧ dialogue ⟦1⟧`) suffered from model de
 - Batches are clamped to `DEFAULT_LLM_BATCH_SIZE = 15` segments to prevent small on-device models from dropping lines.
 
 #### 3. Resilient Waterfall Fallback Chain
-If the primary translation engine fails (rate limit, out of memory, network drop), Manga Garden automatically falls back through the user's configured chain:
-$$\text{WebLLM} \longrightarrow \text{Cloudflare Shared Pool} \longrightarrow \text{Google Translate} \longrightarrow \text{Custom API}$$
+`TranslationManager` attempts the user's selected primary engine, then each ID in `fallbackChain` in the order configured in the popup. There is no fixed client-side sequence such as WebLLM → Cloudflare → Google → Custom API. The Cloud Shared Pool has its own, separate provider cascade on the Worker. Some translation engines can return the source text after a per-block failure instead of throwing, in which case the client does not advance to the next fallback. See [`application-flow-map.md`](application-flow-map.md) for the current engine catalog, exact network endpoints and quota semantics.
 
 ---
 

@@ -28,9 +28,9 @@ flowchart TD
     end
 
     subgraph ProviderPool["Multi-Provider Waterfall Pool"]
-        Groq["Groq API<br/>(Qwen / GPT-OSS)"]
-        Mistral["Mistral AI<br/>(Ministral 3B)"]
         Gemini["Google AI Studio<br/>(Gemma 4 26B / 31B)"]
+        Groq["Groq API<br/>(Qwen 3.8 / 3.6, GPT-OSS 120B / 20B)"]
+        Mistral["Mistral AI<br/>(Ministral 3B)"]
         OpenRouter["OpenRouter Free Tier"]
         WorkersAI["Cloudflare Workers AI<br/>(Meta Llama 3.2 1B)"]
     end
@@ -87,19 +87,27 @@ Cloudflare Workers Free Tier permits **100,000 SQLite writes per day**. To preve
 
 ## ⚡ Multi-Provider Waterfall & Resilience
 
-Different free-tier and low-cost AI providers have variable rate limits, latency spikes, and transient outages. Manga Garden organizes providers in a declarative priority waterfall (`providers.ts`):
+Different AI providers have variable rate limits, latency spikes, and transient outages. Manga Garden organizes nine enabled routes in a declarative priority waterfall (`worker/src/config/providers.ts`; see also the [application flow map](application-flow-map.md)):
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Mistral: Priority 1 (High Throughput)
-    Mistral --> GroqQwen: 429 Rate Limit / Timeout
-    GroqQwen --> GeminiGemma: 429 Rate Limit / Timeout
-    GeminiGemma --> OpenRouter: 429 Rate Limit / Timeout
-    OpenRouter --> WorkersAI: Fallback to Native Cloudflare
+    [*] --> Gemini26: Priority 1
+    Gemini26 --> Gemini31: Failure / Rate Limit / Timeout
+    Gemini31 --> GroqQwen38: Failure / Rate Limit / Timeout
+    GroqQwen38 --> GroqOSS120: Failure / Rate Limit / Timeout
+    GroqOSS120 --> GroqOSS20: Failure / Rate Limit / Timeout
+    GroqOSS20 --> GroqQwen36: Failure / Rate Limit / Timeout
+    GroqQwen36 --> Mistral: Failure / Rate Limit / Timeout
+    Mistral --> OpenRouter: Failure / Rate Limit / Timeout
+    OpenRouter --> WorkersAI: Failure / Rate Limit / Timeout
     WorkersAI --> Failed: All Providers Exhausted
+    Gemini26 --> Success: 200 OK
+    Gemini31 --> Success: 200 OK
+    GroqQwen38 --> Success: 200 OK
+    GroqOSS120 --> Success: 200 OK
+    GroqOSS20 --> Success: 200 OK
+    GroqQwen36 --> Success: 200 OK
     Mistral --> Success: 200 OK
-    GroqQwen --> Success: 200 OK
-    GeminiGemma --> Success: 200 OK
     OpenRouter --> Success: 200 OK
     WorkersAI --> Success: 200 OK
 ```
