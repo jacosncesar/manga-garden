@@ -179,22 +179,6 @@ Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchime
 
 ---
 
-## 🚀 Início rápido e instalação
-
-> **Atenção:** a publicação da Chrome Web Store ainda não foi atualizada com a nova marca Manga Garden. Use o código-fonte abaixo para compilar esta versão.
-
-### Opção 1: publicação na Chrome Web Store
-
-O link existente continuará apontando para a publicação anterior até que a versão Manga Garden seja enviada e aprovada pela Chrome Web Store:
-
-<div align="left">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Add_to_Chrome-Free_Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Add to Chrome" height="38" />
-  </a>
-</div>
-
----
-
 ### Opção 2: arquivo ZIP
 
 1. Baixe o arquivo ZIP na página de [releases do repositório](https://github.com/jacosncesar/MangaLumeTwo/releases/latest), quando uma versão Manga Garden for publicada.
