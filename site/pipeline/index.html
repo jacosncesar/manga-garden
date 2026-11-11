@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-preset="classic">
+<html lang="pt-BR" data-theme="dark" data-preset="classic">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,8 +73,8 @@
       --database-stroke:  #a78bfa;
       --cloud-fill:       rgba(120, 53, 15, 0.3);
       --cloud-stroke:     #fbbf24;
-      --security-fill:    rgba(136, 19, 55, 0.4);
-      --security-stroke:  #fb7185;
+      --security-fill:    rgba(76, 29, 149, 0.4);
+      --security-stroke:  #c084fc;
       --messagebus-fill:  rgba(251, 146, 60, 0.3);
       --messagebus-stroke:#fb923c;
       --external-fill:    rgba(30, 41, 59, 0.5);
@@ -113,8 +113,8 @@
       --database-stroke:  #7c3aed;
       --cloud-fill:       rgba(251, 191, 36, 0.18);
       --cloud-stroke:     #d97706;
-      --security-fill:    rgba(251, 113, 133, 0.15);
-      --security-stroke:  #e11d48;
+      --security-fill:    rgba(139, 92, 246, 0.15);
+      --security-stroke:  #7c3aed;
       --messagebus-fill:  rgba(251, 146, 60, 0.15);
       --messagebus-stroke:#ea580c;
       --external-fill:    rgba(148, 163, 184, 0.18);
@@ -152,8 +152,8 @@
       --database-stroke: #c4b5fd;
       --cloud-fill: rgba(245, 158, 11, 0.13);
       --cloud-stroke: #fcd34d;
-      --security-fill: rgba(244, 63, 94, 0.13);
-      --security-stroke: #fda4af;
+      --security-fill: rgba(168, 85, 247, 0.13);
+      --security-stroke: #c084fc;
       --messagebus-fill: rgba(249, 115, 22, 0.13);
       --messagebus-stroke: #fdba74;
       --external-fill: rgba(71, 85, 105, 0.24);
@@ -185,8 +185,8 @@
       --database-stroke: #7254c7;
       --cloud-fill: rgba(217, 119, 6, 0.08);
       --cloud-stroke: #b9670b;
-      --security-fill: rgba(225, 29, 72, 0.08);
-      --security-stroke: #c53a59;
+      --security-fill: rgba(124, 58, 237, 0.08);
+      --security-stroke: #7c3aed;
       --messagebus-fill: rgba(234, 88, 12, 0.08);
       --messagebus-stroke: #c65f27;
       --external-fill: rgba(100, 116, 139, 0.1);
@@ -222,7 +222,7 @@
       --cloud-fill: rgba(197, 145, 43, 0.13);
       --cloud-stroke: #ffd166;
       --security-fill: rgba(199, 76, 104, 0.13);
-      --security-stroke: #ff8da1;
+      --security-stroke: #c084fc;
       --messagebus-fill: rgba(207, 112, 49, 0.13);
       --messagebus-stroke: #ffad66;
       --external-fill: rgba(84, 119, 139, 0.18);
@@ -257,7 +257,7 @@
       --cloud-fill: rgba(181, 120, 15, 0.08);
       --cloud-stroke: #a86609;
       --security-fill: rgba(190, 48, 80, 0.07);
-      --security-stroke: #b32f50;
+      --security-stroke: #7e22ce;
       --messagebus-fill: rgba(196, 81, 22, 0.07);
       --messagebus-stroke: #b65120;
       --external-fill: rgba(79, 112, 128, 0.08);
@@ -2991,8 +2991,8 @@
         --database-stroke:  #7c3aed;
         --cloud-fill:       rgba(251, 191, 36, 0.18);
         --cloud-stroke:     #d97706;
-        --security-fill:    rgba(251, 113, 133, 0.15);
-        --security-stroke:  #e11d48;
+        --security-fill:    rgba(139, 92, 246, 0.15);
+        --security-stroke:  #7c3aed;
         --messagebus-fill:  rgba(251, 146, 60, 0.15);
         --messagebus-stroke:#ea580c;
         --external-fill:    rgba(148, 163, 184, 0.18);
@@ -3062,6 +3062,22 @@
       background: transparent;
       box-shadow: none;
       z-index: 100;
+    }
+    .toolbar .language-select {
+      max-width: 9.5rem;
+      min-height: 2.75rem;
+      padding: 0.5rem 0.625rem;
+      border: 1px solid var(--toolbar-border);
+      border-radius: 0.625rem;
+      background: var(--toolbar-bg);
+      color: var(--toolbar-text);
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .toolbar .language-select:focus-visible {
+      outline: 2px solid var(--frontend-stroke);
+      outline-offset: 2px;
     }
     .toolbar button {
       background: var(--toolbar-bg);
@@ -3582,6 +3598,7 @@
       .toolbar {
         position: relative;
         justify-content: flex-end;
+        flex-wrap: wrap;
         width: max-content;
         max-width: 100%;
         margin-left: auto;
@@ -4853,6 +4870,10 @@
        Motion appears only for trace-enabled artifacts and has no shortcut;
        Keyboard: T toggles theme, S cycles style, F toggles the stage, E opens export. -->
   <div class="toolbar" role="toolbar" aria-label="Diagram actions">
+    <select class="language-select" data-site-language aria-label="Select language">
+      <option value="pt-BR">Português (Brasil)</option>
+      <option value="en">English</option>
+    </select>
     <button id="btn-theme" type="button"
             title="Toggle theme (T)"
             aria-label="Toggle color theme"
@@ -14906,5 +14927,6 @@
       }
     });
   </script>
+  <script src="/js/i18n.js"></script>
 </body>
 </html>

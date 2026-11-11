@@ -15,6 +15,8 @@ export { SharedPoolDO } from './durable/SharedPoolDO';
 
 const MAX_PAYLOAD_CHARS = 2048;
 const MAX_REQUEST_BYTES = 32 * 1024; // 32 KB maximum payload pre-check
+// Keep this name stable: changing it selects a new Durable Object and breaks continuity of shared quota state.
+const SHARED_POOL_OBJECT_NAME = 'global-kites-pool';
 
 /**
  * Build CORS response headers based on the request's Origin.
@@ -224,7 +226,7 @@ export default {
       }
 
       // Route to singleton SharedPoolDO
-      const poolId = env.SHARED_POOL.idFromName('global-kites-pool');
+      const poolId = env.SHARED_POOL.idFromName(SHARED_POOL_OBJECT_NAME);
       const poolStub = env.SHARED_POOL.get(poolId);
 
       try {
@@ -303,7 +305,7 @@ export default {
         );
       }
 
-      const poolId = env.SHARED_POOL.idFromName('global-kites-pool');
+      const poolId = env.SHARED_POOL.idFromName(SHARED_POOL_OBJECT_NAME);
       const poolStub = env.SHARED_POOL.get(poolId);
 
       try {

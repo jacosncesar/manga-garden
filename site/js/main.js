@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     demo2: {
       split: 52,
       targetLang: 'English',
+      targetLangCode: 'en',
       langLabel: '日本語',
       lang: 'ja',
       caption: 'Story: 佐藤さんは知っていた by @09ra_19ra',
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     demo7: {
       split: 50,
       targetLang: 'Tiếng Việt',
+      targetLangCode: 'vi',
       langLabel: '日本語',
       lang: 'ja',
       caption: 'Source: Pixiv #145272482 - Erases strictly inside character strokes',
@@ -33,6 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
       translated: 'assets/demo7-result.png',
       originalAlt: 'Original Japanese Manga Scan - Dialogue-heavy panel',
       translatedAlt: 'Manga Garden Vietnamese Translation - Zero gray boxes, clean inpainting'
+    },
+    demo8: {
+      split: 50,
+      targetLang: 'Portuguese',
+      targetLangCode: 'pt-BR',
+      langLabel: '日本語',
+      lang: 'ja',
+      caption: 'Source: Pixiv #144884723',
+      original: 'assets/demo8-imput.png',
+      translated: 'assets/demo8-thumb.png',
+      originalAlt: 'Original Japanese manga page about autumn and school decisions',
+      translatedAlt: 'Manga Garden translation of a Japanese manga page into Portuguese'
     }
   };
 
@@ -170,9 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return loadedImages[key];
     };
 
-    // Preload both initially
-    preloadPage('demo2');
-    preloadPage('demo7');
+    // Preload all available demos to avoid loading delays when selected.
+    Object.keys(DEMO_PAGES).forEach(preloadPage);
 
     // Thumbnail selector switching
     thumbs.forEach((thumb) => {
@@ -204,8 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
         translated.src = page.translated;
         translated.alt = page.translatedAlt;
 
-        if (afterTag) afterTag.textContent = page.targetLang;
-        if (beforeTag) beforeTag.textContent = page.langLabel;
+        if (afterTag) {
+          afterTag.textContent = page.targetLang;
+          afterTag.lang = page.targetLangCode;
+        }
+        if (beforeTag) {
+          beforeTag.textContent = page.langLabel;
+          beforeTag.lang = page.lang;
+        }
         if (captionEl) captionEl.textContent = page.caption;
 
         if (REDUCED_MOTION) {
@@ -227,6 +246,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /**
+   * Connects the responsive navigation menu toggle and its dismissal behavior.
+   * @returns {void}
+   */
+  function setUpNavigationMenu() {
+    const navigation = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.nav-menu-toggle');
+    const menu = document.getElementById('primary-nav-menu');
+    if (!navigation || !toggle || !menu) return;
+
+    /**
+     * Opens or closes the responsive navigation menu and updates its accessible state.
+     * @param {boolean} isOpen Whether the menu should be open.
+     * @returns {void}
+     */
+    const setMenuOpen = (isOpen) => {
+      navigation.classList.toggle('is-open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    };
+
+    toggle.addEventListener('click', () => {
+      setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!navigation.contains(event.target)) setMenuOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setMenuOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.getComputedStyle(toggle).display === 'none') setMenuOpen(false);
+    });
+  }
+
+  setUpNavigationMenu();
   setUpHeroDemo();
 
   // Smooth scroll for nav anchor links

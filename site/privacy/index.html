@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -81,6 +81,14 @@
     .meta-box strong {
       color: var(--text);
     }
+    .store-listing-unavailable {
+      display: inline-block;
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
     h2 {
       font-size: 20px;
       font-weight: 700;
@@ -131,6 +139,30 @@
       margin-bottom: 20px;
       text-decoration: none;
     }
+    .page-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .language-select {
+      max-width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      background: var(--card-bg);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .language-select:focus-visible {
+      outline: 2px solid #8b5cf6;
+      outline-offset: 2px;
+    }
     footer {
       border-top: 1px solid var(--border);
       margin-top: 40px;
@@ -143,13 +175,19 @@
 </head>
 <body>
   <div class="container">
-    <a href="/" class="nav-back">← Back to Manga Garden Homepage</a>
+    <div class="page-toolbar">
+      <a href="/" class="nav-back">← Back to Manga Garden Homepage</a>
+      <select class="language-select" data-site-language aria-label="Select language">
+        <option value="pt-BR">Português (Brasil)</option>
+        <option value="en">English</option>
+      </select>
+    </div>
     <header>
       <div class="badge">Official Legal Document</div>
       <h1>Privacy Policy</h1>
       <div class="meta-box">
         <strong>Application Name:</strong> Manga Garden: Local-First Manga Translator<br />
-        <strong>Extension ID:</strong> <code>pcaokchkdgnmfgjkljfpghlfohbdjcmj</code> (<a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb" target="_blank" rel="noopener">Chrome Web Store Listing</a>)<br />
+        <strong>Extension ID:</strong> <code>pcaokchkdgnmfgjkljfpghlfohbdjcmj</code> (<span class="store-listing-unavailable" aria-disabled="true" title="Temporarily unavailable">Chrome Web Store Listing · Temporarily unavailable</span>)<br />
         <strong>Effective Date:</strong> September 13, 2026<br />
         <strong>Developer Contact:</strong> <a href="mailto:andangtruong085@gmail.com">andangtruong085@gmail.com</a>
       </div>
@@ -222,7 +260,7 @@
         Manga Garden is licensed under the <strong>GNU General Public License v3.0 (GPLv3)</strong>. Our complete codebase, including all background scripts, network handlers, and dependencies, is publicly available and auditable on GitHub:
       </p>
       <p>
-        <a href="https://github.com/jacosncesar/MangaLumeTwo" target="_blank" rel="noopener">https://github.com/jacosncesar/MangaLumeTwo</a>
+        <a href="https://github.com/jacosncesar/manga-garden" target="_blank" rel="noopener">https://github.com/jacosncesar/manga-garden</a>
       </p>
 
       <h2>7. Contact & Inquiries</h2>
@@ -231,7 +269,7 @@
       </p>
       <ul>
         <li><strong>Developer Email:</strong> <a href="mailto:andangtruong085@gmail.com">andangtruong085@gmail.com</a></li>
-        <li><strong>GitHub Issue Tracker:</strong> <a href="https://github.com/jacosncesar/MangaLumeTwo/issues" target="_blank" rel="noopener">https://github.com/jacosncesar/MangaLumeTwo/issues</a></li>
+        <li><strong>GitHub Issue Tracker:</strong> <a href="https://github.com/jacosncesar/manga-garden/issues" target="_blank" rel="noopener">https://github.com/jacosncesar/manga-garden/issues</a></li>
       </ul>
     </main>
 
@@ -239,5 +277,6 @@
       &copy; 2026 Manga Garden: Local-First Manga Translator. All rights reserved.
     </footer>
   </div>
+  <script src="/js/i18n.js"></script>
 </body>
 </html>

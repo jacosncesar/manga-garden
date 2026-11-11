@@ -71,6 +71,7 @@ describe('CloudflareTranslateEngine Keyed JSON Protocol', () => {
     await engine.translate(['Bonjour'], 'fr', 'en');
     expect(fetchSpy).toHaveBeenCalled();
     const requestBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
+    expect(requestBody.model).toBe('manga-garden-translation');
     expect(Array.isArray(requestBody.messages)).toBe(true);
     expect(requestBody.messages[0].role).toBe('system');
     expect(requestBody.messages[0].content).toContain('Return only one JSON object');

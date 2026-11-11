@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,18 +18,30 @@
         <img src="assets/icon.svg" alt="Manga Garden Logo" class="brand-logo" />
         <span class="brand-title">Manga Garden</span>
       </a>
-      <nav class="nav-links">
-        <a href="#hero" class="nav-link">Showcase</a>
-        <a href="#ui-showcase" class="nav-link">Features & UI</a>
-        <a href="#architecture" class="nav-link">Architecture</a>
-        <a href="#install" class="nav-link">Install</a>
-        <a href="/pipeline" class="nav-link">Pipeline Map</a>
-        <a href="/privacy" class="nav-link">Privacy</a>
-        <a href="https://github.com/jacosncesar/MangaLumeTwo" target="_blank" rel="noopener" class="nav-link">GitHub ⭐</a>
-        <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb" class="btn btn-primary btn-nav-cta" target="_blank" rel="noopener">
-          <svg class="nav-chrome-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/></svg>
-          <span class="nav-cta-text">Add to Chrome</span>
-        </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <button type="button" class="nav-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav-menu">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <div class="nav-menu" id="primary-nav-menu">
+          <a href="#hero" class="nav-link">Showcase</a>
+          <a href="#ui-showcase" class="nav-link">Features & UI</a>
+          <a href="#architecture" class="nav-link">Architecture</a>
+          <a href="#install" class="nav-link">Install</a>
+          <a href="/pipeline" class="nav-link">Pipeline Map</a>
+          <a href="/privacy" class="nav-link">Privacy</a>
+          <a href="https://github.com/jacosncesar/manga-garden" target="_blank" rel="noopener" class="nav-link">GitHub ⭐</a>
+          <span class="btn btn-primary btn-nav-cta is-unavailable" aria-disabled="true" title="Temporarily unavailable">
+            <svg class="nav-chrome-svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/></svg>
+            <span class="nav-cta-text">Add to Chrome</span>
+            <span class="store-unavailable-label" role="note">Temporarily unavailable</span>
+          </span>
+        </div>
+        <select class="language-select" data-site-language aria-label="Select language">
+          <option value="pt-BR">Português (Brasil)</option>
+          <option value="en">English</option>
+        </select>
       </nav>
     </div>
   </header>
@@ -51,23 +63,23 @@
           The AI manga translator for your browser. Translate manga, manhwa, and webtoons with zero servers, clean polygon inpainting, and authentic comic lettering.
         </p>
         <div class="hero-actions">
-          <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb" class="btn btn-store-hero" target="_blank" rel="noopener">
+          <span class="btn-store-hero is-unavailable" aria-disabled="true" title="Temporarily unavailable">
             <span class="btn-store-icon-wrap">
               <svg class="chrome-store-svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
               </svg>
             </span>
             <span class="btn-store-copy">
-              <span class="btn-store-sub">Available in the</span>
+              <span class="btn-store-sub">Temporarily unavailable</span>
               <span class="btn-store-main">Chrome Web Store</span>
             </span>
             <span class="btn-store-free-badge">Free</span>
-          </a>
+          </span>
           <a href="#install" class="btn btn-secondary btn-hero-secondary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Install Options
           </a>
-          <a href="https://github.com/jacosncesar/MangaLumeTwo" class="btn btn-secondary btn-hero-secondary" target="_blank" rel="noopener">
+          <a href="https://github.com/jacosncesar/manga-garden" class="btn btn-secondary btn-hero-secondary" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
@@ -93,15 +105,15 @@
       <!-- Right Column: Interactive Torii-Style Comparison Showcase -->
       <div class="hero-showcase-wrap">
         <div aria-hidden="true" class="dot-field hero-dots"></div>
-        <div id="hero-demo" data-page="demo2" style="--split: 52%;" class="demo-card select-none">
+        <div id="hero-demo" data-page="demo8" style="--split: 50%;" class="demo-card select-none">
           <!-- Base Layer: Raw Japanese Scan -->
-          <img data-demo="original" src="assets/demo2-input.jpeg" alt="Original Japanese Manga Scan - Romance comedy panel" class="demo-img" />
+          <img data-demo="original" src="assets/demo8-imput.png" alt="Original Japanese manga page about autumn and school decisions" class="demo-img" />
 
           <!-- Overlay Layer: Translated (clipped via clip-path) -->
-          <img data-demo="translated" src="assets/demo2-result.png" alt="Manga Garden English Translation - Balanced lettering and line breaks" class="demo-img demo-after" />
+          <img data-demo="translated" src="assets/demo8-thumb.png" alt="Manga Garden translation of a Japanese manga page into Portuguese" class="demo-img demo-after" />
 
           <!-- Floating Language Tags -->
-          <span data-demo-tag="after" class="demo-tag demo-tag-after">English</span>
+          <span data-demo-tag="after" class="demo-tag demo-tag-after" lang="pt-BR">Portuguese</span>
           <span data-demo-tag="before" class="demo-tag demo-tag-before" lang="ja">日本語</span>
 
           <!-- Seam Line and Knob -->
@@ -114,7 +126,7 @@
           </span>
 
           <!-- Range Input for Native Drag -->
-          <input id="hero-demo-range" type="range" min="0" max="100" value="52" step="0.1" aria-label="Compare raw manga with Manga Garden translation" class="demo-range" />
+          <input id="hero-demo-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare raw manga with Manga Garden translation" class="demo-range" />
 
           <!-- In-Page Translate Gate Button (triggers translation sweep) -->
           <button id="hero-gate" type="button" aria-label="Simulate in-page translation sweep" class="demo-gate is-inviting" title="Click to trigger translation sweep">
@@ -125,14 +137,17 @@
         <!-- Thumbnail Page Picker with Multi-Image Selection -->
         <div class="demo-picker-section">
           <div role="group" aria-label="Choose a demo page" class="demo-picker">
-            <button type="button" data-demo-page="demo2" aria-pressed="true" class="demo-thumb" title="Romance comedy manga (Japanese to English)">
+            <button type="button" data-demo-page="demo8" aria-pressed="true" class="demo-thumb" title="Japanese manga (Japanese to Portuguese)">
+              <img src="assets/demo8-imput.png" alt="Japanese manga thumbnail" width="46" height="64" />
+            </button>
+            <button type="button" data-demo-page="demo2" aria-pressed="false" class="demo-thumb" title="Romance comedy manga (Japanese to English)">
               <img src="assets/demo2-thumb.jpg" alt="Romance manga thumbnail" width="46" height="64" />
             </button>
             <button type="button" data-demo-page="demo7" aria-pressed="false" class="demo-thumb" title="Dialogue-heavy manga (Japanese to Vietnamese)">
               <img src="assets/demo7-thumb.jpg" alt="Dialogue manga thumbnail" width="46" height="64" />
             </button>
           </div>
-          <p class="demo-caption" id="demo-caption-text">Story: 佐藤さんは知っていた by @09ra_19ra</p>
+          <p class="demo-caption" id="demo-caption-text">Source: Pixiv #144884723</p>
           <p class="demo-hint">Click the kite icon or drag the slider to compare.</p>
         </div>
       </div>
@@ -313,8 +328,8 @@
 
       <div class="install-grid">
         <!-- Option 1: Chrome Web Store (Featured & Recommended) -->
-        <div class="install-card install-card-featured">
-          <div class="install-card-ribbon">Recommended • 1-Click</div>
+        <div class="install-card install-card-featured is-unavailable">
+          <div class="install-card-ribbon">Temporarily unavailable</div>
           <div class="install-card-header">
             <div class="install-channel-icon chrome-gradient-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
@@ -351,12 +366,13 @@
           </ul>
 
           <div class="install-card-cta">
-            <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb" class="btn btn-store-primary btn-block" target="_blank" rel="noopener">
+            <span class="btn btn-store-primary btn-block is-unavailable" aria-disabled="true" title="Temporarily unavailable">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257c.206.01.413.016.621.016 6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728Z"/>
               </svg>
               Add to Chrome (Free) ↗
-            </a>
+              <span class="store-unavailable-label" role="note">Temporarily unavailable</span>
+            </span>
           </div>
         </div>
 
@@ -384,7 +400,7 @@
           </ol>
 
           <div class="install-card-cta">
-            <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest" class="btn btn-secondary btn-block" target="_blank" rel="noopener">
+            <a href="https://github.com/jacosncesar/manga-garden/releases/latest" class="btn btn-secondary btn-block" target="_blank" rel="noopener">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download Release .ZIP
             </a>
@@ -408,11 +424,11 @@
           </p>
 
           <div class="install-terminal-snippet">
-            <code>git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden<br/>cd manga-garden &amp;&amp; npm ci<br/>npm run build</code>
+            <code>git clone https://github.com/jacosncesar/manga-garden.git manga-garden<br/>cd manga-garden &amp;&amp; npm ci<br/>npm run build</code>
           </div>
 
           <div class="install-card-cta">
-            <a href="https://github.com/jacosncesar/MangaLumeTwo" class="btn btn-secondary btn-block" target="_blank" rel="noopener">
+            <a href="https://github.com/jacosncesar/manga-garden" class="btn btn-secondary btn-block" target="_blank" rel="noopener">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub Repository
             </a>
@@ -431,12 +447,12 @@
           <span>Manga Garden</span>
         </div>
         <div class="footer-links">
-          <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb" target="_blank" rel="noopener" class="footer-link footer-store-link">Chrome Web Store ↗</a>
+          <span class="footer-link footer-store-link is-unavailable" aria-disabled="true" title="Temporarily unavailable">Chrome Web Store · Temporarily unavailable</span>
           <a href="/privacy" class="footer-link footer-privacy-highlight">Privacy Policy</a>
           <a href="/pipeline" class="footer-link">Pipeline Map</a>
-          <a href="https://github.com/jacosncesar/MangaLumeTwo" target="_blank" rel="noopener" class="footer-link">GitHub</a>
-          <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest" target="_blank" rel="noopener" class="footer-link">Releases</a>
-          <a href="https://github.com/jacosncesar/MangaLumeTwo/issues" target="_blank" rel="noopener" class="footer-link">Support & Issues</a>
+          <a href="https://github.com/jacosncesar/manga-garden" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+          <a href="https://github.com/jacosncesar/manga-garden/releases/latest" target="_blank" rel="noopener" class="footer-link">Releases</a>
+          <a href="https://github.com/jacosncesar/manga-garden/issues" target="_blank" rel="noopener" class="footer-link">Support & Issues</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -446,6 +462,7 @@
     </div>
   </footer>
 
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
