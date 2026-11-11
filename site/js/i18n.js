@@ -40,6 +40,7 @@
     'Manga Garden Manga Translator': 'Tradutor de mangá Manga Garden',
     'Read raw manga': 'Leia mangás sem tradução',
     'in your language': 'no seu idioma',
+    'May language never be a barrier to discovering a story you love.': 'Que o idioma nunca seja uma barreira para alguém conhecer uma história que ama.',
     'The AI manga translator for your browser. Translate manga, manhwa, and webtoons with zero servers, clean polygon inpainting, and authentic comic lettering.': 'O tradutor de mangás com IA para o seu navegador. Traduza mangás, manhwas e webtoons sem servidores, com restauração precisa do fundo e letreiramento autêntico de quadrinhos.',
     'Available in the': 'Disponível na',
     'Chrome Web Store': 'Chrome Web Store',
