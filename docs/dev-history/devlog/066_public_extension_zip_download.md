@@ -23,4 +23,7 @@ Torne o repositório público para permitir downloads sem autenticação, gere o
 
 ## Validação
 
-- A validação do build, do conteúdo do ZIP e do download público da Release permanece pendente.
+- `npm run package` concluiu o build e gerou o ZIP `manga-garden-v1.2.3.zip`.
+- O ZIP foi verificado: contém 77 arquivos, `manifest.json` na raiz com versão `1.2.3` e o ícone `icons/icon128.png`; tamanho de 35.000.688 bytes.
+- `npm run lint` e `git diff --check` passaram.
+- A criação da Release e o teste de download público permanecem pendentes: o repositório ainda precisa estar público e a CLI `gh` não está instalada neste ambiente.
