@@ -223,7 +223,8 @@ Manga Garden は [Unheat](https://github.com/Unheat) が開発した [Kites](htt
 **改変に関する通知：** Manga Garden の公開開発履歴は **2026-07-08** から記録されています。各バージョンの変更はリポジトリの履歴および対応するタグに記録されています。
 
 **公開バージョンのソースコード：**
-- [v1.2.4 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.4)（2026-11-12 UTC 公開）。ZIP には `LICENSE` と `NOTICE.txt` が含まれますが、`THIRD_PARTY_NOTICES.md` は含まれていません。次のパッケージで追加を修正しましたが、まだ公開されていません。
+- [v1.2.5 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.5)（2026-11-12 UTC 公開）。ZIP には `LICENSE`、`THIRD_PARTY_NOTICES.md`、`NOTICE.txt` が含まれています。
+- [v1.2.4 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.4)（2026-11-12 UTC 公開）。ZIP には `LICENSE` と `NOTICE.txt` が含まれていますが、`THIRD_PARTY_NOTICES.md` は含まれていません。この不足は v1.2.5 で修正されました。
 - [v1.2.3 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.3)（2026-11-11 公開）。この ZIP は `LICENSE` と `NOTICE.txt` の追加前に公開されたため、後続バージョンに置き換えられています。
 
 上記のタグから、これらのバージョンに対応するソースコードを確認・ダウンロードできます。新しいバージョンは、ソースコードのタグと関連するライセンス通知を ZIP に含めて公開してください。

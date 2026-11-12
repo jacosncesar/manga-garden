@@ -226,7 +226,8 @@ Manga Garden là một dự án độc lập đã chỉnh sửa, dựa trên [Ki
 **Thông báo sửa đổi:** lịch sử phát triển công khai của Manga Garden được ghi nhận từ **2026-07-08**. Các thay đổi của từng phiên bản được lưu trong lịch sử kho mã nguồn và các tag tương ứng.
 
 **Mã nguồn các phiên bản đã phát hành:**
-- [v1.2.4 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.4) (phát hành ngày 2026-11-12 UTC). ZIP của phiên bản này có `LICENSE` và `NOTICE.txt` nhưng chưa có `THIRD_PARTY_NOTICES.md`; việc bổ sung đã được sửa trong gói tiếp theo, chưa phát hành.
+- [v1.2.5 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.5) (phát hành ngày 2026-11-12 UTC). ZIP có `LICENSE`, `THIRD_PARTY_NOTICES.md` và `NOTICE.txt`.
+- [v1.2.4 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.4) (phát hành ngày 2026-11-12 UTC). ZIP có `LICENSE` và `NOTICE.txt` nhưng chưa có `THIRD_PARTY_NOTICES.md`; thiếu sót đó đã được khắc phục ở v1.2.5.
 - [v1.2.3 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.3) (phát hành ngày 2026-11-11). ZIP của phiên bản này được phát hành trước khi thêm `LICENSE` và `NOTICE.txt`; phiên bản này đã được thay thế.
 
 Các tag ở trên cho phép xem và tải mã nguồn tương ứng với các phiên bản đó. Phiên bản mới cần được phát hành kèm tag mã nguồn và các thông báo giấy phép liên quan trong ZIP.
