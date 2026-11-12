@@ -227,7 +227,15 @@ Contribuições de pessoas desenvolvedoras, tradutoras e leitoras são bem-vinda
 
 Este projeto é distribuído sob a **[GNU General Public License, versão 3 ou qualquer versão posterior](LICENSE)**.
 
-O Manga Garden é um trabalho independente e modificado, baseado no [Kites](https://github.com/Unheat/Kites), projeto desenvolvido pela [Unheat](https://github.com/Unheat). O Manga Garden não é afiliado, patrocinado nem endossado pela Unheat. Seu nome, identidade visual, interface e modificações são distintos do projeto original. O código-fonte correspondente a cada versão do Manga Garden está disponível neste repositório, na tag daquela versão.
+O Manga Garden é um trabalho independente e modificado, baseado no [Kites](https://github.com/Unheat/Kites), projeto desenvolvido pela [Unheat](https://github.com/Unheat). O Manga Garden não é afiliado, patrocinado nem endossado pela Unheat. Seu nome, identidade visual, interface e modificações são distintos do projeto original.
+
+**Aviso de modificações:** o histórico público de desenvolvimento do Manga Garden começa em **2026-07-08**. As alterações específicas de cada versão estão registradas no histórico do repositório e nas respectivas tags.
+
+**Código-fonte das versões publicadas:**
+- [v1.2.4 — código-fonte correspondente](https://github.com/jacosncesar/manga-garden/tree/v1.2.4) (publicada em 2026-11-12 UTC). O ZIP desta versão contém `LICENSE` e `NOTICE.txt`, mas não inclui `THIRD_PARTY_NOTICES.md`; a inclusão foi corrigida no próximo pacote, ainda não publicado.
+- [v1.2.3 — código-fonte correspondente](https://github.com/jacosncesar/manga-garden/tree/v1.2.3) (publicada em 2026-11-11). O ZIP desta versão foi publicado antes da inclusão de `LICENSE` e `NOTICE.txt`; está supersedido.
+
+As tags vinculadas acima permitem consultar e baixar o código-fonte correspondente a essas versões. Novas versões devem ser publicadas com sua tag de código-fonte e os avisos de licença pertinentes incluídos no ZIP.
 
 Este projeto agradece às iniciativas de código aberto que tornaram seu desenvolvimento possível:
 - **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** algoritmos de agrupamento espacial de texto e composição tipográfica.

@@ -86,14 +86,18 @@ async function main() {
     'Manga Garden is an independent modified project; its branding, interface, and additional changes are not authored or endorsed by Unheat.',
     `Modifications by the Manga Garden project are included in this release. Release date: ${releaseDate}.`,
     '',
-    'This program is distributed under the GNU General Public License, version 3 or (at your option) any later version. See LICENSE in this archive.',
+    'This program is distributed under the GNU General Public License, version 3 or (at your option) any later version. See LICENSE and THIRD_PARTY_NOTICES.md in this archive.',
     `Corresponding source code for this release: ${sourceUrl}`,
     'Original project: https://github.com/Unheat/Kites',
     '',
   ].join('\n');
   archive.file('LICENSE', await readFile(path.join(rootDirectory, 'LICENSE')));
+  archive.file(
+    'THIRD_PARTY_NOTICES.md',
+    await readFile(path.join(rootDirectory, 'THIRD_PARTY_NOTICES.md')),
+  );
   archive.file('NOTICE.txt', notice);
-  fileCount += 2;
+  fileCount += 3;
 
   const zipBuffer = await archive.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
   await mkdir(path.dirname(outputPath), { recursive: true });
