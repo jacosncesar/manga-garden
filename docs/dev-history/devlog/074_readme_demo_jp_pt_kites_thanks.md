@@ -12,7 +12,7 @@ Acrescentar ao README a demonstração japonês-português já apresentada no si
 
 - Incluída a comparação da página original em japonês com o resultado em português, seguindo o formato das demonstrações existentes.
 - Adicionada a referência de origem Pixiv #144884723.
-- Incluída a ilustração fornecida pelo usuário e um agradecimento explícito ao Kites, à equipe Unheat e às pessoas colaboradoras.
+- Incluída a ilustração fornecida pelo usuário e um agradecimento explícito logo abaixo dela, no mesmo bloco visual, ao Kites, à equipe Unheat e às pessoas colaboradoras.
 
 ## Validação
 
