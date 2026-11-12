@@ -1329,6 +1329,39 @@ footer {
   font-weight: 700 !important;
 }
 
+.footer-attribution {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footer-attribution h2,
+.footer-attribution p {
+  margin: 0;
+}
+
+.footer-attribution h2 {
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.footer-attribution p {
+  max-width: 760px;
+}
+
+.footer-attribution-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 2px;
+}
+
 .footer-bottom {
   text-align: center;
   font-size: 13px;
