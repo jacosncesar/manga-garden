@@ -11,18 +11,6 @@
 
 <br/>
 
-<p align="center">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
-    <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
-  </a>
-</p>
-
-<br/>
-
 [![Banner do Manga Garden](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
 </div>
