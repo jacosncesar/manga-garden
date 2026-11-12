@@ -1,34 +1,22 @@
 <div align="center">
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
+[Português (Brasil)](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
 # 🪁 Manga Garden
 
 ### どんな言語のマンガも、ブラウザ上でそのまま読める。
-**Python不要 • サーバー通信ゼロ • 100% 完全ローカル＆プライベートなブラウザ拡張機能 AI 翻訳**
+**Python不要 • 専用サーバー不要 • ブラウザー内で動作するAI翻訳**
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Free_Install-4285F4.svg?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](LICENSE)
-[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-success.svg?style=flat-square&logo=googlechrome&logoColor=white)](manifest.json)
-[![WebGPU](https://img.shields.io/badge/Hardware-WebGPU%20Accelerated-orange.svg?style=flat-square&logo=webgpu&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
-[![Vite](https://img.shields.io/badge/Built%20with-React%2019%20%2B%20Vite-646CFF.svg?style=flat-square&logo=vite&logoColor=white)](package.json)
-
-<br/>
-
-<p align="center">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
-    <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
-  </a>
-</p>
+🌐 **[Manga Garden のウェブサイト](https://manga-garden-translator.pages.dev/)**
 
 <br/>
 
 [![Manga Garden Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
+</div>
+
+<div align="center">
+  <p><strong>プロジェクト <a href="https://github.com/Unheat/Kites">Kites</a>、チーム <a href="https://github.com/Unheat">Unheat</a>、および貢献者の皆さまに心より感謝します。</strong><br />Kites のオープンソースの成果が Manga Garden の基盤となりました。これは原作プロジェクトの着想と貢献への謝意です。</p>
 </div>
 
 ---
@@ -39,17 +27,30 @@
 
 **Manga Garden はそれを一変させます。** 最先端の画像認識および大規模言語モデルを、**WebGPU 経由でお使いの GPU 上で直接実行**する軽量な Chrome 拡張機能です。
 
-- ⚡ **セットアップ不要：** [Chrome ウェブストア](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb) から 1 クリックでインストールしてすぐ使えます。コマンドライン、Python、追加の環境構築は一切不要です。
-- 🔒 **100% ローカル＆プライベート：** 文字認識 (OCR) と背景のテキスト消去はすべてお使いのデバイス上で完結。画像がブラウザの外に送信されることはありません。
-- 🎨 **インテリジェントな背景修復：** 線画、スクリーントーン、テクスチャの質感を損なうことなく、AI インペインティングで元の文字だけを綺麗に消去します。
-- ✍️ **自然な写植・タイポグラフィ：** 吹き出しのサイズを自動計測し、適切な改行バランス、フォントサイズ、文字・縁取りカラーを美しく自動調整します。
-- 🗨️ **吹き出し形状へのスマート適応 (Smart Bubble Fit)：** 高度な吹き出し検出（ヒューリスティックおよび YOLO 神経網）により、縦長になりがちな CJK のテキスト領域を広々とした吹き出し全体へ自然に拡張。極小文字への押しつぶしを防止します。
-- 📜 **縦スクロール Webtoon 完全対応：** 1D インメモリキャンバス分割処理により、超長尺の縦スクロールマンガ（$>14,000\text{ px}$）も原寸解像度のままシームレスに翻訳。
-- 🛠️ **内蔵 Manga Garden Studio：** 訳文の微調整、吹き出しのリサイズ、フォントスタイルの変更などをブラウザ上でそのまま手軽に行えます。
+- ⚡ **簡単なインストール：** 拡張機能をインストールしてすぐに読書を始められます。ソースコードから実行する場合は、以下の手順に従ってください。
+- 🔒 **可能な範囲でローカル処理：** OCR と背景の消去は端末上で実行されます。画像は翻訳プロバイダーへ送信されませんが、認識されたテキストは選択した翻訳サービスへ送信される場合があります。
+- 🎨 **インテリジェントな背景修復：** AI インペインティングで元の文字を消しながら、線画、スクリーントーン、質感を保ちます。
+- ✍️ **自然な文字組み：** 吹き出しを計測し、改行、フォントサイズ、色を調整します。
+- 🗨️ **吹き出しの調整：** ヒューリスティックとニューラル YOLO が狭い領域を広げ、小さすぎる文字を防ぎます。
+- 📜 **長い Webtoon に対応：** 14,000 px を超える縦長画像も、元の解像度を保ったままメモリ内で分割して翻訳します。
+- 🛠️ **内蔵 Studio：** 翻訳の修正、吹き出しのサイズ変更、文字組みの調整ができます。
 
 ---
 
 ## 🖼️ 実際の動作デモ
+
+### 日本語 → ポルトガル語
+> *出典: [Pixiv のイラスト #144884723](https://www.pixiv.net/en/artworks/144884723)*
+
+<div align="center">
+<table>
+  <tr><th width="50%" align="center">日本語原文</th><th width="50%" align="center">Manga Garden による翻訳</th></tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo8-imput.png" alt="日本語のマンガ原文" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo8-thumb.png" alt="Manga Garden によるポルトガル語訳" width="100%" /></td>
+  </tr>
+</table>
+</div>
 
 ### 日本語 → 英語 (Japanese → English)
 > *作品: 佐藤さんは知っていた by [@09ra_19ra](https://x.com/09ra_19ra)*
@@ -93,9 +94,9 @@
 
 ---
 
-## 🖱️ インプレース即時翻訳
+## 🖱️ ページ上での即時翻訳
 
-Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗せるだけ。CSS Anchor Positioning によるスマートな翻訳バッジが浮き上がり、クリックひとつでコマ上のセリフが直接翻訳されます。コピペの手間は一切不要です。
+Twitter/X、Pixiv、マンガサイトの画像にカーソルを合わせると、画像の近くにボタンが表示されます。クリックすると、コピー＆ペーストせずにページ上でセリフを翻訳できます。
 
 <div align="center">
   <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Manga Garden In-Page Hover Translation Button" width="620px" />
@@ -172,46 +173,19 @@ Twitter/X、Pixiv、各種マンガ配信サイトのコマ上にマウスを乗
 
 | コンポーネント | 選択可能なエンジン | 説明 |
 | :--- | :--- | :--- |
-| **翻訳 (Translation)** | **WebLLM** *(ローカル WebGPU)*<br/>**クラウド共有プール** *(1日100回無料)*<br/>**Google 翻訳** *(無制限・完全無料)*<br/>**カスタム API** *(OpenAI, Claude, Gemini)* | ブラウザ内で無制限のローカル LLM（Qwen 3.5、Qwen 3、Gemma 3、Llama 3.2）を実行、無制限の Google 翻訳、コミュニティ共有クラウド（1日100回無料）、またはお手持ちの API キーを連携。 |
+| **翻訳** | **WebLLM** *(ローカル WebGPU)*<br/>**クラウド共有プール** *(1日100回)*<br/>**Google 翻訳**<br/>**カスタム API** *(OpenAI, Claude, Gemini)* | ローカルモデル（Qwen 3.5、Qwen 3、Gemma 3、Llama 3.2）の実行、Google 翻訳、共有プールの利用、または独自の API キーの接続ができます。 |
 | **背景修復 (Inpainting)** | **LaMa Manga** *(ニューラルモデル)*<br/>**AOT-GAN** *(高速ニューラル)*<br/>**Telea Diffusion** *(即時)*<br/>**シンプル塗りつぶし (Simple Fill)** | 文字の境界内を厳密に消去し、マンガの主線やトーンを最大限に保護。 |
-| **文字認識 (OCR)** | **PaddleOCR v3 – v6** | 多言語に対応した業界標準の高精度テキスト検出・認識。長尺 Webtoon の 1D 分割結合にも対応。 |
-| **吹き出しフィッティング (Bubble Fit)** | **Neural YOLO** *(WebGPU)*<br/>**ヒューリスティック (Heuristic)** *(即時)*<br/>**Classic MST** | 吹き出しの「しっぽ」部分を自動分離し、自然な余白領域全体へ文字を美しく配置。文字の潰れを解消します。 |
+| **OCR** | **PaddleOCR v3 – v6** | 長い Webtoon の縦長画像を含む、多言語テキストの検出と認識。 |
+| **吹き出し調整** | **ニューラル YOLO** *(WebGPU)*<br/>**ヒューリスティック** *(即時)*<br/>**クラシック MST** | 吹き出し内のセリフ領域を広げ、小さすぎる文字を防ぎます。 |
 
 ---
 
-## 🚀 クイックスタート・インストール
+### 方法 2: ZIP ファイル
 
-### 方法 1: Chrome ウェブストア（推奨 • 1 クリックインストール）
+1. Manga Garden のリリースが公開されたら、[リポジトリのリリースページ](https://github.com/jacosncesar/manga-garden/releases/latest)から ZIP をダウンロードします。
+2. `.zip` を展開し、Chrome の `chrome://extensions/` で **デベロッパー モード** > **パッケージ化されていない拡張機能を読み込む** を選びます。
 
-公式かつ最も簡単なインストール方法です。バックグラウンド自動アップデートと Google のセキュリティ審査を含みます：
-
-<div align="left">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Add_to_Chrome-Free_Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Add to Chrome" height="38" />
-  </a>
-</div>
-
-1. **[Chrome ウェブストアの Manga Garden ページ](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)** を開きます。
-2. **Chrome に追加** をクリックし、インストールの確認を承認します。
-3. すぐにアクセスできるように **Manga Garden** をブラウザのツールバーに固定します。
-4. Twitter/X、Pixiv、MangaDex などで任意のマンガを開き、コマにマウスを合わせて翻訳を開始します！
-
----
-
-### 方法 2: ビルド済み ZIP（手動読み込み — ターミナル不要）
-
-オフライン環境、手動テスト、または特定のリリースの動作確認に最適です：
-
-1. 最新の GitHub リリースから **[`Manga Garden.zip`](https://github.com/jacosncesar/MangaLumeTwo/releases/latest)** をダウンロードします。
-2. ダウンロードした `.zip` ファイルをお使いの PC のフォルダに展開します。
-3. Chrome で `chrome://extensions/` を開きます。
-4. 右上の **デベロッパー モード (Developer mode)** をオンにします。
-5. 左上の **パッケージ化されていない拡張機能を読み込む (Load unpacked)** をクリックし、展開したフォルダを選択します。
-6. **Manga Garden** をツールバーに固定すれば、すぐにマンガを読み始められます！
-
----
-
-### 方法 3: ソースコードからビルド（開発者向け）
+### 方法 3: ソースコードからビルド
 
 ```bash
 # 1. リポジトリをクローン
@@ -240,18 +214,29 @@ npm run build
 
 ---
 
-## 📜 ライセンス・謝辞
+## 📜 ライセンスと謝辞
 
-Manga Garden は **[GNU General Public License v3.0](LICENSE)** のもとで公開されています。
+本プロジェクトは **[GNU General Public License バージョン3 またはそれ以降の任意のバージョン](LICENSE)** のもとで配布されています。
 
-Manga Garden の実現に不可欠だった素晴らしいオープンソースプロジェクトに心より感謝申し上げます：
-- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** 画期的な空間テキストグループ化および写植レンダリングアルゴリズム。
-- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** 動的パッチインペインティングアーキテクチャおよび OCR ノイズ除去フィルター。
-- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** 高速かつ高精度な多言語ニューラルテキスト検出・認識モデル。
-- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** 大規模言語モデル向けのブラウザネイティブ WebGPU 推論ランタイム。
+Manga Garden は [Unheat](https://github.com/Unheat) が開発した [Kites](https://github.com/Unheat/Kites) を基にした、独立して改変されたプロジェクトです。Manga Garden は Unheat と提携・後援・公認関係にありません。名称、ビジュアルアイデンティティ、インターフェースおよび改変内容は原プロジェクトとは異なります。
+
+**改変に関する通知：** Manga Garden の公開開発履歴は **2026-07-08** から記録されています。各バージョンの変更はリポジトリの履歴および対応するタグに記録されています。
+
+**公開バージョンのソースコード：**
+- [v1.2.4 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.4)（2026-11-12 UTC 公開）。ZIP には `LICENSE` と `NOTICE.txt` が含まれますが、`THIRD_PARTY_NOTICES.md` は含まれていません。次のパッケージで追加を修正しましたが、まだ公開されていません。
+- [v1.2.3 — 対応するソースコード](https://github.com/jacosncesar/manga-garden/tree/v1.2.3)（2026-11-11 公開）。この ZIP は `LICENSE` と `NOTICE.txt` の追加前に公開されたため、後続バージョンに置き換えられています。
+
+上記のタグから、これらのバージョンに対応するソースコードを確認・ダウンロードできます。新しいバージョンは、ソースコードのタグと関連するライセンス通知を ZIP に含めて公開してください。
+
+本プロジェクトの実現に貢献したオープンソースの取り組みに感謝します：
+- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** 空間的なテキストグループ化と文字組みのアルゴリズム。
+- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** 動的パッチ・インペインティングの構成と OCR ノイズフィルター。
+- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** 高速なテキスト検出モデル。
+- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** 大規模言語モデル向けのブラウザネイティブ WebGPU ランタイム。
+- [**Unheat** と An Dang](https://github.com/Unheat) に特別な感謝を申し上げます。
 
 ---
 
 <div align="center">
-  <sub>マンガやコミックを愛するすべての人へ、❤️ を込めて。快適な読書体験を楽しんでいただけたら、ぜひ GitHub で ⭐ Star をお願いします！</sub>
+  <sub>マンガやコミックを愛するすべての方へ、❤️ を込めて。</sub>
 </div>

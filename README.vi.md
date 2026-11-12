@@ -1,34 +1,22 @@
 <div align="center">
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
+[Português (Brasil)](README.md) | [简体中文](README.zh-CN.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)
 
 # 🪁 Manga Garden
 
 ### Đọc Mọi Bộ Manga Bằng Ngôn Ngữ Của Bạn. Trực Tiếp Trên Trình Duyệt.
-**Không Cần Python • Không Cần Máy Chủ • Dịch Truyện AI 100% Cục Bộ & Bảo Mật Ngay Trong Tiện Ích Mở Rộng**
+**Không cần Python • Không cần máy chủ riêng • Dịch bằng AI ngay trong trình duyệt**
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Free_Install-4285F4.svg?style=flat-square&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](LICENSE)
-[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-success.svg?style=flat-square&logo=googlechrome&logoColor=white)](manifest.json)
-[![WebGPU](https://img.shields.io/badge/Hardware-WebGPU%20Accelerated-orange.svg?style=flat-square&logo=webgpu&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API)
-[![Vite](https://img.shields.io/badge/Built%20with-React%2019%20%2B%20Vite-646CFF.svg?style=flat-square&logo=vite&logoColor=white)](package.json)
-
-<br/>
-
-<p align="center">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Available_in_the-Chrome_Web_Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" height="42" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://github.com/jacosncesar/MangaLumeTwo/releases/latest">
-    <img src="https://img.shields.io/badge/GitHub_Releases-Download_.zip-24292e?style=for-the-badge&logo=github&logoColor=white" alt="Download Release .zip" height="42" />
-  </a>
-</p>
+🌐 **[Truy cập trang web Manga Garden](https://manga-garden-translator.pages.dev/)**
 
 <br/>
 
 [![Manga Garden Hero Banner](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
+</div>
+
+<div align="center">
+  <p><strong>Cảm ơn đặc biệt dự án <a href="https://github.com/Unheat/Kites">Kites</a>, nhóm <a href="https://github.com/Unheat">Unheat</a> và các cộng tác viên.</strong><br />Mã nguồn mở của Kites là nền tảng cho Manga Garden; đây là lời tri ân đến nguồn cảm hứng và đóng góp của dự án gốc.</p>
 </div>
 
 ---
@@ -39,17 +27,33 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 
 **Manga Garden thay đổi hoàn toàn điều đó.** Đây là một tiện ích mở rộng (extension) Chrome siêu nhẹ, vận hành các mô hình thị giác và ngôn ngữ AI tiên tiến nhất **trực tiếp trên card đồ họa của bạn thông qua WebGPU**.
 
-- ⚡ **Không cần cài đặt phức tạp:** Cài đặt chỉ với 1 cú click từ [Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb) và bắt đầu đọc ngay lập tức. Không dòng lệnh terminal, không Python, không phụ thuộc môi trường ngoài.
-- 🔒 **100% Cục bộ & Bảo mật:** Nhận diện ký tự quang học (OCR) và xóa thoại/cleaner nền diễn ra hoàn toàn trên thiết bị của bạn. Hình ảnh của bạn không bao giờ rời khỏi trình duyệt.
-- 🎨 **Tẩy trắng & Khôi phục nền thông minh:** Công nghệ AI inpainting xóa sạch chữ gốc nhưng giữ trọn từng nét vẽ, hiệu ứng chuyển màu và lớp lưới screentone đặc trưng của manga.
-- ✍️ **Typeset & Canh chỉnh tự nhiên:** Tự động đo kích thước khung thoại, cân bằng ngắt dòng hợp lý, tự co giãn cỡ chữ (font size) và chọn màu chữ/viền tương phản tối ưu.
-- 🗨️ **Tự động mở rộng theo khung thoại (Smart Bubble Fit):** Sử dụng thuật toán nhận diện bóng thoại thông minh (Heuristic & Neural YOLO) để mở rộng các cột chữ hẹp CJK thành khung bong bóng tròn rộng rãi, loại bỏ hoàn toàn tình trạng chữ bị bóp nghẹt li ti.
-- 📜 **Hỗ trợ trọn vẹn truyện tranh Webtoon dài tập:** Xử lý mượt mà các dải webtoon cuộn dọc cực dài ($>14.000\text{ px}$) nhờ thuật toán phân mảnh 1D trên bộ nhớ canvas ở độ phân giải gốc.
-- 🛠️ **Tích hợp Manga Garden Studio:** Dễ dàng sửa lại câu từ chưa ưng ý, kéo giãn khung thoại hoặc tinh chỉnh typography trực tiếp ngay tức thì.
+- ⚡ **Cài đặt đơn giản:** Cài tiện ích và bắt đầu đọc. Để chạy dự án từ mã nguồn, hãy làm theo hướng dẫn cài đặt bên dưới.
+- 🔒 **Xử lý cục bộ khi có thể:** OCR và xóa nền được thực hiện trên thiết bị. Hình ảnh không được gửi đến nhà cung cấp dịch thuật; văn bản đã nhận dạng có thể được gửi đến dịch vụ dịch bạn chọn.
+- 🎨 **Khôi phục nền thông minh:** Inpainting bằng AI xóa chữ gốc trong khi vẫn giữ nét vẽ, screentone và kết cấu.
+- ✍️ **Dàn chữ tự nhiên:** Đo khung thoại, cân bằng ngắt dòng, điều chỉnh cỡ chữ và màu sắc.
+- 🗨️ **Tối ưu khung thoại:** Heuristic và YOLO neural mở rộng vùng đọc hẹp để tránh chữ quá nhỏ.
+- 📜 **Hỗ trợ webtoon dài:** Dịch các dải dài hơn 14.000 px bằng cách chia thành các khối trong bộ nhớ, không giảm độ phân giải gốc.
+- 🛠️ **Studio tích hợp:** Sửa bản dịch, thay đổi kích thước khung thoại và điều chỉnh kiểu chữ.
 
 ---
 
 ## 🖼️ Trải nghiệm thực tế
+
+### Tiếng Nhật → Tiếng Bồ Đào Nha
+> *Nguồn: [Minh họa trên Pixiv #144884723](https://www.pixiv.net/en/artworks/144884723)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">Bản gốc tiếng Nhật</th>
+    <th width="50%" align="center">Được Manga Garden dịch</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo8-imput.png" alt="Manga gốc tiếng Nhật" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo8-thumb.png" alt="Bản dịch tiếng Bồ Đào Nha của Manga Garden" width="100%" /></td>
+  </tr>
+</table>
+</div>
 
 ### Tiếng Nhật → Tiếng Anh (Japanese → English)
 > *Tác phẩm: 佐藤さんは知っていた của [@09ra_19ra](https://x.com/09ra_19ra)*
@@ -93,9 +97,9 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 
 ---
 
-## 🖱️ Dịch tại chỗ tức thì
+## 🖱️ Dịch tức thì trên trang
 
-Rê chuột qua bất kỳ khung tranh nào trên Twitter/X, Pixiv hoặc các trang đọc truyện. Nút dịch nổi gọn gàng sẽ xuất hiện thông qua CSS Anchor Positioning — chỉ cần nhấp để dịch ngay lời thoại trực tiếp trên trang truyện mà không cần copy-paste.
+Di chuột qua bất kỳ hình ảnh truyện tranh nào trên Twitter/X, Pixiv hoặc các trang manga. Một nút kín đáo xuất hiện cạnh ảnh; nhấp vào để dịch lời thoại trực tiếp trên trang mà không cần sao chép và dán.
 
 <div align="center">
   <img src="./README_images/UI-feature/hover-inplace-preview.png" alt="Manga Garden In-Page Hover Translation Button" width="620px" />
@@ -172,46 +176,19 @@ Tuỳ biến ngôn ngữ đích, mô hình AI OCR và thuật toán xóa chữ t
 
 | Thành phần | Tuỳ chọn | Mô tả chi tiết |
 | :--- | :--- | :--- |
-| **Dịch thuật (Translation)** | **WebLLM** *(WebGPU cục bộ)*<br/>**Cloud Shared Pool** *(100 lượt/ngày free)*<br/>**Google Translate** *(Miễn phí không giới hạn)*<br/>**Custom API** *(OpenAI, Claude, Gemini)* | Chạy không giới hạn LLM cục bộ trên trình duyệt (Qwen 3.5, Qwen 3, Gemma 3, Llama 3.2), dịch Google Translate không giới hạn, dùng cụm cloud cộng đồng (100 lượt/ngày miễn phí), hoặc kết nối API key riêng. |
+| **Dịch thuật** | **WebLLM** *(WebGPU cục bộ)*<br/>**Pool dùng chung trên đám mây** *(100/ngày)*<br/>**Google Translate**<br/>**API tùy chỉnh** *(OpenAI, Claude, Gemini)* | Chạy mô hình cục bộ (Qwen 3.5, Qwen 3, Gemma 3, Llama 3.2), dùng Google Translate, truy cập pool dùng chung hoặc kết nối khóa API riêng. |
 | **Xóa thoại & Khôi phục nền (Inpainting)** | **LaMa Manga** *(Neural)*<br/>**AOT-GAN** *(Fast Neural)*<br/>**Telea Diffusion** *(Tức thì)*<br/>**Simple Fill** | Xóa chữ chuẩn xác trong ranh giới ký tự để bảo toàn tối đa nét vẽ gốc của truyện. |
-| **Nhận diện chữ (OCR)** | **PaddleOCR v3 – v6** | Tiêu chuẩn công nghiệp trong nhận diện văn bản đa ngôn ngữ, hỗ trợ cắt ghép 1D mượt mà cho truyện dài tập. |
-| **Khớp bóng thoại (Bubble Fit)** | **Neural YOLO** *(WebGPU)*<br/>**Heuristic** *(Tức thì)*<br/>**Classic MST** | Cắt bỏ đuôi thoại và mở rộng khoảng trống bong bóng tự nhiên, loại bỏ hoàn toàn chữ bị ép nhỏ. |
+| **OCR** | **PaddleOCR v3 – v6** | Phát hiện và nhận dạng văn bản đa ngôn ngữ, bao gồm cả các dải webtoon dài. |
+| **Điều chỉnh khung thoại** | **YOLO neural** *(WebGPU)*<br/>**Heuristic** *(tức thì)*<br/>**MST cổ điển** | Mở rộng không gian lời thoại trong khung để tránh cỡ chữ quá nhỏ. |
 
 ---
 
-## 🚀 Bắt đầu nhanh & Cài đặt
+### Tùy chọn 2: Tệp ZIP
 
-### Cách 1: Chrome Web Store (Khuyên dùng • Cài đặt 1-Click)
+1. Tải tệp ZIP từ [trang phát hành của kho mã nguồn](https://github.com/jacosncesar/manga-garden/releases/latest) khi có phiên bản Manga Garden được phát hành.
+2. Giải nén `.zip` và tải thư mục lên Chrome tại `chrome://extensions/` > **Chế độ nhà phát triển** > **Tải tiện ích đã giải nén**.
 
-Cách chính thức và thuận tiện nhất để cài đặt Manga Garden. Tự động cập nhật phiên bản mới và đã qua kiểm duyệt bảo mật của Google:
-
-<div align="left">
-  <a href="https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb">
-    <img src="https://img.shields.io/badge/Add_to_Chrome-Free_Install-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Add to Chrome" height="38" />
-  </a>
-</div>
-
-1. Mở trang **[Manga Garden trên Chrome Web Store](https://chromewebstore.google.com/detail/pcaokchkdgnmfgjkljfpghlfohbdjcmj?utm_source=item-share-cb)**.
-2. Nhấp **Thêm vào Chrome** và xác nhận quyền cài đặt.
-3. Ghim **Manga Garden** lên thanh công cụ trình duyệt để dễ dàng sử dụng.
-4. Lướt bất kỳ trang truyện manga hoặc minh họa nào (trên Twitter/X, Pixiv, MangaDex, v.v.) và rê chuột vào khung tranh để dịch!
-
----
-
-### Cách 2: Tải file Zip dựng sẵn (Cài đặt thủ công — Không cần dùng terminal)
-
-Phù hợp cho môi trường offline, thử nghiệm tính năng mới hoặc dùng các bản dựng cụ thể:
-
-1. Tải về file **[`Manga Garden.zip`](https://github.com/jacosncesar/MangaLumeTwo/releases/latest)** từ bản phát hành GitHub Release mới nhất.
-2. Giải nén file `.zip` vừa tải vào một thư mục trên máy tính của bạn.
-3. Trong trình duyệt Chrome, mở đường dẫn `chrome://extensions/`.
-4. Bật chế độ **Chế độ dành cho nhà phát triển (Developer mode)** ở góc trên bên phải.
-5. Nhấp nút **Tải tiện ích đã giải nén (Load unpacked)** ở góc trên bên trái và chọn thư mục vừa giải nén.
-6. Ghim **Manga Garden** lên thanh công cụ trình duyệt và bắt đầu thưởng thức truyện tranh ngay!
-
----
-
-### Cách 3: Biên dịch từ mã nguồn (Dành cho lập trình viên)
+### Tùy chọn 3: Biên dịch từ mã nguồn
 
 ```bash
 # 1. Clone repository
@@ -240,18 +217,29 @@ Chúng tôi rất hoan nghênh sự đóng góp từ các lập trình viên, d�
 
 ---
 
-## 📜 Giấy phép & Lời cảm ơn
+## 📜 Giấy phép và lời cảm ơn
 
-Manga Garden được phát hành theo giấy phép **[GNU General Public License v3.0](LICENSE)**.
+Manga Garden được phân phối theo **[GNU General Public License phiên bản 3 hoặc bất kỳ phiên bản nào sau đó](LICENSE)**.
 
-Gửi lời cảm ơn chân thành đến các dự án mã nguồn mở tuyệt vời đã đặt nền tảng cho Manga Garden:
-- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** Thuật toán mang tính đột phá về phân nhóm không gian văn bản và dàn trang.
-- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** Kiến trúc inpainting chia mảng động và bộ lọc nhiễu OCR.
-- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** Mô hình mạng nơ-ron nhận diện văn bản đa ngôn ngữ hiệu suất cao.
-- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** Runtime chạy mô hình ngôn ngữ lớn (LLM) trên WebGPU ngay trong trình duyệt.
+Manga Garden là một dự án độc lập đã chỉnh sửa, dựa trên [Kites](https://github.com/Unheat/Kites), dự án do [Unheat](https://github.com/Unheat) phát triển. Manga Garden không liên kết, được tài trợ hay chứng thực bởi Unheat. Tên gọi, nhận diện hình ảnh, giao diện và các sửa đổi của dự án khác biệt với dự án gốc.
+
+**Thông báo sửa đổi:** lịch sử phát triển công khai của Manga Garden được ghi nhận từ **2026-07-08**. Các thay đổi của từng phiên bản được lưu trong lịch sử kho mã nguồn và các tag tương ứng.
+
+**Mã nguồn các phiên bản đã phát hành:**
+- [v1.2.4 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.4) (phát hành ngày 2026-11-12 UTC). ZIP của phiên bản này có `LICENSE` và `NOTICE.txt` nhưng chưa có `THIRD_PARTY_NOTICES.md`; việc bổ sung đã được sửa trong gói tiếp theo, chưa phát hành.
+- [v1.2.3 — mã nguồn tương ứng](https://github.com/jacosncesar/manga-garden/tree/v1.2.3) (phát hành ngày 2026-11-11). ZIP của phiên bản này được phát hành trước khi thêm `LICENSE` và `NOTICE.txt`; phiên bản này đã được thay thế.
+
+Các tag ở trên cho phép xem và tải mã nguồn tương ứng với các phiên bản đó. Phiên bản mới cần được phát hành kèm tag mã nguồn và các thông báo giấy phép liên quan trong ZIP.
+
+Dự án cảm ơn các sáng kiến mã nguồn mở đã góp phần giúp dự án ra đời:
+- **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** thuật toán nhóm văn bản theo không gian và dàn chữ.
+- **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** kiến trúc inpainting theo khối động và bộ lọc nhiễu OCR.
+- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR):** mô hình phát hiện văn bản tốc độ cao.
+- **[@mlc-ai/web-llm](https://github.com/mlc-ai/web-llm):** môi trường WebGPU gốc của trình duyệt cho mô hình ngôn ngữ lớn.
+- Đặc biệt cảm ơn [**Unheat** và An Dang](https://github.com/Unheat).
 
 ---
 
 <div align="center">
-  <sub>Được phát triển với ❤️ dành cho cộng đồng yêu thích truyện tranh. Hãy tặng Manga Garden một ⭐ Star trên GitHub nếu bạn thấy tiện ích này hữu ích!</sub>
+  <sub>Được tạo bằng ❤️ dành cho những người yêu thích manga và truyện tranh.</sub>
 </div>
