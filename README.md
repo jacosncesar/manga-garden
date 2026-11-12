@@ -33,8 +33,7 @@
 
 </div>
 
-<div align="center">
-  <img src="./README_images/kites-tribute.png" alt="Ilustração de duas pessoas empinando uma pipa ao entardecer" width="100%" />
+<div align="center"> 
   <p><strong>Um agradecimento especial ao projeto <a href="https://github.com/Unheat/Kites">Kites</a>, à equipe <a href="https://github.com/Unheat">Unheat</a> e às pessoas colaboradoras.</strong><br />O trabalho de código aberto do Kites serviu de base para o Manga Garden; esta é uma homenagem à inspiração e à contribuição do projeto original.</p>
 </div>
 
