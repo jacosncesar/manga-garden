@@ -221,6 +221,8 @@ Contribuições de pessoas desenvolvedoras, tradutoras e leitoras são bem-vinda
 
 Este projeto está licenciado sob a **[GNU General Public License v3.0](LICENSE)**.
 
+O Manga Garden é um projeto modificado e independente baseado no [Kites](https://github.com/Unheat/Kites), originalmente desenvolvido pela equipe [Unheat](https://github.com/Unheat). Identidade visual, interface e modificações próprias do Manga Garden não foram desenvolvidas nem são endossadas pela Unheat. O código-fonte correspondente a cada versão está disponível neste repositório, na tag daquela versão.
+
 Este projeto agradece às iniciativas de código aberto que tornaram seu desenvolvimento possível:
 - **[manga-image-translator (Cotrans)](https://github.com/zyddnys/manga-image-translator):** algoritmos de agrupamento espacial de texto e composição tipográfica.
 - **[xianscan-rust](https://github.com/ArbenApura/xianscan-rust):** arquiteturas de preenchimento por blocos dinâmicos e filtros de ruído de OCR.

@@ -50,6 +50,13 @@ async function main() {
   }
 
   const packageJson = JSON.parse(await readFile(path.join(rootDirectory, 'package.json'), 'utf8'));
+  const manifest = JSON.parse(await readFile(path.join(distributionDirectory, 'manifest.json'), 'utf8'));
+  if (manifest.version !== packageJson.version) {
+    throw new Error(
+      `Extension version mismatch: package.json is ${packageJson.version}, but dist/manifest.json is ${manifest.version}.`,
+    );
+  }
+
   const outputPath = path.resolve(
     rootDirectory,
     process.argv[2] ?? `manga-garden-v${packageJson.version}.zip`,
@@ -60,10 +67,33 @@ async function main() {
   }
 
   const archive = new JSZip();
-  const fileCount = await addDirectoryFiles(distributionDirectory, archive, distributionDirectory);
+  let fileCount = await addDirectoryFiles(distributionDirectory, archive, distributionDirectory);
   if (fileCount === 0) {
     throw new Error('The dist directory is empty; refusing to create an empty extension package.');
   }
+
+  const now = new Date();
+  const releaseDate = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0'),
+  ].join('-');
+  const sourceUrl = `https://github.com/jacosncesar/manga-garden/tree/v${packageJson.version}`;
+  const notice = [
+    `Manga Garden v${packageJson.version} — modified release`,
+    '',
+    'This project is based on Kites, originally developed by the Unheat team.',
+    'Manga Garden is an independent modified project; its branding, interface, and additional changes are not authored or endorsed by Unheat.',
+    `Modifications by the Manga Garden project are included in this release. Release date: ${releaseDate}.`,
+    '',
+    'This program is distributed under the GNU General Public License, version 3 or (at your option) any later version. See LICENSE in this archive.',
+    `Corresponding source code for this release: ${sourceUrl}`,
+    'Original project: https://github.com/Unheat/Kites',
+    '',
+  ].join('\n');
+  archive.file('LICENSE', await readFile(path.join(rootDirectory, 'LICENSE')));
+  archive.file('NOTICE.txt', notice);
+  fileCount += 2;
 
   const zipBuffer = await archive.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
   await mkdir(path.dirname(outputPath), { recursive: true });
