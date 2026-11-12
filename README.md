@@ -31,6 +31,9 @@
 
 [![Banner do Manga Garden](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)](./README_images/Gemini_Generated_Image_f7lh52f7lh52f7lh.jpeg)
 
+
+> **Um agradecimento especial ao projeto [Kites](https://github.com/Unheat/Kites), à equipe [Unheat](https://github.com/Unheat) e às pessoas colaboradoras.** O trabalho de código aberto do Kites serviu de base para o Manga Garden; esta é uma homenagem à inspiração e à contribuição do projeto original.
+
 </div>
 
 ---
@@ -72,12 +75,6 @@ Tradutores tradicionais de mangá exigem a instalação de scripts Python comple
   </tr>
 </table>
 </div>
-
-<div align="center">
-  <img src="./README_images/kites-tribute.png" alt="Ilustração de duas pessoas empinando uma pipa ao entardecer" width="100%" />
-</div>
-
-> **Um agradecimento especial ao projeto [Kites](https://github.com/Unheat/Kites), à equipe [Unheat](https://github.com/Unheat) e às pessoas colaboradoras.** O trabalho de código aberto do Kites serviu de base para o Manga Garden; esta é uma homenagem à inspiração e à contribuição do projeto original.
 
 ### Japonês → inglês
 > *História: 佐藤さんは知っていた, de [@09ra_19ra](https://x.com/09ra_19ra)*
