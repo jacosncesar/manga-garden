@@ -205,7 +205,7 @@
 
 ```bash
 # 1. 克隆代码仓库
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. 安装依赖并构建扩展

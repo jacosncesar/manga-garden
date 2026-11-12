@@ -205,7 +205,7 @@ Twitter/X、Pixiv、マンガサイトの画像にカーソルを合わせると
 
 ```bash
 # 1. リポジトリをクローン
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. 依存関係のインストールとビルド

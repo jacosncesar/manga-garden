@@ -208,7 +208,7 @@ Tuỳ biến ngôn ngữ đích, mô hình AI OCR và thuật toán xóa chữ t
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. Cài đặt thư viện phụ thuộc và build tiện ích

@@ -209,7 +209,7 @@ Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchime
 
 ### Opção 2: arquivo ZIP
 
-1. Baixe o arquivo ZIP na página de [releases do repositório](https://github.com/jacosncesar/MangaLumeTwo/releases/latest), quando uma versão Manga Garden for publicada.
+1. Baixe o arquivo ZIP na página de [releases do repositório](https://github.com/jacosncesar/manga-garden/releases/latest), quando uma versão Manga Garden for publicada.
 2. Extraia o `.zip` e carregue a pasta no Chrome por `chrome://extensions/` > **Modo do desenvolvedor** > **Carregar sem compactação**.
 
 ---
@@ -218,7 +218,7 @@ Personalize o idioma de destino, os modelos de OCR e os algoritmos de preenchime
 
 ```bash
 # 1. Clone o repositório com um diretório local chamado manga-garden
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. Instale as dependências e compile a extensão

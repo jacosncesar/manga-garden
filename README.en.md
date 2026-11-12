@@ -209,14 +209,14 @@ Customize the target language, OCR models, and inpainting algorithms from the ex
 
 ### Option 2: ZIP file
 
-1. Download the ZIP from the repository's [releases page](https://github.com/jacosncesar/MangaLumeTwo/releases/latest) when a Manga Garden version is published.
+1. Download the ZIP from the repository's [releases page](https://github.com/jacosncesar/manga-garden/releases/latest) when a Manga Garden version is published.
 2. Extract the `.zip` and load the folder in Chrome from `chrome://extensions/` > **Developer mode** > **Load unpacked**.
 
 ### Option 3: build from source
 
 ```bash
 # 1. Clone the repository into a local folder named manga-garden
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. Install dependencies and build the extension

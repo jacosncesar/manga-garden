@@ -194,7 +194,7 @@ Personaliza el idioma de destino, los modelos OCR y los algoritmos de relleno de
 
 ```bash
 # 1. Clona el repositorio
-git clone https://github.com/jacosncesar/MangaLumeTwo.git manga-garden
+git clone https://github.com/jacosncesar/manga-garden.git manga-garden
 cd manga-garden
 
 # 2. Instala las dependencias y compila la extensión
