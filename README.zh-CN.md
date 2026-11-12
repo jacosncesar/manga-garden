@@ -92,6 +92,22 @@
 </table>
 </div>
 
+### 日文 → 西班牙文 (Japanese → Spanish)
+> *来源：[Pixiv 插画 #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">日文原图</th>
+    <th width="50%" align="center">Manga Garden 西班牙语翻译</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo9-imput.png" alt="日文漫画原图" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo9-thumb.png" alt="Manga Garden 西班牙语翻译" width="100%" /></td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ 页面内即时翻译

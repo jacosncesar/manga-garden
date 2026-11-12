@@ -99,6 +99,26 @@ Tradutores tradicionais de mangá exigem a instalação de scripts Python comple
 </table>
 </div>
 
+### Japonês → espanhol
+> *Fonte: [ilustração no Pixiv #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">Original em japonês</th>
+    <th width="50%" align="center">Traduzido pelo Manga Garden</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./site/assets/demo9-imput.png" alt="Mangá original em japonês" width="100%" />
+    </td>
+    <td align="center">
+      <img src="./site/assets/demo9-thumb.png" alt="Tradução para espanhol pelo Manga Garden" width="100%" />
+    </td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ Tradução instantânea na página

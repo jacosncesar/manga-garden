@@ -47,6 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
       translated: 'assets/demo8-thumb.png',
       originalAlt: 'Original Japanese manga page about autumn and school decisions',
       translatedAlt: 'Manga Garden translation of a Japanese manga page into Portuguese'
+    },
+    demo9: {
+      split: 50,
+      targetLang: 'Spanish',
+      targetLangCode: 'es',
+      langLabel: '日本語',
+      lang: 'ja',
+      caption: 'Source: Pixiv #144216246',
+      original: 'assets/demo9-imput.png',
+      translated: 'assets/demo9-thumb.png',
+      originalAlt: 'Original Japanese manga page from Pixiv #144216246',
+      translatedAlt: 'Manga Garden translation of a Japanese manga page into Spanish'
     }
   };
 

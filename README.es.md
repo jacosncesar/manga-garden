@@ -87,6 +87,22 @@ Los traductores tradicionales de manga requieren instalar complejos scripts de P
 </table>
 </div>
 
+### Japonés → español
+> *Fuente: [ilustración en Pixiv #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">Original en japonés</th>
+    <th width="50%" align="center">Traducido por Manga Garden al español</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo9-imput.png" alt="Manga original en japonés" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo9-thumb.png" alt="Traducción al español de Manga Garden" width="100%" /></td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ Traducción instantánea en la página

@@ -99,6 +99,26 @@ Traditional manga translators require installing complex Python scripts and giga
 </table>
 </div>
 
+### Japanese → Spanish
+> *Source: [Pixiv illustration #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">Original in Japanese</th>
+    <th width="50%" align="center">Translated by Manga Garden into Spanish</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./site/assets/demo9-imput.png" alt="Original Japanese manga" width="100%" />
+    </td>
+    <td align="center">
+      <img src="./site/assets/demo9-thumb.png" alt="Manga Garden translation into Spanish" width="100%" />
+    </td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ Instant in-page translation

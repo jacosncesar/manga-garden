@@ -92,6 +92,22 @@
 </table>
 </div>
 
+### 日本語 → スペイン語 (Japanese → Spanish)
+> *出典: [Pixiv のイラスト #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">日本語原文</th>
+    <th width="50%" align="center">Manga Garden によるスペイン語訳</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo9-imput.png" alt="日本語のマンガ原文" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo9-thumb.png" alt="Manga Garden によるスペイン語訳" width="100%" /></td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ ページ上での即時翻訳

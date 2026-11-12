@@ -95,6 +95,22 @@ Các công cụ dịch manga truyền thống thường đòi hỏi cài đặt 
 </table>
 </div>
 
+### Tiếng Nhật → Tiếng Tây Ban Nha (Japanese → Spanish)
+> *Nguồn: [Minh họa trên Pixiv #144216246](https://www.pixiv.net/en/artworks/144216246)*
+
+<div align="center">
+<table>
+  <tr>
+    <th width="50%" align="center">Bản gốc tiếng Nhật (Original Japanese)</th>
+    <th width="50%" align="center">Manga Garden dịch sang tiếng Tây Ban Nha (Translated into Spanish)</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="./site/assets/demo9-imput.png" alt="Manga gốc tiếng Nhật" width="100%" /></td>
+    <td align="center"><img src="./site/assets/demo9-thumb.png" alt="Bản dịch tiếng Tây Ban Nha của Manga Garden" width="100%" /></td>
+  </tr>
+</table>
+</div>
+
 ---
 
 ## 🖱️ Dịch tức thì trên trang
